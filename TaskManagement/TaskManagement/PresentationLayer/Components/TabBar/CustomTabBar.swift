@@ -62,12 +62,20 @@ struct CustomTabBar: View {
             } label: {
                 ZStack {
                     Circle()
-                        .fill(themeManager.selectedTheme.accentColor)
+                        .stroke(themeManager.selectedTheme.accentColor, lineWidth: 2)
                         .frame(width: 48)
-                    Image(systemName: systemImages.plus)
-                        .scaledToFit()
-                        .font(.title2)
-                        .foregroundColor(.white)
+                    if #available(iOS 16, *) {
+                        Image(systemName: systemImages.plus)
+                            .scaledToFit()
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                    } else {
+                        Image(systemName: systemImages.plus)
+                            .scaledToFit()
+                            .font(.title2)
+                            .foregroundColor(.black)
+                    }
                 }
             }
             .buttonStyle(.plain)
