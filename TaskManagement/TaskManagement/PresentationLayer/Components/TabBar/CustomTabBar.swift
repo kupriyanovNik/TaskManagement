@@ -47,8 +47,7 @@ struct CustomTabBar: View {
             }
         }
         .buttonStyle(.plain)
-        .padding(.trailing)
-        .padding(.leading, 10)
+        .padding(.horizontal)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
     private var profileButton: some View {

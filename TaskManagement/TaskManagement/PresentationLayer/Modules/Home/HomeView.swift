@@ -225,8 +225,14 @@ struct HomeView: View {
     @ViewBuilder func headerView() -> some View {
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 3) {
-                Text(homeViewModel.showGreetings ? Date().greeting() : Date().formatted(date: .abbreviated, time: .omitted))
-                    .foregroundColor(.gray)
+                if homeViewModel.showGreetings {
+                    Text(Date().greeting())
+                        .foregroundColor(.gray)
+                } else {
+                    Text(Date().formatted(date: .abbreviated, time: .omitted))
+                        .foregroundColor(.gray)
+                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                }
                 Text(strings.today)
                     .bold()
                     .font(.largeTitle)
