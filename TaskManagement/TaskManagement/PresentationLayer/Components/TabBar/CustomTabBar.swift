@@ -25,26 +25,34 @@ struct CustomTabBar: View {
             navigationViewModel.selectedTab = .home
         } label: {
             HStack {
-                Image(systemName: navigationViewModel.selectedTab == .home ? tabBarImages.Active.home : tabBarImages.Inactive.home)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
                 if shouldShowTaskCount {
-                    VStack(spacing: -3) {
-                        Text("\(taskCount)")
-                        Text(taskCount == 1 ? "task" : "tasks")
-                    }
-                    .font(.body)
-                    .foregroundColor(themeManager.selectedTheme.accentColor)
+                    Text("\(taskCount)")
+                        .font(.body)
+                        .foregroundColor(themeManager.selectedTheme.accentColor)
+                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
                 }
+                Group {
+                    if shouldShowTaskCount {
+                        Image(systemName: systemImages.noteText)
+                            .resizable()
+                            .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                    } else {
+                        Image(systemName: navigationViewModel.selectedTab == .home ? tabBarImages.Active.home : tabBarImages.Inactive.home)
+                            .resizable()
+                            .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
+                    }
+                }
+                .frame(width: 24, height: 24)
+                .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
         }
         .buttonStyle(.plain)
-        .padding(.horizontal)
+        .padding(.trailing)
+        .padding(.leading, 10)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
     private var profileButton: some View {
-        Button {
+        return Button {
             navigationViewModel.selectedTab = .profile
         } label: {
             Image(systemName: navigationViewModel.selectedTab == .profile ? tabBarImages.Active.profile : tabBarImages.Inactive.profile)
@@ -56,22 +64,31 @@ struct CustomTabBar: View {
         .padding(.horizontal)
     }
     private var plusButton: some View {
-        ZStack {
-            Button {
-                navigationViewModel.showAddingView.toggle()
-            } label: {
-                ZStack {
-                    Circle()
-                        .fill(themeManager.selectedTheme.accentColor)
-                        .frame(width: 48)
+        let taskCount = coreDataViewModel.filteredTasks.filter { !$0.isCompleted }.count
+        let shouldShowTaskCount = homeViewModel.showGreetings && taskCount != 0
+        return Button {
+            navigationViewModel.showAddingView.toggle()
+        } label: {
+            ZStack {
+                Circle()
+                    .stroke(themeManager.selectedTheme.accentColor, lineWidth: 2)
+                    .frame(width: 48)
+                if #available(iOS 16, *) {
                     Image(systemName: systemImages.plus)
                         .scaledToFit()
                         .font(.title2)
-                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                } else {
+                    Image(systemName: systemImages.plus)
+                        .scaledToFit()
+                        .font(.title2)
+                        .foregroundColor(.black)
                 }
             }
-            .buttonStyle(.plain)
         }
+        .buttonStyle(.plain)
+        .scaleEffect(shouldShowTaskCount ? 0.8 : 1)
     }
 
     // MARK: Body

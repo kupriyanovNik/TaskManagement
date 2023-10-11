@@ -9,6 +9,7 @@ enum ImageNames {
         static let plus = "plus"
         static let gear = "gear"
         static let checkmark = "checkmark"
+        static let noteText = "note.text"
         static let backArrow = "chevron.left"
         static let xmarkCircleFill = "xmark.circle.fill"
         static let pencilCircleFill = "pencil.circle.fill"

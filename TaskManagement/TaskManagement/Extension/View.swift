@@ -28,13 +28,10 @@ extension View {
 
 extension View {
     func makeCustomNavBar<Content: View>(showBackground: Bool = true, backgroundColor: Color = .white, content: @escaping () -> Content) -> some View {
-        VStack {
-            self.safeAreaInset(edge: .top) {
-                CustomNavBar(showBackground: showBackground, backgroundColor: .white) {
-                    content()
-                }
+        self.safeAreaInset(edge: .top) {
+            CustomNavBar(showBackground: showBackground, backgroundColor: .white) {
+                content()
             }
-            Spacer()
         }
     }
 }
