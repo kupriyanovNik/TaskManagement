@@ -103,11 +103,17 @@ struct CustomTabBar: View {
                 )
             }
             .onChange(of: navigationViewModel.selectedTab) { _ in
+                withAnimation {
+                    homeViewModel.isEditing = false
+                }
                 feedback(style: .rigid)
             }
             .padding(.horizontal, 50)
         }
         .sheet(isPresented: $navigationViewModel.showAddingView) {
+            withAnimation {
+                homeViewModel.isEditing = false
+            }
             homeViewModel.editTask = nil
             addingViewModel.taskTitle = ""
             addingViewModel.taskDescription = ""

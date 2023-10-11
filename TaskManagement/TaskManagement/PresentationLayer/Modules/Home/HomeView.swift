@@ -242,12 +242,23 @@ struct HomeView: View {
             }
             .hLeading()
             if !coreDataViewModel.filteredTasks.isEmpty {
-                Button(homeViewModel.isEditing ? strings.done : strings.edit) {
-                    withAnimation {
-                        homeViewModel.isEditing.toggle()
+                Group {
+                    if homeViewModel.isEditing {
+                        Button(strings.done) {
+                            withAnimation {
+                                homeViewModel.isEditing.toggle()
+                            }
+                        }
+                        .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
+                    } else {
+                        Button(strings.edit) {
+                            withAnimation {
+                                homeViewModel.isEditing.toggle()
+                            }
+                        }
+                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
                     }
                 }
-                .animation(.none, value: homeViewModel.isEditing)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
 
