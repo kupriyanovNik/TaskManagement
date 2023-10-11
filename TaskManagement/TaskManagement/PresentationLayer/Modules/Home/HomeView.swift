@@ -118,7 +118,6 @@ struct HomeView: View {
     @ViewBuilder func taskCardView(task: TaskModel, isEditing: Bool) -> some View {
         let isCurrentHour = homeViewModel.isCurrentHour(date: task.taskDate ?? Date())
         HStack(alignment: (isEditing ? .center : .top), spacing: 30) {
-
             if isEditing {
                 VStack(spacing: 10) {
                     if task.isCompleted {
@@ -149,6 +148,7 @@ struct HomeView: View {
                             .foregroundColor(.red)
                     }
                 }
+                .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
             } else {
                 VStack(spacing: 10) {
                     Circle()
@@ -164,6 +164,7 @@ struct HomeView: View {
                         .fill(themeManager.selectedTheme.accentColor)
                         .frame(width: 3)
                 }
+                .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
             }
             taskCard(task: task)
 
@@ -228,6 +229,7 @@ struct HomeView: View {
                 if homeViewModel.showGreetings {
                     Text(Date().greeting())
                         .foregroundColor(.gray)
+                        .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
                 } else {
                     Text(Date().formatted(date: .abbreviated, time: .omitted))
                         .foregroundColor(.gray)

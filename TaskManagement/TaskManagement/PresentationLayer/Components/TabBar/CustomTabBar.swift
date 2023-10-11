@@ -19,35 +19,22 @@ struct CustomTabBar: View {
     private var tabBarImages = ImageNames.TabBarImages.self
 
     private var homeButton: some View {
-        let taskCount = coreDataViewModel.filteredTasks.filter { !$0.isCompleted }.count
-        let shouldShowTaskCount = homeViewModel.showGreetings && taskCount != 0
         return Button {
             navigationViewModel.selectedTab = .home
         } label: {
             HStack {
-                if shouldShowTaskCount {
-                    Text("\(taskCount)")
-                        .font(.body)
-                        .foregroundColor(themeManager.selectedTheme.accentColor)
-                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
-                }
                 Group {
-                    if shouldShowTaskCount {
-                        Image(systemName: systemImages.noteText)
-                            .resizable()
-                            .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
-                    } else {
-                        Image(systemName: navigationViewModel.selectedTab == .home ? tabBarImages.Active.home : tabBarImages.Inactive.home)
-                            .resizable()
-                            .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-                    }
+                    Image(systemName: navigationViewModel.selectedTab == .home ? tabBarImages.Active.home : tabBarImages.Inactive.home)
+                        .resizable()
+                        .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
                 }
-                .frame(width: 24, height: 24)
+                .frame(width: 25, height: 25)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
         }
         .buttonStyle(.plain)
         .padding(.horizontal)
+        .scaleEffect(navigationViewModel.selectedTab == .home ? 1.15 : 1)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
     private var profileButton: some View {
@@ -56,15 +43,15 @@ struct CustomTabBar: View {
         } label: {
             Image(systemName: navigationViewModel.selectedTab == .profile ? tabBarImages.Active.profile : tabBarImages.Inactive.profile)
                 .resizable()
-                .frame(width: 24, height: 24)
+                .frame(width: 25, height: 25)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
         }
         .buttonStyle(.plain)
         .padding(.horizontal)
+        .scaleEffect(navigationViewModel.selectedTab == .profile ? 1.15 : 1)
+        .animation(.linear, value: navigationViewModel.selectedTab)
     }
     private var plusButton: some View {
-        let taskCount = coreDataViewModel.filteredTasks.filter { !$0.isCompleted }.count
-        let shouldShowTaskCount = homeViewModel.showGreetings && taskCount != 0
         return Button {
             navigationViewModel.showAddingView.toggle()
         } label: {
@@ -87,26 +74,34 @@ struct CustomTabBar: View {
             }
         }
         .buttonStyle(.plain)
-        .scaleEffect(shouldShowTaskCount ? 0.8 : 1)
     }
 
     // MARK: Body
     var body: some View {
         ZStack(alignment: .bottom) {
-            HStack(spacing: 0) {
+            HStack(spacing: 24) {
                 plusButton
-                Spacer()
-                homeButton
-                Spacer()
-                profileButton
+                    .padding(.horizontal, 24)
+                    .frame(height: 72)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+                    )
+                HStack(spacing: 0) {
+                    homeButton
+                    Spacer()
+                    profileButton
+
+                }
+                .padding(.horizontal, 24)
+                .frame(height: 72)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.white)
+                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+                )
             }
-            .padding(.horizontal, 24)
-            .frame(height: 72)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.white)
-                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
-            )
             .onChange(of: navigationViewModel.selectedTab) { _ in
                 feedback(style: .rigid)
             }

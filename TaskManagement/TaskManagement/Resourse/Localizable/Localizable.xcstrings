@@ -17,9 +17,6 @@
         }
       }
     },
-    "%lld" : {
-
-    },
     "Adding.cancel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -462,6 +459,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select theme of application"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите тему приложения"
           }
         }
       }
