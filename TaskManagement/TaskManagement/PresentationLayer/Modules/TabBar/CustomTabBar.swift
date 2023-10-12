@@ -107,6 +107,15 @@ struct CustomTabBar: View {
         .buttonStyle(.plain)
     }
 
+    private var addingView: some View {
+        AddingView()
+            .environmentObject(homeViewModel)
+            .environmentObject(navigationViewModel)
+            .environmentObject(coreDataViewModel)
+            .environmentObject(addingViewModel)
+            .environmentObject(themeManager)
+    }
+
     // MARK: Body
     var body: some View {
         HStack(spacing: 0) {
@@ -133,42 +142,50 @@ struct CustomTabBar: View {
                 .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
         }
         .onChange(of: navigationViewModel.selectedTab) { _ in
-            withAnimation {
-                homeViewModel.isEditing = false
-            }
+            dismissEditInAllScreens()
             feedback(style: .rigid)
         }
         .padding(.horizontal, coreDataViewModel.allTasks.isEmpty ? 50 : 30)
         .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)
         .sheet(isPresented: $navigationViewModel.showAddingView) {
-            withAnimation {
-                homeViewModel.isEditing = false
-                allTasksViewModel.isEditing = false
-            }
-            homeViewModel.editTask = nil
-            addingViewModel.taskTitle = ""
-            addingViewModel.taskDescription = ""
-            addingViewModel.taskDate = .now
-            if navigationViewModel.selectedTab == .profile {
-                navigationViewModel.selectedTab = .home
-            }
+            addingViewDismissAction()
         } content: {
-            AddingView()
-                .environmentObject(homeViewModel)
-                .environmentObject(navigationViewModel)
-                .environmentObject(coreDataViewModel)
-                .environmentObject(addingViewModel)
-                .environmentObject(themeManager)
+            addingView
         }
         .onAppear {
-            withAnimation(.linear(duration: 1.5)) {
-                tabBarViewModel.gradientLineWidth = 2
-            }
-            withAnimation (.easeInOut(duration: 2.5).repeatForever()) {
-                tabBarViewModel.gradientStart = UnitPoint(x: 1, y: -1)
-                tabBarViewModel.gradientEnd = UnitPoint(x: 0, y: 1)
-                tabBarViewModel.gradientRotation = 36
-            }
+            playPlusButtonAnimation()
+            playGradientAnimation()
+        }
+    }
+    private func playPlusButtonAnimation() {
+        withAnimation(.linear(duration: 1.5)) {
+            tabBarViewModel.gradientLineWidth = 2
+        }
+    }
+    private func playGradientAnimation() {
+        withAnimation (.easeInOut(duration: 2.5).repeatForever()) {
+            tabBarViewModel.gradientStart = UnitPoint(x: 1, y: -1)
+            tabBarViewModel.gradientEnd = UnitPoint(x: 0, y: 1)
+            tabBarViewModel.gradientRotation = 36
+        }
+    }
+    private func addingViewDismissAction() {
+        withAnimation {
+            homeViewModel.isEditing = false
+            allTasksViewModel.isEditing = false
+        }
+        homeViewModel.editTask = nil
+        addingViewModel.taskTitle = ""
+        addingViewModel.taskDescription = ""
+        addingViewModel.taskDate = .now
+        if navigationViewModel.selectedTab == .profile {
+            navigationViewModel.selectedTab = .home
+        }
+    }
+    private func dismissEditInAllScreens() {
+        withAnimation {
+            homeViewModel.isEditing = false
+            allTasksViewModel.isEditing = false
         }
     }
 }
