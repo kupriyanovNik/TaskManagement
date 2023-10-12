@@ -45,7 +45,7 @@ class CoreDataViewModel: ObservableObject {
         onAdded?(date)
     }
 
-    func removeTask(task: TaskModel, date: Date) {
+    func removeTask(task: TaskModel, date: Date, onRemove: ((Date) -> ())? = nil) {
         viewContext.delete(task)
         do {
             try viewContext.save()
@@ -53,6 +53,7 @@ class CoreDataViewModel: ObservableObject {
             print("DEBUG: \(error.localizedDescription)")
         }
         self.fetchFilteredTasks(dateToFilter: date)
+        onRemove?(date)
     }
 
     func updateTask(task: TaskModel, title: String, description: String?) {

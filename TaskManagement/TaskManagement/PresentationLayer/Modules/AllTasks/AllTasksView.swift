@@ -119,7 +119,9 @@ struct AllTasksView: View {
                         }
                     }
                     Button {
-                        coreDataViewModel.removeTask(task: task, date: task.taskDate ?? .now)
+                        coreDataViewModel.removeTask(task: task, date: task.taskDate ?? .now) { _ in
+                            navigationViewModel.selectedTab = .home
+                        }
                     } label: {
                         Image(systemName: systemImages.minusCircleFill)
                             .font(.title2)
