@@ -17,6 +17,7 @@
 		B71FD1022AD43E810039270D /* TaskManagement.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */; };
 		B72972942AD850D400B9F8BF /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72972932AD850D400B9F8BF /* TabBarViewModel.swift */; };
 		B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72972962AD8547500B9F8BF /* AllTasksView.swift */; };
+		B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72972982AD8606D00B9F8BF /* AllTasksViewModel.swift */; };
 		B73213BF2ACC8CCA00E42B1D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213BE2ACC8CCA00E42B1D /* HomeViewModel.swift */; };
 		B73213C32ACC8D1000E42B1D /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213C22ACC8D1000E42B1D /* NavigationViewModel.swift */; };
 		B73213C62ACC8E9F00E42B1D /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213C52ACC8E9F00E42B1D /* Strings.swift */; };
@@ -58,6 +59,7 @@
 		B71FD1012AD43E810039270D /* TaskManagement.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskManagement.xcdatamodel; sourceTree = "<group>"; };
 		B72972932AD850D400B9F8BF /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		B72972962AD8547500B9F8BF /* AllTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksView.swift; sourceTree = "<group>"; };
+		B72972982AD8606D00B9F8BF /* AllTasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksViewModel.swift; sourceTree = "<group>"; };
 		B73213BE2ACC8CCA00E42B1D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B73213C22ACC8D1000E42B1D /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		B73213C52ACC8E9F00E42B1D /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				B72972962AD8547500B9F8BF /* AllTasksView.swift */,
+				B72972982AD8606D00B9F8BF /* AllTasksViewModel.swift */,
 			);
 			path = AllTasks;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */,
 				B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */,
 				B7181BEE2AD4640E002F3D82 /* OnboardingModel.swift in Sources */,
+				B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */,
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
 				B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */,
 				B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */,

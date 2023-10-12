@@ -17,8 +17,15 @@
         }
       }
     },
-    "A" : {
-
+    "%lld %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
     },
     "Adding.cancel" : {
       "extractionState" : "manual",
@@ -491,6 +498,12 @@
           }
         }
       }
+    },
+    "Tasks" : {
+
+    },
+    "Your" : {
+
     }
   },
   "version" : "1.0"

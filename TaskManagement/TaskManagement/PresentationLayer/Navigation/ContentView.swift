@@ -11,6 +11,7 @@ struct ContentView: View {
     @StateObject private var tabBarViewModel = TabBarViewModel()
     @StateObject private var coreDataViewModel = CoreDataViewModel()
     @StateObject private var homeViewModel = HomeViewModel()
+    @StateObject private var allTasksViewModel = AllTasksViewModel()
     @StateObject private var addingViewModel = AddingViewModel()
     @StateObject private var profileViewModel = ProfileViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
@@ -40,7 +41,9 @@ struct ContentView: View {
                             .environmentObject(themeManager)
                     case .allTasks:
                         AllTasksView()
+                            .environmentObject(allTasksViewModel)
                             .environmentObject(coreDataViewModel)
+                            .environmentObject(themeManager)
                     }
                 }
             }

@@ -31,10 +31,8 @@ struct HomeView: View {
         }
         .onAppear {
             coreDataViewModel.fetchFilteredTasks(dateToFilter: homeViewModel.currentDay)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                withAnimation {
-                    homeViewModel.showGreetings = false
-                }
+            withAnimation(.default.delay(3)) {
+                homeViewModel.showGreetings = false
             }
         }
         .animation(.spring(), value: coreDataViewModel.filteredTasks)
