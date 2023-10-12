@@ -264,6 +264,7 @@ struct HomeView: View {
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
+        .animation(.linear, value: coreDataViewModel.filteredTasks.isEmpty)
     }
 }
 

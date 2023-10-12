@@ -27,6 +27,9 @@
         }
       }
     },
+    "♡" : {
+
+    },
     "Adding.cancel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -130,6 +133,12 @@
       }
     },
     "AllTasks" : {
+
+    },
+    "Done" : {
+
+    },
+    "Edit" : {
 
     },
     "Greetings.day" : {

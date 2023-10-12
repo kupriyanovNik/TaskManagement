@@ -40,7 +40,26 @@ struct AllTasksView: View {
                     .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
             .hLeading()
-
+            if !coreDataViewModel.filteredTasks.isEmpty {
+                Group {
+                    if allTasksViewModel.isEditing {
+                        Button("Done") {
+                            withAnimation {
+                                allTasksViewModel.isEditing.toggle()
+                            }
+                        }
+                        .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
+                    } else {
+                        Button("Edit") {
+                            withAnimation {
+                                allTasksViewModel.isEditing.toggle()
+                            }
+                        }
+                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                    }
+                }
+                .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+            }
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)

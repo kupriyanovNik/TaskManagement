@@ -114,13 +114,13 @@ struct CustomTabBar: View {
             Divider()
             Spacer()
             homeButton
-            Spacer()
-            profileButton
-            if !coreDataViewModel.allTasks.isEmpty { 
+            if !coreDataViewModel.allTasks.isEmpty {
                 Spacer()
                 allTasksButton
                     .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
+            Spacer()
+            profileButton
 
         }
         .padding(.horizontal, 24)

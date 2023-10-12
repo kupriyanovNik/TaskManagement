@@ -37,6 +37,7 @@ struct ContentView: View {
                             .environmentObject(themeManager)
                     case .profile:
                         ProfileView()
+                            .environmentObject(profileViewModel)
                             .environmentObject(settingsViewModel)
                             .environmentObject(themeManager)
                     case .allTasks:
