@@ -58,14 +58,10 @@ struct SettingsView: View {
                         .foregroundColor(.black)
                         .font(.title2)
                 }
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(strings.application)
-                        .foregroundColor(.gray)
-                    Text(strings.title)
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
-                }
+                Text(strings.title)
+                    .bold()
+                    .font(.largeTitle)
+                    .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
                 Spacer()
 
             }

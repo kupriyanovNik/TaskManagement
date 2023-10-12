@@ -53,7 +53,6 @@ struct AddingView: View {
             }
             .padding()
         }
-        .interactiveDismissDisabled()
         .makeCustomNavBar {
             HStack {
                 Button {
@@ -62,15 +61,12 @@ struct AddingView: View {
                     Image(systemName: systemImages.backArrow)
                         .foregroundColor(.black)
                         .font(.title2)
+                        .rotationEffect(.degrees(270))
                 }
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(strings.cancel)
-                        .foregroundColor(.gray)
-                    Text(strings.title)
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
-                }
+                Text(strings.title)
+                    .bold()
+                    .font(.largeTitle)
+                    .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
                 Spacer()
                 if !addingViewModel.taskTitle.isEmpty {
                     Button {
