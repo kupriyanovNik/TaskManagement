@@ -43,6 +43,8 @@ struct ContentView: View {
                     case .allTasks:
                         AllTasksView()
                             .environmentObject(allTasksViewModel)
+                            .environmentObject(homeViewModel)
+                            .environmentObject(navigationViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)
                     }
@@ -53,6 +55,7 @@ struct ContentView: View {
                     .environmentObject(navigationViewModel)
                     .environmentObject(tabBarViewModel)
                     .environmentObject(homeViewModel)
+                    .environmentObject(allTasksViewModel)
                     .environmentObject(coreDataViewModel)
                     .environmentObject(addingViewModel)
                     .environmentObject(themeManager)

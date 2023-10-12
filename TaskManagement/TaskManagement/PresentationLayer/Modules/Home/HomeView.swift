@@ -14,8 +14,6 @@ struct HomeView: View {
 
     @Namespace var animation
 
-    @Environment(\.managedObjectContext) var context
-
     // MARK: - Private Properties
     private var strings = Localizable.Home.self
     private var systemImages = ImageNames.System.self
@@ -136,7 +134,6 @@ struct HomeView: View {
                         Button {
                             homeViewModel.editTask = task
                             navigationViewModel.showAddingView.toggle()
-                            try? context.save()
                         } label: {
                             Image(systemName: systemImages.pencilCircleFill)
                                 .font(.title2)

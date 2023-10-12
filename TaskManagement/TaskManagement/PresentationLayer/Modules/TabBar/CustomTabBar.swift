@@ -11,6 +11,7 @@ struct CustomTabBar: View {
     @EnvironmentObject var tabBarViewModel: TabBarViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var addingViewModel: AddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -142,12 +143,15 @@ struct CustomTabBar: View {
         .sheet(isPresented: $navigationViewModel.showAddingView) {
             withAnimation {
                 homeViewModel.isEditing = false
+                allTasksViewModel.isEditing = false
             }
             homeViewModel.editTask = nil
             addingViewModel.taskTitle = ""
             addingViewModel.taskDescription = ""
             addingViewModel.taskDate = .now
-            navigationViewModel.selectedTab = .home
+            if navigationViewModel.selectedTab == .profile {
+                navigationViewModel.selectedTab = .home
+            }
         } content: {
             AddingView()
                 .environmentObject(homeViewModel)
