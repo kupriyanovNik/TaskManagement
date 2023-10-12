@@ -119,6 +119,9 @@
         }
       }
     },
+    "All Tasks" : {
+
+    },
     "Greetings.day" : {
       "extractionState" : "manual",
       "localizations" : {

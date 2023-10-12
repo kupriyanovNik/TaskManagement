@@ -52,6 +52,21 @@ struct CustomTabBar: View {
         .scaleEffect(navigationViewModel.selectedTab == .profile ? 1.15 : 1)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
+    private var allTasksButton: some View {
+        return Button {
+            navigationViewModel.selectedTab = .allTasks
+        } label: {
+            Image(systemName: navigationViewModel.selectedTab == .allTasks ? tabBarImages.Active.allTasks : tabBarImages.Inactive.allTasks)
+                .resizable()
+                .frame(width: 25, height: 25)
+                .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal)
+        .scaleEffect(navigationViewModel.selectedTab == .allTasks ? 1.15 : 1)
+        .animation(.linear, value: navigationViewModel.selectedTab)
+
+    }
     private var plusButton: some View {
         return Button {
             navigationViewModel.showAddingView.toggle()
@@ -99,6 +114,8 @@ struct CustomTabBar: View {
             homeButton
             Spacer()
             profileButton
+            Spacer()
+            allTasksButton
 
         }
         .padding(.horizontal, 24)
@@ -115,7 +132,7 @@ struct CustomTabBar: View {
             }
             feedback(style: .rigid)
         }
-        .padding(.horizontal, 50)
+        .padding(.horizontal, 30)
         .sheet(isPresented: $navigationViewModel.showAddingView) {
             withAnimation {
                 homeViewModel.isEditing = false

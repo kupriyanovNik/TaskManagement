@@ -19,10 +19,12 @@ enum ImageNames {
         enum Active {
             static let home = "house.fill"
             static let profile = "person.fill"
+            static let allTasks = "list.bullet.rectangle.fill"
         }
         enum Inactive {
             static let home = "house"
             static let profile = "person"
+            static let allTasks = "list.bullet.rectangle"
         }
     }
 

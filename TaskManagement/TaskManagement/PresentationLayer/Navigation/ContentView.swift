@@ -38,6 +38,8 @@ struct ContentView: View {
                         ProfileView()
                             .environmentObject(settingsViewModel)
                             .environmentObject(themeManager)
+                    case .allTasks:
+                        Text("All Tasks")
                     }
                 }
             }
