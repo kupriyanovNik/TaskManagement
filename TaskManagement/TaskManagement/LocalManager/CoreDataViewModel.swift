@@ -101,7 +101,7 @@ class CoreDataViewModel: ObservableObject {
         } catch {
             print("DEBUG: \(error.localizedDescription)")
         }
-
+        self.fetchAllTasks()
     }
 
 }

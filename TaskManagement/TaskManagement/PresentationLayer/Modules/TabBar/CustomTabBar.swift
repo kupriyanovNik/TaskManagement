@@ -119,6 +119,7 @@ struct CustomTabBar: View {
             if !coreDataViewModel.allTasks.isEmpty { 
                 Spacer()
                 allTasksButton
+                    .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
 
         }
@@ -137,6 +138,7 @@ struct CustomTabBar: View {
             feedback(style: .rigid)
         }
         .padding(.horizontal, coreDataViewModel.allTasks.isEmpty ? 50 : 30)
+        .animation(.linear.delay(0.5), value: coreDataViewModel.allTasks.isEmpty)
         .sheet(isPresented: $navigationViewModel.showAddingView) {
             withAnimation {
                 homeViewModel.isEditing = false
