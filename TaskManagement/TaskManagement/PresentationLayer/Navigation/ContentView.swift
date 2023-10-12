@@ -39,7 +39,8 @@ struct ContentView: View {
                             .environmentObject(settingsViewModel)
                             .environmentObject(themeManager)
                     case .allTasks:
-                        Text("All Tasks")
+                        AllTasksView()
+                            .environmentObject(coreDataViewModel)
                     }
                 }
             }

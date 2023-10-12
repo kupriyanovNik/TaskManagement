@@ -111,11 +111,15 @@ struct CustomTabBar: View {
         HStack(spacing: 0) {
             plusButton
             Spacer()
+            Divider()
+            Spacer()
             homeButton
             Spacer()
             profileButton
-            Spacer()
-            allTasksButton
+            if !coreDataViewModel.allTasks.isEmpty { 
+                Spacer()
+                allTasksButton
+            }
 
         }
         .padding(.horizontal, 24)
@@ -132,7 +136,7 @@ struct CustomTabBar: View {
             }
             feedback(style: .rigid)
         }
-        .padding(.horizontal, 30)
+        .padding(.horizontal, coreDataViewModel.allTasks.isEmpty ? 50 : 30)
         .sheet(isPresented: $navigationViewModel.showAddingView) {
             withAnimation {
                 homeViewModel.isEditing = false

@@ -14,6 +14,7 @@ class CoreDataViewModel: ObservableObject {
     init() {
         self.viewContext = PersistenceController.shared.viewContext
         self.fetchFilteredTasks(dateToFilter: .now)
+        self.fetchAllTasks()
     }
 
     @Published var allTasks: [TaskModel] = []

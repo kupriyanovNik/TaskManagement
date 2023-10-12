@@ -17,6 +17,9 @@
         }
       }
     },
+    "A" : {
+
+    },
     "Adding.cancel" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -119,7 +122,7 @@
         }
       }
     },
-    "All Tasks" : {
+    "AllTasks" : {
 
     },
     "Greetings.day" : {
