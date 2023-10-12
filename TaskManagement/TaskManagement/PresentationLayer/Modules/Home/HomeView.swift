@@ -196,7 +196,6 @@ struct HomeView: View {
 
             if isCurrentHour {
                 HStack(spacing: 12) {
-
                     if !task.isCompleted {
                         Button {
                             coreDataViewModel.doneTask(task: task, date: task.taskDate ?? .now)
@@ -207,16 +206,13 @@ struct HomeView: View {
                                 .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
                         }
                     }
-
                     Text(task.isCompleted ? strings.markedAsCompleted : strings.markAsCompleted)
-                        .font(.system(size: task.isCompleted ? 14 : 16))
+                        .font(.system(size: 15))
                         .foregroundColor(task.isCompleted ? .gray : .white)
                         .hLeading()
-
                 }
                 .padding(.top)
             }
-
         }
         .foregroundColor(isCurrentHour ? .white : .black)
         .padding(isCurrentHour ? 16 : 0)
