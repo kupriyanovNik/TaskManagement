@@ -148,7 +148,7 @@ struct HomeView: View {
                             .foregroundColor(.red)
                     }
                 }
-                .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
+                .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
             } else {
                 VStack(spacing: 10) {
                     Circle()
@@ -164,7 +164,7 @@ struct HomeView: View {
                         .fill(themeManager.selectedTheme.accentColor)
                         .frame(width: 3)
                 }
-                .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
             taskCard(task: task)
 

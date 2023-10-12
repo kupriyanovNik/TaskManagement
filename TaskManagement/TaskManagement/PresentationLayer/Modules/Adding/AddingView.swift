@@ -72,29 +72,32 @@ struct AddingView: View {
                         .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
                 }
                 Spacer()
-                Button {
-                    if let task = homeViewModel.editTask {
-                        coreDataViewModel.updateTask(
-                            task: task,
-                            title: addingViewModel.taskTitle,
-                            description: addingViewModel.taskDescription
-                        )
-                    } else {
-                        coreDataViewModel.addTask(
-                            title: addingViewModel.taskTitle,
-                            description: addingViewModel.taskDescription,
-                            date: addingViewModel.taskDate
-                        ) {
-                            homeViewModel.currentDay = $0
+                if !addingViewModel.taskTitle.isEmpty {
+                    Button {
+                        if let task = homeViewModel.editTask {
+                            coreDataViewModel.updateTask(
+                                task: task,
+                                title: addingViewModel.taskTitle,
+                                description: addingViewModel.taskDescription
+                            )
+                        } else {
+                            coreDataViewModel.addTask(
+                                title: addingViewModel.taskTitle,
+                                description: addingViewModel.taskDescription,
+                                date: addingViewModel.taskDate
+                            ) {
+                                homeViewModel.currentDay = $0
+                            }
                         }
+                        dismiss()
+                    } label: {
+                        Text(strings.save)
+                            .foregroundStyle(themeManager.selectedTheme.accentColor)
                     }
-                    dismiss()
-                } label: {
-                    Text(strings.save)
-                        .foregroundStyle(themeManager.selectedTheme.accentColor)
+                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
                 }
-                .disabled(addingViewModel.taskTitle == "")
             }
+            .animation(.linear, value: addingViewModel.taskTitle)
             .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
             .padding([.horizontal, .top])
         }

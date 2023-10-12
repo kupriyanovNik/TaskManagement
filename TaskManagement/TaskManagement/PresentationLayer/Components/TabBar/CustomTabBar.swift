@@ -91,6 +91,7 @@ struct CustomTabBar: View {
         .background {
             RoundedRectangle(cornerRadius: 10)
                 .fill(.white)
+                .shadow(color: .white, radius: 100, x: 0, y: 100)
                 .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
         }
         .onChange(of: navigationViewModel.selectedTab) { _ in
