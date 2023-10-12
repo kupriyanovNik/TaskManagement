@@ -26,9 +26,6 @@ struct HomeView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 15) {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    calendarView()
-                }
                 tasksView()
             }
         }
@@ -50,7 +47,15 @@ struct HomeView: View {
             }
         }
         .makeCustomNavBar {
-            headerView()
+            VStack(spacing: 0) {
+                headerView()
+                if !coreDataViewModel.allTasks.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        calendarView()
+                    }
+                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                }
+            }
         }
     }
     @ViewBuilder func calendarView() -> some View {
