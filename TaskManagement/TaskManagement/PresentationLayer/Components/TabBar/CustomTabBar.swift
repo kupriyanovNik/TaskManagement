@@ -78,38 +78,28 @@ struct CustomTabBar: View {
 
     // MARK: Body
     var body: some View {
-        ZStack(alignment: .bottom) {
-            HStack(spacing: 24) {
-                plusButton
-                    .padding(.horizontal, 24)
-                    .frame(height: 72)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.white)
-                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
-                    )
-                HStack(spacing: 0) {
-                    homeButton
-                    Spacer()
-                    profileButton
+        HStack(spacing: 0) {
+            plusButton
+            Spacer()
+            homeButton
+            Spacer()
+            profileButton
 
-                }
-                .padding(.horizontal, 24)
-                .frame(height: 72)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
-                )
-            }
-            .onChange(of: navigationViewModel.selectedTab) { _ in
-                withAnimation {
-                    homeViewModel.isEditing = false
-                }
-                feedback(style: .rigid)
-            }
-            .padding(.horizontal, 50)
         }
+        .padding(.horizontal, 24)
+        .frame(height: 72)
+        .background {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.white)
+                .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+        }
+        .onChange(of: navigationViewModel.selectedTab) { _ in
+            withAnimation {
+                homeViewModel.isEditing = false
+            }
+            feedback(style: .rigid)
+        }
+        .padding(.horizontal, 50)
         .sheet(isPresented: $navigationViewModel.showAddingView) {
             withAnimation {
                 homeViewModel.isEditing = false
