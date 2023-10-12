@@ -8,6 +8,7 @@ struct ContentView: View {
 
     // MARK: - Property Wrappers
     @StateObject private var navigationViewModel = NavigationViewModel()
+    @StateObject private var tabBarViewModel = TabBarViewModel()
     @StateObject private var coreDataViewModel = CoreDataViewModel()
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var addingViewModel = AddingViewModel()
@@ -43,6 +44,7 @@ struct ContentView: View {
             .safeAreaInset(edge: .bottom) {
                 CustomTabBar()
                     .environmentObject(navigationViewModel)
+                    .environmentObject(tabBarViewModel)
                     .environmentObject(homeViewModel)
                     .environmentObject(coreDataViewModel)
                     .environmentObject(addingViewModel)

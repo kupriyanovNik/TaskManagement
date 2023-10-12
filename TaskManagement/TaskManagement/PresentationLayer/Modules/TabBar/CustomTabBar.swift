@@ -8,6 +8,7 @@ struct CustomTabBar: View {
 
     // MARK: - Property Wrappers
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var tabBarViewModel: TabBarViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
@@ -57,7 +58,21 @@ struct CustomTabBar: View {
         } label: {
             ZStack {
                 Circle()
-                    .stroke(themeManager.selectedTheme.accentColor, lineWidth: 2)
+                    .stroke(
+                        LinearGradient(
+                            colors: [
+                                .pink,
+                                .indigo, 
+                                themeManager.selectedTheme.accentColor,
+                                .purple,
+                                .mint
+                            ],
+                            startPoint: tabBarViewModel.gradientStart,
+                            endPoint: tabBarViewModel.gradientEnd
+                        ), style: .init(lineWidth: tabBarViewModel.gradientLineWidth)
+                    )
+                    .shadow(color: themeManager.selectedTheme.accentColor.opacity(0.5), radius: 10)
+                    .rotationEffect(.degrees(tabBarViewModel.gradientRotation))
                     .frame(width: 48)
                 if #available(iOS 16, *) {
                     Image(systemName: systemImages.plus)
@@ -117,6 +132,16 @@ struct CustomTabBar: View {
                 .environmentObject(coreDataViewModel)
                 .environmentObject(addingViewModel)
                 .environmentObject(themeManager)
+        }
+        .onAppear {
+            withAnimation(.linear(duration: 1.5)) {
+                tabBarViewModel.gradientLineWidth = 2
+            }
+            withAnimation (.easeInOut(duration: 2.5).repeatForever()) {
+                tabBarViewModel.gradientStart = UnitPoint(x: 1, y: -1)
+                tabBarViewModel.gradientEnd = UnitPoint(x: 0, y: 1)
+                tabBarViewModel.gradientRotation = 36
+            }
         }
     }
 }
