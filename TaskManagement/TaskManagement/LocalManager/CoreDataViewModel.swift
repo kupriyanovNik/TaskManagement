@@ -8,6 +8,9 @@ import SwiftUI
 
 class CoreDataViewModel: ObservableObject {
 
+    @Published var allTasks: [TaskModel] = []
+    @Published var filteredTasks: [TaskModel] = []
+
     private var viewContext: NSManagedObjectContext
     private var coreDataNames = Constants.CoreDataNames.self
 
@@ -16,9 +19,6 @@ class CoreDataViewModel: ObservableObject {
         self.fetchFilteredTasks(dateToFilter: .now)
         self.fetchAllTasks()
     }
-
-    @Published var allTasks: [TaskModel] = []
-    @Published var filteredTasks: [TaskModel] = []
 
     func fetchAllTasks() {
         let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
@@ -36,22 +36,14 @@ class CoreDataViewModel: ObservableObject {
         task.taskDescription = description
         task.taskDate = date
         task.isCompleted = false 
-        do {
-            try viewContext.save()
-        } catch {
-            print("DEBUG: \(error.localizedDescription)")
-        }
+        saveContext()
         self.fetchFilteredTasks(dateToFilter: date)
         onAdded?(date)
     }
 
     func removeTask(task: TaskModel, date: Date, onRemove: ((Date) -> ())? = nil) {
         viewContext.delete(task)
-        do {
-            try viewContext.save()
-        } catch {
-            print("DEBUG: \(error.localizedDescription)")
-        }
+        saveContext()
         self.fetchFilteredTasks(dateToFilter: date)
         onRemove?(date)
     }
@@ -59,30 +51,18 @@ class CoreDataViewModel: ObservableObject {
     func updateTask(task: TaskModel, title: String, description: String?) {
         task.taskTitle = title
         task.taskDescription = description
-        do {
-            try viewContext.save()
-        } catch {
-            print("DEBUG: \(error.localizedDescription)")
-        }
+        saveContext()
     }
 
     func doneTask(task: TaskModel, date: Date) {
         task.isCompleted = true
-        do {
-            try viewContext.save()
-        } catch {
-            print("DEBUG: \(error.localizedDescription)")
-        }
+        saveContext()
         self.fetchFilteredTasks(dateToFilter: date)
     }
 
     func undoneTask(task: TaskModel, date: Date) {
         task.isCompleted = false
-        do {
-            try viewContext.save()
-        } catch {
-            print("DEBUG: \(error.localizedDescription)")
-        }
+        saveContext()
         self.fetchFilteredTasks(dateToFilter: date)
     }
 
@@ -103,6 +83,14 @@ class CoreDataViewModel: ObservableObject {
             print("DEBUG: \(error.localizedDescription)")
         }
         self.fetchAllTasks()
+    }
+
+    private func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            print("DEBUG: \(error.localizedDescription)")
+        }
     }
 
 }
