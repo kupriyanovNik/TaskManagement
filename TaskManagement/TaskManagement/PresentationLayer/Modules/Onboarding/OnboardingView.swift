@@ -11,7 +11,7 @@ struct OnboardingView: View {
     @State private var isUpscale: Bool = false
     @Binding var shouldShowOnboarding: Bool
 
-    // MARK: Internal Properties
+    // MARK: - Private Properties
     private var currentText: String {
         OnboardingModel.texts[onboardingViewModel.currentPageIndex]
     }
@@ -20,7 +20,6 @@ struct OnboardingView: View {
         onboardingViewModel.currentPageIndex == 2
     }
 
-    // MARK: Private Properties
     private var strings = Localizable.Onboarding.self
 
     private var onboardingBottomBar: some View {

@@ -50,24 +50,27 @@ struct SettingsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: systemImages.backArrow)
-                        .foregroundColor(.black)
-                        .font(.title2)
-                }
-                Text(strings.title)
-                    .bold()
-                    .font(.largeTitle)
-                    .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
-                Spacer()
-
-            }
-            .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
-            .padding(.horizontal)
+            headerView()
         }
+    }
+    @ViewBuilder func headerView() -> some View {
+        HStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: systemImages.backArrow)
+                    .foregroundColor(.black)
+                    .font(.title2)
+            }
+            Text(strings.title)
+                .bold()
+                .font(.largeTitle)
+                .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+            Spacer()
+
+        }
+        .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
+        .padding(.horizontal)
     }
 }
 

@@ -47,18 +47,25 @@ struct AllTasksView: View {
         .padding(.top)
     }
     @ViewBuilder func headerView() -> some View {
-        let tasksCount = coreDataViewModel.allTasks.count
+        let tasksCount = coreDataViewModel.allTasks.filter { !$0.isCompleted }.count
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 3) {
-                if allTasksViewModel.showAllTasksCount {
-                    let postfix = tasksCount == 1 ? "task" : "tasks"
-                    Text("\(tasksCount) \(postfix)")
-                        .foregroundColor(.gray)
-                        .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-                } else {
-                    Text("Your")
-                        .foregroundColor(.gray)
-                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                Group {
+                    if allTasksViewModel.showGreetings {
+                        Text("\(tasksCount) \(tasksCount == 1 ? "task" : "tasks")")
+                            .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
+                    } else {
+                        Text("Your")
+                            .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                    }
+                }
+                .foregroundColor(.gray)
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        withAnimation(.default) {
+                            self.allTasksViewModel.showGreetings = false
+                        }
+                    }
                 }
                 Text("Tasks")
                     .bold()
@@ -89,11 +96,6 @@ struct AllTasksView: View {
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
-        .onAppear {
-            withAnimation(.default.delay(3)) {
-                allTasksViewModel.showAllTasksCount = false
-            }
-        }
     }
     @ViewBuilder func taskCardView(task: TaskModel, isEditing: Bool) -> some View {
         HStack(alignment: (isEditing ? .center : .top), spacing: 30) {

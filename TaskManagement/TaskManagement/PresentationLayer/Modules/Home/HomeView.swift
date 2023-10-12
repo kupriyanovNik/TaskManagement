@@ -29,8 +29,10 @@ struct HomeView: View {
         }
         .onAppear {
             coreDataViewModel.fetchFilteredTasks(dateToFilter: homeViewModel.currentDay)
-            withAnimation(.default.delay(3)) {
-                homeViewModel.showGreetings = false
+            DispatchQueue.main.asyncAfter(wallDeadline: .now() + 3) {
+                withAnimation(.default) {
+                    homeViewModel.showGreetings = false
+                }
             }
         }
         .animation(.spring(), value: coreDataViewModel.filteredTasks)
@@ -43,15 +45,7 @@ struct HomeView: View {
             }
         }
         .makeCustomNavBar {
-            VStack(spacing: 0) {
-                headerView()
-                if !coreDataViewModel.allTasks.isEmpty {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        calendarView()
-                    }
-                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-                }
-            }
+            headerView()
         }
     }
     @ViewBuilder func calendarView() -> some View {
@@ -219,7 +213,7 @@ struct HomeView: View {
         }
     }
 
-    @ViewBuilder func headerView() -> some View {
+    @ViewBuilder func titleView() -> some View {
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 3) {
                 if homeViewModel.showGreetings {
@@ -262,6 +256,17 @@ struct HomeView: View {
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
         .animation(.linear, value: coreDataViewModel.filteredTasks.isEmpty)
+    }
+    @ViewBuilder func headerView() -> some View {
+        VStack(spacing: 0) {
+            titleView()
+            if !coreDataViewModel.allTasks.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    calendarView()
+                }
+                .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+            }
+        }
     }
 }
 
