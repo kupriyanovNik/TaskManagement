@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings (ru)
+*/
+
+// MARK: - Adding
+
+"Adding.title" = "Добавление";
+"Adding.save" = "Сохранить";
+"Adding.taskTitle" = "Имя задачи";
+"Adding.taskDescription" = "Описание задачи";
+"Adding.taskDate" = "Дедлайн задачи";
+
+// MARK: - Home
+
+"Home.markAsCompleted" = "Выполнить";
+"Home.markedAsCompleted" = "Выполнено";
+"Home.today" = "Сегодня";
+"Home.edit" = "Изменить";
+"Home.done" = "Готово";
+"Home.noTasks" = "Не найдено задач";
+
+// MARK: - Profile
+
+"Profile.your" = "Ваш";
+"Profile.profile" = "Профиль";
+
+// MARK: - Onboarding
+
+"Onboarding.endOnboarding" = "Скрыть онбординг";
+"Onboarding.next" = "Далее";
+"Onboarding.myName" = "My";
+"Onboarding.habits" = "Habits";
+
+// MARK: - Greetings
+
+"Greetings.morning" = "Доброе утро";
+"Greetings.day" = "Добрый день";
+"Greetings.evening" = "Добрый вечер";
+"Greetings.night" = "Доброй ночи";
+
+// MARK: - Settings
+
+"Settings.title" = "Настройки";
+"Settings.selectTheme" = "Выберите тему приложения";

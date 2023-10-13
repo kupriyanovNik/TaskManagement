@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings (en)
+*/
+
+// MARK: - Adding
+
+"Adding.title" = "Add new task";
+"Adding.save" = "Save";
+"Adding.taskTitle" = "Task title";
+"Adding.taskDescription" = "Task description";
+"Adding.taskDate" = "Task date";
+
+// MARK: - Home
+
+"Home.markAsCompleted" = "Mark as completed";
+"Home.markedAsCompleted" = "Marked as completed";
+"Home.today" = "Today";
+"Home.edit" = "Edit";
+"Home.done" = "Done";
+"Home.noTasks" = "No tasks found";
+
+// MARK: - Profile
+
+"Profile.your" = "Your";
+"Profile.profile" = "Profile";
+
+// MARK: - Onboarding
+
+"Onboarding.endOnboarding" = "Hide onboarding";
+"Onboarding.next" = "Next";
+"Onboarding.myName" = "My";
+"Onboarding.habits" = "Habits";
+
+// MARK: - Greetings
+
+"Greetings.morning" = "Good morning";
+"Greetings.day" = "Good day";
+"Greetings.evening" = "Good evening";
+"Greetings.night" = "Good night";
+
+// MARK: - Settings
+
+"Settings.title" = "Settings";
+"Settings.selectTheme" = "Select theme of application";
