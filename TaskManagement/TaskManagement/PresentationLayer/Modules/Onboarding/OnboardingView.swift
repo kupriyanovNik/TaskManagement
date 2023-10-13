@@ -63,6 +63,8 @@ struct OnboardingView: View {
     // MARK: Body
     var body: some View {
         ZStack {
+            Color.white
+                .ignoresSafeArea()
             VStack(alignment: .center, spacing: 0) {
                 Spacer()
                 if !isUpscale {
@@ -84,6 +86,7 @@ struct OnboardingView: View {
                 Spacer()
             }
         }
+        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
         .overlay {
             onboardingBottomBar
         }
@@ -94,8 +97,10 @@ struct OnboardingView: View {
         withAnimation(.linear) {
             self.isUpscale = true
         }
-        withAnimation(.linear.delay(1.5)) {
-            self.shouldShowOnboarding.toggle()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            withAnimation(.linear) {
+                self.shouldShowOnboarding.toggle()
+            }
         }
     }
 }
