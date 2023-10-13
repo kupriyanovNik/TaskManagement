@@ -4,7 +4,6 @@
 
 import SwiftUI
 
-// MARK: - May be helpful, but unused now
 struct RoundedShape: Shape {
     let corners: UIRectCorner
     var radius: CGFloat = 10

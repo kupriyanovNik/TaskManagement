@@ -25,7 +25,7 @@ struct TaskManagementApp: App {
                         if shouldShowOnboarding {
                             OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
                                 .clipShape(RoundedShape(corners: [.bottomRight, .bottomLeft], radius: 30))
-                                .padding(.bottom, 30)
+                                .padding(.bottom, 15)
                                 .ignoresSafeArea(edges: .top)
                         }
                     }

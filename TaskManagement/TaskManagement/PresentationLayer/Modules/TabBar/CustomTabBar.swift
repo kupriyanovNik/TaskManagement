@@ -37,6 +37,7 @@ struct CustomTabBar: View {
         .buttonStyle(.plain)
         .padding(.horizontal)
         .scaleEffect(navigationViewModel.selectedTab == .home ? 1.15 : 1)
+        .opacity(navigationViewModel.selectedTab == .home ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
     private var profileButton: some View {
@@ -51,6 +52,7 @@ struct CustomTabBar: View {
         .buttonStyle(.plain)
         .padding(.horizontal)
         .scaleEffect(navigationViewModel.selectedTab == .profile ? 1.15 : 1)
+        .opacity(navigationViewModel.selectedTab == .profile ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
     private var allTasksButton: some View {
@@ -65,6 +67,7 @@ struct CustomTabBar: View {
         .buttonStyle(.plain)
         .padding(.horizontal)
         .scaleEffect(navigationViewModel.selectedTab == .allTasks ? 1.15 : 1)
+        .opacity(navigationViewModel.selectedTab == .allTasks ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
 
     }
