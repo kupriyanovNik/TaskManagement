@@ -69,7 +69,6 @@ struct CustomTabBar: View {
         .scaleEffect(navigationViewModel.selectedTab == .allTasks ? 1.15 : 1)
         .opacity(navigationViewModel.selectedTab == .allTasks ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
-
     }
     private var plusButton: some View {
         return Button {
@@ -80,11 +79,9 @@ struct CustomTabBar: View {
                     .stroke(
                         LinearGradient(
                             colors: [
-                                .pink,
-                                .indigo, 
+                                .pink, .indigo,
                                 themeManager.selectedTheme.accentColor,
-                                .purple,
-                                .mint
+                                .purple, .mint
                             ],
                             startPoint: tabBarViewModel.gradientStart,
                             endPoint: tabBarViewModel.gradientEnd

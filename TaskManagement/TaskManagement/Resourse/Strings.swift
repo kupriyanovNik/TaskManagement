@@ -14,6 +14,7 @@ enum Constants {
     }
     enum UserDefaultsKeys {
         static let shouldShowOnboarding = "shouldShowOnboarding"
+        static let selectedTheme = "selectedThemeIndex"
     }
     enum CoreDataNames {
         static let taskManagement = "TaskManagement"

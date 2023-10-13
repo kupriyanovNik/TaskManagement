@@ -22,7 +22,7 @@ struct SettingsView: View {
                 .padding(.leading)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: -10) {
-                    ForEach(0..<DataSource.themes.count) { themeIndex in
+                    ForEach(0..<DataSource.themesCount) { themeIndex in
                         let theme = DataSource.getTheme(themeIndex: themeIndex)
                         ThemePickerCell(
                             accentColor: theme.accentColor,

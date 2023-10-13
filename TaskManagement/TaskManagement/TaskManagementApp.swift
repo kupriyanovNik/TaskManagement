@@ -18,13 +18,23 @@ struct TaskManagementApp: App {
                     .ignoresSafeArea()
                 ContentView()
                     .opacity(shouldShowOnboarding ? 0.5 : 1)
-                    .clipShape(RoundedShape(corners: [.bottomRight, .bottomLeft], radius: shouldShowOnboarding ? 30 : 0))
+                    .clipShape(
+                        RoundedShape(
+                            corners: [.bottomRight, .bottomLeft], 
+                            radius: shouldShowOnboarding ? 30 : 0
+                        )
+                    )
                     .padding(.bottom, shouldShowOnboarding ? 25 : 0)
                     .ignoresSafeArea()
                     .overlay {
                         if shouldShowOnboarding {
                             OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
-                                .clipShape(RoundedShape(corners: [.bottomRight, .bottomLeft], radius: 30))
+                                .clipShape(
+                                    RoundedShape(
+                                        corners: [.bottomRight, .bottomLeft],
+                                        radius: 30
+                                    )
+                                )
                                 .padding(.bottom, 15)
                                 .ignoresSafeArea(edges: .top)
                         }
