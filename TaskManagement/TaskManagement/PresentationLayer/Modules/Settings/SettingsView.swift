@@ -44,7 +44,11 @@ struct SettingsView: View {
             VStack(alignment: .leading) {
                 themeSelectionRow
                 Divider()
-
+                Button {
+                    UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
+                } label: {
+                    Text("show onboarding")
+                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
