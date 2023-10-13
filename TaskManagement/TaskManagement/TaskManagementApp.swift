@@ -10,9 +10,6 @@ struct TaskManagementApp: App {
     // MARK: - Property Wrappers
     @AppStorage(Constants.UserDefaultsKeys.shouldShowOnboarding) var shouldShowOnboarding: Bool = true
 
-    // MARK: - Internal Properties
-    var persistenceController = PersistenceController.shared
-
     // MARK: - Body
     var body: some Scene {
         WindowGroup {
@@ -21,11 +18,9 @@ struct TaskManagementApp: App {
                     OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
                 } else {
                     ContentView()
-                        .environment(\.managedObjectContext, persistenceController.viewContext)
                 }
             }
             .preferredColorScheme(.light)
-            .animation(.spring(), value: shouldShowOnboarding)
         }
     }
 }

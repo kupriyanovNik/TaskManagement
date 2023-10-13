@@ -60,6 +60,7 @@ struct ContentView: View {
                     .environmentObject(addingViewModel)
                     .environmentObject(themeManager)
                     .padding(.top)
+                    .padding(.bottom, 5)
             }
             .ignoresSafeArea(.keyboard)
             .animation(.linear(duration: 0.3), value: navigationViewModel.selectedTab)
