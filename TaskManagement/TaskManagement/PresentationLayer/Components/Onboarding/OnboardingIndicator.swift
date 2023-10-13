@@ -9,7 +9,7 @@ struct OnboardingIndicator: View {
     // MARK: - Property Wrapper
     @Binding var index: Int
 
-    // MARK: Body
+    // MARK: - Body
     var body: some View {
         HStack {
             ForEach(0..<3) { index in
