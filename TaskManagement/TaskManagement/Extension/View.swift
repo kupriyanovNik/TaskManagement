@@ -36,3 +36,17 @@ extension View {
     }
 }
 
+extension View {
+    func endEditing() -> some View {
+        self
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+    }
+    func continueEditing() -> some View {
+        self
+            .onTapGesture {
+
+            }
+    }
+}

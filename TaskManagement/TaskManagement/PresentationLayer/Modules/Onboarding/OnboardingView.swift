@@ -10,55 +10,44 @@ struct OnboardingView: View {
     @StateObject private var onboardingViewModel = OnboardingViewModel()
     @EnvironmentObject var settingsViewModel: SettingsViewModel
 
-    @State private var isUpscale: Bool = false
     @Binding var shouldShowOnboarding: Bool
 
     // MARK: - Private Properties
-    private var currentText: String {
-        OnboardingModel.texts[onboardingViewModel.currentPageIndex]
-    }
-
-    private var isLastPage: Bool {
-        onboardingViewModel.currentPageIndex == 2
-    }
-
     private var strings = Localizable.Onboarding.self
 
-    private var onboardingBottomBar: some View {
-        Group {
-            VStack(spacing: 22) {
-                Spacer()
-                if !isLastPage {
-                    OnboardingIndicator(index: $onboardingViewModel.currentPageIndex)
-                }
-                Button {
-                    if isLastPage {
-                        hideOnboarding()
-                    } else {
-                        withAnimation(.linear) {
-                            onboardingViewModel.currentPageIndex += 1
-                        }
-                    }
-                } label: {
-                    Text(isLastPage ? strings.endOnboarding : strings.next)
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 25)
-                        .padding(.vertical, 5)
-                        .background {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.black)
-                        }
-                }
-                .opacity(isUpscale ? 0 : 1)
-
+    private var registrationView: some View {
+        VStack(spacing: 16) {
+            CustomTextField(
+                inputText: $settingsViewModel.userName,
+                placeHolder: "Как к Вам обращаться?",
+                strokeColor: .black
+            )
+            .continueEditing()
+            CustomTextField(
+                inputText: $settingsViewModel.userAge,
+                placeHolder: "Ваш возраст",
+                strokeColor: .black
+            )
+            .keyboardType(.numberPad)
+            .continueEditing()
+            Button {
+                hideOnboarding()
+            } label: {
+                Text("Войти")
+                    .padding()
+                    .foregroundColor(.white)
+                    .hCenter()
+                    .background(.black)
+                    .cornerRadius(10)
             }
-            .padding(.bottom)
+            .buttonStyle(.plain)
         }
+        .padding()
     }
 
     // MARK: Inits
     init(shouldShowOnboarding: Binding<Bool>) {
+        // MARK: - Because 'OnboardingView' initializer is inaccessible due to 'private' protection level
         self._shouldShowOnboarding = shouldShowOnboarding
     }
 
@@ -67,41 +56,40 @@ struct OnboardingView: View {
         ZStack {
             Color.white
                 .ignoresSafeArea()
-            VStack(alignment: .center, spacing: 0) {
-                Spacer()
-                if !isUpscale {
-                    Text(currentText)
-                        .font(.system(size: 40, weight: .semibold))
-                }
-                HStack(alignment: .center, spacing: 0) {
-                    if isLastPage {
-                        Text(strings.myName)
-                            .font(.system(size: 40, weight: .bold))
-                            .offset(y: isLastPage ? 50 : 0)
+                .endEditing()
+            Group {
+                if onboardingViewModel.showGreetings {
+                    VStack(spacing: 30) {
+                        Text("My\nHabits")
                             .multilineTextAlignment(.center)
+                            .font(.system(size: 30, weight: .semibold))
+
+                        Text("Приложение для контроля и отслеживания выполнения задач")
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 20, weight: .semibold))
+                            .padding(.horizontal)
                     }
-                    Text(strings.habits)
-                        .font(.system(size: 40, weight: .bold))
-                        .offset(y: isLastPage ? 50 : 0)
+                } else {
+                    registrationView
                 }
-                .scaleEffect(isUpscale ? 1.3 : 1)
-                Spacer()
             }
         }
         .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-        .overlay {
-            onboardingBottomBar
+        .onAppear {
+            showRegistrationView()
         }
     }
 
     // MARK: Private Functions
     private func hideOnboarding() {
         withAnimation(.linear) {
-            self.isUpscale = true
+            self.shouldShowOnboarding.toggle()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.linear) {
-                self.shouldShowOnboarding.toggle()
+    }
+    private func showRegistrationView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            withAnimation(.default) {
+                self.onboardingViewModel.showGreetings = false
             }
         }
     }

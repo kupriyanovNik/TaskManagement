@@ -8,6 +8,7 @@ struct HomeView: View {
 
     // MARK: - Property Wrappers
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -217,7 +218,7 @@ struct HomeView: View {
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 3) {
                 if homeViewModel.showGreetings {
-                    Text(Date().greeting())
+                    Text("\(Date().greeting()), \(settingsViewModel.userName)")
                         .foregroundColor(.gray)
                         .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
                 } else {
@@ -273,6 +274,7 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .environmentObject(HomeViewModel())
+        .environmentObject(SettingsViewModel())
         .environmentObject(NavigationViewModel())
         .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())

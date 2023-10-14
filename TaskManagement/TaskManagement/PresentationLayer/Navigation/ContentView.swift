@@ -33,6 +33,7 @@ struct ContentView: View {
                         HomeView()
                             .environmentObject(navigationViewModel)
                             .environmentObject(homeViewModel)
+                            .environmentObject(settingsViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)
                     case .profile:

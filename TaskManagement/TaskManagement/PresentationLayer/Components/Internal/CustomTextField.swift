@@ -24,12 +24,15 @@ struct CustomTextField: View {
                 .padding(.leading)
                 .foregroundColor(.gray)
             ZStack(alignment: .trailing) {
-                TextField(placeHolder, text: $inputText)
+                if #available(iOS 16, *) {
+                    TextField(placeHolder, text: $inputText, axis: .vertical)
+                } else {
+                    TextField(placeHolder, text: $inputText)
+                }
             }
             .focused($isFocused)
             .foregroundColor(Color.black)
             .disableAutocorrection(true)
-            .frame(maxHeight: 24)
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
