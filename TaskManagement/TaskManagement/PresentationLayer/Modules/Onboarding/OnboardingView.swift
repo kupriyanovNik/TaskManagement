@@ -15,6 +15,18 @@ struct OnboardingView: View {
     // MARK: - Private Properties
     private var strings = Localizable.Onboarding.self
 
+    private var greetingsView: some View {
+        VStack(spacing: 30) {
+            Text("My\nHabits")
+                .multilineTextAlignment(.center)
+                .font(.system(size: 30, weight: .semibold))
+
+            Text("Приложение для контроля и отслеживания выполнения задач")
+                .multilineTextAlignment(.center)
+                .font(.system(size: 20, weight: .semibold))
+                .padding(.horizontal)
+        }
+    }
     private var registrationView: some View {
         VStack(spacing: 16) {
             CustomTextField(
@@ -31,7 +43,11 @@ struct OnboardingView: View {
             .keyboardType(.numberPad)
             .continueEditing()
             Button {
-                hideOnboarding()
+                if settingsViewModel.userName.isEmpty || settingsViewModel.userAge.isEmpty || settingsViewModel.userName.count > 15 || settingsViewModel.userAge.count > 15 {
+                    onboardingViewModel.showError = true
+                } else {
+                    hideOnboarding()
+                }
             } label: {
                 Text("Войти")
                     .padding()
@@ -59,16 +75,7 @@ struct OnboardingView: View {
                 .endEditing()
             Group {
                 if onboardingViewModel.showGreetings {
-                    VStack(spacing: 30) {
-                        Text("My\nHabits")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 30, weight: .semibold))
-
-                        Text("Приложение для контроля и отслеживания выполнения задач")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 20, weight: .semibold))
-                            .padding(.horizontal)
-                    }
+                    greetingsView
                 } else {
                     registrationView
                 }
@@ -78,6 +85,7 @@ struct OnboardingView: View {
         .onAppear {
             showRegistrationView()
         }
+        .alert("Поля не должны быть пустыми и длина каждого их них не должна быть больше 15", isPresented: $onboardingViewModel.showError) {}
     }
 
     // MARK: Private Functions
