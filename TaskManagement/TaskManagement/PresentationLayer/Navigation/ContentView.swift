@@ -7,15 +7,15 @@ import SwiftUI
 struct ContentView: View {
 
     // MARK: - Property Wrappers
-    @StateObject private var navigationViewModel = NavigationViewModel()
-    @StateObject private var tabBarViewModel = TabBarViewModel()
-    @StateObject private var coreDataViewModel = CoreDataViewModel()
-    @StateObject private var homeViewModel = HomeViewModel()
-    @StateObject private var allTasksViewModel = AllTasksViewModel()
-    @StateObject private var addingViewModel = AddingViewModel()
-    @StateObject private var profileViewModel = ProfileViewModel()
-    @StateObject private var settingsViewModel = SettingsViewModel()
-    @StateObject private var themeManager = ThemeManager()
+    @EnvironmentObject var navigationViewModel: NavigationViewModel
+    @EnvironmentObject var tabBarViewModel: TabBarViewModel
+    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var allTasksViewModel: AllTasksViewModel
+    @EnvironmentObject var addingViewModel: AddingViewModel
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Inits
     init() {
@@ -66,8 +66,4 @@ struct ContentView: View {
             .animation(.linear(duration: 0.3), value: navigationViewModel.selectedTab)
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

@@ -8,6 +8,8 @@ struct OnboardingView: View {
 
     // MARK: Property Wrappers
     @StateObject private var onboardingViewModel = OnboardingViewModel()
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
+
     @State private var isUpscale: Bool = false
     @Binding var shouldShowOnboarding: Bool
 
@@ -107,4 +109,5 @@ struct OnboardingView: View {
 
 #Preview {
     OnboardingView(shouldShowOnboarding: .constant(false))
+        .environmentObject(SettingsViewModel())
 }
