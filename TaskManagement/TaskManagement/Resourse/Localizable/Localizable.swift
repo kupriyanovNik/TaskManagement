@@ -26,10 +26,11 @@ enum Localizable {
         static let profile = localized("Profile.profile")
     }
     enum Onboarding {
-        static let endOnboarding = localized("Onboarding.endOnboarding")
-        static let next = localized("Onboarding.next")
-        static let myName = localized("Onboarding.myName")
-        static let habits = localized("Onboarding.habits")
+        static let application = localized("Onboarding.application")
+        static let username = localized("Onboarding.username")
+        static let userage = localized("Onboarding.userage")
+        static let login = localized("Onboarding.enter")
+        static let error = localized("Onboarding.error")
     }
     enum Greetings {
         static let morning = localized("Greetings.morning")

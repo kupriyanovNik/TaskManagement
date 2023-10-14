@@ -26,10 +26,11 @@
 
 // MARK: - Onboarding
 
-"Onboarding.endOnboarding" = "Скрыть онбординг";
-"Onboarding.next" = "Далее";
-"Onboarding.myName" = "My";
-"Onboarding.habits" = "Habits";
+"Onboarding.application" = "Приложение для контроля и отслеживания выполнения задач";
+"Onboarding.username" = "Как к Вам обращаться?";
+"Onboarding.userage" = "Ваш возраст";
+"Onboarding.enter" = "Войти";
+"Onboarding.error" = "Поля не должны быть пустыми и длина каждого их них не должна быть больше 15";
 
 // MARK: - Greetings
 

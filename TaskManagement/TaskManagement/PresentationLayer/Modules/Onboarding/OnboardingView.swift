@@ -21,7 +21,7 @@ struct OnboardingView: View {
                 .multilineTextAlignment(.center)
                 .font(.system(size: 30, weight: .semibold))
 
-            Text("Приложение для контроля и отслеживания выполнения задач")
+            Text(strings.application)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 20, weight: .semibold))
                 .padding(.horizontal)
@@ -31,13 +31,13 @@ struct OnboardingView: View {
         VStack(spacing: 16) {
             CustomTextField(
                 inputText: $settingsViewModel.userName,
-                placeHolder: "Как к Вам обращаться?",
+                placeHolder: strings.username,
                 strokeColor: .black
             )
             .continueEditing()
             CustomTextField(
                 inputText: $settingsViewModel.userAge,
-                placeHolder: "Ваш возраст",
+                placeHolder: strings.userage,
                 strokeColor: .black
             )
             .keyboardType(.numberPad)
@@ -49,7 +49,7 @@ struct OnboardingView: View {
                     hideOnboarding()
                 }
             } label: {
-                Text("Войти")
+                Text(strings.login)
                     .padding()
                     .foregroundColor(.white)
                     .hCenter()
@@ -85,7 +85,7 @@ struct OnboardingView: View {
         .onAppear {
             showRegistrationView()
         }
-        .alert("Поля не должны быть пустыми и длина каждого их них не должна быть больше 15", isPresented: $onboardingViewModel.showError) {}
+        .alert(strings.error, isPresented: $onboardingViewModel.showError) {}
     }
 
     // MARK: Private Functions
