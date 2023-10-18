@@ -49,6 +49,20 @@ struct AddingView: View {
                                     .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                             }
                     }
+                    HStack {
+                        Text(strings.shouldRemind)
+                        Spacer()
+                        RadioButton(
+                            isSelected: $addingViewModel.shouldSendNotification,
+                            accentColor: themeManager.selectedTheme.accentColor
+                        )
+                        .frame(width: 30, height: 30)
+                    }
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
+                    }
                 }
             }
             .padding()
@@ -80,22 +94,7 @@ struct AddingView: View {
             Spacer()
             if !addingViewModel.taskTitle.isEmpty {
                 Button {
-                    if let task = homeViewModel.editTask {
-                        coreDataViewModel.updateTask(
-                            task: task,
-                            title: addingViewModel.taskTitle,
-                            description: addingViewModel.taskDescription
-                        )
-                    } else {
-                        coreDataViewModel.addTask(
-                            title: addingViewModel.taskTitle,
-                            description: addingViewModel.taskDescription,
-                            date: addingViewModel.taskDate
-                        ) {
-                            homeViewModel.currentDay = $0
-                        }
-                    }
-                    dismiss()
+                    saveAction()
                 } label: {
                     Text(strings.save)
                         .foregroundStyle(themeManager.selectedTheme.accentColor)
@@ -106,6 +105,46 @@ struct AddingView: View {
         .animation(.linear, value: addingViewModel.taskTitle)
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding([.horizontal, .top])
+    }
+
+    // MARK: - Private Functions
+    private func saveAction() {
+        if let task = homeViewModel.editTask {
+            coreDataViewModel.updateTask(
+                task: task,
+                title: addingViewModel.taskTitle,
+                description: addingViewModel.taskDescription
+            )
+        } else {
+            coreDataViewModel.addTask(
+                title: addingViewModel.taskTitle,
+                description: addingViewModel.taskDescription,
+                date: addingViewModel.taskDate
+            ) {
+                homeViewModel.currentDay = $0
+            }
+            if addingViewModel.shouldSendNotification {
+                sendNotification()
+            }
+        }
+        dismiss()
+    }
+    private func sendNotification() {
+        let date = addingViewModel.taskDate
+        let body = addingViewModel.taskTitle
+        let calendar = Calendar.current
+        let minute = calendar.component(.minute, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let day = calendar.component(.day, from: date)
+        NotificationManager.shared.sendNotification(
+            id: UUID().uuidString,
+            minute: minute,
+            hour: hour,
+            day: day,
+            title: date.greeting(),
+            subtitle: strings.unfinishedTask,
+            body: body
+        )
     }
 }
 

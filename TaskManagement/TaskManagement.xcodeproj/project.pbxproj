@@ -33,6 +33,8 @@
 		B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C22AD5B21000F5631E /* ProfileViewModel.swift */; };
 		B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
+		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
+		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
 		B7DC65882AD56858009DA010 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC65872AD56858009DA010 /* Theme.swift */; };
 		B7DC658A2AD568C3009DA010 /* ThemeDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC65892AD568C3009DA010 /* ThemeDefinitions.swift */; };
 		B7DC658C2AD56967009DA010 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC658B2AD56967009DA010 /* ThemeManager.swift */; };
@@ -77,6 +79,8 @@
 		B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		B7DC65872AD56858009DA010 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		B7DC65892AD568C3009DA010 /* ThemeDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDefinitions.swift; sourceTree = "<group>"; };
 		B7DC658B2AD56967009DA010 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				B76646BF2AD5AA5B00F5631E /* Internal */,
+				B7D949AD2AE04D9500FE5CAE /* Adding */,
 				B7DC65962AD57475009DA010 /* Onboarding */,
 				B7181BE52AD45C59002F3D82 /* NavBar */,
 			);
@@ -253,6 +258,31 @@
 			path = Internal;
 			sourceTree = "<group>";
 		};
+		B7D949A82AE04B5800FE5CAE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B7D949AA2AE04B7A00FE5CAE /* NotificationManager */,
+				B73213C92ACC8EF100E42B1D /* LocalManager */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B7D949AA2AE04B7A00FE5CAE /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */,
+			);
+			path = NotificationManager;
+			sourceTree = "<group>";
+		};
+		B7D949AD2AE04D9500FE5CAE /* Adding */ = {
+			isa = PBXGroup;
+			children = (
+				B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */,
+			);
+			path = Adding;
+			sourceTree = "<group>";
+		};
 		B7DC65852AD56756009DA010 /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,7 +341,7 @@
 			children = (
 				B7F515C62ACB27060001A282 /* TaskManagementApp.swift */,
 				B73213B82ACC8CA800E42B1D /* Resourse */,
-				B73213C92ACC8EF100E42B1D /* LocalManager */,
+				B7D949A82AE04B5800FE5CAE /* Service */,
 				B73213B62ACC8C9A00E42B1D /* Extension */,
 				B73213B52ACC8C6000E42B1D /* PresentationLayer */,
 				B7F515CA2ACB27070001A282 /* Assets.xcassets */,
@@ -420,6 +450,7 @@
 				B7181BEE2AD4640E002F3D82 /* OnboardingModel.swift in Sources */,
 				B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */,
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
+				B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */,
 				B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */,
 				B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */,
 				B71FD0FF2AD437910039270D /* CoreDataViewModel.swift in Sources */,
@@ -432,6 +463,7 @@
 				B7DC65922AD571ED009DA010 /* Localizable.swift in Sources */,
 				B73213D32ACCACC900E42B1D /* CustomTabBar.swift in Sources */,
 				B7181BF02AD46466002F3D82 /* OnboardingIndicator.swift in Sources */,
+				B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */,
 				B7F515C72ACB27060001A282 /* TaskManagementApp.swift in Sources */,
 				B7DC65902AD569BC009DA010 /* DataSource.swift in Sources */,
 				B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */,
@@ -505,7 +537,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -559,7 +591,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
