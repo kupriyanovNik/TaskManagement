@@ -161,7 +161,17 @@ struct HomeView: View {
                 }
                 .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
-            taskCard(task: task)
+            if #available(iOS 17, *) {
+                taskCard(task: task)
+                    .scrollTransition(.animated) { effect, phase in
+                        effect
+                            .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                            .opacity(phase.isIdentity ? 1 : 0.8)
+                            .blur(radius: phase.isIdentity ? 0 : 2)
+                    }
+            } else {
+                taskCard(task: task)
+            }
 
         }
         .hLeading()
