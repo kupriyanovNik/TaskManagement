@@ -6,6 +6,7 @@ import SwiftUI
 
 enum DataSource {
     static let themes: [Theme] = [
+        Theme0(),
         Theme1(),
         Theme2(),
         Theme3(),

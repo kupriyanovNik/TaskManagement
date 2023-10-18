@@ -5,10 +5,16 @@
 import Foundation
 import SwiftUI
 
-struct Theme1: Theme {
+struct Theme0: Theme {
     var accentColor: Color = .black
     var pageTitleColor: Color = .black
     var themeName: String = "Black"
+}
+
+struct Theme1: Theme {
+    var accentColor: Color = .purple
+    var pageTitleColor: Color = .black
+    var themeName: String = "Purple"
 }
 
 struct Theme2: Theme {
