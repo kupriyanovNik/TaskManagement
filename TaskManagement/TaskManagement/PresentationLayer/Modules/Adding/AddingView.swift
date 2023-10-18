@@ -141,8 +141,8 @@ struct AddingView: View {
             minute: minute,
             hour: hour,
             day: day,
-            title: "Привет!",
-            subtitle: "Невыполненное задание",
+            title: date.greeting(),
+            subtitle: strings.unfinishedTask,
             body: body
         )
     }

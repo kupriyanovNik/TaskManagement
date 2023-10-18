@@ -12,6 +12,7 @@ enum Localizable {
         static let taskTitle = localized("Adding.taskTitle")
         static let taskDescription = localized("Adding.taskDescription")
         static let taskDate = localized("Adding.taskDate")
+        static let unfinishedTask = localized("Adding.unfinishedTask")
     }
     enum Home {
         static let markAsCompleted = localized("Home.markAsCompleted")
