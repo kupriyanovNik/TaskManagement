@@ -15,7 +15,7 @@ struct AllTasksView: View {
 
     // MARK: - Private Properties
     private var systemImages = ImageNames.System.self
-    private var strings = Localizable.Home.self
+    private var strings = Localizable.AllTasks.self
 
     // MARK: - Body
     var body: some View {
@@ -52,10 +52,10 @@ struct AllTasksView: View {
             VStack(alignment: .leading, spacing: 3) {
                 Group {
                     if allTasksViewModel.showGreetings {
-                        Text("\(tasksCount) \(tasksCount == 1 ? "task" : "tasks")")
+                        Text("\(tasksCount) \(tasksCount == 1 ? strings.taskLowercased : strings.tasksLowercased)")
                             .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
                     } else {
-                        Text("Your")
+                        Text(strings.your)
                             .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
                     }
                 }
@@ -67,23 +67,23 @@ struct AllTasksView: View {
                         }
                     }
                 }
-                Text("Tasks")
+                Text(strings.tasks)
                     .bold()
                     .font(.largeTitle)
                     .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
             .hLeading()
-            if !coreDataViewModel.filteredTasks.isEmpty {
+            if !coreDataViewModel.allTasks.isEmpty {
                 Group {
                     if allTasksViewModel.isEditing {
-                        Button("Done") {
+                        Button(strings.done) {
                             withAnimation {
                                 allTasksViewModel.isEditing.toggle()
                             }
                         }
                         .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
                     } else {
-                        Button("Edit") {
+                        Button(strings.edit) {
                             withAnimation {
                                 allTasksViewModel.isEditing.toggle()
                             }

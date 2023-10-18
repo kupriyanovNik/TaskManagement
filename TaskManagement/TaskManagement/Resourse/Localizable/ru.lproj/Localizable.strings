@@ -45,3 +45,12 @@
 
 "Settings.title" = "Настройки";
 "Settings.selectTheme" = "Выберите тему приложения";
+
+// MARK: - AllTasks
+
+"AllTasks.taskLowercased" = "задача";
+"AllTasks.tasksLowercased" = "задачи";
+"AllTasks.your" = "Ваши";
+"AllTasks.tasks" = "Задачи";
+"AllTasks.done" = "Готово";
+"AllTasks.edit" = "Изменить";

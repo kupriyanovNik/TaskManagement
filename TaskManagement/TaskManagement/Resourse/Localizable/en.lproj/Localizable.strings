@@ -45,3 +45,12 @@
 
 "Settings.title" = "Settings";
 "Settings.selectTheme" = "Select theme of application";
+
+// MARK: - AllTasks
+
+"AllTasks.taskLowercased" = "task";
+"AllTasks.tasksLowercased" = "tasks";
+"AllTasks.your" = "Your";
+"AllTasks.tasks" = "Tasks";
+"AllTasks.done" = "Done";
+"AllTasks.edit" = "Edit";
