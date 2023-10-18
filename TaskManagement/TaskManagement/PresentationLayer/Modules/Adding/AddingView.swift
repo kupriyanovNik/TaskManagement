@@ -33,20 +33,6 @@ struct AddingView: View {
                     placeHolder: strings.taskDescription,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
-                HStack {
-                    Text("Send notification")
-                    Spacer()
-                    RadioButton(
-                        isSelected: $addingViewModel.shouldSendNotification,
-                        accentColor: themeManager.selectedTheme.accentColor
-                    )
-                    .frame(width: 30, height: 30)
-                }
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
-                }
                 if homeViewModel.editTask == nil {
                     VStack(alignment: .leading, spacing: 5) {
                         Text(strings.taskDate)
@@ -62,6 +48,20 @@ struct AddingView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                             }
+                    }
+                    HStack {
+                        Text(strings.shouldRemind)
+                        Spacer()
+                        RadioButton(
+                            isSelected: $addingViewModel.shouldSendNotification,
+                            accentColor: themeManager.selectedTheme.accentColor
+                        )
+                        .frame(width: 30, height: 30)
+                    }
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                     }
                 }
             }

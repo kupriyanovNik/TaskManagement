@@ -9,6 +9,7 @@
 "Adding.taskTitle" = "Имя задачи";
 "Adding.taskDescription" = "Описание задачи";
 "Adding.taskDate" = "Дедлайн задачи";
+"Adding.shouldNotificate" = "Напомнить?";
 "Adding.unfinishedTask" = "Невыполненная задача";
 
 // MARK: - Home

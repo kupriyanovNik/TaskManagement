@@ -9,6 +9,7 @@
 "Adding.taskTitle" = "Task title";
 "Adding.taskDescription" = "Task description";
 "Adding.taskDate" = "Task date";
+"Adding.shouldNotificate" = "Remind?";
 "Adding.unfinishedTask" = "Unfinished task";
 
 // MARK: - Home
