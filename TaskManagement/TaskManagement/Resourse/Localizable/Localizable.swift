@@ -45,4 +45,15 @@ enum Localizable {
         static let application = localized("Settings.application")
         static let selectTheme = localized("Settings.selectTheme")
     }
+    enum AllTasks {
+        static let taskLowercased = localized("AllTasks.taskLowercased")
+        static let tasksLowercased = localized("AllTasks.tasksLowercased")
+        static let your = localized("AllTasks.your")
+        static let tasks = localized("AllTasks.tasks")
+        static let done = localized("AllTasks.done")
+        static let edit = localized("AllTasks.edit")
+        static let noTasks = localized("Home.noTasks")
+        static let markAsCompleted = localized("Home.markAsCompleted")
+        static let markedAsCompleted = localized("Home.markedAsCompleted")
+    }
 }
