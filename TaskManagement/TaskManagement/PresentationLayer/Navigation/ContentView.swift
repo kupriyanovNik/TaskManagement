@@ -45,6 +45,7 @@ struct ContentView: View {
                         AllTasksView()
                             .environmentObject(allTasksViewModel)
                             .environmentObject(homeViewModel)
+                            .environmentObject(settingsViewModel)
                             .environmentObject(navigationViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)

@@ -37,18 +37,38 @@ struct SettingsView: View {
             }
         }
     }
-    
+    private var shouldShowScrollAnimationRow: some View {
+        HStack {
+            Text(strings.showScrollAnimations)
+                .font(.title2)
+            Spacer()
+            RadioButton(
+                isSelected: $settingsViewModel.shouldShowScrollAnimation,
+                accentColor: themeManager.selectedTheme.accentColor
+            )
+            .frame(width: 30, height: 30)
+        }
+        .padding(.horizontal)
+    }
+    private var showOnboardingRow: some View {
+        Button {
+            UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
+        } label: {
+            Text("show onboarding")
+        }
+    }
+
     // MARK: - Body
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
                 themeSelectionRow
                 Divider()
-                Button {
-                    UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
-                } label: {
-                    Text("show onboarding")
+                if #available(iOS 17, *) {
+                    shouldShowScrollAnimationRow
+                    Divider()
                 }
+                showOnboardingRow
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -84,24 +104,3 @@ struct SettingsView: View {
         .environmentObject(SettingsViewModel())
 }
 
-struct ThemePickerCell: View {
-    var accentColor: Color
-    var pageTitleColor: Color
-    var themeName: String
-    var onSelect: () -> ()
-    var body: some View {
-        VStack {
-            Text(themeName)
-                .font(.caption)
-            HStack(spacing: 0) {
-                accentColor
-                pageTitleColor
-            }
-            .frame(width: 100, height: 60)
-            .cornerRadius(10)
-            .onTapGesture {
-                onSelect()
-            }
-        }
-    }
-}

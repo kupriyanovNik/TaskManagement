@@ -161,7 +161,7 @@ struct HomeView: View {
                 }
                 .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
-            if #available(iOS 17, *) {
+            if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
                 taskCard(task: task)
                     .scrollTransition(.animated) { effect, phase in
                         effect
