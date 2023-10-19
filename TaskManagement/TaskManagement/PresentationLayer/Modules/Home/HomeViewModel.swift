@@ -7,12 +7,6 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
 
-    private var calendar = Calendar.current
-
-    init() {
-        fetchCurrentWeek()
-    }
-
     @Published var currentWeek: [Date] = []
     @Published var currentDay = Date()
 
@@ -21,6 +15,12 @@ class HomeViewModel: ObservableObject {
 
     @Published var isEditing: Bool = false
     @Published var showGreetings: Bool = true
+
+    private var calendar = Calendar.current
+
+    init() {
+        fetchCurrentWeek()
+    }
 
     func fetchCurrentWeek() {
         let today = Date()

@@ -14,7 +14,6 @@ class NotificationManager {
     private init() { }
 
     func requestAuthorization() {
-        // TODO: criticalAlert is unused now. plans to separate tasks into categories. a criticalAlert would be appropriate for the 'Hot' category
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .badge, .sound, .criticalAlert]) { success, error in
                 if let error {

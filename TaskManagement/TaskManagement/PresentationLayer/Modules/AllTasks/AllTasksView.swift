@@ -7,6 +7,7 @@ import SwiftUI
 struct AllTasksView: View {
 
     // MARK: - Property Wrappers
+
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
@@ -15,15 +16,37 @@ struct AllTasksView: View {
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
+
     private var systemImages = ImageNames.System.self
     private var strings = Localizable.AllTasks.self
 
     // MARK: - Body
+
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 15) {
-                tasksView()
+            LazyVStack(spacing: 20) {
+                if coreDataViewModel.allTasks.isEmpty {
+                    Text(strings.noTasks)
+                        .font(.system(size: 16))
+                        .fontWeight(.semibold)
+                        .offset(y: 100)
+
+                } else {
+                    ForEach($coreDataViewModel.allTasks, id: \.id) { $task in
+                        TaskCardView(
+                            homeViewModel: homeViewModel,
+                            navigationViewModel: navigationViewModel,
+                            coreDataViewModel: coreDataViewModel,
+                            settingsViewModel: settingsViewModel,
+                            themeManager: themeManager,
+                            isEditing: $allTasksViewModel.isEditing,
+                            task: $task
+                        )
+                    }
+                }
             }
+            .padding()
+            .padding(.top)
         }
         .makeCustomNavBar {
             headerView()
@@ -31,32 +54,10 @@ struct AllTasksView: View {
     }
 
     // MARK: - ViewBuilders
-    @ViewBuilder func tasksView() -> some View {
-        LazyVStack(spacing: 20) {
-            if coreDataViewModel.allTasks.isEmpty {
-                Text(strings.noTasks)
-                    .font(.system(size: 16))
-                    .fontWeight(.semibold)
-                    .offset(y: 100)
-            } else {
-                ForEach($coreDataViewModel.allTasks, id: \.id) { $task in
-                    TaskCardView(
-                        homeViewModel: homeViewModel,
-                        navigationViewModel: navigationViewModel,
-                        coreDataViewModel: coreDataViewModel,
-                        settingsViewModel: settingsViewModel,
-                        themeManager: themeManager,
-                        isEditing: $allTasksViewModel.isEditing,
-                        task: $task
-                    )
-                }
-            }
-        }
-        .padding()
-        .padding(.top)
-    }
+
     @ViewBuilder func headerView() -> some View {
         let tasksCount = coreDataViewModel.allTasks.filter { !$0.isCompleted }.count
+
         HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 3) {
                 Group {
@@ -76,12 +77,14 @@ struct AllTasksView: View {
                         }
                     }
                 }
+
                 Text(strings.tasks)
                     .bold()
                     .font(.largeTitle)
                     .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
             .hLeading()
+
             if !coreDataViewModel.allTasks.isEmpty {
                 Group {
                     if allTasksViewModel.isEditing {
@@ -91,6 +94,7 @@ struct AllTasksView: View {
                             }
                         }
                         .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
+                        
                     } else {
                         Button(strings.edit) {
                             withAnimation {

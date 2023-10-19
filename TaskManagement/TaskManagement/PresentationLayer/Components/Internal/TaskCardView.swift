@@ -8,15 +8,18 @@ import SwiftUI
 struct TaskCard: View {
 
     // MARK: - Property Wrappers
+
     @ObservedObject var coreDataViewModel: CoreDataViewModel
 
     // MARK: - Internal Properties
+
     let task: TaskModel
     var doneImageName: String
     var markAsCompletedName: String
     var markedAsCompletedName: String
 
     // MARK: - Body
+
     var body: some View {
         VStack {
             HStack(alignment: .top, spacing: 10) {
@@ -25,24 +28,30 @@ struct TaskCard: View {
                         Text(task.taskCategory ?? "Normal")
                             .font(.callout)
                             .foregroundStyle(.secondary)
+
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
                             .bold()
                     }
                     .hLeading()
+
                     Text(task.taskDescription ?? "Default Description")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
                 .hLeading()
+
                 VStack(alignment: .trailing, spacing: 12) {
                     let taskDate = (task.taskDate ?? Date())
+
                     Text(taskDate.formatted(date: .omitted, time: .shortened))
+
                     if !Calendar.current.isDateInToday(taskDate) {
                         Text(taskDate.formatted(date: .abbreviated, time: .omitted))
                     }
                 }
             }
+
             HStack(spacing: 12) {
                 if !task.isCompleted {
                     Button {
@@ -54,6 +63,7 @@ struct TaskCard: View {
                             .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
                     }
                 }
+
                 Text(task.isCompleted ? markedAsCompletedName : markAsCompletedName)
                     .font(.system(size: 15))
                     .foregroundColor(task.isCompleted ? .gray : .white)
@@ -74,6 +84,7 @@ struct TaskCard: View {
 struct TaskCardView: View {
 
     // MARK: - Property Wrappers
+
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var navigationViewModel: NavigationViewModel
     @ObservedObject var coreDataViewModel: CoreDataViewModel
@@ -84,6 +95,7 @@ struct TaskCardView: View {
     @Binding var task: TaskModel
 
     // MARK: - Body
+
     var body: some View {
         HStack(alignment: (isEditing ? .center : .top), spacing: 30) {
             if isEditing {
@@ -97,6 +109,7 @@ struct TaskCardView: View {
                                 .foregroundColor(.primary)
                         }
                     }
+
                     if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
                         Button {
                             homeViewModel.editTask = task
@@ -107,6 +120,7 @@ struct TaskCardView: View {
                                 .foregroundColor(.primary)
                         }
                     }
+
                     Button {
                         coreDataViewModel.removeTask(task: task, date: task.taskDate ?? .now) { _ in
                             if coreDataViewModel.allTasks.isEmpty {
@@ -130,13 +144,14 @@ struct TaskCardView: View {
                                 .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                                 .padding(-3)
                         }
-                        .scaleEffect(1)
+
                     Rectangle()
                         .fill(themeManager.selectedTheme.accentColor)
                         .frame(width: 3)
                 }
                 .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
+            
             if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
                 TaskCard(
                     coreDataViewModel: coreDataViewModel,

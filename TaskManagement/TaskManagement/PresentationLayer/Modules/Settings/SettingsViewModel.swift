@@ -6,15 +6,9 @@ import SwiftUI
 
 class SettingsViewModel: ObservableObject {
 
-    @Published var showInformation: Bool = false 
+    @Published var showInformation: Bool = false
 
-    // TODO: - Ability to change app icon
-    @AppStorage("selectedAppIcon") var selectedAppIcon: String = "App Icon 1" {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-
+    // MARK: - User Defaults Variables
     @AppStorage("userName") var userName: String = "" {
         willSet {
             objectWillChange.send()
@@ -34,6 +28,13 @@ class SettingsViewModel: ObservableObject {
     }
 
     @AppStorage("shouldShowTabBarAnimation") var shouldShowTabBarAnimation: Bool = true {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+
+    // TODO: - Add ability to change app icon
+    @AppStorage("selectedAppIcon") var selectedAppIcon: String = "App Icon 1" {
         willSet {
             objectWillChange.send()
         }

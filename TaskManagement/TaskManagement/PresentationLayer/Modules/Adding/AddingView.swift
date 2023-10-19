@@ -7,6 +7,7 @@ import SwiftUI
 struct AddingView: View {
 
     // MARK: - Property Wrappers
+
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
@@ -16,10 +17,12 @@ struct AddingView: View {
     @Environment(\.dismiss) var dismiss
 
     // MARK: - Private Properties
+
     private var strings = Localizable.Adding.self
     private var systemImages = ImageNames.System.self
 
     // MARK: - Body
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 16) {
@@ -28,16 +31,19 @@ struct AddingView: View {
                     placeHolder: strings.taskTitle,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
+
                 CustomTextField(
                     inputText: $addingViewModel.taskDescription,
                     placeHolder: strings.taskDescription,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
+
                 if homeViewModel.editTask == nil {
                     TaskCategorySelector(
                         taskCategory: $addingViewModel.taskCategory,
                         accentColor: themeManager.selectedTheme.accentColor
                     )
+
                     DatePicker("", selection: $addingViewModel.taskDate, in: Date()...)
                         .datePickerStyle(.graphical)
                         .tint(themeManager.selectedTheme.accentColor)
@@ -48,9 +54,12 @@ struct AddingView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                         }
+
                     HStack {
                         Text(strings.shouldRemind)
+
                         Spacer()
+
                         RadioButton(
                             isSelected: $addingViewModel.shouldSendNotification,
                             accentColor: themeManager.selectedTheme.accentColor
@@ -86,11 +95,14 @@ struct AddingView: View {
                     .font(.title2)
                     .rotationEffect(.degrees(270))
             }
+
             Text(strings.title)
                 .bold()
                 .font(.largeTitle)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+
             Spacer()
+
             if !addingViewModel.taskTitle.isEmpty {
                 Button {
                     saveAction()
@@ -107,6 +119,7 @@ struct AddingView: View {
     }
 
     // MARK: - Private Functions
+
     private func saveAction() {
         if let task = homeViewModel.editTask {
             coreDataViewModel.updateTask(
@@ -129,6 +142,7 @@ struct AddingView: View {
         }
         dismiss()
     }
+    
     private func sendNotification() {
         let date = addingViewModel.taskDate
         let body = addingViewModel.taskTitle
