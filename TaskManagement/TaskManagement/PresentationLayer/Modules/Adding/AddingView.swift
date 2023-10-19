@@ -129,21 +129,24 @@ struct AddingView: View {
             )
         } else {
             coreDataViewModel.addTask(
+                id: UUID().uuidString,
                 title: addingViewModel.taskTitle,
                 description: addingViewModel.taskDescription,
                 date: addingViewModel.taskDate,
-                category: addingViewModel.taskCategory
-            ) {
-                homeViewModel.currentDay = $0
+                category: addingViewModel.taskCategory,
+                shouldNotificate: addingViewModel.shouldSendNotification
+            ) { date, task in
+                homeViewModel.currentDay = date
+                if addingViewModel.shouldSendNotification {
+                    sendNotification(id: task.taskID ?? "")
+                }
             }
-            if addingViewModel.shouldSendNotification {
-                sendNotification()
-            }
+
         }
         dismiss()
     }
     
-    private func sendNotification() {
+    private func sendNotification(id: String) {
         let date = addingViewModel.taskDate
         let body = addingViewModel.taskTitle
         let calendar = Calendar.current
@@ -151,7 +154,7 @@ struct AddingView: View {
         let hour = calendar.component(.hour, from: date)
         let day = calendar.component(.day, from: date)
         NotificationManager.shared.sendNotification(
-            id: UUID().uuidString,
+            id: id,
             minute: minute,
             hour: hour,
             day: day,

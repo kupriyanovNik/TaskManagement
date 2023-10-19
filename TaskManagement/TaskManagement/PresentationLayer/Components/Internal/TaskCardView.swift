@@ -56,6 +56,7 @@ struct TaskCard: View {
                 if !task.isCompleted {
                     Button {
                         coreDataViewModel.doneTask(task: task, date: task.taskDate ?? .now)
+                        NotificationManager.shared.removeNotification(with: task.taskID ?? "")
                     } label: {
                         Image(systemName: doneImageName)
                             .foregroundStyle(.black)
@@ -103,6 +104,7 @@ struct TaskCardView: View {
                     if task.isCompleted {
                         Button {
                             coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                            sendNotification(task: task)
                         } label: {
                             Image(systemName: ImageNames.System.xmarkCircleFill)
                                 .font(.title2)
@@ -179,5 +181,26 @@ struct TaskCardView: View {
         }
         .hLeading()
         .animation(.spring(), value: task.isCompleted)
+    }
+
+    // MARK: - Private Functions
+
+    func sendNotification(task: TaskModel) {
+        let date = task.taskDate ?? .now
+        let body = task.taskTitle ?? ""
+        let calendar = Calendar.current
+        let minute = calendar.component(.minute, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let day = calendar.component(.day, from: date)
+        NotificationManager.shared.sendNotification(
+            id: task.taskID ?? "",
+            minute: minute,
+            hour: hour,
+            day: day,
+            title: date.greeting(),
+            subtitle: Localizable.Adding.unfinishedTask,
+            body: body,
+            isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
+        )
     }
 }
