@@ -35,6 +35,7 @@
 		B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */; };
 		B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F092AE1473B000F19EE /* AnimatedGradient.swift */; };
 		B7739F0C2AE14D6B000F19EE /* TaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */; };
+		B7739F0F2AE15272000F19EE /* TaskCategorySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
 		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
@@ -83,6 +84,7 @@
 		B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerCell.swift; sourceTree = "<group>"; };
 		B7739F092AE1473B000F19EE /* AnimatedGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradient.swift; sourceTree = "<group>"; };
 		B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategory.swift; sourceTree = "<group>"; };
+		B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySelector.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				B76646BF2AD5AA5B00F5631E /* Internal */,
+				B7739F0D2AE15261000F19EE /* Adding */,
 				B7739F062AE13A88000F19EE /* Settings */,
 				B7DC65962AD57475009DA010 /* Onboarding */,
 				B7181BE52AD45C59002F3D82 /* NavBar */,
@@ -273,6 +276,14 @@
 				B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		B7739F0D2AE15261000F19EE /* Adding */ = {
+			isa = PBXGroup;
+			children = (
+				B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */,
+			);
+			path = Adding;
 			sourceTree = "<group>";
 		};
 		B7D949A82AE04B5800FE5CAE /* Service */ = {
@@ -472,6 +483,7 @@
 				B7739F0C2AE14D6B000F19EE /* TaskCategory.swift in Sources */,
 				B7181BEC2AD463A3002F3D82 /* OnboardingViewModel.swift in Sources */,
 				B76646C12AD5AA6200F5631E /* CustomTextField.swift in Sources */,
+				B7739F0F2AE15272000F19EE /* TaskCategorySelector.swift in Sources */,
 				B7DC65922AD571ED009DA010 /* Localizable.swift in Sources */,
 				B73213D32ACCACC900E42B1D /* CustomTabBar.swift in Sources */,
 				B7181BF02AD46466002F3D82 /* OnboardingIndicator.swift in Sources */,

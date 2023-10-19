@@ -4,15 +4,16 @@
 
 import Foundation
 
-enum TaskCategory {
-    case normal, critical
-    
+enum TaskCategory: Int, CaseIterable {
+    case normal = 0
+    case critical = 1
+
     var localizableRawValue: String {
         switch self {
         case .normal:
-            "TaskCategory.normal"
+            localized("TaskCategory.normal")
         case .critical:
-            "TaskCategory.critical"
+            localized("TaskCategory.critical")
         }
     }
 }
