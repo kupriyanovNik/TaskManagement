@@ -30,4 +30,10 @@ class SettingsViewModel: ObservableObject {
             objectWillChange.send()
         }
     }
+
+    @AppStorage("shouldShowTabBarAnimation") var shouldShowTabBarAnimation: Bool = true {
+        willSet {
+            objectWillChange.send()
+        }
+    }
 }

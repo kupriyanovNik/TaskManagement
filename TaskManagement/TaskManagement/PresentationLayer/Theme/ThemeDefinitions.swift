@@ -14,7 +14,7 @@ struct Theme0: Theme {
 struct Theme1: Theme {
     var accentColor: Color = .purple
     var pageTitleColor: Color = .black
-    var themeName: String = "Purple"
+    var themeName: String = "Purple/Black"
 }
 
 struct Theme2: Theme {

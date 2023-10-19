@@ -29,6 +29,7 @@ struct OnboardingView: View {
     }
     private var registrationView: some View {
         VStack(spacing: 16) {
+            Spacer()
             CustomTextField(
                 inputText: $settingsViewModel.userName,
                 placeHolder: strings.username,
@@ -42,6 +43,7 @@ struct OnboardingView: View {
             )
             .keyboardType(.numberPad)
             .continueEditing()
+            Spacer()
             Button {
                 if settingsViewModel.userName.isEmpty || settingsViewModel.userAge.isEmpty || settingsViewModel.userName.count > 15 || settingsViewModel.userAge.count > 15 {
                     onboardingViewModel.showError = true
