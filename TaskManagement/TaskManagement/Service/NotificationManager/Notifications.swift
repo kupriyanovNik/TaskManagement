@@ -7,11 +7,11 @@ import UserNotificationsUI
 import UserNotifications
 
 
-class NotificationManager {
+class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     static let shared = NotificationManager()
 
-    private init() { }
+    private override init() { super.init() }
 
     func requestAuthorization() {
         UNUserNotificationCenter.current()
@@ -20,6 +20,15 @@ class NotificationManager {
                     print("DEBUG: \(error.localizedDescription)")
                 }
             }
+        UNUserNotificationCenter.current().delegate = self
+    }
+
+    /// for sending notofication in foreground 
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.sound, .banner])
     }
 
     func removeNotification(with id: String) {
