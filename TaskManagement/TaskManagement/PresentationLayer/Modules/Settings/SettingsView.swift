@@ -56,6 +56,7 @@ struct SettingsView: View {
         } label: {
             Text("show onboarding")
         }
+        .padding(.horizontal)
     }
 
     // MARK: - Body
@@ -68,7 +69,9 @@ struct SettingsView: View {
                     shouldShowScrollAnimationRow
                     Divider()
                 }
+                #if DEBUG
                 showOnboardingRow
+                #endif
             }
         }
         .navigationBarTitleDisplayMode(.inline)

@@ -19,31 +19,26 @@ struct CustomTextField: View {
 
     // MARK: - Body
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(placeHolder.capitalized)
-                .padding(.leading)
-                .foregroundColor(.gray)
-            ZStack(alignment: .trailing) {
-                if #available(iOS 16, *) {
-                    TextField(placeHolder, text: $inputText, axis: .vertical)
-                } else {
-                    TextField(placeHolder, text: $inputText)
-                }
+        ZStack(alignment: .trailing) {
+            if #available(iOS 16, *) {
+                TextField(placeHolder, text: $inputText, axis: .vertical)
+            } else {
+                TextField(placeHolder, text: $inputText)
             }
-            .focused($isFocused)
-            .foregroundColor(Color.black)
-            .disableAutocorrection(true)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(backgroundColor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: cornerRadius)
-                            .stroke(strokeColor, lineWidth: withBorder ? 1 : 0)
-                    )
-                    .shadow(radius: isFocused ? 4 : 0)
-                    .animation(.linear, value: isFocused)
-            )
         }
+        .focused($isFocused)
+        .foregroundColor(Color.black)
+        .disableAutocorrection(true)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(backgroundColor)
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .stroke(strokeColor, lineWidth: withBorder ? 1 : 0)
+                )
+                .shadow(radius: isFocused ? 4 : 0)
+                .animation(.linear, value: isFocused)
+        )
     }
 }

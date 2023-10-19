@@ -34,21 +34,16 @@ struct AddingView: View {
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
                 if homeViewModel.editTask == nil {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(strings.taskDate)
-                            .padding(.leading)
-                            .foregroundColor(.gray)
-                        DatePicker("", selection: $addingViewModel.taskDate, in: Date()...)
-                            .datePickerStyle(.graphical)
-                            .tint(themeManager.selectedTheme.accentColor)
-                            .labelsHidden()
-                            .padding(.horizontal)
-                            .padding(.vertical, 0)
-                            .background {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
-                            }
-                    }
+                    DatePicker("", selection: $addingViewModel.taskDate, in: Date()...)
+                        .datePickerStyle(.graphical)
+                        .tint(themeManager.selectedTheme.accentColor)
+                        .labelsHidden()
+                        .padding(.horizontal)
+                        .padding(.vertical, 0)
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
+                        }
                     HStack {
                         Text(strings.shouldRemind)
                         Spacer()
