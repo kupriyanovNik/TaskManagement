@@ -56,3 +56,8 @@
 "AllTasks.tasks" = "Tasks";
 "AllTasks.done" = "Done";
 "AllTasks.edit" = "Edit";
+
+// MARK: - TaskCategory
+
+"TaskCategory.normal" = "Normal";
+"TaskCategory.critical" = "Hot🔥";

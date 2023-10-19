@@ -56,3 +56,8 @@
 "AllTasks.tasks" = "Задачи";
 "AllTasks.done" = "Готово";
 "AllTasks.edit" = "Изменить";
+
+// MARK: - TaskCategory
+
+"TaskCategory.normal" = "Обычное";
+"TaskCategory.critical" = "Важное🔥";

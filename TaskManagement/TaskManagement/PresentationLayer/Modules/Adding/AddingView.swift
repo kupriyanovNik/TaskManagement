@@ -34,12 +34,16 @@ struct AddingView: View {
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
                 if homeViewModel.editTask == nil {
+                    TaskCategorySelector(
+                        taskCategory: $addingViewModel.taskCategory,
+                        accentColor: themeManager.selectedTheme.accentColor
+                    )
                     DatePicker("", selection: $addingViewModel.taskDate, in: Date()...)
                         .datePickerStyle(.graphical)
                         .tint(themeManager.selectedTheme.accentColor)
                         .labelsHidden()
                         .padding(.horizontal)
-                        .padding(.vertical, 0)
+                        .padding(.bottom, 5)
                         .background {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
@@ -114,7 +118,8 @@ struct AddingView: View {
             coreDataViewModel.addTask(
                 title: addingViewModel.taskTitle,
                 description: addingViewModel.taskDescription,
-                date: addingViewModel.taskDate
+                date: addingViewModel.taskDate,
+                category: addingViewModel.taskCategory
             ) {
                 homeViewModel.currentDay = $0
             }
@@ -138,7 +143,8 @@ struct AddingView: View {
             day: day,
             title: date.greeting(),
             subtitle: strings.unfinishedTask,
-            body: body
+            body: body,
+            isCritical: addingViewModel.taskCategory == .critical ? true : false 
         )
     }
 }

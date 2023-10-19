@@ -171,6 +171,11 @@ struct AllTasksView: View {
         VStack {
             HStack(alignment: .top, spacing: 10) {
                 VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text(task.taskCategory ?? "Normal")
+                    }
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
                     Text(task.taskTitle ?? "Default Title")
                         .font(.title2)
                         .bold()
