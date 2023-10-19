@@ -9,6 +9,7 @@ struct AllTasksView: View {
     // MARK: - Property Wrappers
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -150,8 +151,18 @@ struct AllTasksView: View {
                 }
                 .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
-            taskCard(task: task)
-
+            if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
+                taskCard(task: task)
+                    .scrollTransition(.animated(.bouncy)) { effect, phase in
+                        effect
+                            .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                            .opacity(phase.isIdentity ? 1 : 0.8)
+                            .blur(radius: phase.isIdentity ? 0 : 2)
+                            .brightness(phase.isIdentity ? 0 : 0.3)
+                    }
+            } else {
+                taskCard(task: task)
+            }
         }
         .hLeading()
         .animation(.spring(), value: task.isCompleted)
@@ -208,6 +219,7 @@ struct AllTasksView: View {
     AllTasksView()
         .environmentObject(CoreDataViewModel())
         .environmentObject(HomeViewModel())
+        .environmentObject(SettingsViewModel())
         .environmentObject(NavigationViewModel())
         .environmentObject(AllTasksViewModel())
         .environmentObject(ThemeManager())

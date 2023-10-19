@@ -45,6 +45,7 @@
 
 "Settings.title" = "Настройки";
 "Settings.selectTheme" = "Выберите тему приложения";
+"Settings.showScrollAnimations" = "Показывать анимации пролистывания?";
 
 // MARK: - AllTasks
 
