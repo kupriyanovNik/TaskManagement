@@ -20,6 +20,7 @@
 "Home.edit" = "Edit";
 "Home.done" = "Done";
 "Home.noTasks" = "No tasks found";
+"Home.willNotificate" = " - we will notificate";
 
 // MARK: - Profile
 

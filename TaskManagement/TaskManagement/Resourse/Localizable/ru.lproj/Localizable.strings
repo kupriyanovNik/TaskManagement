@@ -20,6 +20,7 @@
 "Home.edit" = "Изменить";
 "Home.done" = "Готово";
 "Home.noTasks" = "Не найдено задач";
+"Home.willNotificate" = " - мы напомним";
 
 // MARK: - Profile
 

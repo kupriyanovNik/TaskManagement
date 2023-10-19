@@ -23,6 +23,7 @@ enum Localizable {
         static let edit = localized("Home.edit")
         static let done = localized("Home.done")
         static let noTasks = localized("Home.noTasks")
+        static let willNotificate = localized("Home.willNotificate")
     }
 
     enum Profile {

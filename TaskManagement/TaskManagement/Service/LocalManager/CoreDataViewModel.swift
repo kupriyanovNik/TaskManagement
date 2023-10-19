@@ -59,9 +59,15 @@ class CoreDataViewModel: ObservableObject {
         onRemove?(date)
     }
 
-    func updateTask(task: TaskModel, title: String, description: String?) {
+    func updateTask(
+        task: TaskModel,
+        title: String,
+        description: String?,
+        shouldNotificate: Bool
+    ) {
         task.taskTitle = title
         task.taskDescription = description
+        task.shouldNotificate = shouldNotificate
         saveContext()
     }
 

@@ -17,6 +17,7 @@ struct TaskCard: View {
     var doneImageName: String
     var markAsCompletedName: String
     var markedAsCompletedName: String
+    var notificateName: String
 
     // MARK: - Body
 
@@ -25,10 +26,14 @@ struct TaskCard: View {
             HStack(alignment: .top, spacing: 10) {
                 VStack(alignment: .leading, spacing: 12) {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(task.taskCategory ?? "Normal")
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-
+                        HStack(spacing: 0) {
+                            Text(task.taskCategory ?? "Normal")
+                            if task.shouldNotificate {
+                                Text(notificateName)
+                            }
+                        }
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
                             .bold()
@@ -160,7 +165,8 @@ struct TaskCardView: View {
                     task: task,
                     doneImageName: ImageNames.System.checkmark,
                     markAsCompletedName: Localizable.Home.markAsCompleted,
-                    markedAsCompletedName: Localizable.Home.markedAsCompleted
+                    markedAsCompletedName: Localizable.Home.markedAsCompleted,
+                    notificateName: Localizable.Home.willNotificate
                 )
                 .scrollTransition(.animated(.bouncy)) { effect, phase in
                     effect
@@ -175,7 +181,8 @@ struct TaskCardView: View {
                     task: task,
                     doneImageName: ImageNames.System.checkmark,
                     markAsCompletedName: Localizable.Home.markAsCompleted,
-                    markedAsCompletedName: Localizable.Home.markedAsCompleted
+                    markedAsCompletedName: Localizable.Home.markedAsCompleted,
+                    notificateName: Localizable.Home.willNotificate
                 )
             }
         }

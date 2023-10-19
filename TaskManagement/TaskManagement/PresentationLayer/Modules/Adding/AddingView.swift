@@ -101,6 +101,7 @@ struct AddingView: View {
             if let task = homeViewModel.editTask {
                 addingViewModel.taskTitle = task.taskTitle ?? ""
                 addingViewModel.taskDescription = task.taskDescription ?? ""
+                addingViewModel.shouldSendNotification = task.shouldNotificate
             }
         }
     }
@@ -144,9 +145,12 @@ struct AddingView: View {
             coreDataViewModel.updateTask(
                 task: task,
                 title: addingViewModel.taskTitle,
-                description: addingViewModel.taskDescription
+                description: addingViewModel.taskDescription,
+                shouldNotificate: addingViewModel.shouldSendNotification
             )
+
             NotificationManager.shared.removeNotification(with: task.taskID ?? "")
+            
             if addingViewModel.shouldSendNotification {
                 sendNotification(
                     id: task.taskID ?? "",
@@ -164,6 +168,7 @@ struct AddingView: View {
                 shouldNotificate: addingViewModel.shouldSendNotification
             ) { date, task in
                 homeViewModel.currentDay = date
+
                 if addingViewModel.shouldSendNotification {
                     sendNotification(
                         id: task.taskID ?? "",
@@ -182,6 +187,7 @@ struct AddingView: View {
         let minute = calendar.component(.minute, from: date)
         let hour = calendar.component(.hour, from: date)
         let day = calendar.component(.day, from: date)
+
         NotificationManager.shared.sendNotification(
             id: id,
             minute: minute,
