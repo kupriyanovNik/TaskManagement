@@ -30,12 +30,13 @@ class CoreDataViewModel: ObservableObject {
         }
     }
 
-    func addTask(title: String, description: String?, date: Date, onAdded: ((Date) -> ())?) {
+    func addTask(title: String, description: String?, date: Date, category: TaskCategory, onAdded: ((Date) -> ())?) {
         let task = TaskModel(context: viewContext)
         task.taskTitle = title
         task.taskDescription = description
         task.taskDate = date
-        task.isCompleted = false 
+        task.taskCategory = category.localizableRawValue
+        task.isCompleted = false
         saveContext()
         self.fetchFilteredTasks(dateToFilter: date)
         onAdded?(date)

@@ -114,7 +114,8 @@ struct AddingView: View {
             coreDataViewModel.addTask(
                 title: addingViewModel.taskTitle,
                 description: addingViewModel.taskDescription,
-                date: addingViewModel.taskDate
+                date: addingViewModel.taskDate,
+                category: addingViewModel.taskCategory
             ) {
                 homeViewModel.currentDay = $0
             }
@@ -138,7 +139,8 @@ struct AddingView: View {
             day: day,
             title: date.greeting(),
             subtitle: strings.unfinishedTask,
-            body: body
+            body: body,
+            isCritical: addingViewModel.taskCategory == .critical ? true : false 
         )
     }
 }

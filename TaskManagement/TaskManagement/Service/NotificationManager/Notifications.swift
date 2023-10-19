@@ -35,7 +35,8 @@ class NotificationManager {
         day: Int,
         title: String,
         subtitle: String,
-        body: String
+        body: String,
+        isCritical: Bool = false
     ) {
         requestAuthorization()
 
@@ -43,7 +44,7 @@ class NotificationManager {
         content.title = title
         content.subtitle = subtitle
         content.body = body
-        content.sound = UNNotificationSound.defaultCritical
+        content.sound = isCritical ? .defaultCritical : .default
 
         var dateComp = DateComponents()
         dateComp.hour = hour
