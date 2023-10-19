@@ -172,17 +172,11 @@ struct CustomTabBar: View {
         }
     }
     private func addingViewDismissAction() {
-        withAnimation {
-            homeViewModel.isEditing = false
-            allTasksViewModel.isEditing = false
-        }
+        dismissEditInAllScreens()
         homeViewModel.editTask = nil
-        addingViewModel.taskTitle = ""
-        addingViewModel.taskDescription = ""
-        addingViewModel.taskDate = .now
-        if navigationViewModel.selectedTab == .profile {
-            navigationViewModel.selectedTab = .home
-        }
+        coreDataViewModel.fetchAllTasks()
+        coreDataViewModel.fetchFilteredTasks(dateToFilter: homeViewModel.currentDay)
+        addingViewModel.reset()
     }
     private func dismissEditInAllScreens() {
         withAnimation {
