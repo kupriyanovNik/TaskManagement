@@ -6,6 +6,8 @@ import SwiftUI
 
 class SettingsViewModel: ObservableObject {
 
+    @Published var showInformation: Bool = false 
+
     // TODO: - Ability to change app icon
     @AppStorage("selectedAppIcon") var selectedAppIcon: String = "App Icon 1" {
         willSet {
