@@ -6,6 +6,7 @@ import Foundation
 import SwiftUI
 
 extension Date {
+    /// Function returning a localized string depending on the current time
     func greeting() -> String {
         let strings = Localizable.Greetings.self
         let calendar = Calendar.current

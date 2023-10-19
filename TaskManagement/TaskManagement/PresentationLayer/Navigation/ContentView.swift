@@ -7,6 +7,7 @@ import SwiftUI
 struct ContentView: View {
 
     // MARK: - Property Wrappers
+
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var tabBarViewModel: TabBarViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
@@ -18,15 +19,18 @@ struct ContentView: View {
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Inits
+
     init() {
         UITabBar.appearance().isHidden = true
     }
 
     // MARK: - Body
+
     var body: some View {
         NavigationView {
             ZStack {
                 Color.white
+
                 VStack {
                     switch navigationViewModel.selectedTab {
                     case .home:
@@ -36,11 +40,13 @@ struct ContentView: View {
                             .environmentObject(settingsViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)
+
                     case .profile:
                         ProfileView()
                             .environmentObject(profileViewModel)
                             .environmentObject(settingsViewModel)
                             .environmentObject(themeManager)
+                        
                     case .allTasks:
                         AllTasksView()
                             .environmentObject(allTasksViewModel)

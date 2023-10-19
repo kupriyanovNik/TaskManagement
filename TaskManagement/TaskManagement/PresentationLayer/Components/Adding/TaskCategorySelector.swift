@@ -7,17 +7,21 @@ import SwiftUI
 struct TaskCategorySelector: View {
 
     // MARK: - Property Wrappers
+
     @Binding var taskCategory: TaskCategory
 
     // MARK: - Internal Properties
+
     var accentColor: Color
 
     // MARK: - Body
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
                 ForEach(TaskCategory.allCases.indices, id: \.self) { index in
                     let mode = TaskCategory.allCases[index]
+
                     Button {
                         taskCategory = mode
                     } label: {
@@ -32,6 +36,7 @@ struct TaskCategorySelector: View {
             .background {
                 GeometryReader { proxy in
                     let caseCount = TaskCategory.allCases.count
+                    
                     accentColor
                         .opacity(0.1)
                         .clipShape(RoundedRectangle(cornerRadius: 10))

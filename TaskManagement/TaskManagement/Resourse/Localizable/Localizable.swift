@@ -15,6 +15,7 @@ enum Localizable {
         static let shouldRemind = localized("Adding.shouldNotificate")
         static let unfinishedTask = localized("Adding.unfinishedTask")
     }
+
     enum Home {
         static let markAsCompleted = localized("Home.markAsCompleted")
         static let markedAsCompleted = localized("Home.markedAsCompleted")
@@ -23,10 +24,12 @@ enum Localizable {
         static let done = localized("Home.done")
         static let noTasks = localized("Home.noTasks")
     }
+
     enum Profile {
         static let your = localized("Profile.your")
         static let profile = localized("Profile.profile")
     }
+
     enum Onboarding {
         static let application = localized("Onboarding.application")
         static let username = localized("Onboarding.username")
@@ -34,12 +37,14 @@ enum Localizable {
         static let login = localized("Onboarding.enter")
         static let error = localized("Onboarding.error")
     }
+
     enum Greetings {
         static let morning = localized("Greetings.morning")
         static let day = localized("Greetings.day")
         static let evening = localized("Greetings.evening")
         static let night = localized("Greetings.night")
     }
+
     enum Settings {
         static let title = localized("Settings.title")
         static let application = localized("Settings.application")
@@ -47,6 +52,7 @@ enum Localizable {
         static let showScrollAnimations = localized("Settings.showScrollAnimations")
         static let showTabBarAnimations = localized("Settings.showTabBarAnimations")
     }
+
     enum AllTasks {
         static let taskLowercased = localized("AllTasks.taskLowercased")
         static let tasksLowercased = localized("AllTasks.tasksLowercased")

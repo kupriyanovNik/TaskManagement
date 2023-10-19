@@ -7,6 +7,7 @@ import SwiftUI
 struct CustomTabBar: View {
 
     // MARK: - Property Wrappers
+
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var tabBarViewModel: TabBarViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
@@ -17,11 +18,12 @@ struct CustomTabBar: View {
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: Private Properties
+
     private var systemImages = ImageNames.System.self
     private var tabBarImages = ImageNames.TabBarImages.self
 
     private var homeButton: some View {
-        return Button {
+        Button {
             navigationViewModel.selectedTab = .home
         } label: {
             HStack {
@@ -40,8 +42,9 @@ struct CustomTabBar: View {
         .opacity(navigationViewModel.selectedTab == .home ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
+
     private var profileButton: some View {
-        return Button {
+        Button {
             navigationViewModel.selectedTab = .profile
         } label: {
             Image(systemName: navigationViewModel.selectedTab == .profile ? tabBarImages.Active.profile : tabBarImages.Inactive.profile)
@@ -55,8 +58,9 @@ struct CustomTabBar: View {
         .opacity(navigationViewModel.selectedTab == .profile ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
+
     private var allTasksButton: some View {
-        return Button {
+        Button {
             navigationViewModel.selectedTab = .allTasks
         } label: {
             Image(systemName: navigationViewModel.selectedTab == .allTasks ? tabBarImages.Active.allTasks : tabBarImages.Inactive.allTasks)
@@ -70,8 +74,9 @@ struct CustomTabBar: View {
         .opacity(navigationViewModel.selectedTab == .allTasks ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
+
     private var plusButton: some View {
-        return Button {
+        Button {
             navigationViewModel.showAddingView.toggle()
         } label: {
             ZStack {
@@ -90,6 +95,7 @@ struct CustomTabBar: View {
                     .shadow(color: themeManager.selectedTheme.accentColor.opacity(0.5), radius: 10)
                     .rotationEffect(.degrees(tabBarViewModel.gradientRotation))
                     .frame(width: 48)
+
                 if #available(iOS 16, *) {
                     Image(systemName: systemImages.plus)
                         .scaledToFit()
@@ -117,6 +123,7 @@ struct CustomTabBar: View {
     }
 
     // MARK: Body
+
     var body: some View {
         HStack(spacing: 0) {
             plusButton
@@ -159,11 +166,13 @@ struct CustomTabBar: View {
     }
 
     // MARK: - Private Functions
+
     private func playPlusButtonAnimation() {
         withAnimation(.linear(duration: 1.5)) {
             tabBarViewModel.gradientLineWidth = 2
         }
     }
+
     private func playGradientAnimation() {
         withAnimation (.easeInOut(duration: 2.5).repeatForever()) {
             tabBarViewModel.gradientStart = UnitPoint(x: 1, y: -1)
@@ -171,19 +180,15 @@ struct CustomTabBar: View {
             tabBarViewModel.gradientRotation = 36
         }
     }
+
     private func addingViewDismissAction() {
-        withAnimation {
-            homeViewModel.isEditing = false
-            allTasksViewModel.isEditing = false
-        }
+        dismissEditInAllScreens()
         homeViewModel.editTask = nil
-        addingViewModel.taskTitle = ""
-        addingViewModel.taskDescription = ""
-        addingViewModel.taskDate = .now
-        if navigationViewModel.selectedTab == .profile {
-            navigationViewModel.selectedTab = .home
-        }
+        coreDataViewModel.fetchAllTasks()
+        coreDataViewModel.fetchFilteredTasks(dateToFilter: homeViewModel.currentDay)
+        addingViewModel.reset()
     }
+    
     private func dismissEditInAllScreens() {
         withAnimation {
             homeViewModel.isEditing = false

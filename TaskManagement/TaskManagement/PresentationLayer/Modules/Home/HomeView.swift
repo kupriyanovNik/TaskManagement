@@ -7,6 +7,7 @@ import SwiftUI
 struct HomeView: View {
 
     // MARK: - Property Wrappers
+
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
@@ -16,17 +17,38 @@ struct HomeView: View {
     @Namespace var animation
 
     // MARK: - Private Properties
+
     private var strings = Localizable.Home.self
     private var systemImages = ImageNames.System.self
     private var dateFormats = Constants.DateFormats.self
     private var animationNames = Constants.MatchedGeometryNames.self
 
     // MARK: - Body
+
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 15) {
-                tasksView()
+            LazyVStack(spacing: 20) {
+                if coreDataViewModel.filteredTasks.isEmpty {
+                    Text(strings.noTasks)
+                        .font(.system(size: 16))
+                        .fontWeight(.semibold)
+                        .offset(y: 100)
+                } else {
+                    ForEach($coreDataViewModel.filteredTasks, id: \.id) { $task in
+                        TaskCardView(
+                            homeViewModel: homeViewModel,
+                            navigationViewModel: navigationViewModel,
+                            coreDataViewModel: coreDataViewModel,
+                            settingsViewModel: settingsViewModel,
+                            themeManager: themeManager,
+                            isEditing: $homeViewModel.isEditing,
+                            task: $task
+                        )
+                    }
+                }
             }
+            .padding()
+            .padding(.top)
         }
         .onAppear {
             coreDataViewModel.fetchFilteredTasks(dateToFilter: homeViewModel.currentDay)
@@ -49,10 +71,12 @@ struct HomeView: View {
             headerView()
         }
     }
+
+    // MARK: - ViewBuilders
+
     @ViewBuilder func calendarView() -> some View {
         HStack(spacing: 10) {
             ForEach(homeViewModel.currentWeek, id: \.timeIntervalSince1970) { day in
-
                 let isToday = homeViewModel.isToday(date: day)
                 let dateNumber = homeViewModel.extractDate(date: day, format: dateFormats.forDateNumber)
                 let dateLiteral = homeViewModel.extractDate(date: day, format: dateFormats.forDateLiteral)
@@ -61,9 +85,11 @@ struct HomeView: View {
                     Text(dateNumber)
                         .font(.system(size: 15))
                         .fontWeight(.semibold)
+
                     Text(dateLiteral)
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
+
                     Circle()
                         .fill(.white)
                         .frame(width: 8, height: 8)
@@ -93,184 +119,53 @@ struct HomeView: View {
         .padding(.horizontal)
     }
 
-    // MARK: - ViewBuilders
-    @ViewBuilder func tasksView() -> some View {
-        LazyVStack(spacing: 20) {
-            if coreDataViewModel.filteredTasks.isEmpty {
-                Text(strings.noTasks)
-                    .font(.system(size: 16))
-                    .fontWeight(.semibold)
-                    .offset(y: 100)
-            } else {
-                ForEach(coreDataViewModel.filteredTasks, id: \.id) { task in
-                    taskCardView(task: task, isEditing: homeViewModel.isEditing)
-                }
-            }
-        }
-        .padding()
-        .padding(.top)
-    }
-
-    @ViewBuilder func taskCardView(task: TaskModel, isEditing: Bool) -> some View {
-        let isCurrentHour = homeViewModel.isCurrentHour(date: task.taskDate ?? Date())
-        HStack(alignment: (isEditing ? .center : .top), spacing: 30) {
-            if isEditing {
-                VStack(spacing: 10) {
-                    if task.isCompleted {
-                        Button {
-                            coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
-                        } label: {
-                            Image(systemName: systemImages.xmarkCircleFill)
-                                .font(.title2)
-                                .foregroundColor(.primary)
-                        }
-                    }
-                    if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
-                        Button {
-                            homeViewModel.editTask = task
-                            navigationViewModel.showAddingView.toggle()
-                        } label: {
-                            Image(systemName: systemImages.pencilCircleFill)
-                                .font(.title2)
-                                .foregroundColor(.primary)
-                        }
-                    }
-                    Button {
-                        coreDataViewModel.removeTask(task: task, date: task.taskDate ?? .now)
-                    } label: {
-                        Image(systemName: systemImages.minusCircleFill)
-                            .font(.title2)
-                            .foregroundColor(.red)
-                    }
-                }
-                .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
-            } else {
-                VStack(spacing: 10) {
-                    Circle()
-                        .fill(isCurrentHour ? (task.isCompleted ? .green : themeManager.selectedTheme.accentColor) : .clear)
-                        .frame(width: 15, height: 15)
-                        .background {
-                            Circle()
-                                .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
-                                .padding(-3)
-                        }
-                        .scaleEffect(isCurrentHour ? 1 : 0.8)
-                    Rectangle()
-                        .fill(themeManager.selectedTheme.accentColor)
-                        .frame(width: 3)
-                }
-                .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-            }
-            if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
-                taskCard(task: task)
-                    .scrollTransition(.animated) { effect, phase in
-                        effect
-                            .scaleEffect(phase.isIdentity ? 1 : 0.95)
-                            .opacity(phase.isIdentity ? 1 : 0.8)
-                            .blur(radius: phase.isIdentity ? 0 : 2)
-                    }
-            } else {
-                taskCard(task: task)
-            }
-
-        }
-        .hLeading()
-        .animation(.spring(), value: task.isCompleted)
-    }
-
-    @ViewBuilder func taskCard(task: TaskModel) -> some View {
-        let isCurrentHour = homeViewModel.isCurrentHour(date: task.taskDate ?? Date())
-        VStack {
-            HStack(alignment: .top, spacing: 10) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(task.taskTitle ?? "Default Title")
-                        .font(.title2)
-                        .bold()
-                    Text(task.taskDescription ?? "Default Description")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                }
-                .hLeading()
-                Text((task.taskDate ?? Date()).formatted(date: .omitted, time: .shortened))
-            }
-
-            if isCurrentHour {
-                HStack(spacing: 12) {
-                    if !task.isCompleted {
-                        Button {
-                            coreDataViewModel.doneTask(task: task, date: task.taskDate ?? .now)
-                        } label: {
-                            Image(systemName: systemImages.checkmark)
-                                .foregroundStyle(.black)
-                                .padding(10)
-                                .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
-                        }
-                    }
-                    Text(task.isCompleted ? strings.markedAsCompleted : strings.markAsCompleted)
-                        .font(.system(size: 15))
-                        .foregroundColor(task.isCompleted ? .gray : .white)
-                        .hLeading()
-                }
-                .padding(.top)
-            }
-        }
-        .foregroundColor(isCurrentHour ? .white : .black)
-        .padding(isCurrentHour ? 16 : 0)
-        .padding(.bottom, isCurrentHour ? 0 : 10)
-        .hLeading()
-        .background {
-            Color.black.opacity(isCurrentHour ? 0.85 : 0)
-                .cornerRadius(25)
-        }
-    }
-
-    @ViewBuilder func titleView() -> some View {
-        HStack(spacing: 10) {
-            VStack(alignment: .leading, spacing: 3) {
-                if homeViewModel.showGreetings {
-                    Text("\(Date().greeting()), \(settingsViewModel.userName)")
-                        .foregroundColor(.gray)
-                        .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-                } else {
-                    Text(Date().formatted(date: .abbreviated, time: .omitted))
-                        .foregroundColor(.gray)
-                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
-                }
-                Text(strings.today)
-                    .bold()
-                    .font(.largeTitle)
-                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
-            }
-            .hLeading()
-            if !coreDataViewModel.filteredTasks.isEmpty {
-                Group {
-                    if homeViewModel.isEditing {
-                        Button(strings.done) {
-                            withAnimation {
-                                homeViewModel.isEditing.toggle()
-                            }
-                        }
-                        .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
-                    } else {
-                        Button(strings.edit) {
-                            withAnimation {
-                                homeViewModel.isEditing.toggle()
-                            }
-                        }
-                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-                    }
-                }
-                .foregroundColor(themeManager.selectedTheme.pageTitleColor)
-            }
-
-        }
-        .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
-        .padding(.horizontal)
-        .animation(.linear, value: coreDataViewModel.filteredTasks.isEmpty)
-    }
     @ViewBuilder func headerView() -> some View {
         VStack(spacing: 0) {
-            titleView()
+            HStack(spacing: 10) {
+                VStack(alignment: .leading, spacing: 3) {
+                    if homeViewModel.showGreetings {
+                        Text("\(Date().greeting()), \(settingsViewModel.userName)")
+                            .foregroundColor(.gray)
+                            .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
+                    } else {
+                        Text(Date().formatted(date: .abbreviated, time: .omitted))
+                            .foregroundColor(.gray)
+                            .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                    }
+
+                    Text(strings.today)
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                }
+                .hLeading()
+
+                if !coreDataViewModel.filteredTasks.isEmpty {
+                    Group {
+                        if homeViewModel.isEditing {
+                            Button(strings.done) {
+                                withAnimation {
+                                    homeViewModel.isEditing.toggle()
+                                }
+                            }
+                            .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
+                        } else {
+                            Button(strings.edit) {
+                                withAnimation {
+                                    homeViewModel.isEditing.toggle()
+                                }
+                            }
+                            .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                        }
+                    }
+                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                }
+
+            }
+            .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
+            .padding(.horizontal)
+            .animation(.linear, value: coreDataViewModel.filteredTasks.isEmpty)
+
             if !coreDataViewModel.allTasks.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     calendarView()

@@ -7,12 +7,14 @@ import SwiftUI
 struct OnboardingView: View {
 
     // MARK: Property Wrappers
+
     @StateObject private var onboardingViewModel = OnboardingViewModel()
     @EnvironmentObject var settingsViewModel: SettingsViewModel
 
     @Binding var shouldShowOnboarding: Bool
 
     // MARK: - Private Properties
+
     private var strings = Localizable.Onboarding.self
 
     private var greetingsView: some View {
@@ -30,12 +32,14 @@ struct OnboardingView: View {
     private var registrationView: some View {
         VStack(spacing: 16) {
             Spacer()
+
             CustomTextField(
                 inputText: $settingsViewModel.userName,
                 placeHolder: strings.username,
                 strokeColor: .black
             )
             .continueEditing()
+
             CustomTextField(
                 inputText: $settingsViewModel.userAge,
                 placeHolder: strings.userage,
@@ -43,7 +47,9 @@ struct OnboardingView: View {
             )
             .keyboardType(.numberPad)
             .continueEditing()
+
             Spacer()
+
             Button {
                 if settingsViewModel.userName.isEmpty || settingsViewModel.userAge.isEmpty || settingsViewModel.userName.count > 15 || settingsViewModel.userAge.count > 15 {
                     onboardingViewModel.showError = true
@@ -75,6 +81,7 @@ struct OnboardingView: View {
             Color.white
                 .ignoresSafeArea()
                 .endEditing()
+
             Group {
                 if onboardingViewModel.showGreetings {
                     greetingsView
@@ -91,11 +98,13 @@ struct OnboardingView: View {
     }
 
     // MARK: Private Functions
+
     private func hideOnboarding() {
         withAnimation(.linear) {
             self.shouldShowOnboarding.toggle()
         }
     }
+    
     private func showRegistrationView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             withAnimation(.default) {
