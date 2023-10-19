@@ -73,6 +73,7 @@ class CoreDataViewModel: ObservableObject {
 
     func doneTask(task: TaskModel, date: Date) {
         task.isCompleted = true
+        task.shouldNotificate = false
         saveContext()
         self.fetchFilteredTasks(dateToFilter: date)
     }
