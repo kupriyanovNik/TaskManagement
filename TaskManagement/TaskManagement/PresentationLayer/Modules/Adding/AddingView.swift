@@ -38,6 +38,25 @@ struct AddingView: View {
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
 
+                if homeViewModel.editTask != nil {
+                    HStack {
+                        Text(strings.shouldRemind)
+
+                        Spacer()
+
+                        RadioButton(
+                            isSelected: $addingViewModel.shouldSendNotification,
+                            accentColor: themeManager.selectedTheme.accentColor
+                        )
+                        .frame(width: 30, height: 30)
+                    }
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
+                    }
+                }
+
                 if homeViewModel.editTask == nil {
                     TaskCategorySelector(
                         taskCategory: $addingViewModel.taskCategory,
@@ -127,6 +146,14 @@ struct AddingView: View {
                 title: addingViewModel.taskTitle,
                 description: addingViewModel.taskDescription
             )
+            NotificationManager.shared.removeNotification(with: task.taskID ?? "")
+            if addingViewModel.shouldSendNotification {
+                sendNotification(
+                    id: task.taskID ?? "",
+                    date: task.taskDate ?? .now,
+                    body: task.taskTitle ?? ""
+                )
+            }
         } else {
             coreDataViewModel.addTask(
                 id: UUID().uuidString,
@@ -138,7 +165,11 @@ struct AddingView: View {
             ) { date, task in
                 homeViewModel.currentDay = date
                 if addingViewModel.shouldSendNotification {
-                    sendNotification(id: task.taskID ?? "")
+                    sendNotification(
+                        id: task.taskID ?? "",
+                        date: addingViewModel.taskDate,
+                        body: addingViewModel.taskTitle
+                    )
                 }
             }
 
@@ -146,9 +177,7 @@ struct AddingView: View {
         dismiss()
     }
     
-    private func sendNotification(id: String) {
-        let date = addingViewModel.taskDate
-        let body = addingViewModel.taskTitle
+    private func sendNotification(id: String, date: Date, body: String) {
         let calendar = Calendar.current
         let minute = calendar.component(.minute, from: date)
         let hour = calendar.component(.hour, from: date)
