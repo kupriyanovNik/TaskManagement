@@ -45,6 +45,7 @@ enum Localizable {
         static let application = localized("Settings.application")
         static let selectTheme = localized("Settings.selectTheme")
         static let showScrollAnimations = localized("Settings.showScrollAnimations")
+        static let showTabBarAnimations = localized("Settings.showTabBarAnimations")
     }
     enum AllTasks {
         static let taskLowercased = localized("AllTasks.taskLowercased")

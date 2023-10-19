@@ -65,7 +65,10 @@ struct ContentView: View {
                     .padding(.bottom, 5)
             }
             .ignoresSafeArea(.keyboard)
-            .animation(.linear(duration: 0.3), value: navigationViewModel.selectedTab)
+            .animation(
+                settingsViewModel.shouldShowTabBarAnimation ? .linear(duration: 0.3) : .linear(duration: 0),
+                value: navigationViewModel.selectedTab
+            )
         }
     }
 }

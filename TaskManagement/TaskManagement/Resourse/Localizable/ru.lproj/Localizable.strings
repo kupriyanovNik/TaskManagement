@@ -46,6 +46,7 @@
 "Settings.title" = "Настройки";
 "Settings.selectTheme" = "Выберите тему приложения";
 "Settings.showScrollAnimations" = "Показывать анимации пролистывания?";
+"Settings.showTabBarAnimations" = "Показывать анимации смены страницы?";
 
 // MARK: - AllTasks
 

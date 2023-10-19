@@ -46,6 +46,7 @@
 "Settings.title" = "Settings";
 "Settings.selectTheme" = "Select theme of application";
 "Settings.showScrollAnimations" = "Should show scroll animations?";
+"Settings.showTabBarAnimations" = "Should show tab bar animations?";
 
 // MARK: - AllTasks
 

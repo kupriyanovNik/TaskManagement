@@ -50,6 +50,19 @@ struct SettingsView: View {
         }
         .padding(.horizontal)
     }
+    private var shouldShowTabBarAnimationRow: some View {
+        HStack {
+            Text(strings.showTabBarAnimations)
+                .font(.title2)
+            Spacer()
+            RadioButton(
+                isSelected: $settingsViewModel.shouldShowTabBarAnimation,
+                accentColor: themeManager.selectedTheme.accentColor
+            )
+            .frame(width: 30, height: 30)
+        }
+        .padding(.horizontal)
+    }
     private var showOnboardingRow: some View {
         Button {
             UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
@@ -67,8 +80,9 @@ struct SettingsView: View {
                 Divider()
                 if #available(iOS 17, *) {
                     shouldShowScrollAnimationRow
-                    Divider()
                 }
+                shouldShowTabBarAnimationRow
+                Divider()
                 #if DEBUG
                 showOnboardingRow
                 #endif
