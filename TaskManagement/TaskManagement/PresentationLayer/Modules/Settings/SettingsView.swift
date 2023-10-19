@@ -90,28 +90,51 @@ struct SettingsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
-        .makeCustomNavBar {
-            headerView()
-        }
-    }
-    @ViewBuilder func headerView() -> some View {
-        HStack {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: systemImages.backArrow)
-                    .foregroundColor(.black)
-                    .font(.title2)
+        .safeAreaInset(edge: .bottom) {
+            if settingsViewModel.showInformation {
+                VStack {
+                    Text("Created by Nikita Kupriyanov with ♡")
+                    Text("SwiftUI - less code")
+                }
+                .font(.caption)
+                .foregroundColor(.gray)
+                .frame(width: 250, height: 60)
+                .background {
+                    AnimatedGradient(colors: [.yellow, .orange, .green, .purple])
+                        .cornerRadius(10)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.white)
+                                .padding(5)
+                        }
+                }
+                .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
             }
-            Text(strings.title)
-                .bold()
-                .font(.largeTitle)
-                .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
-            Spacer()
-
         }
-        .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
-        .padding(.horizontal)
+        .makeCustomNavBar {
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: systemImages.backArrow)
+                        .foregroundColor(.black)
+                        .font(.title2)
+                }
+                Text(strings.title)
+                    .bold()
+                    .font(.largeTitle)
+                    .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+                    .onTapGesture(count: 5) {
+                        withAnimation {
+                            settingsViewModel.showInformation = true
+                        }
+                    }
+                Spacer()
+
+            }
+            .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
+            .padding(.horizontal)
+        }
     }
 }
 

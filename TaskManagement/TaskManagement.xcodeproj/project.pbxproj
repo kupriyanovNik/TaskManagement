@@ -33,6 +33,7 @@
 		B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C22AD5B21000F5631E /* ProfileViewModel.swift */; };
 		B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */; };
 		B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */; };
+		B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F092AE1473B000F19EE /* AnimatedGradient.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
 		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
@@ -79,6 +80,7 @@
 		B76646C22AD5B21000F5631E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerCell.swift; sourceTree = "<group>"; };
+		B7739F092AE1473B000F19EE /* AnimatedGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradient.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				B73213D52ACCB07000E42B1D /* Profile */,
 				B73213C02ACC8CCD00E42B1D /* Adding */,
 				B73213BB2ACC8CB800E42B1D /* Home */,
+				B7739F092AE1473B000F19EE /* AnimatedGradient.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				B73213C32ACC8D1000E42B1D /* NavigationViewModel.swift in Sources */,
 				B73213BF2ACC8CCA00E42B1D /* HomeViewModel.swift in Sources */,
 				B7F515C92ACB27060001A282 /* ContentView.swift in Sources */,
+				B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */,
 				B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */,
 				B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */,
 				B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */,
