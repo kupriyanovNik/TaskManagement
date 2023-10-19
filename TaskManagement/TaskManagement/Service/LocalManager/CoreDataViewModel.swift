@@ -30,16 +30,26 @@ class CoreDataViewModel: ObservableObject {
         }
     }
 
-    func addTask(title: String, description: String?, date: Date, category: TaskCategory, onAdded: ((Date) -> ())?) {
+    func addTask(
+        id: String,
+        title: String,
+        description: String?,
+        date: Date,
+        category: TaskCategory,
+        shouldNotificate: Bool,
+        onAdded: ((Date, TaskModel) -> ())?
+    ) {
         let task = TaskModel(context: viewContext)
+        task.taskID = id
         task.taskTitle = title
         task.taskDescription = description
         task.taskDate = date
         task.taskCategory = category.localizableRawValue
+        task.shouldNotificate = shouldNotificate
         task.isCompleted = false
         saveContext()
         self.fetchFilteredTasks(dateToFilter: date)
-        onAdded?(date)
+        onAdded?(date, task)
     }
 
     func removeTask(task: TaskModel, date: Date, onRemove: ((Date) -> ())? = nil) {
