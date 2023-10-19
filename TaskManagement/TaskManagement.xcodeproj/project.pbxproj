@@ -36,6 +36,7 @@
 		B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F092AE1473B000F19EE /* AnimatedGradient.swift */; };
 		B7739F0C2AE14D6B000F19EE /* TaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */; };
 		B7739F0F2AE15272000F19EE /* TaskCategorySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */; };
+		B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
 		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
@@ -85,6 +86,7 @@
 		B7739F092AE1473B000F19EE /* AnimatedGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradient.swift; sourceTree = "<group>"; };
 		B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategory.swift; sourceTree = "<group>"; };
 		B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySelector.swift; sourceTree = "<group>"; };
+		B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorButtonStyle.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		B73213BA2ACC8CB100E42B1D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B7739F122AE179E6000F19EE /* ButtonStyles */,
 				B76646BF2AD5AA5B00F5631E /* Internal */,
 				B7739F0D2AE15261000F19EE /* Adding */,
 				B7739F062AE13A88000F19EE /* Settings */,
@@ -284,6 +287,14 @@
 				B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */,
 			);
 			path = Adding;
+			sourceTree = "<group>";
+		};
+		B7739F122AE179E6000F19EE /* ButtonStyles */ = {
+			isa = PBXGroup;
+			children = (
+				B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */,
+			);
+			path = ButtonStyles;
 			sourceTree = "<group>";
 		};
 		B7D949A82AE04B5800FE5CAE /* Service */ = {
@@ -474,6 +485,7 @@
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
 				B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */,
 				B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */,
+				B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */,
 				B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */,
 				B71FD0FF2AD437910039270D /* CoreDataViewModel.swift in Sources */,
 				B7DC65882AD56858009DA010 /* Theme.swift in Sources */,

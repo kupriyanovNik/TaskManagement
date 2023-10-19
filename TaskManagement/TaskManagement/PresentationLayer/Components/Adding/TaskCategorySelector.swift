@@ -18,20 +18,13 @@ struct TaskCategorySelector: View {
             HStack(spacing: 0) {
                 ForEach(TaskCategory.allCases.indices, id: \.self) { index in
                     let mode = TaskCategory.allCases[index]
-                    let isSelected = taskCategory == mode
                     Button {
                         taskCategory = mode
                     } label: {
                         Text(mode.localizableRawValue)
-                            .font(.system(
-                                size: isSelected ? 14 : 11,
-                                weight: isSelected ? .semibold : .regular
-                            ))
-                            .frame(maxWidth: .infinity)
-                            .padding(8)
-                            .padding(.vertical, 13)
+                            .font(.caption)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(CategorySelectorButtonStyle())
                 }
             }
             .frame(maxWidth: .infinity)
