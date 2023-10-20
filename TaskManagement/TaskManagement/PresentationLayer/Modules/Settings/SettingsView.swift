@@ -33,7 +33,9 @@ struct SettingsView: View {
                             pageTitleColor: theme.pageTitleColor,
                             themeName: theme.themeName
                         ) {
-                            themeManager.selectedThemeIndex = themeIndex
+                            withAnimation {
+                                themeManager.selectedThemeIndex = themeIndex
+                            }
                         }
                         .padding(.leading)
                     }

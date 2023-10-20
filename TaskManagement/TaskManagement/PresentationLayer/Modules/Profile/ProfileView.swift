@@ -10,6 +10,7 @@ struct ProfileView: View {
 
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
@@ -17,17 +18,62 @@ struct ProfileView: View {
     private var strings = Localizable.Profile.self
     private var systemImages = ImageNames.System.self
 
+    private var allTasksCount: Int {
+        coreDataViewModel.allTasks.count
+    }
+
+    private var allDoneTasksCount: Int {
+        coreDataViewModel.allTasks.filter { $0.isCompleted }.count
+    }
+    
+    private var doneTasksPercentage: Double {
+        Double(allDoneTasksCount) / Double(allTasksCount)
+    }
+
+    private var allTodayTasksCount: Int {
+        coreDataViewModel.allTodayTasks.count
+    }
+
+    private var allTodayDoneTasksCount: Int {
+        coreDataViewModel.allTodayTasks.filter { $0.isCompleted }.count
+    }
+
+    private var doneTodayTasksPercentage: Double {
+        Double(allTodayDoneTasksCount) / Double(allTodayTasksCount)
+    }
+
+    private let screenWidth = UIScreen.main.bounds.width
+
     // MARK: - Body
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            Text("Profile Page")
-                .hCenter()
+            VStack {
+                StatisticsGauge(
+                    title: strings.doneTasks,
+                    fromValue: allDoneTasksCount,
+                    toValue: allTasksCount,
+                    accentColor: themeManager.selectedTheme.accentColor
+                )
+
+                StatisticsGauge(
+                    title: strings.todayDoneTasks,
+                    fromValue: allTodayDoneTasksCount,
+                    toValue: allTodayTasksCount,
+                    accentColor: themeManager.selectedTheme.accentColor
+                )
+            }
         }
         .makeCustomNavBar {
             headerView()
         }
+        .onAppear {
+            coreDataViewModel.fetchTodayTasks()
+        }
     }
+
+    // MARK: - ViewBuilders
+
     @ViewBuilder func headerView() -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
@@ -77,5 +123,6 @@ struct ProfileView: View {
     ProfileView()
         .environmentObject(ProfileViewModel())
         .environmentObject(SettingsViewModel())
+        .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())
 }
