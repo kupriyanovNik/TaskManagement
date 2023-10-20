@@ -87,7 +87,7 @@ struct StatisticsGauge: View {
             }
             if isAllDone {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    lineWidth = 45
+                    lineWidth = 5
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         lineWidth = 15
                     }
