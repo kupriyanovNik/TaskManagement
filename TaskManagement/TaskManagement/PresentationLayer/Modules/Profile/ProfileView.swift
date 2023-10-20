@@ -18,17 +18,70 @@ struct ProfileView: View {
     private var strings = Localizable.Profile.self
     private var systemImages = ImageNames.System.self
 
+    private var allTasksCount: Int {
+        coreDataViewModel.allTasks.count
+    }
+
+    private var allDoneTasksCount: Int {
+        coreDataViewModel.allTasks.filter { $0.isCompleted }.count
+    }
+    
+    private var doneTasksPercentage: Double {
+        Double(allDoneTasksCount) / Double(allTasksCount)
+    }
+
+    private var allTodayTasksCount: Int {
+        coreDataViewModel.allTodayTasks.count
+    }
+
+    private var allTodayDoneTasksCount: Int {
+        coreDataViewModel.allTodayTasks.filter { $0.isCompleted }.count
+    }
+
+    private var doneTodayTasksPercentage: Double {
+        Double(allTodayDoneTasksCount) / Double(allTodayTasksCount)
+    }
+
+    private let screenWidth = UIScreen.main.bounds.width
+
     // MARK: - Body
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            Text("Profile Page")
-                .hCenter()
+            VStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        StatisticsGauge(
+                            title: "Done Tasks",
+                            fromValue: allDoneTasksCount,
+                            toValue: allTasksCount,
+                            accentColor: themeManager.selectedTheme.accentColor
+                        )
+                        .frame(width: screenWidth / 2.5, height: screenWidth / 2)
+
+                        StatisticsGauge(
+                            title: "Today Tasks",
+                            fromValue: allTodayDoneTasksCount,
+                            toValue: allTodayTasksCount,
+                            accentColor: themeManager.selectedTheme.accentColor
+                        )
+                        .frame(width: screenWidth / 2.5, height: screenWidth / 2)
+                    }
+                    .padding(.leading)
+                }
+            }
+
         }
         .makeCustomNavBar {
             headerView()
         }
+        .onAppear {
+            coreDataViewModel.fetchTodayTasks()
+        }
     }
+
+    // MARK: - ViewBuilders
+
     @ViewBuilder func headerView() -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {

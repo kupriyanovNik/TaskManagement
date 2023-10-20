@@ -9,6 +9,7 @@ import SwiftUI
 class CoreDataViewModel: ObservableObject {
 
     @Published var allTasks: [TaskModel] = []
+    @Published var allTodayTasks: [TaskModel] = []
     @Published var filteredTasks: [TaskModel] = []
 
     private var viewContext: NSManagedObjectContext
@@ -17,16 +18,6 @@ class CoreDataViewModel: ObservableObject {
     init() {
         self.viewContext = PersistenceController.shared.viewContext
         self.fetchFilteredTasks(dateToFilter: .now)
-    }
-
-    func fetchAllTasks() {
-        let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
-        request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
-        do {
-            self.allTasks = try viewContext.fetch(request)
-        } catch {
-            print("DEBUG: \(error.localizedDescription)")
-        }
     }
 
     func addTask(
@@ -84,6 +75,16 @@ class CoreDataViewModel: ObservableObject {
         self.fetchFilteredTasks(dateToFilter: date)
     }
 
+    func fetchAllTasks() {
+        let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
+        request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
+        do {
+            self.allTasks = try viewContext.fetch(request)
+        } catch {
+            print("DEBUG: \(error.localizedDescription)")
+        }
+    }
+
     func fetchFilteredTasks(dateToFilter: Date) {
         let today = Calendar.current.startOfDay(for: dateToFilter)
         let tommorow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
@@ -101,6 +102,25 @@ class CoreDataViewModel: ObservableObject {
             print("DEBUG: \(error.localizedDescription)")
         }
         self.fetchAllTasks()
+        self.fetchTodayTasks()
+    }
+
+    func fetchTodayTasks() {
+        let today = Calendar.current.startOfDay(for: .now)
+        let tommorow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+
+        let filterKey = "taskDate"
+        let predicate = NSPredicate(format: "\(filterKey) >= %@ AND \(filterKey) < %@", argumentArray: [today, tommorow])
+
+        let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
+        request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
+        request.predicate = predicate
+
+        do {
+            self.allTodayTasks = try viewContext.fetch(request)
+        } catch {
+            print("DEBUG: \(error.localizedDescription)")
+        }
     }
 
     private func saveContext() {
