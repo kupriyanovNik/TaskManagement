@@ -26,6 +26,8 @@
 
 "Profile.your" = "Your";
 "Profile.profile" = "Profile";
+"Profile.doneTasks" = "Done Tasks";
+"Profile.todayDoneTasks" = "Today Done Tasks";
 
 // MARK: - Onboarding
 

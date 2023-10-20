@@ -9,6 +9,7 @@ struct StatisticsGauge: View {
     // MARK: - Property Wrappers
 
     @State private var showDetail: Bool = false
+    @State private var lineWidth: Double = 5
 
     // MARK: - Internal Properties
     
@@ -39,22 +40,16 @@ struct StatisticsGauge: View {
     // MARK: - Body
 
     var body: some View {
-        VStack {
-            if !showDetail {
+        HStack {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(title)
-                    .hLeading()
-                    .padding(.bottom, 5)
+                    .font(.title2)
+                    .fontWeight(.semibold)
 
-                HStack {
-                    Text("\(fromValue)/\(toValue)")
-                        .padding(.bottom)
-
-                    Spacer()
-
-                    Text("\(percentageString)")
-                        .padding(.bottom)
-                }
-                .font(.caption)
+                Text("\(fromValue)/\(toValue)")
+                    .font(.title)
+                    .foregroundColor(accentColor)
+                    .fontWeight(.bold)
             }
 
             Spacer()
@@ -65,9 +60,17 @@ struct StatisticsGauge: View {
 
                 Circle()
                     .trim(from: 0, to: divided)
-                    .stroke(accentColor, lineWidth: 2)
+                    .stroke(accentColor, style: .init(lineWidth: lineWidth, lineCap: .round))
                     .rotationEffect(.degrees(-90))
+
+                if showDetail {
+                    Text("\(percentageString)")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundColor(accentColor)
+                }
             }
+            .padding()
 
             Spacer()
         }
@@ -77,19 +80,26 @@ struct StatisticsGauge: View {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(accentColor.opacity(0.1))
         }
+        .onAppear {
+            lineWidth = 15
+            if fromValue == 0 {
+                showDetail = true 
+            }
+        }
+        .animation(.spring.delay(0.5), value: lineWidth)
+        .animation(.spring, value: showDetail)
         .onTapGesture {
             showDetail.toggle()
         }
-        .animation(.default, value: showDetail)
+        .padding(.horizontal)
     }
 }
 
 #Preview {
     StatisticsGauge(
-        title: "aaa",
-        fromValue: 14,
-        toValue: 14,
+        title: "Today Tasks",
+        fromValue: 3,
+        toValue: 10,
         accentColor: .purple
     )
-    .frame(width: UIScreen.main.bounds.width / 2.5, height: 200)
 }

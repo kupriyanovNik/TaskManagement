@@ -49,28 +49,20 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        StatisticsGauge(
-                            title: "Done Tasks",
-                            fromValue: allDoneTasksCount,
-                            toValue: allTasksCount,
-                            accentColor: themeManager.selectedTheme.accentColor
-                        )
-                        .frame(width: screenWidth / 2.5, height: screenWidth / 2)
+                StatisticsGauge(
+                    title: strings.doneTasks,
+                    fromValue: allDoneTasksCount,
+                    toValue: allTasksCount,
+                    accentColor: themeManager.selectedTheme.accentColor
+                )
 
-                        StatisticsGauge(
-                            title: "Today Tasks",
-                            fromValue: allTodayDoneTasksCount,
-                            toValue: allTodayTasksCount,
-                            accentColor: themeManager.selectedTheme.accentColor
-                        )
-                        .frame(width: screenWidth / 2.5, height: screenWidth / 2)
-                    }
-                    .padding(.leading)
-                }
+                StatisticsGauge(
+                    title: strings.todayDoneTasks,
+                    fromValue: allTodayDoneTasksCount,
+                    toValue: allTodayTasksCount,
+                    accentColor: themeManager.selectedTheme.accentColor
+                )
             }
-
         }
         .makeCustomNavBar {
             headerView()
