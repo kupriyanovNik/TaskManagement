@@ -10,6 +10,7 @@ struct ProfileView: View {
 
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
@@ -77,5 +78,6 @@ struct ProfileView: View {
     ProfileView()
         .environmentObject(ProfileViewModel())
         .environmentObject(SettingsViewModel())
+        .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())
 }

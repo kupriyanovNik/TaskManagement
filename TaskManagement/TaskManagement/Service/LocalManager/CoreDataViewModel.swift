@@ -17,7 +17,6 @@ class CoreDataViewModel: ObservableObject {
     init() {
         self.viewContext = PersistenceController.shared.viewContext
         self.fetchFilteredTasks(dateToFilter: .now)
-        self.fetchAllTasks()
     }
 
     func fetchAllTasks() {
@@ -69,6 +68,7 @@ class CoreDataViewModel: ObservableObject {
         task.taskDescription = description
         task.shouldNotificate = shouldNotificate
         saveContext()
+        self.fetchFilteredTasks(dateToFilter: task.taskDate ?? .now)
     }
 
     func doneTask(task: TaskModel, date: Date) {
