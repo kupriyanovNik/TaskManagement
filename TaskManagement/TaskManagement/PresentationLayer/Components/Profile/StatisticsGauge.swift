@@ -78,16 +78,24 @@ struct StatisticsGauge: View {
         .cornerRadius(cornerRadius)
         .background {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(accentColor.opacity(0.1))
+                .fill(accentColor.opacity(0.2))
         }
         .onAppear {
             lineWidth = 15
             if fromValue == 0 {
                 showDetail = true 
             }
+            if isAllDone {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    lineWidth = 45
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        lineWidth = 15
+                    }
+                }
+            }
         }
-        .animation(.spring.delay(0.5), value: lineWidth)
-        .animation(.spring, value: showDetail)
+        .animation(.linear, value: lineWidth)
+        .animation(.linear, value: showDetail)
         .onTapGesture {
             showDetail.toggle()
         }
