@@ -131,7 +131,7 @@ struct AllTasksView: View {
             }
 
 
-            if !coreDataViewModel.allTasks.isEmpty {
+            if !coreDataViewModel.allTasks.isEmpty && allTasksViewModel.filteringCategory == nil {
                 Group {
                     if allTasksViewModel.isEditing {
                         Button(strings.done) {
@@ -151,6 +151,9 @@ struct AllTasksView: View {
                     }
                 }
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+            } else if let category = allTasksViewModel.filteringCategory {
+                Text(category.localizableRawValue)
+                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
