@@ -41,6 +41,7 @@ struct AllTasksView: View {
             }
             .padding()
             .padding(.top)
+            .blur(radius: allTasksViewModel.showFilteringView ? 3 : 0)
         }
         .makeCustomNavBar {
             headerView()
@@ -50,7 +51,6 @@ struct AllTasksView: View {
                 taskCategory: allTasksViewModel.filteringCategory
             )
         }
-        .animation(.spring, value: coreDataViewModel.tasksFilteredByCategory)
     }
 
     // MARK: - ViewBuilders
@@ -86,9 +86,7 @@ struct AllTasksView: View {
                     isEditing: $allTasksViewModel.isEditing,
                     task: $task
                 )
-                .animation(.none, value: coreDataViewModel.tasksFilteredByCategory)
             }
-            .animation(.none, value: coreDataViewModel.tasksFilteredByCategory)
         }
     }
 

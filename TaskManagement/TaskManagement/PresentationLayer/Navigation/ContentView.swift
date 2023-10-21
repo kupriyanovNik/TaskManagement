@@ -91,7 +91,12 @@ struct ContentView: View {
                         VStack {
                             ZStack {
                                 Color.white
-                                    .clipShape(RoundedShape(corners: [.bottomLeft, .bottomRight], radius: 30))
+                                    .clipShape(
+                                        RoundedShape(
+                                            corners: [.bottomLeft, .bottomRight],
+                                            radius: 30
+                                        )
+                                    )
                                     .ignoresSafeArea()
 
                                 FilterSelectorView(
