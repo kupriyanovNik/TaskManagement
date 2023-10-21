@@ -18,6 +18,10 @@ struct ContentView: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
+    // MARK: - Private Properties
+
+    private var strings = Localizable.Content.self
+
     // MARK: - Inits
 
     init() {
@@ -101,7 +105,7 @@ struct ContentView: View {
 
                                 FilterSelectorView(
                                     selectedCategory: $allTasksViewModel.filteringCategory,
-                                    title: "Выберите категорию",
+                                    title: strings.selectCategory,
                                     accentColor: themeManager.selectedTheme.accentColor
                                 )
                             }

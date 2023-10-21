@@ -2,6 +2,10 @@
   Localizable.strings (ru)
 */
 
+// MARK: - Content
+
+"Content.selectCategory" = "Выберите Категорию:";
+
 // MARK: - Adding
 
 "Adding.title" = "Добавление";
