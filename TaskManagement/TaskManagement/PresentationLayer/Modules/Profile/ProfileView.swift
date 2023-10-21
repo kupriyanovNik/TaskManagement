@@ -54,19 +54,21 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                StatisticsGauge(
-                    title: strings.todayDoneTasks,
-                    fromValue: allTodayDoneTasksCount,
-                    toValue: allTodayTasksCount,
-                    accentColor: themeManager.selectedTheme.accentColor
-                )
+                if !coreDataViewModel.allTasks.isEmpty {
+                    StatisticsGauge(
+                        title: strings.todayDoneTasks,
+                        fromValue: allTodayDoneTasksCount,
+                        toValue: allTodayTasksCount,
+                        accentColor: themeManager.selectedTheme.accentColor
+                    )
 
-                StatisticsGauge(
-                    title: strings.doneTasks,
-                    fromValue: allDoneTasksCount,
-                    toValue: allTasksCount,
-                    accentColor: themeManager.selectedTheme.accentColor
-                )
+                    StatisticsGauge(
+                        title: strings.doneTasks,
+                        fromValue: allDoneTasksCount,
+                        toValue: allTasksCount,
+                        accentColor: themeManager.selectedTheme.accentColor
+                    )
+                }
             }
         }
         .makeCustomNavBar {
