@@ -28,13 +28,13 @@ struct HomeView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
-                if coreDataViewModel.filteredTasks.isEmpty {
+                if coreDataViewModel.tasksFilteredByDate.isEmpty {
                     Text(strings.noTasks)
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
                         .offset(y: 100)
                 } else {
-                    ForEach($coreDataViewModel.filteredTasks, id: \.id) { $task in
+                    ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
                         TaskCardView(
                             homeViewModel: homeViewModel,
                             navigationViewModel: navigationViewModel,
@@ -51,18 +51,18 @@ struct HomeView: View {
             .padding(.top)
         }
         .onAppear {
-            coreDataViewModel.fetchFilteredTasks(dateToFilter: homeViewModel.currentDay)
+            coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
             DispatchQueue.main.asyncAfter(wallDeadline: .now() + 3) {
                 withAnimation(.default) {
                     homeViewModel.showGreetings = false
                 }
             }
         }
-        .animation(.spring(), value: coreDataViewModel.filteredTasks)
+        .animation(.spring(), value: coreDataViewModel.tasksFilteredByDate)
         .onChange(of: homeViewModel.currentDay) { newCurrentDate in
-            coreDataViewModel.fetchFilteredTasks(dateToFilter: newCurrentDate)
+            coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: newCurrentDate)
         }
-        .onChange(of: coreDataViewModel.filteredTasks) { newFilteredTasks in
+        .onChange(of: coreDataViewModel.tasksFilteredByDate) { newFilteredTasks in
             if newFilteredTasks.isEmpty {
                 homeViewModel.isEditing = false
             }
@@ -140,7 +140,7 @@ struct HomeView: View {
                 }
                 .hLeading()
 
-                if !coreDataViewModel.filteredTasks.isEmpty {
+                if !coreDataViewModel.tasksFilteredByDate.isEmpty {
                     Group {
                         if homeViewModel.isEditing {
                             Button(strings.done) {
@@ -164,7 +164,7 @@ struct HomeView: View {
             }
             .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
             .padding(.horizontal)
-            .animation(.linear, value: coreDataViewModel.filteredTasks.isEmpty)
+            .animation(.linear, value: coreDataViewModel.tasksFilteredByDate.isEmpty)
 
             if !coreDataViewModel.allTasks.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
