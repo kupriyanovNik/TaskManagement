@@ -27,6 +27,7 @@
 		B73213D32ACCACC900E42B1D /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213D12ACCACC900E42B1D /* CustomTabBar.swift */; };
 		B73213D42ACCACC900E42B1D /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213D22ACCACC900E42B1D /* TabBarModel.swift */; };
 		B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213D62ACCB07A00E42B1D /* ProfileView.swift */; };
+		B736A2A32AE4456B00977067 /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = B736A2A22AE4456B00977067 /* SPConfetti */; };
 		B76287272AD95061003EE58D /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76287262AD95061003EE58D /* RoundedShape.swift */; };
 		B76646C12AD5AA6200F5631E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C02AD5AA6200F5631E /* CustomTextField.swift */; };
 		B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C22AD5B21000F5631E /* ProfileViewModel.swift */; };
@@ -115,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B736A2A32AE4456B00977067 /* SPConfetti in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +418,9 @@
 			dependencies = (
 			);
 			name = TaskManagement;
+			packageProductDependencies = (
+				B736A2A22AE4456B00977067 /* SPConfetti */,
+			);
 			productName = TaskManagement;
 			productReference = B7F515C32ACB27060001A282 /* TaskManagement.app */;
 			productType = "com.apple.product-type.application";
@@ -445,6 +450,9 @@
 				ru,
 			);
 			mainGroup = B7F515BA2ACB27060001A282;
+			packageReferences = (
+				B736A2A12AE4456B00977067 /* XCRemoteSwiftPackageReference "SPConfetti" */,
+			);
 			productRefGroup = B7F515C42ACB27060001A282 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -733,6 +741,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B736A2A12AE4456B00977067 /* XCRemoteSwiftPackageReference "SPConfetti" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPConfetti";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B736A2A22AE4456B00977067 /* SPConfetti */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B736A2A12AE4456B00977067 /* XCRemoteSwiftPackageReference "SPConfetti" */;
+			productName = SPConfetti;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */ = {

@@ -17,6 +17,12 @@ enum Constants {
     enum UserDefaultsKeys {
         static let shouldShowOnboarding = "shouldShowOnboarding"
         static let selectedTheme = "selectedThemeIndex"
+        static let lastTimeShowConfetti = "lastTimeShowConfetti"
+        static let userName = "userName"
+        static let userAge = "userAge"
+        static let shouldShowScrollAnimation = "shouldShowScrollAnimation"
+        static let shouldShowTabBarAnimation = "shouldShowTabBarAnimation"
+        static let selectedAppIcon = "selectedAppIcon"
     }
 
     enum CoreDataNames {

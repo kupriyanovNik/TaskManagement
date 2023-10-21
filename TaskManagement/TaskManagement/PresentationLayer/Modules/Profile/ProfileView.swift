@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import SPConfetti
 
 struct ProfileView: View {
 
@@ -42,6 +43,10 @@ struct ProfileView: View {
         Double(allTodayDoneTasksCount) / Double(allTodayTasksCount)
     }
 
+    private var isAllDone: Bool {
+        doneTasksPercentage == 1 && doneTodayTasksPercentage == 1
+    }
+
     private let screenWidth = UIScreen.main.bounds.width
 
     // MARK: - Body
@@ -50,16 +55,16 @@ struct ProfileView: View {
         ScrollView(showsIndicators: false) {
             VStack {
                 StatisticsGauge(
-                    title: strings.doneTasks,
-                    fromValue: allDoneTasksCount,
-                    toValue: allTasksCount,
+                    title: strings.todayDoneTasks,
+                    fromValue: allTodayDoneTasksCount,
+                    toValue: allTodayTasksCount,
                     accentColor: themeManager.selectedTheme.accentColor
                 )
 
                 StatisticsGauge(
-                    title: strings.todayDoneTasks,
-                    fromValue: allTodayDoneTasksCount,
-                    toValue: allTodayTasksCount,
+                    title: strings.doneTasks,
+                    fromValue: allDoneTasksCount,
+                    toValue: allTasksCount,
                     accentColor: themeManager.selectedTheme.accentColor
                 )
             }
@@ -69,7 +74,14 @@ struct ProfileView: View {
         }
         .onAppear {
             coreDataViewModel.fetchTodayTasks()
+            showConfetti()
         }
+        .confetti(
+            isPresented: $profileViewModel.showConfetti,
+            animation: .fullWidthToDown,
+            particles: [.star, .heart],
+            duration: 3
+        )
     }
 
     // MARK: - ViewBuilders
@@ -117,6 +129,19 @@ struct ProfileView: View {
             }
         }
     }
+
+    // MARK: - Private Functions
+
+    private func showConfetti() {
+        let calendar = Calendar.current
+        let lastDate = Date(timeIntervalSince1970: profileViewModel.lastTimeShowConfetti)
+        let isToday = calendar.isDateInToday(lastDate)
+        if isAllDone && !isToday {
+            profileViewModel.showConfetti = true
+            profileViewModel.lastTimeShowConfetti = Date().timeIntervalSince1970
+        }
+    }
+
 }
 
 #Preview {
