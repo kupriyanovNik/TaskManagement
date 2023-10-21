@@ -18,6 +18,10 @@ struct ContentView: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
+    // MARK: - Private Properties
+
+    private var strings = Localizable.Content.self
+
     // MARK: - Inits
 
     init() {
@@ -76,6 +80,42 @@ struct ContentView: View {
                 settingsViewModel.shouldShowTabBarAnimation ? .linear(duration: 0.3) : .linear(duration: 0),
                 value: navigationViewModel.selectedTab
             )
+            .overlay {
+                if allTasksViewModel.showFilteringView {
+                    ZStack {
+                        Color.black
+                            .opacity(0.8)
+                            .ignoresSafeArea()
+                            .onTapGesture {
+                                withAnimation {
+                                    allTasksViewModel.showFilteringView = false
+                                }
+                            }
+
+                        VStack {
+                            ZStack {
+                                Color.white
+                                    .clipShape(
+                                        RoundedShape(
+                                            corners: [.bottomLeft, .bottomRight],
+                                            radius: 30
+                                        )
+                                    )
+                                    .ignoresSafeArea()
+
+                                FilterSelectorView(
+                                    selectedCategory: $allTasksViewModel.filteringCategory,
+                                    title: strings.selectCategory,
+                                    accentColor: themeManager.selectedTheme.accentColor
+                                )
+                            }
+                            .frame(maxHeight: 150)
+
+                            Spacer()
+                        }
+                    }
+                }
+            }
         }
     }
 }

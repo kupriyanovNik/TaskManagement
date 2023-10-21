@@ -32,28 +32,63 @@ struct AllTasksView: View {
                         .offset(y: 100)
 
                 } else {
-                    ForEach($coreDataViewModel.allTasks, id: \.id) { $task in
-                        TaskCardView(
-                            homeViewModel: homeViewModel,
-                            navigationViewModel: navigationViewModel,
-                            coreDataViewModel: coreDataViewModel,
-                            settingsViewModel: settingsViewModel,
-                            themeManager: themeManager,
-                            isEditing: $allTasksViewModel.isEditing,
-                            task: $task
-                        )
+                    if allTasksViewModel.filteringCategory == nil {
+                        allTasks()
+                    } else {
+                        tasksFilteredByCategory()
                     }
                 }
             }
             .padding()
             .padding(.top)
+            .blur(radius: allTasksViewModel.showFilteringView ? 3 : 0)
         }
         .makeCustomNavBar {
             headerView()
         }
+        .onChange(of: allTasksViewModel.filteringCategory) { _ in
+            coreDataViewModel.fetchTasksFilteredByCategory(
+                taskCategory: allTasksViewModel.filteringCategory
+            )
+        }
     }
 
     // MARK: - ViewBuilders
+
+    @ViewBuilder func allTasks() -> some View {
+        ForEach($coreDataViewModel.allTasks, id: \.id) { $task in
+            TaskCardView(
+                homeViewModel: homeViewModel,
+                navigationViewModel: navigationViewModel,
+                coreDataViewModel: coreDataViewModel,
+                settingsViewModel: settingsViewModel,
+                themeManager: themeManager,
+                isEditing: $allTasksViewModel.isEditing,
+                task: $task
+            )
+        }
+    }
+
+    @ViewBuilder func tasksFilteredByCategory() -> some View {
+        if coreDataViewModel.tasksFilteredByCategory.isEmpty {
+            Text(strings.noTasks)
+                .font(.system(size: 16))
+                .fontWeight(.semibold)
+                .offset(y: 100)
+        } else {
+            ForEach($coreDataViewModel.tasksFilteredByCategory, id: \.id) { $task in
+                TaskCardView(
+                    homeViewModel: homeViewModel,
+                    navigationViewModel: navigationViewModel,
+                    coreDataViewModel: coreDataViewModel,
+                    settingsViewModel: settingsViewModel,
+                    themeManager: themeManager,
+                    isEditing: $allTasksViewModel.isEditing,
+                    task: $task
+                )
+            }
+        }
+    }
 
     @ViewBuilder func headerView() -> some View {
         let tasksCount = coreDataViewModel.allTasks.filter { !$0.isCompleted }.count
@@ -82,8 +117,19 @@ struct AllTasksView: View {
                     .bold()
                     .font(.largeTitle)
                     .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                    .scaleEffect(allTasksViewModel.showHeaderTap ? 1.1 : 1)
             }
             .hLeading()
+            .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
+                withAnimation {
+                    allTasksViewModel.showFilteringView = true
+                }
+            } onPressingChanged: { isPressed in
+                withAnimation {
+                    allTasksViewModel.showHeaderTap = isPressed
+                }
+            }
+
 
             if !coreDataViewModel.allTasks.isEmpty {
                 Group {

@@ -2,6 +2,10 @@
   Localizable.strings (en)
 */
 
+// MARK: - Content
+
+"Content.selectCategory" = "Select Category:";
+
 // MARK: - Adding
 
 "Adding.title" = "Add new task";

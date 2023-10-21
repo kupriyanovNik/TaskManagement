@@ -10,14 +10,15 @@ class CoreDataViewModel: ObservableObject {
 
     @Published var allTasks: [TaskModel] = []
     @Published var allTodayTasks: [TaskModel] = []
-    @Published var filteredTasks: [TaskModel] = []
+    @Published var tasksFilteredByDate: [TaskModel] = []
+    @Published var tasksFilteredByCategory: [TaskModel] = []
 
     private var viewContext: NSManagedObjectContext
     private var coreDataNames = Constants.CoreDataNames.self
 
     init() {
         self.viewContext = PersistenceController.shared.viewContext
-        self.fetchFilteredTasks(dateToFilter: .now)
+        self.fetchTasksFilteredByDate(dateToFilter: .now)
     }
 
     func addTask(
@@ -38,14 +39,14 @@ class CoreDataViewModel: ObservableObject {
         task.shouldNotificate = shouldNotificate
         task.isCompleted = false
         saveContext()
-        self.fetchFilteredTasks(dateToFilter: date)
+        self.fetchTasksFilteredByDate(dateToFilter: date)
         onAdded?(date, task)
     }
 
     func removeTask(task: TaskModel, date: Date, onRemove: ((Date) -> ())? = nil) {
         viewContext.delete(task)
         saveContext()
-        self.fetchFilteredTasks(dateToFilter: date)
+        self.fetchTasksFilteredByDate(dateToFilter: date)
         onRemove?(date)
     }
 
@@ -59,20 +60,20 @@ class CoreDataViewModel: ObservableObject {
         task.taskDescription = description
         task.shouldNotificate = shouldNotificate
         saveContext()
-        self.fetchFilteredTasks(dateToFilter: task.taskDate ?? .now)
+        self.fetchTasksFilteredByDate(dateToFilter: task.taskDate ?? .now)
     }
 
     func doneTask(task: TaskModel, date: Date) {
         task.isCompleted = true
         task.shouldNotificate = false
         saveContext()
-        self.fetchFilteredTasks(dateToFilter: date)
+        self.fetchTasksFilteredByDate(dateToFilter: date)
     }
 
     func undoneTask(task: TaskModel, date: Date) {
         task.isCompleted = false
         saveContext()
-        self.fetchFilteredTasks(dateToFilter: date)
+        self.fetchTasksFilteredByDate(dateToFilter: date)
     }
 
     func fetchAllTasks() {
@@ -85,7 +86,7 @@ class CoreDataViewModel: ObservableObject {
         }
     }
 
-    func fetchFilteredTasks(dateToFilter: Date) {
+    func fetchTasksFilteredByDate(dateToFilter: Date) {
         let today = Calendar.current.startOfDay(for: dateToFilter)
         let tommorow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
 
@@ -97,7 +98,7 @@ class CoreDataViewModel: ObservableObject {
         request.predicate = predicate
 
         do {
-            self.filteredTasks = try viewContext.fetch(request)
+            self.tasksFilteredByDate = try viewContext.fetch(request)
         } catch {
             print("DEBUG: \(error.localizedDescription)")
         }
@@ -120,6 +121,26 @@ class CoreDataViewModel: ObservableObject {
             self.allTodayTasks = try viewContext.fetch(request)
         } catch {
             print("DEBUG: \(error.localizedDescription)")
+        }
+    }
+
+    func fetchTasksFilteredByCategory(taskCategory: TaskCategory?) {
+        if let taskCategory {
+            let filterKey = "taskCategory"
+            let predicate = NSPredicate(format: "\(filterKey) = %@", argumentArray: [taskCategory.localizableRawValue])
+
+            let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
+            request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
+            request.predicate = predicate
+
+            do {
+                self.tasksFilteredByCategory = try viewContext.fetch(request)
+            } catch {
+                print("DEBUG: \(error.localizedDescription)")
+            }
+            
+        } else {
+            self.tasksFilteredByCategory = []
         }
     }
 

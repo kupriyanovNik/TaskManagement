@@ -28,6 +28,7 @@
 		B73213D42ACCACC900E42B1D /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213D22ACCACC900E42B1D /* TabBarModel.swift */; };
 		B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213D62ACCB07A00E42B1D /* ProfileView.swift */; };
 		B736A2A32AE4456B00977067 /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = B736A2A22AE4456B00977067 /* SPConfetti */; };
+		B736A2A92AE4555000977067 /* FilterSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736A2A82AE4555000977067 /* FilterSelectorView.swift */; };
 		B76287272AD95061003EE58D /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76287262AD95061003EE58D /* RoundedShape.swift */; };
 		B76646C12AD5AA6200F5631E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C02AD5AA6200F5631E /* CustomTextField.swift */; };
 		B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C22AD5B21000F5631E /* ProfileViewModel.swift */; };
@@ -79,6 +80,7 @@
 		B73213D12ACCACC900E42B1D /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		B73213D22ACCACC900E42B1D /* TabBarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
 		B73213D62ACCB07A00E42B1D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B736A2A82AE4555000977067 /* FilterSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorView.swift; sourceTree = "<group>"; };
 		B76287262AD95061003EE58D /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
 		B76646C02AD5AA6200F5631E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B76646C22AD5B21000F5631E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		B73213BA2ACC8CB100E42B1D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B736A2A72AE4554100977067 /* AllTasks */,
 				B7F298492AE30D4400F4A8E3 /* Profile */,
 				B7739F122AE179E6000F19EE /* ButtonStyles */,
 				B76646BF2AD5AA5B00F5631E /* Internal */,
@@ -265,6 +268,14 @@
 				B76646C22AD5B21000F5631E /* ProfileViewModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		B736A2A72AE4554100977067 /* AllTasks */ = {
+			isa = PBXGroup;
+			children = (
+				B736A2A82AE4555000977067 /* FilterSelectorView.swift */,
+			);
+			path = AllTasks;
 			sourceTree = "<group>";
 		};
 		B76646BF2AD5AA5B00F5631E /* Internal */ = {
@@ -491,6 +502,7 @@
 				B71FD1022AD43E810039270D /* TaskManagement.xcdatamodeld in Sources */,
 				B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */,
 				B76287272AD95061003EE58D /* RoundedShape.swift in Sources */,
+				B736A2A92AE4555000977067 /* FilterSelectorView.swift in Sources */,
 				B73213C62ACC8E9F00E42B1D /* Strings.swift in Sources */,
 				B73213CF2ACCAC0600E42B1D /* Internal.swift in Sources */,
 				B73213C32ACC8D1000E42B1D /* NavigationViewModel.swift in Sources */,
