@@ -97,7 +97,9 @@ struct StatisticsGauge: View {
         .animation(.linear, value: showDetail)
         .animation(.linear, value: isAppeared)
         .onTapGesture {
-            showDetail.toggle()
+            if fromValue != 0 {
+                showDetail.toggle()
+            }
         }
         .padding(.horizontal)
     }
