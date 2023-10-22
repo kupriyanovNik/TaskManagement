@@ -5,6 +5,9 @@
 import SwiftUI
 
 class ThemeManager: ObservableObject {
+
+    // MARK: - Property Wrappers
+
     @Published var selectedTheme: Theme = Theme1()
     
     @AppStorage(Constants.UserDefaultsKeys.selectedTheme) var selectedThemeIndex: Int = 0 {
@@ -16,9 +19,13 @@ class ThemeManager: ObservableObject {
         }
     }
 
+    // MARK: - Inits
+
     init() {
         updateTheme()
     }
+
+    // MARK: - Private Functions 
 
     private func updateTheme() {
         selectedTheme = DataSource.getTheme(themeIndex: selectedThemeIndex)

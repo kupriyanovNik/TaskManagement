@@ -34,6 +34,7 @@ struct TaskCard: View {
                         }
                         .font(.callout)
                         .foregroundStyle(.secondary)
+
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
                             .bold()
@@ -141,6 +142,7 @@ struct TaskCardView: View {
                     }
                 }
                 .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+
             } else {
                 VStack(spacing: 10) {
                     Circle()
@@ -187,18 +189,19 @@ struct TaskCardView: View {
             }
         }
         .hLeading()
-        .animation(.spring(), value: task.isCompleted)
+        .animation(.spring, value: task.isCompleted)
     }
 
     // MARK: - Private Functions
 
-    func sendNotification(task: TaskModel) {
+    private func sendNotification(task: TaskModel) {
         let date = task.taskDate ?? .now
         let body = task.taskTitle ?? ""
         let calendar = Calendar.current
         let minute = calendar.component(.minute, from: date)
         let hour = calendar.component(.hour, from: date)
         let day = calendar.component(.day, from: date)
+        
         NotificationManager.shared.sendNotification(
             id: task.taskID ?? "",
             minute: minute,

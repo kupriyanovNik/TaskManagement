@@ -5,6 +5,9 @@
 import SwiftUI
 
 enum DataSource {
+
+    // MARK: - Internal Properties
+
     static let themes: [Theme] = [
         Theme0(),
         Theme1(),
@@ -18,11 +21,13 @@ enum DataSource {
         Theme9()
     ]
 
-    static func getTheme(themeIndex: Int) -> Theme {
-        Self.themes[themeIndex]
-    }
-
     static var themesCount: Int {
         Self.themes.count
+    }
+
+    // MARK: - Internal Functions
+
+    static func getTheme(themeIndex: Int) -> Theme {
+        Self.themes[themeIndex]
     }
 }

@@ -54,6 +54,8 @@ struct TaskCategorySelector: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     TaskCategorySelector(taskCategory: .constant(.normal), accentColor: .purple)
 }

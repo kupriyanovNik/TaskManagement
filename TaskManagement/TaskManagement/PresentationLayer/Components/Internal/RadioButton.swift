@@ -39,6 +39,8 @@ struct RadioButton: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     RadioButton(isSelected: .constant(true), accentColor: .purple)
         .frame(width: 30, height: 30)

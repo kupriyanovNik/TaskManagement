@@ -13,7 +13,7 @@ struct CategorySelectorButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .onChange(of: configuration.isPressed) { newValue in
                 if newValue {
-                    feedback()
+                    generateFeedback()
                 }
             }
             .animation(.default, value: configuration.isPressed)

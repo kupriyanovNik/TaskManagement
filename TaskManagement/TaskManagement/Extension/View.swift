@@ -28,7 +28,11 @@ extension View {
 
 // MARK: - Navigation Bar Functions
 extension View {
-    func makeCustomNavBar<Content: View>(showBackground: Bool = true, backgroundColor: Color = .white, content: @escaping () -> Content) -> some View {
+    func makeCustomNavBar<Content: View>(
+        showBackground: Bool = true,
+        backgroundColor: Color = .white,
+        content: @escaping () -> Content
+    ) -> some View {
         self.safeAreaInset(edge: .top) {
             CustomNavBar(showBackground: showBackground, backgroundColor: .white) {
                 content()

@@ -129,6 +129,8 @@ struct StatisticsGauge: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     StatisticsGauge(
         title: "Today Done Tasks",

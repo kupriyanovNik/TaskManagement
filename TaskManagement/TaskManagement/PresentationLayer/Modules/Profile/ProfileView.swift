@@ -19,7 +19,6 @@ struct ProfileView: View {
     private var strings = Localizable.Profile.self
     private var systemImages = ImageNames.System.self
 
-
     private var allTodayTasksCount: Int {
         coreDataViewModel.allTodayTasks.count
     }
@@ -125,8 +124,9 @@ struct ProfileView: View {
             profileViewModel.lastTimeShowConfetti = Date().timeIntervalSince1970
         }
     }
-
 }
+
+// MARK: - Preview
 
 #Preview {
     ProfileView()

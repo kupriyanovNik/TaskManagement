@@ -39,7 +39,10 @@ struct CustomTextField: View {
                 .fill(backgroundColor)
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(strokeColor, lineWidth: withBorder ? 1 : 0)
+                        .stroke(
+                            strokeColor, 
+                            lineWidth: withBorder ? 1 : 0
+                        )
                 )
                 .shadow(radius: isFocused ? 4 : 0)
                 .animation(.linear, value: isFocused)

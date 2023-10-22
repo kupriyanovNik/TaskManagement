@@ -132,7 +132,7 @@ struct AllTasksView: View {
             .hLeading()
             .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
                 withAnimation {
-                    feedback()
+                    generateFeedback()
                     allTasksViewModel.showFilteringView = true
                 }
             } onPressingChanged: { isPressed in
@@ -168,6 +168,8 @@ struct AllTasksView: View {
         .padding(.horizontal)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     AllTasksView()

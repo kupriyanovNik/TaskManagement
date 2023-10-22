@@ -5,6 +5,7 @@
 import Foundation
 import SwiftUI
 
+// MARK: - For Gettings 'Good Evening'
 extension Date {
     /// Function returning a localized string depending on the current time
     func greeting() -> String {

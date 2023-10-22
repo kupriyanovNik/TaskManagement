@@ -43,6 +43,7 @@ struct SettingsView: View {
             }
         }
     }
+
     private var shouldShowScrollAnimationRow: some View {
         HStack {
             Text(strings.showScrollAnimations)
@@ -58,6 +59,7 @@ struct SettingsView: View {
         }
         .padding(.horizontal)
     }
+
     private var shouldShowTabBarAnimationRow: some View {
         HStack {
             Text(strings.showTabBarAnimations)
@@ -73,6 +75,7 @@ struct SettingsView: View {
         }
         .padding(.horizontal)
     }
+    
     /// debug option
     private var showOnboardingRow: some View {
         Button {
@@ -161,6 +164,8 @@ struct SettingsView: View {
         .padding(.horizontal)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     SettingsView()

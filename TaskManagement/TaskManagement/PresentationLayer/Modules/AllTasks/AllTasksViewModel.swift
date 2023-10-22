@@ -5,6 +5,9 @@
 import Foundation
 
 class AllTasksViewModel: ObservableObject {
+
+    // MARK: - Property Wrappers
+
     @Published var isEditing: Bool = false
     @Published var showGreetings: Bool = true
 
