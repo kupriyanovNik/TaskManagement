@@ -19,17 +19,6 @@ struct ProfileView: View {
     private var strings = Localizable.Profile.self
     private var systemImages = ImageNames.System.self
 
-    private var allTasksCount: Int {
-        coreDataViewModel.allTasks.count
-    }
-
-    private var allDoneTasksCount: Int {
-        coreDataViewModel.allTasks.filter { $0.isCompleted }.count
-    }
-    
-    private var doneTasksPercentage: Double {
-        Double(allDoneTasksCount) / Double(allTasksCount)
-    }
 
     private var allTodayTasksCount: Int {
         coreDataViewModel.allTodayTasks.count
@@ -43,8 +32,8 @@ struct ProfileView: View {
         Double(allTodayDoneTasksCount) / Double(allTodayTasksCount)
     }
 
-    private var isAllDone: Bool {
-        doneTasksPercentage == 1 && doneTodayTasksPercentage == 1
+    private var isAllTodayDone: Bool {
+        doneTodayTasksPercentage == 1
     }
 
     private let screenWidth = UIScreen.main.bounds.width
@@ -59,13 +48,6 @@ struct ProfileView: View {
                         title: strings.todayDoneTasks,
                         fromValue: allTodayDoneTasksCount,
                         toValue: allTodayTasksCount,
-                        accentColor: themeManager.selectedTheme.accentColor
-                    )
-
-                    StatisticsGauge(
-                        title: strings.doneTasks,
-                        fromValue: allDoneTasksCount,
-                        toValue: allTasksCount,
                         accentColor: themeManager.selectedTheme.accentColor
                     )
                 }
@@ -138,7 +120,7 @@ struct ProfileView: View {
         let calendar = Calendar.current
         let lastDate = Date(timeIntervalSince1970: profileViewModel.lastTimeShowConfetti)
         let isToday = calendar.isDateInToday(lastDate)
-        if isAllDone && !isToday {
+        if isAllTodayDone && !isToday {
             profileViewModel.showConfetti = true
             profileViewModel.lastTimeShowConfetti = Date().timeIntervalSince1970
         }

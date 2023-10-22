@@ -50,6 +50,7 @@ struct StatisticsGauge: View {
                     .font(.title)
                     .foregroundColor(accentColor)
                     .fontWeight(.bold)
+                    .opacity(showDetail ? 0.5 : 1)
             }
 
             Spacer()
@@ -60,39 +61,35 @@ struct StatisticsGauge: View {
 
                 Circle()
                     .trim(from: 0, to: divided)
-                    .stroke(accentColor, style: .init(lineWidth: lineWidth, lineCap: .round))
+                    .stroke(
+                        accentColor,
+                        style: .init(
+                            lineWidth: lineWidth / (showDetail ? 1.5 : 1),
+                            lineCap: .round
+                        )
+                    )
                     .rotationEffect(.degrees(-90))
 
                 if showDetail {
                     Text("\(percentageString)")
-                        .font(.title3)
-                        .fontWeight(.semibold)
+                        .font(.title2)
+                        .fontWeight(.bold)
                         .foregroundColor(accentColor)
                 }
             }
             .padding()
+            .frame(width: 200, height: 200)
 
-            Spacer()
         }
         .padding()
-        .cornerRadius(cornerRadius)
         .background {
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(accentColor.opacity(0.2))
+            RoundedRectangle(
+                cornerRadius: cornerRadius + (showDetail ? 10 : 0)
+            )
+            .fill(accentColor.opacity(0.2))
         }
         .onAppear {
-            lineWidth = 15
-            if fromValue == 0 {
-                showDetail = true 
-            }
-            if isAllDone {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    lineWidth = 5
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        lineWidth = 15
-                    }
-                }
-            }
+            whenStarted()
         }
         .animation(.linear, value: lineWidth)
         .animation(.linear, value: showDetail)
@@ -101,11 +98,31 @@ struct StatisticsGauge: View {
         }
         .padding(.horizontal)
     }
+
+    // MARK: - Private Functions
+
+    private func whenStarted() {
+        lineWidth = 15
+
+        if fromValue == 0 {
+            showDetail = true
+        }
+
+        if isAllDone {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                lineWidth = 5
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    lineWidth = 15
+                }
+            }
+        }
+    }
 }
 
 #Preview {
     StatisticsGauge(
-        title: "Today Tasks",
+        title: "Today Done Tasks",
         fromValue: 3,
         toValue: 10,
         accentColor: .purple
