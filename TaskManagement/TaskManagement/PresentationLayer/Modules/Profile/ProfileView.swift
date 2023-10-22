@@ -119,7 +119,8 @@ struct ProfileView: View {
         let calendar = Calendar.current
         let lastDate = Date(timeIntervalSince1970: profileViewModel.lastTimeShowConfetti)
         let isToday = calendar.isDateInToday(lastDate)
-        if isAllTodayDone && !isToday {
+        let moreOrEqualWhenFive = allTodayTasksCount >= 5
+        if isAllTodayDone && !isToday && moreOrEqualWhenFive {
             profileViewModel.showConfetti = true
             profileViewModel.lastTimeShowConfetti = Date().timeIntervalSince1970
         }
