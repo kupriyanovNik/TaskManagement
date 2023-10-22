@@ -127,6 +127,14 @@ struct StatisticsGauge: View {
                         lineWidth = 15
                     }
                 }
+            } else {
+                delay(1) {
+                    lineWidth = 25
+
+                    delay(0.1) {
+                        lineWidth = 15
+                    }
+                }
             }
         }
     }
