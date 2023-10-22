@@ -105,7 +105,7 @@ struct ProfileView: View {
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
         .onAppear {
-            DispatchQueue.main.asyncAfter(wallDeadline: .now() + 3) {
+            delay(3) {
                 withAnimation(.default) {
                     profileViewModel.showGreetings = false
                 }

@@ -107,7 +107,7 @@ struct StatisticsGauge: View {
     // MARK: - Private Functions
 
     private func whenStarted() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+        delay(0.25) {
             isAppeared = true
 
             lineWidth = 15
@@ -117,10 +117,10 @@ struct StatisticsGauge: View {
             }
 
             if isAllDone {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                delay(1) {
                     lineWidth = 5
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    
+                    delay(0.1) {
                         lineWidth = 15
                     }
                 }

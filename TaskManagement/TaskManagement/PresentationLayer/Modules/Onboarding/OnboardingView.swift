@@ -109,7 +109,7 @@ struct OnboardingView: View {
     }
     
     private func showRegistrationView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        delay(4) {
             withAnimation(.default) {
                 self.onboardingViewModel.showGreetings = false
             }
