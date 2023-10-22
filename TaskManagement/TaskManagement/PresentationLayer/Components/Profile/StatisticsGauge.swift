@@ -9,6 +9,7 @@ struct StatisticsGauge: View {
     // MARK: - Property Wrappers
 
     @State private var showDetail: Bool = false
+    @State private var isAppeared: Bool = false
     @State private var lineWidth: Double = 5
 
     // MARK: - Internal Properties
@@ -22,7 +23,8 @@ struct StatisticsGauge: View {
     // MARK: - Private Properties
 
     private var divided: Double {
-        Double(fromValue) / Double(toValue)
+        if !isAppeared { return 0 }
+        return Double(fromValue) / Double(toValue)
     }
 
     private var percentage: Double {
@@ -93,6 +95,7 @@ struct StatisticsGauge: View {
         }
         .animation(.linear, value: lineWidth)
         .animation(.linear, value: showDetail)
+        .animation(.linear, value: isAppeared)
         .onTapGesture {
             showDetail.toggle()
         }
@@ -102,18 +105,22 @@ struct StatisticsGauge: View {
     // MARK: - Private Functions
 
     private func whenStarted() {
-        lineWidth = 15
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            isAppeared = true
 
-        if fromValue == 0 {
-            showDetail = true
-        }
+            lineWidth = 15
 
-        if isAllDone {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                lineWidth = 5
+            if fromValue == 0 {
+                showDetail = true
+            }
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    lineWidth = 15
+            if isAllDone {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    lineWidth = 5
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        lineWidth = 15
+                    }
                 }
             }
         }
