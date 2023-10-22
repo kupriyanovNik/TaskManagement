@@ -47,12 +47,15 @@ struct StatisticsGauge: View {
                 Text(title)
                     .font(.title2)
                     .fontWeight(.semibold)
+                    .scaleEffect(isAppeared ? 1 : 0.7)
 
                 Text("\(fromValue)/\(toValue)")
                     .font(.title)
                     .foregroundColor(accentColor)
                     .fontWeight(.bold)
                     .opacity(showDetail ? 0.5 : 1)
+                    .scaleEffect(isAppeared ? 1 : 0.7)
+                    .animation(.linear.delay(0.25), value: isAppeared)
             }
 
             Spacer()
@@ -79,6 +82,7 @@ struct StatisticsGauge: View {
                         .foregroundColor(accentColor)
                 }
             }
+            .animation(.linear.delay(0.5), value: isAppeared)
             .padding()
             .frame(width: 170, height: 170)
 
@@ -95,7 +99,6 @@ struct StatisticsGauge: View {
         }
         .animation(.linear, value: lineWidth)
         .animation(.linear, value: showDetail)
-        .animation(.linear, value: isAppeared)
         .onTapGesture {
             if fromValue != 0 {
                 showDetail.toggle()
