@@ -52,7 +52,7 @@ struct HomeView: View {
         }
         .onAppear {
             coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
-            DispatchQueue.main.asyncAfter(wallDeadline: .now() + 3) {
+            delay(3) {
                 withAnimation(.default) {
                     homeViewModel.showGreetings = false
                 }

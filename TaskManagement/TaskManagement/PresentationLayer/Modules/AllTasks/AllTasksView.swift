@@ -108,7 +108,7 @@ struct AllTasksView: View {
                 }
                 .foregroundColor(.gray)
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    delay(3) {
                         withAnimation(.default) {
                             self.allTasksViewModel.showGreetings = false
                         }
