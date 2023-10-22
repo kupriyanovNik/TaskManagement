@@ -115,11 +115,19 @@ struct AllTasksView: View {
                     }
                 }
 
-                Text(strings.tasks)
-                    .bold()
-                    .font(.largeTitle)
-                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
-                    .scaleEffect(allTasksViewModel.showHeaderTap ? 1.1 : 1)
+                if let filteringCategory = allTasksViewModel.filteringCategory {
+                    Text(filteringCategory.localizableRawValue)
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                        .scaleEffect(allTasksViewModel.showHeaderTap ? 1.1 : 1)
+                } else {
+                    Text(strings.tasks)
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                        .scaleEffect(allTasksViewModel.showHeaderTap ? 1.1 : 1)
+                }
             }
             .hLeading()
             .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
