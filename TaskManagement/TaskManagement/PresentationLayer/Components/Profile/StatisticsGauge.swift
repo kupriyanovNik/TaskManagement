@@ -80,7 +80,7 @@ struct StatisticsGauge: View {
                 }
             }
             .padding()
-            .frame(width: 200, height: 200)
+            .frame(width: 170, height: 170)
 
         }
         .padding()
