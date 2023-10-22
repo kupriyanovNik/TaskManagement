@@ -124,8 +124,9 @@ struct ProfileView: View {
             profileViewModel.lastTimeShowConfetti = Date().timeIntervalSince1970
         }
     }
-
 }
+
+// MARK: - Preview
 
 #Preview {
     ProfileView()

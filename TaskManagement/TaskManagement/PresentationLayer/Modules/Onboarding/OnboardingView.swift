@@ -117,6 +117,8 @@ struct OnboardingView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     OnboardingView(shouldShowOnboarding: .constant(false))
         .environmentObject(SettingsViewModel())

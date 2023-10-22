@@ -58,6 +58,8 @@ struct FilterSelectorView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     FilterSelectorView(
         selectedCategory: .constant(.normal),

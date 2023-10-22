@@ -169,6 +169,8 @@ struct AllTasksView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     AllTasksView()
         .environmentObject(CoreDataViewModel())

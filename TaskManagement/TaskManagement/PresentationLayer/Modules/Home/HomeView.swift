@@ -176,6 +176,8 @@ struct HomeView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     HomeView()
         .environmentObject(HomeViewModel())

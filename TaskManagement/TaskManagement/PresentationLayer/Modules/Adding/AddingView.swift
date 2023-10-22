@@ -204,6 +204,8 @@ struct AddingView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     AddingView()
         .environmentObject(HomeViewModel())
