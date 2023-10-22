@@ -24,7 +24,8 @@ struct AllTasksView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 20) {
+            // MARK: I encountered bugs with redrawing due to the Lazy
+            VStack(spacing: 20) {
                 if coreDataViewModel.allTasks.isEmpty {
                     Text(strings.noTasks)
                         .font(.system(size: 16))
@@ -47,9 +48,10 @@ struct AllTasksView: View {
             headerView()
         }
         .onChange(of: allTasksViewModel.filteringCategory) { _ in
-            coreDataViewModel.fetchTasksFilteredByCategory(
-                taskCategory: allTasksViewModel.filteringCategory
-            )
+            if let filteringCategory = allTasksViewModel.filteringCategory {
+                coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
+                allTasksViewModel.isEditing = false
+            }
         }
     }
 
@@ -113,15 +115,24 @@ struct AllTasksView: View {
                     }
                 }
 
-                Text(strings.tasks)
-                    .bold()
-                    .font(.largeTitle)
-                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
-                    .scaleEffect(allTasksViewModel.showHeaderTap ? 1.1 : 1)
+                if let filteringCategory = allTasksViewModel.filteringCategory {
+                    Text(filteringCategory.localizableRawValue)
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                        .scaleEffect(allTasksViewModel.showHeaderTap ? 1.1 : 1)
+                } else {
+                    Text(strings.tasks)
+                        .bold()
+                        .font(.largeTitle)
+                        .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                        .scaleEffect(allTasksViewModel.showHeaderTap ? 1.1 : 1)
+                }
             }
             .hLeading()
             .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
                 withAnimation {
+                    feedback()
                     allTasksViewModel.showFilteringView = true
                 }
             } onPressingChanged: { isPressed in
@@ -131,7 +142,7 @@ struct AllTasksView: View {
             }
 
 
-            if !coreDataViewModel.allTasks.isEmpty && allTasksViewModel.filteringCategory == nil {
+            if !coreDataViewModel.allTasks.isEmpty {
                 Group {
                     if allTasksViewModel.isEditing {
                         Button(strings.done) {
@@ -151,9 +162,6 @@ struct AllTasksView: View {
                     }
                 }
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
-            } else if let category = allTasksViewModel.filteringCategory {
-                Text(category.localizableRawValue)
-                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
