@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainNavigationView: View {
 
     // MARK: - Property Wrappers
 

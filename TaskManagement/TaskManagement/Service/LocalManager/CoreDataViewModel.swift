@@ -123,27 +123,23 @@ class CoreDataViewModel: ObservableObject {
             print("DEBUG: \(error.localizedDescription)")
         }
     }
-
-    func fetchTasksFilteredByCategory(taskCategory: TaskCategory?) {
-        if let taskCategory {
-            let filterKey = "taskCategory"
-            let predicate = NSPredicate(format: "\(filterKey) = %@", argumentArray: [taskCategory.localizableRawValue])
-
-            let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
-            request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
-            request.predicate = predicate
-
-            do {
-                self.tasksFilteredByCategory = try viewContext.fetch(request)
-            } catch {
-                print("DEBUG: \(error.localizedDescription)")
-            }
-            
-        } else {
-            self.tasksFilteredByCategory = []
+    
+    func fetchTasksFilteredByCategory(taskCategory: TaskCategory) {
+        let filterKey = "taskCategory"
+        let predicate = NSPredicate(format: "\(filterKey) = %@", argumentArray: [taskCategory.localizableRawValue])
+        
+        let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
+        request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
+        request.predicate = predicate
+        
+        do {
+            self.tasksFilteredByCategory = try viewContext.fetch(request)
+        } catch {
+            print("DEBUG: \(error.localizedDescription)")
         }
+        
     }
-
+    
     private func saveContext() {
         do {
             try viewContext.save()

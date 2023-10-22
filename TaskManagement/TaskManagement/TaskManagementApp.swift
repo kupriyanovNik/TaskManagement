@@ -28,7 +28,7 @@ struct TaskManagementApp: App {
                 Color.black
                     .ignoresSafeArea()
                 
-                ContentView()
+                MainNavigationView()
                     .environmentObject(navigationViewModel)
                     .environmentObject(tabBarViewModel)
                     .environmentObject(coreDataViewModel)

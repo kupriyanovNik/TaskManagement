@@ -186,7 +186,9 @@ struct CustomTabBar: View {
         homeViewModel.editTask = nil
         coreDataViewModel.fetchAllTasks()
         coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
-        coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: allTasksViewModel.filteringCategory)
+        if let filteringCategory = allTasksViewModel.filteringCategory {
+            coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
+        }
         addingViewModel.reset()
     }
     
