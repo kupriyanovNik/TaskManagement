@@ -29,6 +29,7 @@ struct OnboardingView: View {
                 .padding(.horizontal)
         }
     }
+
     private var registrationView: some View {
         VStack(spacing: 16) {
             Spacer()
@@ -70,12 +71,14 @@ struct OnboardingView: View {
     }
 
     // MARK: Inits
+
     init(shouldShowOnboarding: Binding<Bool>) {
-        // MARK: - Because 'OnboardingView' initializer is inaccessible due to 'private' protection level
+        // Because 'OnboardingView' initializer is inaccessible due to 'private' protection level
         self._shouldShowOnboarding = shouldShowOnboarding
     }
 
     // MARK: Body
+
     var body: some View {
         ZStack {
             Color.white

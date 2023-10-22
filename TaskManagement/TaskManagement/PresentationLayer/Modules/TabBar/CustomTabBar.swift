@@ -9,6 +9,7 @@ struct CustomTabBar: View {
     // MARK: - Property Wrappers
 
     @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var tabBarViewModel: TabBarViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
@@ -138,7 +139,6 @@ struct CustomTabBar: View {
             }
             Spacer()
             profileButton
-
         }
         .padding(.horizontal, 24)
         .frame(height: 72)
@@ -150,7 +150,7 @@ struct CustomTabBar: View {
         }
         .onChange(of: navigationViewModel.selectedTab) { _ in
             dismissEditInAllScreens()
-            feedback(style: .rigid)
+            generateFeedback(style: .rigid)
         }
         .padding(.horizontal, coreDataViewModel.allTasks.isEmpty ? 50 : 30)
         .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)

@@ -105,6 +105,9 @@ struct AddingView: View {
             }
         }
     }
+
+    // MARK: - ViewBuilders
+
     @ViewBuilder func headerView() -> some View {
         HStack {
             Button {

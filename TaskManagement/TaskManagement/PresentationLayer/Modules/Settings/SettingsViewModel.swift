@@ -6,9 +6,10 @@ import SwiftUI
 
 class SettingsViewModel: ObservableObject {
 
+    // MARK: - Property Wrappers
+
     @Published var showInformation: Bool = false
 
-    // MARK: - User Defaults Variables
     @AppStorage(Constants.UserDefaultsKeys.userName) var userName: String = "" {
         willSet {
             objectWillChange.send()
