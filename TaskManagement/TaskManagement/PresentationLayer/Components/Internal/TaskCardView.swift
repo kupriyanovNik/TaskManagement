@@ -101,6 +101,10 @@ struct TaskCardView: View {
     @Binding var isEditing: Bool
     @Binding var task: TaskModel
 
+    // MARK: - Internal Properties
+
+    var onRemove: (() -> ())? = nil
+
     // MARK: - Body
 
     var body: some View {
@@ -131,6 +135,7 @@ struct TaskCardView: View {
 
                     Button {
                         coreDataViewModel.removeTask(task: task, date: task.taskDate ?? .now) { _ in
+                            self.onRemove?()
                             if coreDataViewModel.allTasks.isEmpty {
                                 navigationViewModel.selectedTab = .home
                             }
