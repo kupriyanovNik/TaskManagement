@@ -100,7 +100,7 @@ struct MainNavigationView: View {
                                     .clipShape(
                                         RoundedShape(
                                             corners: [.bottomLeft, .bottomRight],
-                                            radius: 30
+                                            radius: 30 - (verticalOffset / 7)
                                         )
                                     )
                                     .ignoresSafeArea()
@@ -110,6 +110,7 @@ struct MainNavigationView: View {
                                     title: strings.selectCategory,
                                     accentColor: themeManager.selectedTheme.accentColor
                                 )
+                                .opacity(1.0 - (abs(verticalOffset) / 150.0))
                             }
                             .frame(maxHeight: 200)
 
@@ -130,7 +131,7 @@ struct MainNavigationView: View {
                                             verticalOffset = 0
                                         }
                                     } else {
-                                        withAnimation {
+                                        withAnimation(.spring) {
                                             verticalOffset = 0
                                         }
                                     }
