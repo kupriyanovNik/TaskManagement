@@ -48,10 +48,8 @@ struct AllTasksView: View {
             headerView()
         }
         .onChange(of: allTasksViewModel.filteringCategory) { _ in
-            if let filteringCategory = allTasksViewModel.filteringCategory {
-                coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
-                allTasksViewModel.isEditing = false
-            }
+            fetchTasksFilteredByCategory()
+            allTasksViewModel.isEditing = false
         }
     }
 
@@ -87,7 +85,9 @@ struct AllTasksView: View {
                     themeManager: themeManager,
                     isEditing: $allTasksViewModel.isEditing,
                     task: $task
-                )
+                ) {
+                    fetchTasksFilteredByCategory()
+                }
             }
         }
     }
@@ -151,7 +151,7 @@ struct AllTasksView: View {
                             }
                         }
                         .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
-                        
+
                     } else {
                         Button(strings.edit) {
                             withAnimation {
@@ -167,6 +167,15 @@ struct AllTasksView: View {
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
     }
+
+    // MARK: - Private Functions
+
+    private func fetchTasksFilteredByCategory() {
+        if let filteringCategory = allTasksViewModel.filteringCategory {
+            coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
+        }
+    }
+
 }
 
 // MARK: - Preview

@@ -42,7 +42,7 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                if !coreDataViewModel.allTasks.isEmpty {
+                if !coreDataViewModel.allTodayTasks.isEmpty {
                     StatisticsGauge(
                         title: strings.todayDoneTasks,
                         fromValue: allTodayDoneTasksCount,
