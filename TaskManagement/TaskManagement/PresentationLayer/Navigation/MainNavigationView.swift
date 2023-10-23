@@ -18,6 +18,8 @@ struct MainNavigationView: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
+    @State private var verticalOffset: CGFloat = .zero
+
     // MARK: - Private Properties
 
     private var strings = Localizable.Content.self
@@ -98,7 +100,7 @@ struct MainNavigationView: View {
                                     .clipShape(
                                         RoundedShape(
                                             corners: [.bottomLeft, .bottomRight],
-                                            radius: 30
+                                            radius: 30 - (verticalOffset / 7)
                                         )
                                     )
                                     .ignoresSafeArea()
@@ -108,11 +110,33 @@ struct MainNavigationView: View {
                                     title: strings.selectCategory,
                                     accentColor: themeManager.selectedTheme.accentColor
                                 )
+                                .opacity(1.0 - (abs(verticalOffset) / 150.0))
                             }
-                            .frame(maxHeight: 150)
+                            .frame(maxHeight: 200)
 
                             Spacer()
                         }
+                        .offset(y: verticalOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    withAnimation {
+                                        verticalOffset = min(0, value.translation.height)
+                                    }
+                                }
+                                .onEnded { value in
+                                    if value.translation.height < -100 {
+                                        withAnimation {
+                                            allTasksViewModel.showFilteringView = false
+                                            verticalOffset = 0
+                                        }
+                                    } else {
+                                        withAnimation(.spring) {
+                                            verticalOffset = 0
+                                        }
+                                    }
+                                }
+                        )
                     }
                 }
             }
