@@ -4,6 +4,10 @@
 
 import SwiftUI
 
+enum CustomTextFieldStyle {
+    case underlined, stroked
+}
+
 struct CustomTextField: View {
 
     // MARK: - Property Wrappers
@@ -13,6 +17,7 @@ struct CustomTextField: View {
 
     // MARK: - Internal Properties
 
+    var customTextFieldStyle: CustomTextFieldStyle = .underlined
     var placeHolder: String
     var cornerRadius: CGFloat = 10
     var backgroundColor: Color = .white
@@ -34,18 +39,42 @@ struct CustomTextField: View {
         .foregroundColor(Color.black)
         .disableAutocorrection(true)
         .padding()
-        .background(
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(backgroundColor)
-                .overlay(
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(
-                            strokeColor, 
-                            lineWidth: withBorder ? 1 : 0
-                        )
-                )
-                .shadow(radius: isFocused ? 4 : 0)
-                .animation(.linear, value: isFocused)
-        )
+        .background {
+            if customTextFieldStyle == .stroked {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(backgroundColor)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: cornerRadius)
+                            .stroke(
+                                strokeColor,
+                                lineWidth: withBorder ? 1 : 0
+                            )
+                    }
+                    .shadow(
+                        color: strokeColor.opacity(0.3),
+                        radius: isFocused ? 4 : 0
+                    )
+            } else if customTextFieldStyle == .underlined {
+                VStack {
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(isFocused ? strokeColor : strokeColor.opacity(0.2))
+                        .frame(height: 3)
+                }
+            }
+        }
+        .animation(.linear, value: isFocused)
     }
+}
+
+#Preview {
+    CustomTextField(
+        inputText: .constant("Hello"),
+        customTextFieldStyle: .underlined,
+        placeHolder: "Meow",
+        backgroundColor: .white,
+        strokeColor: .black,
+        shouldExpandVertically: false
+    )
+    .padding()
 }

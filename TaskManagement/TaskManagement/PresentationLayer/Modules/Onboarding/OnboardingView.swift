@@ -37,14 +37,16 @@ struct OnboardingView: View {
             CustomTextField(
                 inputText: $settingsViewModel.userName,
                 placeHolder: strings.username,
-                strokeColor: .black
+                strokeColor: .black,
+                shouldExpandVertically: false
             )
             .continueEditing()
 
             CustomTextField(
                 inputText: $settingsViewModel.userAge,
                 placeHolder: strings.userage,
-                strokeColor: .black
+                strokeColor: .black,
+                shouldExpandVertically: false
             )
             .keyboardType(.numberPad)
             .continueEditing()
@@ -103,8 +105,17 @@ struct OnboardingView: View {
     // MARK: Private Functions
 
     private func hideOnboarding() {
-        withAnimation(.linear) {
-            self.shouldShowOnboarding.toggle()
+        UIApplication.shared
+            .sendAction(
+                #selector(UIResponder.resignFirstResponder), 
+                to: nil,
+                from: nil,
+                for: nil
+            )
+        delay(1) {
+            withAnimation(.linear) {
+                self.shouldShowOnboarding.toggle()
+            }
         }
     }
     

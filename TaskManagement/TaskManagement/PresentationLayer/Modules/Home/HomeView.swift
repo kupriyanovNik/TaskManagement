@@ -29,10 +29,11 @@ struct HomeView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
                 if coreDataViewModel.tasksFilteredByDate.isEmpty {
-                    Text(strings.noTasks)
-                        .font(.system(size: 16))
-                        .fontWeight(.semibold)
-                        .offset(y: 100)
+                    NoTasksFoundView(
+                        title: strings.noTasks,
+                        description: strings.noTasksDescription,
+                        accentColor: themeManager.selectedTheme.accentColor
+                    )
                 } else {
                     ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
                         TaskCardView(

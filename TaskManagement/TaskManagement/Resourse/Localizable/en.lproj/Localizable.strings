@@ -24,6 +24,7 @@
 "Home.edit" = "Edit";
 "Home.done" = "Done";
 "Home.noTasks" = "No tasks found";
+"Home.noTasksDescription" = "Here You will see your tasks.\nTap \"+\" to add a new one";
 "Home.willNotificate" = " - we will notificate";
 
 // MARK: - Profile

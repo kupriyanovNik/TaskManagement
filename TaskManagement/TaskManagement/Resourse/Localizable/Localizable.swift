@@ -27,6 +27,7 @@ enum Localizable {
         static let edit = localized("Home.edit")
         static let done = localized("Home.done")
         static let noTasks = localized("Home.noTasks")
+        static let noTasksDescription = localized("Home.noTasksDescription")
         static let willNotificate = localized("Home.willNotificate")
     }
 

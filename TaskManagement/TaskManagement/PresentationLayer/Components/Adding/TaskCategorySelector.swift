@@ -44,11 +44,6 @@ struct TaskCategorySelector: View {
                         .offset(x: proxy.size.width / CGFloat(caseCount) * CGFloat(taskCategory.rawValue))
                 }
             }
-            .padding(12)
-        }
-        .background {
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(accentColor, lineWidth: 1)
         }
         .animation(.default, value: taskCategory)
     }
