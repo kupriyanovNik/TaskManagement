@@ -16,6 +16,8 @@ struct NoTasksFoundView: View {
     var description: String? = nil
     var accentColor: Color
 
+    // MARK: - Body
+
     var body: some View {
         VStack(alignment: .center) {
             Text(title)
