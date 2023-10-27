@@ -11,13 +11,16 @@ struct TaskCard: View {
 
     @ObservedObject var coreDataViewModel: CoreDataViewModel
 
+    @State private var shouldShowDetail: Bool = false
+    @State private var showCardTap: Bool = false
+
     // MARK: - Internal Properties
 
     let task: TaskModel
+
     var doneImageName: String
     var markAsCompletedName: String
     var markedAsCompletedName: String
-    var notificateName: String
 
     // MARK: - Body
 
@@ -26,11 +29,24 @@ struct TaskCard: View {
             HStack(alignment: .top, spacing: 10) {
                 VStack(alignment: .leading, spacing: 12) {
                     VStack(alignment: .leading, spacing: 0) {
-                        HStack(spacing: 0) {
-                            Text(task.taskCategory ?? "Normal")
-                            if task.shouldNotificate {
-                                Text(notificateName)
+                        HStack(spacing: 10) {
+                            let taskDate = (task.taskDate ?? Date())
+                            let isToday = Calendar.current.isDateInToday(taskDate)
+
+                            if shouldShowDetail {
+                                if !isToday {
+                                    Text(taskDate.formatted(date: .abbreviated, time: .omitted))
+                                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                                }
                             }
+
+                            Text(taskDate.formatted(date: .omitted, time: .shortened))
+
+                            if shouldShowDetail {
+                                Text(task.taskCategory ?? "Normal")
+                                    .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
+                            }
+
                         }
                         .font(.callout)
                         .foregroundStyle(.secondary)
@@ -38,37 +54,34 @@ struct TaskCard: View {
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
                             .bold()
+                            .scaleEffect(shouldShowDetail ? 1 : 0.9)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     .hLeading()
 
-                    Text(task.taskDescription ?? "Default Description")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                }
-                .hLeading()
-
-                VStack(alignment: .trailing, spacing: 12) {
-                    let taskDate = (task.taskDate ?? Date())
-
-                    Text(taskDate.formatted(date: .omitted, time: .shortened))
-
-                    if !Calendar.current.isDateInToday(taskDate) {
-                        Text(taskDate.formatted(date: .abbreviated, time: .omitted))
+                    if shouldShowDetail, let description = task.taskDescription {
+                        Text(description)
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                            .lineLimit(nil)
                     }
                 }
+                .hLeading()
             }
 
             HStack(spacing: 12) {
                 if !task.isCompleted {
                     Button {
-                        coreDataViewModel.doneTask(task: task, date: task.taskDate ?? .now)
-                        NotificationManager.shared.removeNotification(with: task.taskID ?? "")
+                        doneTask()
                     } label: {
                         Image(systemName: doneImageName)
                             .foregroundStyle(.black)
                             .padding(10)
                             .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
                     }
+                    .buttonStyle(.plain)
                 }
 
                 Text(task.isCompleted ? markedAsCompletedName : markAsCompletedName)
@@ -85,7 +98,59 @@ struct TaskCard: View {
             Color.black.opacity(0.85)
                 .cornerRadius(25)
         }
+        .scaleEffect(showCardTap ? 1.03 : 1)
+        .onTapGesture {
+            withAnimation(.spring) {
+                shouldShowDetail.toggle()
+            }
+        }
+        .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
+            withAnimation {
+                generateFeedback()
+
+                if task.isCompleted {
+                    coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                    sendNotification(task: task)
+                } else {
+                    doneTask()
+                }
+            }
+        } onPressingChanged: { isPressed in
+            withAnimation {
+                showCardTap = isPressed
+            }
+        }
     }
+    
+    // MARK: - Private Functions
+
+    private func doneTask() {
+        withAnimation(.spring) {
+            coreDataViewModel.doneTask(task: task, date: task.taskDate ?? .now)
+        }
+        NotificationManager.shared.removeNotification(with: task.taskID ?? "")
+    }
+
+    private func sendNotification(task: TaskModel) {
+        let date = task.taskDate ?? .now
+        let body = task.taskTitle ?? ""
+        let calendar = Calendar.current
+        let minute = calendar.component(.minute, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let day = calendar.component(.day, from: date)
+
+        NotificationManager.shared.sendNotification(
+            id: task.taskID ?? "",
+            minute: minute,
+            hour: hour,
+            day: day,
+            title: date.greeting(),
+            subtitle: Localizable.Adding.unfinishedTask,
+            body: body,
+            isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
+        )
+    }
+
 }
 
 struct TaskCardView: View {
@@ -113,7 +178,9 @@ struct TaskCardView: View {
                 VStack(spacing: 10) {
                     if task.isCompleted {
                         Button {
-                            coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                            withAnimation(.spring) {
+                                coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                            }
                             sendNotification(task: task)
                         } label: {
                             Image(systemName: ImageNames.System.xmarkCircleFill)
@@ -158,6 +225,16 @@ struct TaskCardView: View {
                                 .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                                 .padding(-3)
                         }
+                        .onTapGesture {
+                            withAnimation(.spring) {
+                                if task.isCompleted {
+                                    withAnimation(.spring) {
+                                        coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                                    }
+                                    sendNotification(task: task)
+                                }
+                            }
+                        }
 
                     Rectangle()
                         .fill(themeManager.selectedTheme.accentColor)
@@ -172,8 +249,7 @@ struct TaskCardView: View {
                     task: task,
                     doneImageName: ImageNames.System.checkmark,
                     markAsCompletedName: Localizable.Home.markAsCompleted,
-                    markedAsCompletedName: Localizable.Home.markedAsCompleted,
-                    notificateName: Localizable.Home.willNotificate
+                    markedAsCompletedName: Localizable.Home.markedAsCompleted
                 )
                 .scrollTransition(.animated(.bouncy)) { effect, phase in
                     effect
@@ -188,8 +264,7 @@ struct TaskCardView: View {
                     task: task,
                     doneImageName: ImageNames.System.checkmark,
                     markAsCompletedName: Localizable.Home.markAsCompleted,
-                    markedAsCompletedName: Localizable.Home.markedAsCompleted,
-                    notificateName: Localizable.Home.willNotificate
+                    markedAsCompletedName: Localizable.Home.markedAsCompleted
                 )
             }
         }
