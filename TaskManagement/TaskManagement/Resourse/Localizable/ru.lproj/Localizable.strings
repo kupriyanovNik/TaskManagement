@@ -24,6 +24,7 @@
 "Home.edit" = "Изменить";
 "Home.done" = "Готово";
 "Home.noTasks" = "Не найдено задач";
+"Home.noTasksDescription" = "Здесь появятся ваши задачи.\nНажмите \"+\", чтобы добавить новое";
 "Home.willNotificate" = " - мы напомним";
 
 // MARK: - Profile
