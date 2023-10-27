@@ -63,32 +63,42 @@ struct AddingView: View {
                         accentColor: themeManager.selectedTheme.accentColor
                     )
 
-                    DatePicker("", selection: $addingViewModel.taskDate, in: Date()...)
+                    VStack {
+                        DatePicker(
+                            "",
+                            selection: $addingViewModel.taskDate,
+                            in: Date()...
+                        )
                         .datePickerStyle(.graphical)
                         .tint(themeManager.selectedTheme.accentColor)
                         .labelsHidden()
                         .padding(.horizontal)
                         .padding(.bottom, 5)
-                        .background {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
+
+                        Rectangle()
+                            .fill(themeManager.selectedTheme.accentColor)
+                            .frame(height: 1)
+
+                        HStack {
+                            Text(strings.shouldRemind)
+
+                            Spacer()
+
+                            RadioButton(
+                                isSelected: $addingViewModel.shouldSendNotification,
+                                accentColor: themeManager.selectedTheme.accentColor
+                            )
+                            .frame(width: 30, height: 30)
                         }
-
-                    HStack {
-                        Text(strings.shouldRemind)
-
-                        Spacer()
-
-                        RadioButton(
-                            isSelected: $addingViewModel.shouldSendNotification,
-                            accentColor: themeManager.selectedTheme.accentColor
-                        )
-                        .frame(width: 30, height: 30)
+                        .padding([.horizontal, .bottom])
+                        .padding(.top, 5)
                     }
-                    .padding()
                     .background {
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
+                            .stroke(
+                                themeManager.selectedTheme.accentColor,
+                                lineWidth: 1
+                            )
                     }
                 }
             }
@@ -153,7 +163,7 @@ struct AddingView: View {
             )
 
             NotificationManager.shared.removeNotification(with: task.taskID ?? "")
-            
+
             if addingViewModel.shouldSendNotification {
                 sendNotification(
                     id: task.taskID ?? "",
@@ -184,7 +194,7 @@ struct AddingView: View {
         }
         dismiss()
     }
-    
+
     private func sendNotification(id: String, date: Date, body: String) {
         let calendar = Calendar.current
         let minute = calendar.component(.minute, from: date)
@@ -199,7 +209,7 @@ struct AddingView: View {
             title: date.greeting(),
             subtitle: strings.unfinishedTask,
             body: body,
-            isCritical: addingViewModel.taskCategory == .critical ? true : false 
+            isCritical: addingViewModel.taskCategory == .critical ? true : false
         )
     }
 }
