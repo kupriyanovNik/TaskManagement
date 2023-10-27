@@ -34,7 +34,6 @@ struct HomeView: View {
                         description: strings.noTasksDescription,
                         accentColor: themeManager.selectedTheme.accentColor
                     )
-                    .offset(y: 100)
                 } else {
                     ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
                         TaskCardView(
