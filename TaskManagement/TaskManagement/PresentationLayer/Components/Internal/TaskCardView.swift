@@ -28,22 +28,28 @@ struct TaskCard: View {
         VStack {
             HStack(alignment: .top, spacing: 10) {
                 VStack(alignment: .leading, spacing: 12) {
+                    let taskDate = (task.taskDate ?? Date())
+                    let isToday = Calendar.current.isDateInToday(taskDate)
+
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(spacing: 10) {
-                            let taskDate = (task.taskDate ?? Date())
-                            let isToday = Calendar.current.isDateInToday(taskDate)
+                            if isToday {
+                                Text(taskDate.formatted(date: .omitted, time: .shortened))
+                                    .foregroundColor(.white.opacity(shouldShowDetail ? 1 : 0.7))
+                            }
+
+                            if shouldShowDetail && !isToday {
+                                Text(taskDate.formatted(date: .omitted, time: .shortened))
+                                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                                    .foregroundColor(.white)
+                            }
 
                             if !isToday {
                                 Text(taskDate.formatted(date: .abbreviated, time: .omitted))
                                     .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
                             }
 
-                            if shouldShowDetail || isToday {
-                                Text(taskDate.formatted(date: .omitted, time: .shortened))
-                                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-                            }
-
-                            if shouldShowDetail {
+                            if shouldShowDetail && isToday {
                                 Text(task.taskCategory ?? "Normal")
                                     .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
                             }
@@ -51,6 +57,13 @@ struct TaskCard: View {
                         }
                         .font(.callout)
                         .foregroundStyle(.secondary)
+
+                        if shouldShowDetail && !isToday {
+                            Text(task.taskCategory ?? "Normal")
+                                .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
+                                .font(.callout)
+                                .foregroundStyle(.secondary)
+                        }
 
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
