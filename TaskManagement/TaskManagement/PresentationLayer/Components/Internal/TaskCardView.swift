@@ -33,14 +33,14 @@ struct TaskCard: View {
                             let taskDate = (task.taskDate ?? Date())
                             let isToday = Calendar.current.isDateInToday(taskDate)
 
-                            if shouldShowDetail {
-                                if !isToday {
-                                    Text(taskDate.formatted(date: .abbreviated, time: .omitted))
-                                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
-                                }
+                            if !isToday {
+                                Text(taskDate.formatted(date: .abbreviated, time: .omitted))
+                                    .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
                             }
 
-                            Text(taskDate.formatted(date: .omitted, time: .shortened))
+                            if shouldShowDetail || isToday {
+                                Text(taskDate.formatted(date: .omitted, time: .shortened))
+                            }
 
                             if shouldShowDetail {
                                 Text(task.taskCategory ?? "Normal")
@@ -121,7 +121,7 @@ struct TaskCard: View {
             }
         }
     }
-    
+
     // MARK: - Private Functions
 
     private func doneTask() {
@@ -242,7 +242,7 @@ struct TaskCardView: View {
                 }
                 .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
-            
+
             if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
                 TaskCard(
                     coreDataViewModel: coreDataViewModel,
@@ -281,7 +281,7 @@ struct TaskCardView: View {
         let minute = calendar.component(.minute, from: date)
         let hour = calendar.component(.hour, from: date)
         let day = calendar.component(.day, from: date)
-        
+
         NotificationManager.shared.sendNotification(
             id: task.taskID ?? "",
             minute: minute,
