@@ -31,20 +31,22 @@ struct TaskCard: View {
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(spacing: 10) {
                             let taskDate = (task.taskDate ?? Date())
+                            let isToday = Calendar.current.isDateInToday(taskDate)
+
+                            if shouldShowDetail {
+                                if !isToday {
+                                    Text(taskDate.formatted(date: .abbreviated, time: .omitted))
+                                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                                }
+                            }
 
                             Text(taskDate.formatted(date: .omitted, time: .shortened))
 
                             if shouldShowDetail {
-                                if !Calendar.current.isDateInToday(taskDate) {
-                                    Text(taskDate.formatted(date: .abbreviated, time: .omitted))
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
-                                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-                                }
-
                                 Text(task.taskCategory ?? "Normal")
-                                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                                    .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
                             }
+
                         }
                         .font(.callout)
                         .foregroundStyle(.secondary)
