@@ -40,6 +40,7 @@ struct TaskCard: View {
 
                             if shouldShowDetail || isToday {
                                 Text(taskDate.formatted(date: .omitted, time: .shortened))
+                                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
                             }
 
                             if shouldShowDetail {
