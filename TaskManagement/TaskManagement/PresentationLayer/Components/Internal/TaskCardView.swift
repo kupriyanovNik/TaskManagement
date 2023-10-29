@@ -68,7 +68,6 @@ struct TaskCard: View {
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
                             .bold()
-                            .scaleEffect(shouldShowDetail ? 1 : 0.9)
                             .lineLimit(nil)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -112,7 +111,8 @@ struct TaskCard: View {
             Color.black.opacity(0.85)
                 .cornerRadius(25)
         }
-        .scaleEffect(showCardTap ? 1.03 : 1)
+        .scaleEffect(showCardTap ? 0.95 : 1)
+        .scaleEffect(shouldShowDetail ? 1.05 : 1)
         .onTapGesture {
             withAnimation(.spring) {
                 shouldShowDetail.toggle()
