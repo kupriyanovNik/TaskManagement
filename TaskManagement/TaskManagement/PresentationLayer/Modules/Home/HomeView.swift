@@ -165,6 +165,7 @@ struct HomeView: View {
             }
             .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
             .padding(.horizontal)
+            .padding(.bottom, 5)
             .animation(.linear, value: coreDataViewModel.tasksFilteredByDate.isEmpty)
 
             if !coreDataViewModel.allTasks.isEmpty {

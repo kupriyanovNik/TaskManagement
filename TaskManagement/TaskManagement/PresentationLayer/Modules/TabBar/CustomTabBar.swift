@@ -169,7 +169,7 @@ struct CustomTabBar: View {
 
     private func playPlusButtonAnimation() {
         withAnimation(.linear(duration: 1.5)) {
-            tabBarViewModel.gradientLineWidth = 2
+            tabBarViewModel.gradientLineWidth = 5
         }
     }
 
