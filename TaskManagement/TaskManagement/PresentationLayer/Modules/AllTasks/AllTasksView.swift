@@ -15,6 +15,8 @@ struct AllTasksView: View {
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
+    @Environment(\.dismiss) var dismiss
+
     // MARK: - Private Properties
 
     private var systemImages = ImageNames.System.self
@@ -25,6 +27,7 @@ struct AllTasksView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             // MARK: I encountered bugs with redrawing due to the Lazy
+
             VStack(spacing: 20) {
                 if coreDataViewModel.allTasks.isEmpty {
                     Text(strings.noTasks)
@@ -43,7 +46,67 @@ struct AllTasksView: View {
             .padding()
             .padding(.top)
             .blur(radius: allTasksViewModel.showFilteringView ? 3 : 0)
+            .overlay {
+                if allTasksViewModel.showFilteringView {
+                    ZStack {
+                        Color.black
+                            .opacity(0.8)
+                            .ignoresSafeArea()
+                            .onTapGesture {
+                                withAnimation {
+                                    allTasksViewModel.showFilteringView = false
+                                }
+                            }
+
+                        VStack {
+                            ZStack {
+                                Color.white
+                                    .clipShape(
+                                        RoundedShape(
+                                            corners: [.bottomLeft, .bottomRight],
+                                            radius: 30 - (allTasksViewModel.verticalOffset / 7)
+                                        )
+                                    )
+                                    .ignoresSafeArea()
+
+                                FilterSelectorView(
+                                    selectedCategory: $allTasksViewModel.filteringCategory,
+                                    title: strings.selectCategory,
+                                    accentColor: themeManager.selectedTheme.accentColor
+                                )
+                                .opacity(1.0 - (abs(allTasksViewModel.verticalOffset) / 150.0))
+                            }
+                            .frame(maxHeight: 200)
+
+                            Spacer()
+                        }
+                        .offset(y: allTasksViewModel.verticalOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    withAnimation {
+                                        allTasksViewModel.verticalOffset = min(0, value.translation.height)
+                                    }
+                                }
+                                .onEnded { value in
+                                    if value.translation.height < -100 {
+                                        withAnimation {
+                                            allTasksViewModel.showFilteringView = false
+                                                allTasksViewModel.verticalOffset = 0
+                                        }
+                                    } else {
+                                        withAnimation(.spring) {
+                                            allTasksViewModel.verticalOffset = 0
+                                        }
+                                    }
+                                }
+                        )
+                    }
+                }
+            }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
         .makeCustomNavBar {
             headerView()
         }
@@ -93,28 +156,16 @@ struct AllTasksView: View {
     }
 
     @ViewBuilder func headerView() -> some View {
-        let tasksCount = coreDataViewModel.allTasks.filter { !$0.isCompleted }.count
+        HStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: systemImages.backArrow)
+                    .foregroundColor(.black)
+                    .font(.title2)
+            }
 
-        HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 3) {
-                Group {
-                    if allTasksViewModel.showGreetings {
-                        Text("\(tasksCount) \(tasksCount == 1 ? strings.taskLowercased : strings.tasksLowercased)")
-                            .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-                    } else {
-                        Text(strings.your)
-                            .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
-                    }
-                }
-                .foregroundColor(.gray)
-                .onAppear {
-                    delay(3) {
-                        withAnimation(.default) {
-                            self.allTasksViewModel.showGreetings = false
-                        }
-                    }
-                }
-
                 if let filteringCategory = allTasksViewModel.filteringCategory {
                     Text(filteringCategory.localizableRawValue)
                         .bold()

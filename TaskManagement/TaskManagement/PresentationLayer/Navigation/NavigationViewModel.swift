@@ -10,4 +10,5 @@ class NavigationViewModel: ObservableObject {
 
     @Published var showAddingView: Bool = false
     @Published var selectedTab: Tab = .home
+    @Published var showAllTasksView: Bool = false 
 }

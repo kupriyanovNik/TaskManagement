@@ -5,10 +5,6 @@
 import Foundation
 
 enum Localizable {
-    enum Content {
-        static let selectCategory = localized("Content.selectCategory")
-    }
-
     enum Adding {
         static let title = localized("Adding.title")
         static let save = localized("Adding.save")
@@ -62,6 +58,7 @@ enum Localizable {
     }
 
     enum AllTasks {
+        static let selectCategory = localized("AllTasks.selectCategory")
         static let taskLowercased = localized("AllTasks.taskLowercased")
         static let tasksLowercased = localized("AllTasks.tasksLowercased")
         static let your = localized("AllTasks.your")
