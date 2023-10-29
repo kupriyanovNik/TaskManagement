@@ -167,7 +167,7 @@ struct CustomTabBar: View {
             dismissEditInAllScreens()
             generateFeedback(style: .rigid)
         }
-        .padding(.horizontal, coreDataViewModel.allTasks.isEmpty ? 50 : 30)
+        .padding(.horizontal, 30)
         .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)
         .sheet(isPresented: $navigationViewModel.showAddingView) {
             addingViewDismissAction()
