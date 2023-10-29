@@ -9,8 +9,9 @@ struct CirclePlusButtonStyle: ButtonStyle {
         configuration.label
             .opacity(1)
             .scaleEffect(configuration.isPressed ? 1.1 : 1)
-            .rotationEffect(.degrees(configuration.isPressed ? 90 : 0))
             .animation(.spring, value: configuration.isPressed)
+            .rotationEffect(.degrees(configuration.isPressed ? 90 : 0))
+            .animation(.spring.delay(0.5), value: configuration.isPressed)
     }
 }
 
