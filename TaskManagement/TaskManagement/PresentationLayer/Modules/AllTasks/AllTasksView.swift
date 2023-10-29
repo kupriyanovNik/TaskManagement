@@ -46,65 +46,9 @@ struct AllTasksView: View {
             .padding()
             .padding(.top)
             .blur(radius: allTasksViewModel.showFilteringView ? 3 : 0)
-            .overlay {
-                if allTasksViewModel.showFilteringView {
-                    ZStack {
-                        Color.black
-                            .opacity(0.8)
-                            .ignoresSafeArea()
-                            .onTapGesture {
-                                withAnimation {
-                                    allTasksViewModel.showFilteringView = false
-                                }
-                            }
-
-                        VStack {
-                            ZStack {
-                                Color.white
-                                    .clipShape(
-                                        RoundedShape(
-                                            corners: [.bottomLeft, .bottomRight],
-                                            radius: 30 - (allTasksViewModel.verticalOffset / 7)
-                                        )
-                                    )
-                                    .ignoresSafeArea()
-
-                                FilterSelectorView(
-                                    selectedCategory: $allTasksViewModel.filteringCategory,
-                                    title: strings.selectCategory,
-                                    accentColor: themeManager.selectedTheme.accentColor
-                                )
-                                .opacity(1.0 - (abs(allTasksViewModel.verticalOffset) / 150.0))
-                            }
-                            .frame(maxHeight: 200)
-
-                            Spacer()
-                        }
-                        .offset(y: allTasksViewModel.verticalOffset)
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    withAnimation {
-                                        allTasksViewModel.verticalOffset = min(0, value.translation.height)
-                                    }
-                                }
-                                .onEnded { value in
-                                    if value.translation.height < -100 {
-                                        withAnimation {
-                                            allTasksViewModel.showFilteringView = false
-                                                allTasksViewModel.verticalOffset = 0
-                                        }
-                                    } else {
-                                        withAnimation(.spring) {
-                                            allTasksViewModel.verticalOffset = 0
-                                        }
-                                    }
-                                }
-                        )
-                    }
-                }
-            }
         }
+        .animation(.default, value: coreDataViewModel.allTasks)
+        .animation(.default, value: coreDataViewModel.tasksFilteredByCategory)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
@@ -113,6 +57,64 @@ struct AllTasksView: View {
         .onChange(of: allTasksViewModel.filteringCategory) { _ in
             fetchTasksFilteredByCategory()
             allTasksViewModel.isEditing = false
+        }
+        .overlay {
+            if allTasksViewModel.showFilteringView {
+                ZStack {
+                    Color.black
+                        .opacity(0.8)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                allTasksViewModel.showFilteringView = false
+                            }
+                        }
+
+                    VStack {
+                        ZStack {
+                            Color.white
+                                .clipShape(
+                                    RoundedShape(
+                                        corners: [.bottomLeft, .bottomRight],
+                                        radius: 30 - (allTasksViewModel.verticalOffset / 7)
+                                    )
+                                )
+                                .ignoresSafeArea()
+
+                            FilterSelectorView(
+                                selectedCategory: $allTasksViewModel.filteringCategory,
+                                title: strings.selectCategory,
+                                accentColor: themeManager.selectedTheme.accentColor
+                            )
+                            .opacity(1.0 - (abs(allTasksViewModel.verticalOffset) / 150.0))
+                        }
+                        .frame(maxHeight: 200)
+
+                        Spacer()
+                    }
+                    .offset(y: allTasksViewModel.verticalOffset)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                withAnimation {
+                                    allTasksViewModel.verticalOffset = min(0, value.translation.height)
+                                }
+                            }
+                            .onEnded { value in
+                                if value.translation.height < -100 {
+                                    withAnimation {
+                                        allTasksViewModel.showFilteringView = false
+                                            allTasksViewModel.verticalOffset = 0
+                                    }
+                                } else {
+                                    withAnimation(.spring) {
+                                        allTasksViewModel.verticalOffset = 0
+                                    }
+                                }
+                            }
+                    )
+                }
+            }
         }
     }
 
