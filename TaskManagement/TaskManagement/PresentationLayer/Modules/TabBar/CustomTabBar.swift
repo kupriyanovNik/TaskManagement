@@ -111,7 +111,7 @@ struct CustomTabBar: View {
                 }
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(CirclePlusButtonStyle())
     }
 
     private var addingView: some View {
