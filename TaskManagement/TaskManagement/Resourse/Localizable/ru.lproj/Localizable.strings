@@ -2,10 +2,6 @@
   Localizable.strings (ru)
 */
 
-// MARK: - Content
-
-"Content.selectCategory" = "Выберите Категорию:";
-
 // MARK: - Adding
 
 "Adding.title" = "Добавление";
@@ -58,6 +54,7 @@
 
 // MARK: - AllTasks
 
+"Content.selectCategory" = "Выберите Категорию:";
 "AllTasks.taskLowercased" = "задача";
 "AllTasks.tasksLowercased" = "задачи";
 "AllTasks.your" = "Ваши";

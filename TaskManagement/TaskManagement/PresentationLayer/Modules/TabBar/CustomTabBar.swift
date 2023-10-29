@@ -14,6 +14,7 @@ struct CustomTabBar: View {
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var addingViewModel: AddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -25,7 +26,11 @@ struct CustomTabBar: View {
 
     private var homeButton: some View {
         Button {
-            navigationViewModel.selectedTab = .home
+            if navigationViewModel.selectedTab == .home {
+                navigationViewModel.showAllTasksView.toggle()
+            } else {
+                navigationViewModel.selectedTab = .home
+            }
         } label: {
             HStack {
                 Group {
@@ -60,19 +65,19 @@ struct CustomTabBar: View {
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
 
-    private var allTasksButton: some View {
+    private var habitsButton: some View {
         Button {
-            navigationViewModel.selectedTab = .allTasks
+            navigationViewModel.selectedTab = .habits
         } label: {
-            Image(systemName: navigationViewModel.selectedTab == .allTasks ? tabBarImages.Active.allTasks : tabBarImages.Inactive.allTasks)
+            Image(systemName: navigationViewModel.selectedTab == .habits ? tabBarImages.Active.allTasks : tabBarImages.Inactive.allTasks)
                 .resizable()
                 .frame(width: 25, height: 25)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
         }
         .buttonStyle(.plain)
         .padding(.horizontal)
-        .scaleEffect(navigationViewModel.selectedTab == .allTasks ? 1.15 : 1)
-        .opacity(navigationViewModel.selectedTab == .allTasks ? 1 : 0.5)
+        .scaleEffect(navigationViewModel.selectedTab == .habits ? 1.15 : 1)
+        .opacity(navigationViewModel.selectedTab == .habits ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
     }
 
@@ -134,7 +139,7 @@ struct CustomTabBar: View {
             homeButton
             if !coreDataViewModel.allTasks.isEmpty {
                 Spacer()
-                allTasksButton
+                habitsButton
                     .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
             Spacer()
@@ -147,6 +152,17 @@ struct CustomTabBar: View {
                 .fill(.white)
                 .shadow(color: .white, radius: 100, x: 0, y: 100)
                 .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+        }
+        .overlay {
+            NavigationLink(isActive: $navigationViewModel.showAllTasksView) {
+                AllTasksView()
+                    .environmentObject(allTasksViewModel)
+                    .environmentObject(homeViewModel)
+                    .environmentObject(settingsViewModel)
+                    .environmentObject(navigationViewModel)
+                    .environmentObject(coreDataViewModel)
+                    .environmentObject(themeManager)
+            } label: {}
         }
         .onChange(of: navigationViewModel.selectedTab) { _ in
             dismissEditInAllScreens()

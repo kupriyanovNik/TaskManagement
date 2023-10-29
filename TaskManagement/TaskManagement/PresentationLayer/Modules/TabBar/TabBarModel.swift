@@ -5,5 +5,5 @@
 import Foundation
 
 enum Tab: String, CaseIterable {
-    case home, profile, allTasks
+    case home, profile, habits
 }

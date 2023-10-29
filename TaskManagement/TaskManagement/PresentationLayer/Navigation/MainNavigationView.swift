@@ -13,16 +13,11 @@ struct MainNavigationView: View {
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
+    @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var addingViewModel: AddingViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
-
-    @State private var verticalOffset: CGFloat = .zero
-
-    // MARK: - Private Properties
-
-    private var strings = Localizable.Content.self
 
     // MARK: - Inits
 
@@ -54,14 +49,9 @@ struct MainNavigationView: View {
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)
                         
-                    case .allTasks:
-                        AllTasksView()
-                            .environmentObject(allTasksViewModel)
-                            .environmentObject(homeViewModel)
-                            .environmentObject(settingsViewModel)
-                            .environmentObject(navigationViewModel)
-                            .environmentObject(coreDataViewModel)
-                            .environmentObject(themeManager)
+                    case .habits:
+                        HabitsView()
+                            .environmentObject(habitsViewModel)
                     }
                 }
             }
@@ -71,10 +61,10 @@ struct MainNavigationView: View {
                     .environmentObject(tabBarViewModel)
                     .environmentObject(homeViewModel)
                     .environmentObject(allTasksViewModel)
+                    .environmentObject(settingsViewModel)
                     .environmentObject(coreDataViewModel)
                     .environmentObject(addingViewModel)
                     .environmentObject(themeManager)
-                    .padding(.top)
                     .padding(.bottom, 5)
             }
             .ignoresSafeArea(.keyboard)
@@ -82,64 +72,6 @@ struct MainNavigationView: View {
                 settingsViewModel.shouldShowTabBarAnimation ? .linear(duration: 0.3) : .linear(duration: 0),
                 value: navigationViewModel.selectedTab
             )
-            .overlay {
-                if allTasksViewModel.showFilteringView {
-                    ZStack {
-                        Color.black
-                            .opacity(0.8)
-                            .ignoresSafeArea()
-                            .onTapGesture {
-                                withAnimation {
-                                    allTasksViewModel.showFilteringView = false
-                                }
-                            }
-
-                        VStack {
-                            ZStack {
-                                Color.white
-                                    .clipShape(
-                                        RoundedShape(
-                                            corners: [.bottomLeft, .bottomRight],
-                                            radius: 30 - (verticalOffset / 7)
-                                        )
-                                    )
-                                    .ignoresSafeArea()
-
-                                FilterSelectorView(
-                                    selectedCategory: $allTasksViewModel.filteringCategory,
-                                    title: strings.selectCategory,
-                                    accentColor: themeManager.selectedTheme.accentColor
-                                )
-                                .opacity(1.0 - (abs(verticalOffset) / 150.0))
-                            }
-                            .frame(maxHeight: 200)
-
-                            Spacer()
-                        }
-                        .offset(y: verticalOffset)
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    withAnimation {
-                                        verticalOffset = min(0, value.translation.height)
-                                    }
-                                }
-                                .onEnded { value in
-                                    if value.translation.height < -100 {
-                                        withAnimation {
-                                            allTasksViewModel.showFilteringView = false
-                                            verticalOffset = 0
-                                        }
-                                    } else {
-                                        withAnimation(.spring) {
-                                            verticalOffset = 0
-                                        }
-                                    }
-                                }
-                        )
-                    }
-                }
-            }
         }
     }
 }
