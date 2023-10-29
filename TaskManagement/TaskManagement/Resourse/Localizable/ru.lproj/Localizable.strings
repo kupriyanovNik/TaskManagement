@@ -54,7 +54,7 @@
 
 // MARK: - AllTasks
 
-"Content.selectCategory" = "Выберите Категорию:";
+"AllTasks.selectCategory" = "Выберите Категорию:";
 "AllTasks.taskLowercased" = "задача";
 "AllTasks.tasksLowercased" = "задачи";
 "AllTasks.your" = "Ваши";
