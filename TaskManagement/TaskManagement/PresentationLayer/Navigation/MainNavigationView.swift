@@ -13,6 +13,7 @@ struct MainNavigationView: View {
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
+    @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var addingViewModel: AddingViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
@@ -49,7 +50,8 @@ struct MainNavigationView: View {
                             .environmentObject(themeManager)
                         
                     case .habits:
-                        Text("Habits View")
+                        HabitsView()
+                            .environmentObject(habitsViewModelç)
                     }
                 }
             }
