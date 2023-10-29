@@ -27,7 +27,9 @@ struct CustomTabBar: View {
     private var homeButton: some View {
         Button {
             if navigationViewModel.selectedTab == .home {
-                navigationViewModel.showAllTasksView.toggle()
+                if !coreDataViewModel.allTasks.isEmpty {
+                    navigationViewModel.showAllTasksView.toggle()
+                }
             } else {
                 navigationViewModel.selectedTab = .home
             }
@@ -137,11 +139,8 @@ struct CustomTabBar: View {
             Divider()
             Spacer()
             homeButton
-            if !coreDataViewModel.allTasks.isEmpty {
-                Spacer()
-                habitsButton
-                    .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-            }
+            Spacer()
+            habitsButton
             Spacer()
             profileButton
         }
