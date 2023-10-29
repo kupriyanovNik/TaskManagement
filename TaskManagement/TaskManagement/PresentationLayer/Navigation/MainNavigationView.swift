@@ -51,7 +51,7 @@ struct MainNavigationView: View {
                         
                     case .habits:
                         HabitsView()
-                            .environmentObject(habitsViewModelç)
+                            .environmentObject(habitsViewModel)
                     }
                 }
             }
