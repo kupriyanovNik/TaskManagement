@@ -5,7 +5,7 @@
 import Foundation
 
 enum Localizable {
-    enum Adding {
+    enum TaskAdding {
         static let title = localized("Adding.title")
         static let save = localized("Adding.save")
         static let cancel = localized("Adding.cancel")
@@ -14,6 +14,10 @@ enum Localizable {
         static let taskDate = localized("Adding.taskDate")
         static let shouldRemind = localized("Adding.shouldNotificate")
         static let unfinishedTask = localized("Adding.unfinishedTask")
+    }
+
+    enum HabitAdding {
+        static let title = "Новая привычка"
     }
 
     enum Home {

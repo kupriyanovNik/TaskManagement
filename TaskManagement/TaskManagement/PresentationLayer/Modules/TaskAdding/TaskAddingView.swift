@@ -18,7 +18,7 @@ struct TaskAddingView: View {
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Adding.self
+    private var strings = Localizable.TaskAdding.self
     private var systemImages = ImageNames.System.self
 
     // MARK: - Body
@@ -131,7 +131,7 @@ struct TaskAddingView: View {
 
             Text(strings.title)
                 .bold()
-                .font(.largeTitle)
+                .font(.title)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
 
             Spacer()

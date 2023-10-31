@@ -159,7 +159,7 @@ struct TaskCard: View {
             hour: hour,
             day: day,
             title: date.greeting(),
-            subtitle: Localizable.Adding.unfinishedTask,
+            subtitle: Localizable.TaskAdding.unfinishedTask,
             body: body,
             isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
         )
@@ -302,7 +302,7 @@ struct TaskCardView: View {
             hour: hour,
             day: day,
             title: date.greeting(),
-            subtitle: Localizable.Adding.unfinishedTask,
+            subtitle: Localizable.TaskAdding.unfinishedTask,
             body: body,
             isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
         )

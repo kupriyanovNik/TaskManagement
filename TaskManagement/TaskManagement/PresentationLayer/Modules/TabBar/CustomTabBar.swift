@@ -87,12 +87,12 @@ struct CustomTabBar: View {
     private var plusButton: some View {
         PlusButton(
             tabBarViewModel: tabBarViewModel,
-            accentColor: themeManager.selectedTheme.accentColor) {
-                navigationViewModel.showTaskAddingView.toggle()
-            } longAction: {
-                navigationViewModel.showHabitAddingView.toggle()
-            }
-
+            accentColor: themeManager.selectedTheme.accentColor
+        ) {
+            navigationViewModel.showTaskAddingView.toggle()
+        } longAction: {
+            navigationViewModel.showHabitAddingView.toggle()
+        }
     }
 
     private var taskAddingView: some View {
@@ -107,6 +107,7 @@ struct CustomTabBar: View {
     private var habitAddingView: some View {
         HabitAddingView()
             .environmentObject(habitAddingViewModel)
+            .environmentObject(themeManager)
     }
 
     // MARK: Body
