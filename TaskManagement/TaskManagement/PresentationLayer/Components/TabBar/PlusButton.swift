@@ -71,6 +71,8 @@ struct PlusButton: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     PlusButton(tabBarViewModel: .init(), accentColor: .purple) {
         print("short")

@@ -13,7 +13,7 @@ struct HabitAddingView: View {
     // MARK: - Body
 
     var body: some View {
-        Text(habitAddingViewModel.a)
+        Text("")
     }
 }
 
