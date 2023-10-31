@@ -4,14 +4,14 @@
 
 import SwiftUI
 
-struct AddingView: View {
+struct TaskAddingView: View {
 
     // MARK: - Property Wrappers
 
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-    @EnvironmentObject var addingViewModel: AddingViewModel
+    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     @Environment(\.dismiss) var dismiss
@@ -27,13 +27,13 @@ struct AddingView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 16) {
                 CustomTextField(
-                    inputText: $addingViewModel.taskTitle,
+                    inputText: $taskAddingViewModel.taskTitle,
                     placeHolder: strings.taskTitle,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
 
                 CustomTextField(
-                    inputText: $addingViewModel.taskDescription,
+                    inputText: $taskAddingViewModel.taskDescription,
                     placeHolder: strings.taskDescription,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
@@ -45,7 +45,7 @@ struct AddingView: View {
                         Spacer()
 
                         RadioButton(
-                            isSelected: $addingViewModel.shouldSendNotification,
+                            isSelected: $taskAddingViewModel.shouldSendNotification,
                             accentColor: themeManager.selectedTheme.accentColor
                         )
                         .frame(width: 30, height: 30)
@@ -59,14 +59,14 @@ struct AddingView: View {
 
                 if homeViewModel.editTask == nil {
                     TaskCategorySelector(
-                        taskCategory: $addingViewModel.taskCategory,
+                        taskCategory: $taskAddingViewModel.taskCategory,
                         accentColor: themeManager.selectedTheme.accentColor
                     )
 
                     VStack {
                         DatePicker(
                             "",
-                            selection: $addingViewModel.taskDate,
+                            selection: $taskAddingViewModel.taskDate,
                             in: Date()...
                         )
                         .datePickerStyle(.graphical)
@@ -85,7 +85,7 @@ struct AddingView: View {
                             Spacer()
 
                             RadioButton(
-                                isSelected: $addingViewModel.shouldSendNotification,
+                                isSelected: $taskAddingViewModel.shouldSendNotification,
                                 accentColor: themeManager.selectedTheme.accentColor
                             )
                             .frame(width: 30, height: 30)
@@ -109,9 +109,9 @@ struct AddingView: View {
         }
         .onAppear {
             if let task = homeViewModel.editTask {
-                addingViewModel.taskTitle = task.taskTitle ?? ""
-                addingViewModel.taskDescription = task.taskDescription ?? ""
-                addingViewModel.shouldSendNotification = task.shouldNotificate
+                taskAddingViewModel.taskTitle = task.taskTitle ?? ""
+                taskAddingViewModel.taskDescription = task.taskDescription ?? ""
+                taskAddingViewModel.shouldSendNotification = task.shouldNotificate
             }
         }
     }
@@ -136,7 +136,7 @@ struct AddingView: View {
 
             Spacer()
 
-            if !addingViewModel.taskTitle.isEmpty {
+            if !taskAddingViewModel.taskTitle.isEmpty {
                 Button {
                     saveAction()
                 } label: {
@@ -146,7 +146,7 @@ struct AddingView: View {
                 .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
             }
         }
-        .animation(.linear, value: addingViewModel.taskTitle)
+        .animation(.linear, value: taskAddingViewModel.taskTitle)
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding([.horizontal, .top])
     }
@@ -157,14 +157,14 @@ struct AddingView: View {
         if let task = homeViewModel.editTask {
             coreDataViewModel.updateTask(
                 task: task,
-                title: addingViewModel.taskTitle,
-                description: addingViewModel.taskDescription,
-                shouldNotificate: addingViewModel.shouldSendNotification
+                title: taskAddingViewModel.taskTitle,
+                description: taskAddingViewModel.taskDescription,
+                shouldNotificate: taskAddingViewModel.shouldSendNotification
             )
 
             NotificationManager.shared.removeNotification(with: task.taskID ?? "")
 
-            if addingViewModel.shouldSendNotification {
+            if taskAddingViewModel.shouldSendNotification {
                 sendNotification(
                     id: task.taskID ?? "",
                     date: task.taskDate ?? .now,
@@ -174,19 +174,19 @@ struct AddingView: View {
         } else {
             coreDataViewModel.addTask(
                 id: UUID().uuidString,
-                title: addingViewModel.taskTitle,
-                description: addingViewModel.taskDescription,
-                date: addingViewModel.taskDate,
-                category: addingViewModel.taskCategory,
-                shouldNotificate: addingViewModel.shouldSendNotification
+                title: taskAddingViewModel.taskTitle,
+                description: taskAddingViewModel.taskDescription,
+                date: taskAddingViewModel.taskDate,
+                category: taskAddingViewModel.taskCategory,
+                shouldNotificate: taskAddingViewModel.shouldSendNotification
             ) { date, task in
                 homeViewModel.currentDay = date
 
-                if addingViewModel.shouldSendNotification {
+                if taskAddingViewModel.shouldSendNotification {
                     sendNotification(
                         id: task.taskID ?? "",
-                        date: addingViewModel.taskDate,
-                        body: addingViewModel.taskTitle
+                        date: taskAddingViewModel.taskDate,
+                        body: taskAddingViewModel.taskTitle
                     )
                 }
             }
@@ -209,7 +209,7 @@ struct AddingView: View {
             title: date.greeting(),
             subtitle: strings.unfinishedTask,
             body: body,
-            isCritical: addingViewModel.taskCategory == .critical ? true : false
+            isCritical: taskAddingViewModel.taskCategory == .critical ? true : false
         )
     }
 }
@@ -217,10 +217,10 @@ struct AddingView: View {
 // MARK: - Preview
 
 #Preview {
-    AddingView()
+    TaskAddingView()
         .environmentObject(HomeViewModel())
         .environmentObject(NavigationViewModel())
         .environmentObject(CoreDataViewModel())
-        .environmentObject(AddingViewModel())
+        .environmentObject(TaskAddingViewModel())
         .environmentObject(ThemeManager())
 }

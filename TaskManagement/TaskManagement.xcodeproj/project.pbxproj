@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7181BE42AD45647002F3D82 /* AddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE32AD45647002F3D82 /* AddingViewModel.swift */; };
+		B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */; };
 		B7181BE72AD45DC8002F3D82 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */; };
 		B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE92AD4638D002F3D82 /* OnboardingView.swift */; };
 		B7181BEC2AD463A3002F3D82 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BEB2AD463A3002F3D82 /* OnboardingViewModel.swift */; };
@@ -60,11 +60,11 @@
 		B7F515CB2ACB27070001A282 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F515CA2ACB27070001A282 /* Assets.xcassets */; };
 		B7F515CE2ACB27070001A282 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F515CD2ACB27070001A282 /* Preview Assets.xcassets */; };
 		B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515DC2ACB27C30001A282 /* HomeView.swift */; };
-		B7F515E32ACB2C2E0001A282 /* AddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515E22ACB2C2E0001A282 /* AddingView.swift */; };
+		B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515E22ACB2C2E0001A282 /* TaskAddingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B7181BE32AD45647002F3D82 /* AddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingViewModel.swift; sourceTree = "<group>"; };
+		B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddingViewModel.swift; sourceTree = "<group>"; };
 		B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		B7181BE92AD4638D002F3D82 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B7181BEB2AD463A3002F3D82 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		B7F515CA2ACB27070001A282 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7F515CD2ACB27070001A282 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B7F515DC2ACB27C30001A282 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		B7F515E22ACB2C2E0001A282 /* AddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingView.swift; sourceTree = "<group>"; };
+		B7F515E22ACB2C2E0001A282 /* TaskAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +201,7 @@
 				B7F016382AD48D8600B9F670 /* Settings */,
 				B7181BE82AD46384002F3D82 /* Onboarding */,
 				B73213D52ACCB07000E42B1D /* Profile */,
-				B73213C02ACC8CCD00E42B1D /* Adding */,
+				B73213C02ACC8CCD00E42B1D /* TaskAdding */,
 				B73213BB2ACC8CB800E42B1D /* Home */,
 			);
 			path = Modules;
@@ -231,13 +231,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		B73213C02ACC8CCD00E42B1D /* Adding */ = {
+		B73213C02ACC8CCD00E42B1D /* TaskAdding */ = {
 			isa = PBXGroup;
 			children = (
-				B7F515E22ACB2C2E0001A282 /* AddingView.swift */,
-				B7181BE32AD45647002F3D82 /* AddingViewModel.swift */,
+				B7F515E22ACB2C2E0001A282 /* TaskAddingView.swift */,
+				B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */,
 			);
-			path = Adding;
+			path = TaskAdding;
 			sourceTree = "<group>";
 		};
 		B73213C12ACC8D0500E42B1D /* Navigation */ = {
@@ -520,7 +520,7 @@
 				B73213C82ACC8EEB00E42B1D /* Persistence.swift in Sources */,
 				B73213CB2ACC934100E42B1D /* Images.swift in Sources */,
 				B7F2984B2AE30D8D00F4A8E3 /* StatisticsGauge.swift in Sources */,
-				B7181BE42AD45647002F3D82 /* AddingViewModel.swift in Sources */,
+				B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */,
 				B750842F2AEE8954006A04E1 /* CirclePlusButtonStyle.swift in Sources */,
 				B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */,
 				B71FD1022AD43E810039270D /* TaskManagement.xcdatamodeld in Sources */,
@@ -559,7 +559,7 @@
 				B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */,
 				B7DC65902AD569BC009DA010 /* DataSource.swift in Sources */,
 				B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */,
-				B7F515E32ACB2C2E0001A282 /* AddingView.swift in Sources */,
+				B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */,
 				B7DC658C2AD56967009DA010 /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

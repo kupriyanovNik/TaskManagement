@@ -1,10 +1,10 @@
 //
-//  AddingViewModel.swift
+//  TaskAddingViewModel.swift
 //
 
 import Foundation
 
-class AddingViewModel: ObservableObject {
+class TaskAddingViewModel: ObservableObject {
     
     // MARK: - Property Wrappers
 

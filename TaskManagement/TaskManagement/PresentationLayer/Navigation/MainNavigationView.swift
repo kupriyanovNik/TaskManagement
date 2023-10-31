@@ -14,7 +14,7 @@ struct MainNavigationView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var habitsViewModel: HabitsViewModel
-    @EnvironmentObject var addingViewModel: AddingViewModel
+    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -63,7 +63,7 @@ struct MainNavigationView: View {
                     .environmentObject(allTasksViewModel)
                     .environmentObject(settingsViewModel)
                     .environmentObject(coreDataViewModel)
-                    .environmentObject(addingViewModel)
+                    .environmentObject(taskAddingViewModel)
                     .environmentObject(themeManager)
                     .padding(.bottom, 5)
             }

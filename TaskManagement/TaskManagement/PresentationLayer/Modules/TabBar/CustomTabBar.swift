@@ -16,7 +16,7 @@ struct CustomTabBar: View {
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-    @EnvironmentObject var addingViewModel: AddingViewModel
+    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: Private Properties
@@ -122,11 +122,11 @@ struct CustomTabBar: View {
     }
 
     private var addingView: some View {
-        AddingView()
+        TaskAddingView()
             .environmentObject(homeViewModel)
             .environmentObject(navigationViewModel)
             .environmentObject(coreDataViewModel)
-            .environmentObject(addingViewModel)
+            .environmentObject(taskAddingViewModel)
             .environmentObject(themeManager)
     }
 
@@ -204,7 +204,7 @@ struct CustomTabBar: View {
         if let filteringCategory = allTasksViewModel.filteringCategory {
             coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
         }
-        addingViewModel.reset()
+        taskAddingViewModel.reset()
     }
     
     private func dismissEditInAllScreens() {
