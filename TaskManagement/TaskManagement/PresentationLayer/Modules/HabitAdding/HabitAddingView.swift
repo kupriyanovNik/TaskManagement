@@ -55,6 +55,8 @@ struct HabitAddingView: View {
 
 }
 
+// MARK: - Preview
+
 #Preview {
     HabitAddingView()
         .environmentObject(HabitAddingViewModel())
