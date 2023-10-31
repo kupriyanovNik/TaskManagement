@@ -17,6 +17,7 @@ struct CustomTabBar: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
+    @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: Private Properties
@@ -85,7 +86,7 @@ struct CustomTabBar: View {
 
     private var plusButton: some View {
         Button {
-            navigationViewModel.showAddingView.toggle()
+            navigationViewModel.showTaskAddingView.toggle()
         } label: {
             ZStack {
                 Circle()
@@ -121,13 +122,18 @@ struct CustomTabBar: View {
         .buttonStyle(CirclePlusButtonStyle())
     }
 
-    private var addingView: some View {
+    private var taskAddingView: some View {
         TaskAddingView()
             .environmentObject(homeViewModel)
             .environmentObject(navigationViewModel)
             .environmentObject(coreDataViewModel)
             .environmentObject(taskAddingViewModel)
             .environmentObject(themeManager)
+    }
+
+    private var habitAddingView: some View {
+        HabitAddingView()
+            .environmentObject(habitAddingViewModel)
     }
 
     // MARK: Body
@@ -169,10 +175,15 @@ struct CustomTabBar: View {
         }
         .padding(.horizontal, 30)
         .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)
-        .sheet(isPresented: $navigationViewModel.showAddingView) {
+        .sheet(isPresented: $navigationViewModel.showTaskAddingView) {
             addingViewDismissAction()
         } content: {
-            addingView
+            taskAddingView
+        }
+        .sheet(isPresented: $navigationViewModel.showHabitAddingView) {
+
+        } content: {
+            habitAddingView
         }
         .onAppear {
             playPlusButtonAnimation()

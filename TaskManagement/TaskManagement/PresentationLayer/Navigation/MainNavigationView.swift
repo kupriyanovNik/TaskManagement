@@ -15,6 +15,7 @@ struct MainNavigationView: View {
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
+    @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -64,6 +65,7 @@ struct MainNavigationView: View {
                     .environmentObject(settingsViewModel)
                     .environmentObject(coreDataViewModel)
                     .environmentObject(taskAddingViewModel)
+                    .environmentObject(habitAddingViewModel)
                     .environmentObject(themeManager)
                     .padding(.bottom, 5)
             }

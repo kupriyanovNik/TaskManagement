@@ -30,6 +30,8 @@
 		B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213D62ACCB07A00E42B1D /* ProfileView.swift */; };
 		B736A2A32AE4456B00977067 /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = B736A2A22AE4456B00977067 /* SPConfetti */; };
 		B736A2A92AE4555000977067 /* FilterSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736A2A82AE4555000977067 /* FilterSelectorView.swift */; };
+		B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38A2AF174D500055510 /* HabitAddingView.swift */; };
+		B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */; };
 		B750842F2AEE8954006A04E1 /* CirclePlusButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */; };
 		B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084312AEEA55E006A04E1 /* HabitsView.swift */; };
 		B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084342AEEA570006A04E1 /* HabitsViewModel.swift */; };
@@ -86,6 +88,8 @@
 		B73213D22ACCACC900E42B1D /* TabBarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
 		B73213D62ACCB07A00E42B1D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B736A2A82AE4555000977067 /* FilterSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorView.swift; sourceTree = "<group>"; };
+		B73BD38A2AF174D500055510 /* HabitAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingView.swift; sourceTree = "<group>"; };
+		B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingViewModel.swift; sourceTree = "<group>"; };
 		B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePlusButtonStyle.swift; sourceTree = "<group>"; };
 		B75084312AEEA55E006A04E1 /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
 		B75084342AEEA570006A04E1 /* HabitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModel.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				B73213D02ACCACC900E42B1D /* TabBar */,
+				B73BD3892AF1749300055510 /* HabitAdding */,
 				B75084302AEEA555006A04E1 /* Habits */,
 				B72972952AD8546800B9F8BF /* AllTasks */,
 				B7F016382AD48D8600B9F670 /* Settings */,
@@ -285,6 +290,15 @@
 				B736A2A82AE4555000977067 /* FilterSelectorView.swift */,
 			);
 			path = AllTasks;
+			sourceTree = "<group>";
+		};
+		B73BD3892AF1749300055510 /* HabitAdding */ = {
+			isa = PBXGroup;
+			children = (
+				B73BD38A2AF174D500055510 /* HabitAddingView.swift */,
+				B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */,
+			);
+			path = HabitAdding;
 			sourceTree = "<group>";
 		};
 		B75084302AEEA555006A04E1 /* Habits */ = {
@@ -539,7 +553,9 @@
 				B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */,
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
 				B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */,
+				B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */,
 				B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */,
+				B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */,
 				B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */,
 				B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */,
 				B71FD0FF2AD437910039270D /* CoreDataViewModel.swift in Sources */,

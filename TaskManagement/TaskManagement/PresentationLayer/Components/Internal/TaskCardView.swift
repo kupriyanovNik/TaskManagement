@@ -206,7 +206,7 @@ struct TaskCardView: View {
                     if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
                         Button {
                             homeViewModel.editTask = task
-                            navigationViewModel.showAddingView.toggle()
+                            navigationViewModel.showTaskAddingView.toggle()
                         } label: {
                             Image(systemName: ImageNames.System.pencilCircleFill)
                                 .font(.title2)
