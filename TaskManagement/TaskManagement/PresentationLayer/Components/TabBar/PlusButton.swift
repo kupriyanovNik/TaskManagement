@@ -53,7 +53,7 @@ struct PlusButton: View {
                         scale = 1.2
                         rotation = 90
                     }
-                    delay(0.4) {
+                    delay(0.2) {
                         longAction()
                         delay(0.3) {
                             scale = 1
