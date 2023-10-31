@@ -85,41 +85,14 @@ struct CustomTabBar: View {
     }
 
     private var plusButton: some View {
-        Button {
-            navigationViewModel.showTaskAddingView.toggle()
-        } label: {
-            ZStack {
-                Circle()
-                    .stroke(
-                        LinearGradient(
-                            colors: [
-                                .pink, .indigo,
-                                themeManager.selectedTheme.accentColor,
-                                .purple, .mint
-                            ],
-                            startPoint: tabBarViewModel.gradientStart,
-                            endPoint: tabBarViewModel.gradientEnd
-                        ), style: .init(lineWidth: tabBarViewModel.gradientLineWidth)
-                    )
-                    .shadow(color: themeManager.selectedTheme.accentColor.opacity(0.5), radius: 10)
-                    .rotationEffect(.degrees(tabBarViewModel.gradientRotation))
-                    .frame(width: 48)
-
-                if #available(iOS 16, *) {
-                    Image(systemName: systemImages.plus)
-                        .scaledToFit()
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                } else {
-                    Image(systemName: systemImages.plus)
-                        .scaledToFit()
-                        .font(.title2)
-                        .foregroundColor(.black)
-                }
+        PlusButton(
+            tabBarViewModel: tabBarViewModel,
+            accentColor: themeManager.selectedTheme.accentColor) {
+                navigationViewModel.showTaskAddingView.toggle()
+            } longAction: {
+                navigationViewModel.showHabitAddingView.toggle()
             }
-        }
-        .buttonStyle(CirclePlusButtonStyle())
+
     }
 
     private var taskAddingView: some View {

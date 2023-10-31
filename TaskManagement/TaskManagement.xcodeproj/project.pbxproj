@@ -32,7 +32,7 @@
 		B736A2A92AE4555000977067 /* FilterSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736A2A82AE4555000977067 /* FilterSelectorView.swift */; };
 		B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38A2AF174D500055510 /* HabitAddingView.swift */; };
 		B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */; };
-		B750842F2AEE8954006A04E1 /* CirclePlusButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */; };
+		B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD3922AF17AE800055510 /* PlusButton.swift */; };
 		B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084312AEEA55E006A04E1 /* HabitsView.swift */; };
 		B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084342AEEA570006A04E1 /* HabitsViewModel.swift */; };
 		B76287272AD95061003EE58D /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76287262AD95061003EE58D /* RoundedShape.swift */; };
@@ -90,7 +90,7 @@
 		B736A2A82AE4555000977067 /* FilterSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorView.swift; sourceTree = "<group>"; };
 		B73BD38A2AF174D500055510 /* HabitAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingView.swift; sourceTree = "<group>"; };
 		B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingViewModel.swift; sourceTree = "<group>"; };
-		B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePlusButtonStyle.swift; sourceTree = "<group>"; };
+		B73BD3922AF17AE800055510 /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
 		B75084312AEEA55E006A04E1 /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
 		B75084342AEEA570006A04E1 /* HabitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModel.swift; sourceTree = "<group>"; };
 		B76287262AD95061003EE58D /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
@@ -215,6 +215,7 @@
 		B73213BA2ACC8CB100E42B1D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B73BD3912AF17AE200055510 /* TabBar */,
 				B736A2A72AE4554100977067 /* AllTasks */,
 				B7F298492AE30D4400F4A8E3 /* Profile */,
 				B7739F122AE179E6000F19EE /* ButtonStyles */,
@@ -301,6 +302,14 @@
 			path = HabitAdding;
 			sourceTree = "<group>";
 		};
+		B73BD3912AF17AE200055510 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B73BD3922AF17AE800055510 /* PlusButton.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		B75084302AEEA555006A04E1 /* Habits */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */,
-				B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */,
 			);
 			path = ButtonStyles;
 			sourceTree = "<group>";
@@ -526,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73165AE2AEC244700BF2CA7 /* NoTasksFoundView.swift in Sources */,
+				B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */,
 				B7F016312AD4752200B9F670 /* Date.swift in Sources */,
 				B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */,
 				B7DC658A2AD568C3009DA010 /* ThemeDefinitions.swift in Sources */,
@@ -535,7 +544,6 @@
 				B73213CB2ACC934100E42B1D /* Images.swift in Sources */,
 				B7F2984B2AE30D8D00F4A8E3 /* StatisticsGauge.swift in Sources */,
 				B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */,
-				B750842F2AEE8954006A04E1 /* CirclePlusButtonStyle.swift in Sources */,
 				B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */,
 				B71FD1022AD43E810039270D /* TaskManagement.xcdatamodeld in Sources */,
 				B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */,
