@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7181BE42AD45647002F3D82 /* AddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE32AD45647002F3D82 /* AddingViewModel.swift */; };
+		B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */; };
 		B7181BE72AD45DC8002F3D82 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */; };
 		B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE92AD4638D002F3D82 /* OnboardingView.swift */; };
 		B7181BEC2AD463A3002F3D82 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BEB2AD463A3002F3D82 /* OnboardingViewModel.swift */; };
@@ -30,7 +30,9 @@
 		B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213D62ACCB07A00E42B1D /* ProfileView.swift */; };
 		B736A2A32AE4456B00977067 /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = B736A2A22AE4456B00977067 /* SPConfetti */; };
 		B736A2A92AE4555000977067 /* FilterSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736A2A82AE4555000977067 /* FilterSelectorView.swift */; };
-		B750842F2AEE8954006A04E1 /* CirclePlusButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */; };
+		B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38A2AF174D500055510 /* HabitAddingView.swift */; };
+		B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */; };
+		B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD3922AF17AE800055510 /* PlusButton.swift */; };
 		B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084312AEEA55E006A04E1 /* HabitsView.swift */; };
 		B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084342AEEA570006A04E1 /* HabitsViewModel.swift */; };
 		B76287272AD95061003EE58D /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76287262AD95061003EE58D /* RoundedShape.swift */; };
@@ -60,11 +62,11 @@
 		B7F515CB2ACB27070001A282 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F515CA2ACB27070001A282 /* Assets.xcassets */; };
 		B7F515CE2ACB27070001A282 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7F515CD2ACB27070001A282 /* Preview Assets.xcassets */; };
 		B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515DC2ACB27C30001A282 /* HomeView.swift */; };
-		B7F515E32ACB2C2E0001A282 /* AddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515E22ACB2C2E0001A282 /* AddingView.swift */; };
+		B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515E22ACB2C2E0001A282 /* TaskAddingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B7181BE32AD45647002F3D82 /* AddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingViewModel.swift; sourceTree = "<group>"; };
+		B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddingViewModel.swift; sourceTree = "<group>"; };
 		B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		B7181BE92AD4638D002F3D82 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B7181BEB2AD463A3002F3D82 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -86,7 +88,9 @@
 		B73213D22ACCACC900E42B1D /* TabBarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
 		B73213D62ACCB07A00E42B1D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B736A2A82AE4555000977067 /* FilterSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorView.swift; sourceTree = "<group>"; };
-		B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePlusButtonStyle.swift; sourceTree = "<group>"; };
+		B73BD38A2AF174D500055510 /* HabitAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingView.swift; sourceTree = "<group>"; };
+		B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingViewModel.swift; sourceTree = "<group>"; };
+		B73BD3922AF17AE800055510 /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
 		B75084312AEEA55E006A04E1 /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
 		B75084342AEEA570006A04E1 /* HabitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModel.swift; sourceTree = "<group>"; };
 		B76287262AD95061003EE58D /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
@@ -118,7 +122,7 @@
 		B7F515CA2ACB27070001A282 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7F515CD2ACB27070001A282 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B7F515DC2ACB27C30001A282 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		B7F515E22ACB2C2E0001A282 /* AddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingView.swift; sourceTree = "<group>"; };
+		B7F515E22ACB2C2E0001A282 /* TaskAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,14 +199,15 @@
 		B73213B92ACC8CAE00E42B1D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				B73213D02ACCACC900E42B1D /* TabBar */,
-				B75084302AEEA555006A04E1 /* Habits */,
-				B72972952AD8546800B9F8BF /* AllTasks */,
-				B7F016382AD48D8600B9F670 /* Settings */,
 				B7181BE82AD46384002F3D82 /* Onboarding */,
-				B73213D52ACCB07000E42B1D /* Profile */,
-				B73213C02ACC8CCD00E42B1D /* Adding */,
+				B73213D02ACCACC900E42B1D /* TabBar */,
 				B73213BB2ACC8CB800E42B1D /* Home */,
+				B72972952AD8546800B9F8BF /* AllTasks */,
+				B75084302AEEA555006A04E1 /* Habits */,
+				B73213D52ACCB07000E42B1D /* Profile */,
+				B7F016382AD48D8600B9F670 /* Settings */,
+				B73BD3892AF1749300055510 /* HabitAdding */,
+				B73213C02ACC8CCD00E42B1D /* TaskAdding */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 		B73213BA2ACC8CB100E42B1D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B73BD3912AF17AE200055510 /* TabBar */,
 				B736A2A72AE4554100977067 /* AllTasks */,
 				B7F298492AE30D4400F4A8E3 /* Profile */,
 				B7739F122AE179E6000F19EE /* ButtonStyles */,
@@ -231,13 +237,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		B73213C02ACC8CCD00E42B1D /* Adding */ = {
+		B73213C02ACC8CCD00E42B1D /* TaskAdding */ = {
 			isa = PBXGroup;
 			children = (
-				B7F515E22ACB2C2E0001A282 /* AddingView.swift */,
-				B7181BE32AD45647002F3D82 /* AddingViewModel.swift */,
+				B7F515E22ACB2C2E0001A282 /* TaskAddingView.swift */,
+				B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */,
 			);
-			path = Adding;
+			path = TaskAdding;
 			sourceTree = "<group>";
 		};
 		B73213C12ACC8D0500E42B1D /* Navigation */ = {
@@ -287,6 +293,23 @@
 			path = AllTasks;
 			sourceTree = "<group>";
 		};
+		B73BD3892AF1749300055510 /* HabitAdding */ = {
+			isa = PBXGroup;
+			children = (
+				B73BD38A2AF174D500055510 /* HabitAddingView.swift */,
+				B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */,
+			);
+			path = HabitAdding;
+			sourceTree = "<group>";
+		};
+		B73BD3912AF17AE200055510 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B73BD3922AF17AE800055510 /* PlusButton.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		B75084302AEEA555006A04E1 /* Habits */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */,
-				B750842E2AEE8954006A04E1 /* CirclePlusButtonStyle.swift */,
 			);
 			path = ButtonStyles;
 			sourceTree = "<group>";
@@ -512,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73165AE2AEC244700BF2CA7 /* NoTasksFoundView.swift in Sources */,
+				B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */,
 				B7F016312AD4752200B9F670 /* Date.swift in Sources */,
 				B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */,
 				B7DC658A2AD568C3009DA010 /* ThemeDefinitions.swift in Sources */,
@@ -520,8 +543,7 @@
 				B73213C82ACC8EEB00E42B1D /* Persistence.swift in Sources */,
 				B73213CB2ACC934100E42B1D /* Images.swift in Sources */,
 				B7F2984B2AE30D8D00F4A8E3 /* StatisticsGauge.swift in Sources */,
-				B7181BE42AD45647002F3D82 /* AddingViewModel.swift in Sources */,
-				B750842F2AEE8954006A04E1 /* CirclePlusButtonStyle.swift in Sources */,
+				B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */,
 				B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */,
 				B71FD1022AD43E810039270D /* TaskManagement.xcdatamodeld in Sources */,
 				B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */,
@@ -539,7 +561,9 @@
 				B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */,
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
 				B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */,
+				B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */,
 				B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */,
+				B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */,
 				B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */,
 				B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */,
 				B71FD0FF2AD437910039270D /* CoreDataViewModel.swift in Sources */,
@@ -559,7 +583,7 @@
 				B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */,
 				B7DC65902AD569BC009DA010 /* DataSource.swift in Sources */,
 				B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */,
-				B7F515E32ACB2C2E0001A282 /* AddingView.swift in Sources */,
+				B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */,
 				B7DC658C2AD56967009DA010 /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

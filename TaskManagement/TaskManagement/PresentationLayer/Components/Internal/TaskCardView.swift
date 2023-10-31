@@ -159,7 +159,7 @@ struct TaskCard: View {
             hour: hour,
             day: day,
             title: date.greeting(),
-            subtitle: Localizable.Adding.unfinishedTask,
+            subtitle: Localizable.TaskAdding.unfinishedTask,
             body: body,
             isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
         )
@@ -206,7 +206,7 @@ struct TaskCardView: View {
                     if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
                         Button {
                             homeViewModel.editTask = task
-                            navigationViewModel.showAddingView.toggle()
+                            navigationViewModel.showTaskAddingView.toggle()
                         } label: {
                             Image(systemName: ImageNames.System.pencilCircleFill)
                                 .font(.title2)
@@ -302,7 +302,7 @@ struct TaskCardView: View {
             hour: hour,
             day: day,
             title: date.greeting(),
-            subtitle: Localizable.Adding.unfinishedTask,
+            subtitle: Localizable.TaskAdding.unfinishedTask,
             body: body,
             isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
         )

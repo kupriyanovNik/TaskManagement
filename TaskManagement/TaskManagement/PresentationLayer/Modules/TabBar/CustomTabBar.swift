@@ -16,7 +16,8 @@ struct CustomTabBar: View {
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-    @EnvironmentObject var addingViewModel: AddingViewModel
+    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
+    @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: Private Properties
@@ -84,49 +85,28 @@ struct CustomTabBar: View {
     }
 
     private var plusButton: some View {
-        Button {
-            navigationViewModel.showAddingView.toggle()
-        } label: {
-            ZStack {
-                Circle()
-                    .stroke(
-                        LinearGradient(
-                            colors: [
-                                .pink, .indigo,
-                                themeManager.selectedTheme.accentColor,
-                                .purple, .mint
-                            ],
-                            startPoint: tabBarViewModel.gradientStart,
-                            endPoint: tabBarViewModel.gradientEnd
-                        ), style: .init(lineWidth: tabBarViewModel.gradientLineWidth)
-                    )
-                    .shadow(color: themeManager.selectedTheme.accentColor.opacity(0.5), radius: 10)
-                    .rotationEffect(.degrees(tabBarViewModel.gradientRotation))
-                    .frame(width: 48)
-
-                if #available(iOS 16, *) {
-                    Image(systemName: systemImages.plus)
-                        .scaledToFit()
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                } else {
-                    Image(systemName: systemImages.plus)
-                        .scaledToFit()
-                        .font(.title2)
-                        .foregroundColor(.black)
-                }
-            }
+        PlusButton(
+            tabBarViewModel: tabBarViewModel,
+            accentColor: themeManager.selectedTheme.accentColor
+        ) {
+            navigationViewModel.showTaskAddingView.toggle()
+        } longAction: {
+            navigationViewModel.showHabitAddingView.toggle()
         }
-        .buttonStyle(CirclePlusButtonStyle())
     }
 
-    private var addingView: some View {
-        AddingView()
+    private var taskAddingView: some View {
+        TaskAddingView()
             .environmentObject(homeViewModel)
             .environmentObject(navigationViewModel)
             .environmentObject(coreDataViewModel)
-            .environmentObject(addingViewModel)
+            .environmentObject(taskAddingViewModel)
+            .environmentObject(themeManager)
+    }
+
+    private var habitAddingView: some View {
+        HabitAddingView()
+            .environmentObject(habitAddingViewModel)
             .environmentObject(themeManager)
     }
 
@@ -169,10 +149,15 @@ struct CustomTabBar: View {
         }
         .padding(.horizontal, 30)
         .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)
-        .sheet(isPresented: $navigationViewModel.showAddingView) {
+        .sheet(isPresented: $navigationViewModel.showTaskAddingView) {
             addingViewDismissAction()
         } content: {
-            addingView
+            taskAddingView
+        }
+        .sheet(isPresented: $navigationViewModel.showHabitAddingView) {
+
+        } content: {
+            habitAddingView
         }
         .onAppear {
             playPlusButtonAnimation()
@@ -204,7 +189,7 @@ struct CustomTabBar: View {
         if let filteringCategory = allTasksViewModel.filteringCategory {
             coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
         }
-        addingViewModel.reset()
+        taskAddingViewModel.reset()
     }
     
     private func dismissEditInAllScreens() {
