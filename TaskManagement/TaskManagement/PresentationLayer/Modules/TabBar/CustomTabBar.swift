@@ -107,6 +107,7 @@ struct CustomTabBar: View {
     private var habitAddingView: some View {
         HabitAddingView()
             .environmentObject(habitAddingViewModel)
+            .environmentObject(coreDataViewModel)
             .environmentObject(themeManager)
     }
 

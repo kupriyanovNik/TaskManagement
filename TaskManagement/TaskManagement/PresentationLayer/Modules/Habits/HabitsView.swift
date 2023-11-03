@@ -9,6 +9,7 @@ struct HabitsView: View {
     // MARK: - Property Wrappers
 
     @EnvironmentObject var habitsViewModel: HabitsViewModel
+    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Body
@@ -16,7 +17,9 @@ struct HabitsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-
+                ForEach(coreDataViewModel.allHabits, id: \.habitID) { habit in
+                    Text(habit.title ?? "Default Title")
+                }
             }
         }
         .makeCustomNavBar {
@@ -63,5 +66,6 @@ struct HabitsView: View {
 #Preview {
     HabitsView()
         .environmentObject(HabitsViewModel())
+        .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())
 }

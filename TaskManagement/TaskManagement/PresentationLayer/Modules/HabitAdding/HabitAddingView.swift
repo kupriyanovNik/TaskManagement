@@ -9,6 +9,7 @@ struct HabitAddingView: View {
     // MARK: - Property Wrappers
 
     @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
+    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     @Environment(\.dismiss) var dismiss
@@ -250,8 +251,10 @@ struct HabitAddingView: View {
         .padding([.horizontal, .top])
     }
 
-    private func saveAction() {
+    // MARK: - Private Functions
 
+    private func saveAction() {
+        
     }
 
 }
@@ -261,5 +264,6 @@ struct HabitAddingView: View {
 #Preview {
     HabitAddingView()
         .environmentObject(HabitAddingViewModel())
+        .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())
 }

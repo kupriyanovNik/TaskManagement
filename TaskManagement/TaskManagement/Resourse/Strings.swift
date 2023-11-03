@@ -28,6 +28,7 @@ enum Constants {
     enum CoreDataNames {
         static let taskManagement = "TaskManagement"
         static let taskModel = "TaskModel"
+        static let habitModel = "HabitModel"
     }
 }
 
