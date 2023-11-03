@@ -52,12 +52,14 @@ struct PlusButton: View {
                     withAnimation {
                         scale = 1.2
                         rotation = 90
+                        tabBarViewModel.gradientLineWidth = 7
                     }
                     delay(0.2) {
                         longAction()
                         delay(0.3) {
                             scale = 1
                             rotation = 0
+                            tabBarViewModel.gradientLineWidth = 5
                         }
                     }
                 }

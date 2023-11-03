@@ -155,7 +155,7 @@ struct CustomTabBar: View {
             taskAddingView
         }
         .sheet(isPresented: $navigationViewModel.showHabitAddingView) {
-
+            habitAddingViewModel.reset()
         } content: {
             habitAddingView
         }

@@ -28,13 +28,14 @@ struct HabitAddingView: View {
                     placeHolder: "Habit Title",
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
+                .continueEditing()
 
                 CustomTextField(
                     inputText: $habitAddingViewModel.habitDescription,
                     placeHolder: "Habit Description",
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
-
+                .continueEditing()
 
                 HStack {
                     ForEach(1..<7) { index in
@@ -137,7 +138,7 @@ struct HabitAddingView: View {
                         .tint(themeManager.selectedTheme.accentColor)
                 }
                 .padding(.vertical)
-                
+
                 if habitAddingViewModel.isRemainderOn {
                     HStack(spacing: 12) {
                         Label {
@@ -148,7 +149,7 @@ struct HabitAddingView: View {
                         .padding(.horizontal)
                         .padding(.vertical, 12)
                         .background(
-                            Color.gray.opacity(0.4),
+                            themeManager.selectedTheme.accentColor.opacity(0.2),
                             in: RoundedRectangle(cornerRadius: 10)
                         )
                         .onTapGesture {
@@ -157,13 +158,13 @@ struct HabitAddingView: View {
                             }
                         }
 
-                        TextField("Remainder Text", text: $habitAddingViewModel.remainderText)
-                            .padding(.horizontal)
-                            .padding(.vertical, 11)
-                            .background(
-                                Color.gray.opacity(0.4),
-                                in: RoundedRectangle(cornerRadius: 10)
-                            )
+                        CustomTextField(
+                            inputText: $habitAddingViewModel.remainderText,
+                            placeHolder: "Remainder Text",
+                            strokeColor: themeManager.selectedTheme.accentColor
+                        )
+                        .continueEditing()
+                        .padding(.horizontal)
 
                     }
                     .transition(.move(edge: .top).combined(with: .opacity))
@@ -178,6 +179,7 @@ struct HabitAddingView: View {
         .makeCustomNavBar {
             headerView()
         }
+        .endEditing()
         .overlay {
             if habitAddingViewModel.showTimePicker {
                 ZStack {
@@ -200,7 +202,7 @@ struct HabitAddingView: View {
                     .padding()
                     .background {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.gray.opacity(0.4))
+                            .fill(themeManager.selectedTheme.accentColor.opacity(0.2))
                     }
                     .padding()
                 }
