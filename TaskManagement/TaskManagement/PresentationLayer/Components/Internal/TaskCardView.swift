@@ -60,12 +60,15 @@ struct TaskCard: View {
                         .foregroundStyle(.secondary)
                         .animation(.spring, value: shouldShowDetail)
 
-                        if shouldShowDetail && !isToday {
-                            Text(task.taskCategory ?? "Normal")
-                                .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
-                                .font(.callout)
-                                .foregroundStyle(.secondary)
+                        VStack {
+                            if shouldShowDetail && !isToday {
+                                Text(task.taskCategory ?? "Normal")
+                                    .transition(.move(edge: isToday ? .top :  .leading).combined(with: .opacity).combined(with: .scale))
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
+                        .animation(.spring, value: shouldShowDetail)
 
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
@@ -75,13 +78,16 @@ struct TaskCard: View {
                     }
                     .hLeading()
 
-                    if shouldShowDetail, let description = task.taskDescription {
-                        Text(description)
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-                            .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-                            .lineLimit(nil)
+                    VStack {
+                        if shouldShowDetail, let description = task.taskDescription {
+                            Text(description)
+                                .font(.callout)
+                                .foregroundStyle(.secondary)
+                                .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                                .lineLimit(nil)
+                        }
                     }
+                    .animation(.spring, value: shouldShowDetail)
                 }
                 .hLeading()
             }
