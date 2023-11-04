@@ -228,7 +228,7 @@ struct TaskCardView: View {
                         coreDataViewModel.removeTask(task: task) { _ in
                             self.onRemove?()
                             if coreDataViewModel.allTasks.isEmpty {
-                                navigationViewModel.selectedTab = .home
+                                navigationViewModel.showAllTasksView = false 
                             }
                         }
                     } label: {
