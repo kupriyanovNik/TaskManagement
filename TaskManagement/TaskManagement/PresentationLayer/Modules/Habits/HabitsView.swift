@@ -88,6 +88,14 @@ struct HabitsView: View {
             }
             .padding(.horizontal, 10)
 
+            Text(habit.habitDescription ?? "Default Description")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+                .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                .lineLimit(nil)
+                .hLeading()
+                .padding(.horizontal, 10)
+
             let calendar = Calendar.current
             let currentWeek = calendar.dateInterval(of: .weekOfMonth, for: .now)
             let symbols = calendar.weekdaySymbols
