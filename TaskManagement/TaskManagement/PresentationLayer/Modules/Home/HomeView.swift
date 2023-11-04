@@ -29,7 +29,7 @@ struct HomeView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
                 if coreDataViewModel.tasksFilteredByDate.isEmpty {
-                    NoTasksFoundView(
+                    NotFoundView(
                         title: strings.noTasks,
                         description: strings.noTasksDescription,
                         accentColor: themeManager.selectedTheme.accentColor

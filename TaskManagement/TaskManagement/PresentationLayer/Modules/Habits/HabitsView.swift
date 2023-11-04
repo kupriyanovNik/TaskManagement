@@ -25,19 +25,27 @@ struct HabitsView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack {
-                ForEach(coreDataViewModel.allHabits, id: \.habitID) { habit in
-                    if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
-                        HabitCardView(habit: habit)
-                            .scrollTransition(.animated(.bouncy)) { effect, phase in
-                                effect
-                                    .scaleEffect(phase.isIdentity ? 1 : 0.95)
-                                    .opacity(phase.isIdentity ? 1 : 0.8)
-                                    .blur(radius: phase.isIdentity ? 0 : 2)
-                                    .brightness(phase.isIdentity ? 0 : 0.3)
-                            }
-                    } else {
-                        HabitCardView(habit: habit)
+            LazyVStack(spacing: 20) {
+                if coreDataViewModel.allHabits.isEmpty {
+                    NotFoundView(
+                        title: "No Habits Found",
+                        description: "Here you will your habits.\nHold \"+\" to add a new one",
+                        accentColor: themeManager.selectedTheme.accentColor
+                    )
+                } else {
+                    ForEach(coreDataViewModel.allHabits, id: \.habitID) { habit in
+                        if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
+                            HabitCardView(habit: habit)
+                                .scrollTransition(.animated(.bouncy)) { effect, phase in
+                                    effect
+                                        .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                                        .opacity(phase.isIdentity ? 1 : 0.8)
+                                        .blur(radius: phase.isIdentity ? 0 : 2)
+                                        .brightness(phase.isIdentity ? 0 : 0.3)
+                                }
+                        } else {
+                            HabitCardView(habit: habit)
+                        }
                     }
                 }
             }

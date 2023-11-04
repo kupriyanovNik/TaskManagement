@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct NoTasksFoundView: View {
+struct NotFoundView: View {
 
     // MARK: - Property Wrappers
 
@@ -49,7 +49,7 @@ struct NoTasksFoundView: View {
 }
 
 #Preview {
-    NoTasksFoundView(
+    NotFoundView(
         title: "No Tasks found",
         description: "Here You will see your tasks.\nTap \"+\" to add a new one",
         accentColor: .black
