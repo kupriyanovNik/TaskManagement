@@ -156,7 +156,7 @@ struct HabitAddingView: View {
 
                         CustomTextField(
                             inputText: $habitAddingViewModel.reminderText,
-                            placeHolder: "Remainder Text",
+                            placeHolder: "Reminder Text",
                             strokeColor: themeManager.selectedTheme.accentColor
                         )
                         .continueEditing()

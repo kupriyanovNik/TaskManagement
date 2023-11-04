@@ -257,7 +257,9 @@ struct TaskCardView: View {
                                     withAnimation(.spring) {
                                         coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
                                     }
-                                    sendNotification(task: task)
+                                    if task.shouldNotificate {
+                                        sendNotification(task: task)
+                                    }
                                 }
                             }
                         }
