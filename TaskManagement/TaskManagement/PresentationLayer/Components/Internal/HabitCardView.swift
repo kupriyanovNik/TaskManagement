@@ -135,6 +135,7 @@ struct HabitCardView: View {
                         }
                     }
                     .padding(.top, 15)
+                    .transition(.move(edge: .top).combined(with: .opacity))
                 }
             }
             .padding(.vertical)
@@ -145,7 +146,7 @@ struct HabitCardView: View {
                     .cornerRadius(showDetail ? 15 : 25)
             }
             .onTapGesture {
-                withAnimation(.smooth(extraBounce: 0.5)) {
+                withAnimation(.easeOut) {
                     showDetail.toggle()
                 }
             }
