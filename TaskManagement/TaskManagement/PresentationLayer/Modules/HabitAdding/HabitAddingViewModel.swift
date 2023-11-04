@@ -15,13 +15,13 @@ class HabitAddingViewModel: ObservableObject {
     @Published var habitColor: String = "Card-1"
     @Published var weekDaysIndicies: [Int] = []
     @Published var shouldNotificate: Bool = false
-    @Published var remainderText: String = ""
+    @Published var reminderText: String = ""
     @Published var remainderDate: Date = .now
 
     // MARK: - Internal Functions
 
     func isAbleToSave() -> Bool {
-        return !(habitTitle == "" || weekDaysIndicies.isEmpty || (shouldNotificate ? remainderText == "" : false))
+        return !(habitTitle == "" || weekDaysIndicies.isEmpty || (shouldNotificate ? reminderText == "" : false))
     }
 
     func reset() {
@@ -30,7 +30,7 @@ class HabitAddingViewModel: ObservableObject {
         habitColor = "Card-1"
         weekDaysIndicies = []
         shouldNotificate = false
-        remainderText = ""
+        reminderText = ""
         remainderDate = .now
     }
 }

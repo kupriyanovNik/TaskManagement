@@ -71,52 +71,47 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             }
     }
 
-//    func cheduleNotification(
-//        title: String = "Habit Remainder",
-//        subtitle: String,
-//        weekDays: [String],
-//        currentWeekSymbols: [String],
-//        remainderDate: Date
-//    ) -> [String] {
-//        let content = UNMutableNotificationContent()
-//        content.title = title
-//        content.subtitle = subtitle
-//        content.sound = .default
-//
-//        var notificationsIDs: [String] = []
-//
-//        for weekDay in weekDays {
-//            let id = UUID().uuidString
-//
-//            let min = Calendar.current.component(.minute, from: remainderDate)
-//            let hour = Calendar.current.component(.hour, from: remainderDate)
-//            let day = currentWeekSymbols.firstIndex { currentDay in
-//                currentDay == weekDay
-//            } ?? -1
-//
-//            if day != -1 {
-//                var components = DateComponents()
-//                
-//                components.minute = min
-//                components.hour = hour
-//                components.weekday = day + 1
-//
-//                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-//
-//                let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
-//
-//                UNUserNotificationCenter.current().add(request) { error in
-//                    if let error {
-//                        print("DEBUG: \(error.localizedDescription)")
-//                    }
-//                }
-//
-//                notificationsIDs.append(id)
-//            }
-//        }
-//
-//        print("DEBUG: \(notificationsIDs)")
-//        return notificationsIDs
-//    }
+    func cheduleNotification(
+        title: String = "Habit Remainder",
+        subtitle: String,
+        weekDays: [Int],
+        reminderDate: Date
+    ) -> [String] {
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = subtitle
+        content.sound = .default
 
+        var notificationsIDs: [String] = []
+        let weekdaySymbols: [String] = Calendar.current.weekdaySymbols
+
+        for weekDayIndex in weekDays {
+            let id = UUID().uuidString
+
+            let min = Calendar.current.component(.minute, from: reminderDate)
+            let hour = Calendar.current.component(.hour, from: reminderDate)
+            let day = weekdaySymbols.firstIndex { currentDay in
+                currentDay == weekdaySymbols[weekDayIndex]
+            } ?? -1
+
+            if day != -1 {
+                var components = DateComponents()
+                components.minute = min
+                components.hour = hour
+                components.weekday = day + 1
+
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+
+                let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+
+                UNUserNotificationCenter.current()
+                    .add(request)
+
+                notificationsIDs.append(id)
+            }
+        }
+
+        return notificationsIDs
+    }
 }

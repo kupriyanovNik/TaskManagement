@@ -155,7 +155,7 @@ struct HabitAddingView: View {
                         }
 
                         CustomTextField(
-                            inputText: $habitAddingViewModel.remainderText,
+                            inputText: $habitAddingViewModel.reminderText,
                             placeHolder: "Remainder Text",
                             strokeColor: themeManager.selectedTheme.accentColor
                         )
@@ -237,7 +237,7 @@ struct HabitAddingView: View {
         }
         .animation(.bouncy, value: habitAddingViewModel.shouldNotificate)
         .animation(.bouncy, value: habitAddingViewModel.remainderDate)
-        .animation(.bouncy, value: habitAddingViewModel.remainderText)
+        .animation(.bouncy, value: habitAddingViewModel.reminderText)
         .animation(.bouncy, value: habitAddingViewModel.habitTitle)
         .animation(.bouncy, value: habitAddingViewModel.weekDaysIndicies.isEmpty)
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
@@ -247,19 +247,23 @@ struct HabitAddingView: View {
     // MARK: - Private Functions
 
     private func saveAction() {
-        // TODO: - Add Notifications For Habits
+        var notificationIDs = NotificationManager.shared.cheduleNotification(
+            title: "Habit Reminder",
+            subtitle: habitAddingViewModel.reminderText,
+            weekDays: habitAddingViewModel.weekDaysIndicies,
+            reminderDate: habitAddingViewModel.remainderDate
+        )
+
         coreDataViewModel.addHabit(
             id: UUID().uuidString,
             title: habitAddingViewModel.habitTitle,
             description: habitAddingViewModel.habitDescription,
             color: habitAddingViewModel.habitColor,
             shouldNotificate: habitAddingViewModel.shouldNotificate,
-            notificationIDs: [],
-            notificationText: "",
+            notificationIDs: notificationIDs,
+            notificationText: habitAddingViewModel.reminderText,
             weekDays: habitAddingViewModel.weekDaysIndicies
         )
-
-        print("DEBUG: \(habitAddingViewModel.weekDaysIndicies)")
 
         dismiss()
     }
