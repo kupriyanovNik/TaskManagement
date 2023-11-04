@@ -192,6 +192,7 @@ struct TaskAddingView: View {
             }
 
         }
+        
         dismiss()
     }
 

@@ -112,6 +112,7 @@ struct OnboardingView: View {
                 from: nil,
                 for: nil
             )
+
         delay(1) {
             withAnimation(.linear) {
                 self.shouldShowOnboarding.toggle()

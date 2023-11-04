@@ -16,11 +16,7 @@ struct HabitsView: View {
 
     // MARK: - Private Properties
 
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd"
-        return formatter
-    }
+    private var strings = Localizable.Habits.self
 
     // MARK: - Body
 
@@ -29,8 +25,8 @@ struct HabitsView: View {
             LazyVStack(spacing: 20) {
                 if coreDataViewModel.allHabits.isEmpty {
                     NotFoundView(
-                        title: "No Habits Found",
-                        description: "Here you will your habits.\nHold \"+\" to add a new one",
+                        title: strings.noHabits,
+                        description: strings.noHabitsDescription,
                         accentColor: themeManager.selectedTheme.accentColor
                     )
                 } else {
@@ -89,11 +85,11 @@ struct HabitsView: View {
                             .transition(.move(edge: .leading).combined(with: .opacity))
                     }
 
-                    Text("Get Better")
+                    Text(strings.subtitle)
                         .foregroundColor(.gray)
                 }
 
-                Text("Habits")
+                Text(strings.title)
                     .bold()
                     .font(.largeTitle)
                     .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
@@ -104,14 +100,14 @@ struct HabitsView: View {
             if !coreDataViewModel.allHabits.isEmpty {
                 Group {
                     if habitsViewModel.isEditing {
-                        Button("Done") {
+                        Button(strings.done) {
                             withAnimation {
                                 habitsViewModel.isEditing.toggle()
                             }
                         }
                         .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
                     } else {
-                        Button("Edit") {
+                        Button(strings.edit) {
                             withAnimation {
                                 habitsViewModel.isEditing.toggle()
                             }

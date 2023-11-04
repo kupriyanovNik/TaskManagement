@@ -7,6 +7,7 @@ import Foundation
 enum ImageNames {
     enum System {
         static let plus = "plus"
+        static let clock = "clock"
         static let gear = "gearshape"
         static let checkmark = "checkmark"
         static let noteText = "note.text"
