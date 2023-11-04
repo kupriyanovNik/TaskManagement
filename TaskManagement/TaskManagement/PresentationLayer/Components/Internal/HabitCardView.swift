@@ -1,6 +1,6 @@
 //
 //  HabitCardView.swift
-// 
+//
 
 import SwiftUI
 
@@ -77,6 +77,7 @@ struct HabitCardView: View {
 
                         Spacer()
                     }
+                    .animation(.spring, value: showDetail)
                 }
 
                 Text(habit.title ?? "Default Title")
@@ -85,6 +86,7 @@ struct HabitCardView: View {
                     .lineLimit(nil)
                     .foregroundColor(.white)
                     .hLeading()
+                    .animation(.spring, value: showDetail)
 
                 VStack {
                     if let description = habit.habitDescription, description != "", showDetail {
