@@ -40,19 +40,19 @@ struct TaskCard: View {
 
                             if shouldShowDetail && !isToday {
                                 Text(taskDate.formatted(date: .omitted, time: .shortened))
-                                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                                    .transition(.opacity.combined(with: .scale))
                                     .foregroundColor(.white)
                             }
 
                             if !isToday {
                                 Text(taskDate.formatted(date: .abbreviated, time: .omitted))
-                                    .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                                    .transition(.opacity.combined(with: .scale))
                             }
 
                             VStack {
                                 if shouldShowDetail && isToday {
                                     Text(task.taskCategory ?? "Normal")
-                                        .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
+                                        .transition(.opacity.combined(with: .scale))
                                 }
                             }
                         }
@@ -63,7 +63,7 @@ struct TaskCard: View {
                         VStack {
                             if shouldShowDetail && !isToday {
                                 Text(task.taskCategory ?? "Normal")
-                                    .transition(.move(edge: isToday ? .top :  .leading).combined(with: .opacity).combined(with: .scale))
+                                    .transition(.opacity.combined(with: .scale))
                                     .font(.callout)
                                     .foregroundStyle(.secondary)
                             }
@@ -116,8 +116,9 @@ struct TaskCard: View {
         .padding(16)
         .hLeading()
         .background {
-            Color.black.opacity(0.85)
-                .cornerRadius(25)
+            Color.black
+                .opacity(0.85)
+                .cornerRadius(shouldShowDetail ? 15 : 25)
         }
         .scaleEffect(showCardTap ? 0.95 : 1)
         .scaleEffect(shouldShowDetail ? 1.05 : 1)
@@ -132,7 +133,6 @@ struct TaskCard: View {
 
                 if task.isCompleted {
                     coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
-                    sendNotification(task: task)
                 } else {
                     doneTask()
                 }
@@ -161,16 +161,18 @@ struct TaskCard: View {
         let hour = calendar.component(.hour, from: date)
         let day = calendar.component(.day, from: date)
 
-        NotificationManager.shared.sendNotification(
-            id: task.taskID ?? "",
-            minute: minute,
-            hour: hour,
-            day: day,
-            title: date.greeting(),
-            subtitle: Localizable.TaskAdding.unfinishedTask,
-            body: body,
-            isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
-        )
+        if task.shouldNotificate {
+            NotificationManager.shared.sendNotification(
+                id: task.taskID ?? "",
+                minute: minute,
+                hour: hour,
+                day: day,
+                title: date.greeting(),
+                subtitle: Localizable.TaskAdding.unfinishedTask,
+                body: body,
+                isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
+            )
+        }
     }
 
 }
@@ -228,7 +230,7 @@ struct TaskCardView: View {
                         coreDataViewModel.removeTask(task: task) { _ in
                             self.onRemove?()
                             if coreDataViewModel.allTasks.isEmpty {
-                                navigationViewModel.showAllTasksView = false 
+                                navigationViewModel.showAllTasksView = false
                             }
                         }
                     } label: {
