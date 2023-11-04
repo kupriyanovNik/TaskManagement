@@ -49,14 +49,16 @@ struct TaskCard: View {
                                     .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
                             }
 
-                            if shouldShowDetail && isToday {
-                                Text(task.taskCategory ?? "Normal")
-                                    .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
+                            VStack {
+                                if shouldShowDetail && isToday {
+                                    Text(task.taskCategory ?? "Normal")
+                                        .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
+                                }
                             }
-
                         }
                         .font(.callout)
                         .foregroundStyle(.secondary)
+                        .animation(.spring, value: shouldShowDetail)
 
                         if shouldShowDetail && !isToday {
                             Text(task.taskCategory ?? "Normal")
@@ -114,7 +116,7 @@ struct TaskCard: View {
         .scaleEffect(showCardTap ? 0.95 : 1)
         .scaleEffect(shouldShowDetail ? 1.05 : 1)
         .onTapGesture {
-            withAnimation(.spring) {
+            withAnimation(.smooth(duration: 0.3, extraBounce: 0.5)) {
                 shouldShowDetail.toggle()
             }
         }

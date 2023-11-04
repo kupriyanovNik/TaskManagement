@@ -22,6 +22,13 @@ struct HabitsView: View {
                 }
             }
         }
+        .onAppear {
+            delay(3) {
+                withAnimation(.default) {
+                    habitsViewModel.showGreetings = false
+                }
+            }
+        }
         .makeCustomNavBar {
             headerView()
         }
@@ -32,12 +39,14 @@ struct HabitsView: View {
     @ViewBuilder func headerView() -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
-                if habitsViewModel.showGreetings {
-                    Text("📋✅")
-                        .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
-                } else {
-                    Text("0")
-                        .opacity(0)
+                HStack {
+                    Text("Get Better")
+                        .foregroundColor(.gray)
+
+                    if habitsViewModel.showGreetings {
+                        Text("✅")
+                            .transition(.move(edge: .trailing).combined(with: .opacity))
+                    }
                 }
 
                 Text("Habits")
@@ -46,17 +55,11 @@ struct HabitsView: View {
                     .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
 
             }
+
             Spacer()
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
-        .onAppear {
-            delay(3) {
-                withAnimation(.default) {
-                    habitsViewModel.showGreetings = false
-                }
-            }
-        }
     }
 
 }

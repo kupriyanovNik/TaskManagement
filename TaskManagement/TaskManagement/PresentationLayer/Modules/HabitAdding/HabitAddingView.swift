@@ -255,6 +255,7 @@ struct HabitAddingView: View {
 
     private func saveAction() {
         
+        dismiss()
     }
 
 }

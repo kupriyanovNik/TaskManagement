@@ -76,7 +76,7 @@ struct ProfileView: View {
                     if profileViewModel.showGreetings {
                         Text("♡")
                             .foregroundColor(.gray)
-                            .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                            .transition(.move(edge: .leading).combined(with: .opacity))
                     }
 
                     Text(strings.your)
