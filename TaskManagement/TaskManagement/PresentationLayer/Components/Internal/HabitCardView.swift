@@ -171,6 +171,7 @@ struct HabitCardView: View {
                     else if cardState == .extended { cardState = .basic }
                 }
             }
+            .scaleEffect(cardState == .extended ? 1.05 : 1)
         }
     }
 
