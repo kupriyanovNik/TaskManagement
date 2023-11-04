@@ -12,7 +12,7 @@ class HabitAddingViewModel: ObservableObject {
     @Published var habitDescription: String = ""
     @Published var habitColor: String = "Card-1"
     @Published var weekDays: [String] = []
-    @Published var isRemainderOn: Bool = false
+    @Published var shouldNotificate: Bool = false
     @Published var remainderText: String = ""
     @Published var remainderDate: Date = .now
 
@@ -40,7 +40,7 @@ class HabitAddingViewModel: ObservableObject {
     }
 
     func isAbleToSave() -> Bool {
-        let remainderStatus = isRemainderOn ? remainderText == "" : false
+        let remainderStatus = shouldNotificate ? remainderText == "" : false
 
         if habitTitle == "" || weekDays.isEmpty || remainderStatus {
             return false
@@ -54,7 +54,7 @@ class HabitAddingViewModel: ObservableObject {
         habitDescription = ""
         habitColor = "Card-1"
         weekDays = []
-        isRemainderOn = false
+        shouldNotificate = false
         remainderText = ""
         remainderDate = .now
     }

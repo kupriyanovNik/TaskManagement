@@ -134,13 +134,13 @@ struct HabitAddingView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Toggle(isOn: $habitAddingViewModel.isRemainderOn) { }
+                    Toggle(isOn: $habitAddingViewModel.shouldNotificate) { }
                         .labelsHidden()
                         .tint(themeManager.selectedTheme.accentColor)
                 }
                 .padding(.vertical)
 
-                if habitAddingViewModel.isRemainderOn {
+                if habitAddingViewModel.shouldNotificate {
                     HStack(spacing: 12) {
                         Label {
                             Text(habitAddingViewModel.remainderDate.formatted(date: .omitted, time: .shortened))
@@ -171,7 +171,7 @@ struct HabitAddingView: View {
                     .transition(.move(edge: .top).combined(with: .opacity))
                 }
             }
-            .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.isRemainderOn)
+            .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.shouldNotificate)
             .padding()
         }
         .onAppear {
@@ -243,7 +243,7 @@ struct HabitAddingView: View {
                 .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
             }
         }
-        .animation(.bouncy, value: habitAddingViewModel.isRemainderOn)
+        .animation(.bouncy, value: habitAddingViewModel.shouldNotificate)
         .animation(.bouncy, value: habitAddingViewModel.remainderText)
         .animation(.bouncy, value: habitAddingViewModel.habitTitle)
         .animation(.bouncy, value: habitAddingViewModel.weekDays.isEmpty)
@@ -254,7 +254,18 @@ struct HabitAddingView: View {
     // MARK: - Private Functions
 
     private func saveAction() {
-        
+        // TODO: - Add Notifications For Habits
+        coreDataViewModel.addHabit(
+            id: UUID().uuidString,
+            title: habitAddingViewModel.habitTitle,
+            description: habitAddingViewModel.habitDescription,
+            color: habitAddingViewModel.habitColor,
+            shouldNotificate: habitAddingViewModel.shouldNotificate,
+            notificationIDs: [],
+            notificationText: "",
+            weekDays: habitAddingViewModel.weekDays
+        )
+
         dismiss()
     }
 
