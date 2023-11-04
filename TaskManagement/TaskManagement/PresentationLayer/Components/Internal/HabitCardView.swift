@@ -1,9 +1,6 @@
 //
 //  HabitCardView.swift
-//  TaskManagement
-//
-//  Created by Никита Куприянов on 04.11.2023.
-//
+// 
 
 import SwiftUI
 
