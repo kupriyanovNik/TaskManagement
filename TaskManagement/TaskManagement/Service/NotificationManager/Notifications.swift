@@ -71,6 +71,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             }
     }
 
+    @discardableResult
     func cheduleNotification(
         title: String = "Habit Remainder",
         subtitle: String,

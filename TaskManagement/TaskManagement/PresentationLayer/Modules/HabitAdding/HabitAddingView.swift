@@ -9,6 +9,7 @@ struct HabitAddingView: View {
     // MARK: - Property Wrappers
 
     @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
+    @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
@@ -169,6 +170,16 @@ struct HabitAddingView: View {
             .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.shouldNotificate)
             .padding()
         }
+        .onAppear {
+            if let habit = habitsViewModel.editHabit {
+                habitAddingViewModel.habitTitle = habit.title ?? ""
+                habitAddingViewModel.habitDescription = habit.habitDescription ?? ""
+                habitAddingViewModel.habitColor = habit.color ?? ""
+                habitAddingViewModel.weekDaysIndicies = habit.weekDays ?? []
+                habitAddingViewModel.shouldNotificate = habit.isReminderOn
+                habitAddingViewModel.reminderText = habit.reminderText ?? ""
+            }
+        }
         .makeCustomNavBar {
             headerView()
         }
@@ -247,23 +258,46 @@ struct HabitAddingView: View {
     // MARK: - Private Functions
 
     private func saveAction() {
-        var notificationIDs = NotificationManager.shared.cheduleNotification(
-            title: "Habit Reminder",
-            subtitle: habitAddingViewModel.reminderText,
-            weekDays: habitAddingViewModel.weekDaysIndicies,
-            reminderDate: habitAddingViewModel.remainderDate
-        )
+        if let habit = habitsViewModel.editHabit {
+            if habitAddingViewModel.shouldNotificate {
+                NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
 
-        coreDataViewModel.addHabit(
-            id: UUID().uuidString,
-            title: habitAddingViewModel.habitTitle,
-            description: habitAddingViewModel.habitDescription,
-            color: habitAddingViewModel.habitColor,
-            shouldNotificate: habitAddingViewModel.shouldNotificate,
-            notificationIDs: notificationIDs,
-            notificationText: habitAddingViewModel.reminderText,
-            weekDays: habitAddingViewModel.weekDaysIndicies
-        )
+                habit.notificationIDs = NotificationManager.shared.cheduleNotification(
+                    title: "Habit Reminder",
+                    subtitle: habitAddingViewModel.reminderText,
+                    weekDays: habitAddingViewModel.weekDaysIndicies,
+                    reminderDate: habitAddingViewModel.remainderDate
+                )
+            } else {
+                if habit.isReminderOn {
+                    NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
+                }
+            }
+            coreDataViewModel.updateHabit(
+                habit: habit,
+                title: habitAddingViewModel.habitTitle,
+                description: habitAddingViewModel.habitDescription,
+                color: habitAddingViewModel.habitColor,
+                shouldNotificate: habitAddingViewModel.shouldNotificate,
+                reminderText: habitAddingViewModel.reminderText
+            )
+        } else {
+            coreDataViewModel.addHabit(
+                id: UUID().uuidString,
+                title: habitAddingViewModel.habitTitle,
+                description: habitAddingViewModel.habitDescription,
+                color: habitAddingViewModel.habitColor,
+                shouldNotificate: habitAddingViewModel.shouldNotificate,
+                notificationIDs: NotificationManager.shared.cheduleNotification(
+                    title: "Habit Reminder",
+                    subtitle: habitAddingViewModel.reminderText,
+                    weekDays: habitAddingViewModel.weekDaysIndicies,
+                    reminderDate: habitAddingViewModel.remainderDate
+                ),
+                notificationText: habitAddingViewModel.reminderText,
+                weekDays: habitAddingViewModel.weekDaysIndicies
+            )
+        }
 
         dismiss()
     }
@@ -275,6 +309,7 @@ struct HabitAddingView: View {
 #Preview {
     HabitAddingView()
         .environmentObject(HabitAddingViewModel())
+        .environmentObject(HabitsViewModel())
         .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())
 }

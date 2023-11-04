@@ -54,6 +54,7 @@ struct MainNavigationView: View {
                         HabitsView()
                             .environmentObject(habitsViewModel)
                             .environmentObject(settingsViewModel)
+                            .environmentObject(navigationViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)
                     }

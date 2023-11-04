@@ -10,6 +10,7 @@ struct HabitsView: View {
 
     @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
@@ -39,7 +40,10 @@ struct HabitsView: View {
                                 habitsViewModel: habitsViewModel,
                                 coreDataViewModel: coreDataViewModel,
                                 habit: habit
-                            )
+                            ) { habit in
+                                habitsViewModel.editHabit = habit
+                                navigationViewModel.showHabitAddingView.toggle()
+                            }
                             .scrollTransition(.animated(.bouncy)) { effect, phase in
                                 effect
                                     .scaleEffect(phase.isIdentity ? 1 : 0.95)
@@ -52,7 +56,10 @@ struct HabitsView: View {
                                 habitsViewModel: habitsViewModel,
                                 coreDataViewModel: coreDataViewModel,
                                 habit: habit
-                            )
+                            ) { habit in
+                                habitsViewModel.editHabit = habit
+                                navigationViewModel.showHabitAddingView.toggle()
+                            }
                         }
                     }
                 }
@@ -127,6 +134,7 @@ struct HabitsView: View {
     HabitsView()
         .environmentObject(HabitsViewModel())
         .environmentObject(SettingsViewModel())
+        .environmentObject(NavigationViewModel())
         .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())
 }

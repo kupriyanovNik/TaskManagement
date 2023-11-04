@@ -15,12 +15,22 @@ struct HabitCardView: View {
 
     let habit: HabitModel
 
+    var editAction: ((HabitModel) -> ())? = nil
+
     // MARK: - Body
 
     var body: some View {
         HStack {
             if habitsViewModel.isEditing {
-                VStack {
+                VStack(spacing: 10) {
+                    Button {
+                        editAction?(habit)
+                    } label: {
+                        Image(systemName: ImageNames.System.pencilCircleFill)
+                            .font(.title2)
+                            .foregroundColor(.primary)
+                    }
+
                     Button {
                         withAnimation {
                             coreDataViewModel.removeHabit(habit: habit) { _ in
@@ -32,8 +42,8 @@ struct HabitCardView: View {
                             .font(.title2)
                             .foregroundColor(.red)
                     }
-                    .padding(.trailing, 5)
                 }
+                .padding(.trailing, 5)
                 .transition(.move(edge: .leading).combined(with: .opacity))
             }
 

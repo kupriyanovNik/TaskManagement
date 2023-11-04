@@ -206,11 +206,15 @@ class CoreDataViewModel: ObservableObject {
         habit: HabitModel,
         title: String,
         description: String,
-        color: String
+        color: String,
+        shouldNotificate: Bool,
+        reminderText: String
     ) {
         habit.title = title
         habit.habitDescription = description
         habit.color = color
+        habit.isReminderOn = shouldNotificate
+        habit.reminderText = reminderText
 
         saveContext()
     }
