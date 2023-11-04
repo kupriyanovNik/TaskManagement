@@ -6,6 +6,8 @@ import Foundation
 
 class HabitAddingViewModel: ObservableObject {
 
+    // MARK: - Property Wrappers
+
     @Published var showTimePicker: Bool = false
 
     @Published var habitTitle: String = ""
@@ -18,7 +20,11 @@ class HabitAddingViewModel: ObservableObject {
 
     @Published var currentWeek: [Date] = []
 
+    // MARK: - Private Properties
+
     private var calendar = Calendar.current
+
+    // MARK: - Internal Functions 
 
     func fetchCurrentWeek() {
         currentWeek = []
