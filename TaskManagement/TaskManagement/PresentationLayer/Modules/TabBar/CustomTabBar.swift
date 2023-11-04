@@ -14,6 +14,7 @@ struct CustomTabBar: View {
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
+    @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
@@ -201,6 +202,7 @@ struct CustomTabBar: View {
 
     private func dismissEditInAllScreens() {
         withAnimation {
+            habitsViewModel.isEditing = false 
             homeViewModel.isEditing = false
             allTasksViewModel.isEditing = false
         }

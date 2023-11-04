@@ -168,10 +168,30 @@ struct HabitsView: View {
                     .bold()
                     .font(.largeTitle)
                     .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
-
             }
 
             Spacer()
+
+            if !coreDataViewModel.allHabits.isEmpty {
+                Group {
+                    if habitsViewModel.isEditing {
+                        Button("Done") {
+                            withAnimation {
+                                habitsViewModel.isEditing.toggle()
+                            }
+                        }
+                        .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
+                    } else {
+                        Button("Edit") {
+                            withAnimation {
+                                habitsViewModel.isEditing.toggle()
+                            }
+                        }
+                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                    }
+                }
+                .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+            }
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)

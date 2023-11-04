@@ -66,6 +66,7 @@ struct MainNavigationView: View {
                     .environmentObject(homeViewModel)
                     .environmentObject(allTasksViewModel)
                     .environmentObject(settingsViewModel)
+                    .environmentObject(habitsViewModel)
                     .environmentObject(coreDataViewModel)
                     .environmentObject(taskAddingViewModel)
                     .environmentObject(habitAddingViewModel)
