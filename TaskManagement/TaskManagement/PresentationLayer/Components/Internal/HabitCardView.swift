@@ -124,12 +124,14 @@ struct HabitCardView: View {
                             }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding(8)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 4)
                             .background {
-                                RoundedRectangle(cornerRadius: 30)
+                                Capsule()
                                     .fill(habit.color?.toColor() ?? "Card-1".toColor())
                                     .opacity(status ? 1 : 0)
                             }
+                            .padding(5)
                         }
                     }
                     .padding(.top, 15)
