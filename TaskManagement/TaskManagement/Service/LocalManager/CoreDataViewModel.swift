@@ -206,12 +206,14 @@ class CoreDataViewModel: ObservableObject {
         habit: HabitModel,
         title: String,
         description: String,
+        weekDays: [Int],
         color: String,
         shouldNotificate: Bool,
         reminderText: String
     ) {
         habit.title = title
         habit.habitDescription = description
+        habit.weekDays = weekDays
         habit.color = color
         habit.isReminderOn = shouldNotificate
         habit.reminderText = reminderText

@@ -11,6 +11,8 @@ struct HabitCardView: View {
     @ObservedObject var habitsViewModel: HabitsViewModel
     @ObservedObject var coreDataViewModel: CoreDataViewModel
 
+    @State private var showDetail: Bool = false
+
     // MARK: - Internal Properties
 
     let habit: HabitModel
@@ -21,6 +23,18 @@ struct HabitCardView: View {
 
     var body: some View {
         HStack {
+            let calendar = Calendar.current
+            let currentWeek = calendar.dateInterval(of: .weekOfMonth, for: .now)
+            let symbols = calendar.weekdaySymbols
+            let startDate = currentWeek?.start ?? .now
+
+            let activeWeekDays = habit.weekDays ?? []
+
+            let activePlot = symbols.indices.compactMap { index -> (index: Int, date: Date) in
+                let currentDate = calendar.date(byAdding: .day, value: index, to: startDate)
+                return (index, currentDate ?? .now)
+            }
+
             if habitsViewModel.isEditing {
                 VStack(spacing: 10) {
                     Button {
@@ -48,80 +62,88 @@ struct HabitCardView: View {
             }
 
             VStack(spacing: 6) {
-                HStack {
-                    Text(habit.title ?? "Default Title")
-                        .font(.callout)
-                        .fontWeight(.semibold)
-                        .lineLimit(1)
+                if !showDetail {
+                    HStack {
+                        var count: Int { habit.weekDays?.count ?? 0 }
 
-                    Image(systemName: "bell.badge.fill")
-                        .font(.callout)
-                        .foregroundColor((habit.color ?? "Card-1").toColor())
-                        .scaleEffect(0.9)
-                        .opacity(habit.isReminderOn ? 1 : 0)
+                        Text(count == 7 ? "Everyday" : "\(count) times a week")
+                            .font(.callout)
+                            .foregroundColor(.white)
+                            .opacity(0.7)
 
-                    Spacer()
+                        Image(systemName: "bell.badge.fill")
+                            .foregroundColor((habit.color ?? "Card-1").toColor())
+                            .opacity(habit.isReminderOn ? 1 : 0)
 
-                    let count = (habit.weekDays?.count ?? 0)
-                    Text( count == 7 ? "Everyday" : "\(count) times a week")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                        Spacer()
+                    }
                 }
-                .padding(.horizontal, 10)
 
-                Text(habit.habitDescription ?? "Default Description")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                Text(habit.title ?? "Default Title")
+                    .font(.title2)
+                    .bold()
                     .lineLimit(nil)
+                    .foregroundColor(.white)
                     .hLeading()
-                    .padding(.horizontal, 10)
 
-                let calendar = Calendar.current
-                let currentWeek = calendar.dateInterval(of: .weekOfMonth, for: .now)
-                let symbols = calendar.weekdaySymbols
-                let startDate = currentWeek?.start ?? .now
-
-                let activeWeekDays = habit.weekDays ?? []
-
-                let activePlot = symbols.indices.compactMap { index -> (index: Int, date: Date) in
-                    let currentDate = calendar.date(byAdding: .day, value: index, to: startDate)
-                    return (index, currentDate ?? .now)
+                VStack {
+                    if let description = habit.habitDescription, description != "", showDetail {
+                        Text(description)
+                            .font(.callout)
+                            .foregroundColor(.gray)
+                            .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                            .lineLimit(nil)
+                            .hLeading()
+                    }
                 }
+                .animation(.spring, value: showDetail)
 
-                HStack(spacing: 0) {
-                    ForEach(activePlot.indices, id: \.self) { index in
-                        let item = activePlot[index]
-
-                        VStack(spacing: 6) {
-                            Text(symbols[item.index].prefix(3))
-                                .font(.caption)
-                                .foregroundStyle(.gray)
+                if showDetail {
+                    HStack(spacing: 0) {
+                        ForEach(activePlot.indices, id: \.self) { index in
+                            let item = activePlot[index]
 
                             let status = activeWeekDays.contains { day in
                                 day == item.0
                             }
 
-                            Text(getDate(date: item.date))
-                                .font(.system(size: 14))
-                                .fontWeight(.semibold)
-                                .padding(8)
-                                .background {
-                                    Circle()
-                                        .fill(habit.color?.toColor() ?? "Card-1".toColor())
-                                        .opacity(status ? 1 : 0)
-                                }
+                            VStack(spacing: 6) {
+                                Text(symbols[item.index].prefix(3))
+                                    .font(.caption)
+
+                                Text(getDate(date: item.date))
+                                    .font(.system(size: 14))
+                                    .fontWeight(.semibold)
+
+                                Circle()
+                                    .fill(.white)
+                                    .frame(width: 8, height: 8)
+                                    .opacity(status ? 1 : 0)
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(8)
+                            .background {
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(habit.color?.toColor() ?? "Card-1".toColor())
+                                    .opacity(status ? 1 : 0)
+                            }
                         }
-                        .frame(maxWidth: .infinity)
                     }
+                    .padding(.top, 15)
                 }
-                .padding(.top, 15)
             }
             .padding(.vertical)
-            .padding(.horizontal, 6)
+            .padding(.horizontal)
             .background {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.gray.opacity(0.2))
+                Color.black
+                    .opacity(0.85)
+                    .cornerRadius(showDetail ? 15 : 25)
+            }
+            .onTapGesture {
+                withAnimation(.smooth(extraBounce: 0.5)) {
+                    showDetail.toggle()
+                }
             }
         }
     }

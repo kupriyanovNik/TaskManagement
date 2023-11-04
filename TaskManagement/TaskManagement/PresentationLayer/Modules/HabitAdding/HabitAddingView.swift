@@ -277,6 +277,7 @@ struct HabitAddingView: View {
                 habit: habit,
                 title: habitAddingViewModel.habitTitle,
                 description: habitAddingViewModel.habitDescription,
+                weekDays: habitAddingViewModel.weekDaysIndicies,
                 color: habitAddingViewModel.habitColor,
                 shouldNotificate: habitAddingViewModel.shouldNotificate,
                 reminderText: habitAddingViewModel.reminderText

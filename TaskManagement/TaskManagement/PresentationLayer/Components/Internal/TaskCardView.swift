@@ -11,7 +11,7 @@ struct TaskCard: View {
 
     @ObservedObject var coreDataViewModel: CoreDataViewModel
 
-    @State private var shouldShowDetail: Bool = false
+    @State private var showDetail: Bool = false
     @State private var showCardTap: Bool = false
 
     // MARK: - Internal Properties
@@ -35,10 +35,10 @@ struct TaskCard: View {
                         HStack(spacing: 10) {
                             if isToday {
                                 Text(taskDate.formatted(date: .omitted, time: .shortened))
-                                    .foregroundColor(.white.opacity(shouldShowDetail ? 1 : 0.7))
+                                    .foregroundColor(.white.opacity(showDetail ? 1 : 0.7))
                             }
 
-                            if shouldShowDetail && !isToday {
+                            if showDetail && !isToday {
                                 Text(taskDate.formatted(date: .omitted, time: .shortened))
                                     .transition(.opacity.combined(with: .scale))
                                     .foregroundColor(.white)
@@ -50,7 +50,7 @@ struct TaskCard: View {
                             }
 
                             VStack {
-                                if shouldShowDetail && isToday {
+                                if showDetail && isToday {
                                     Text(task.taskCategory ?? "Normal")
                                         .transition(.opacity.combined(with: .scale))
                                 }
@@ -58,17 +58,17 @@ struct TaskCard: View {
                         }
                         .font(.callout)
                         .foregroundStyle(.secondary)
-                        .animation(.spring, value: shouldShowDetail)
+                        .animation(.spring, value: showDetail)
 
                         VStack {
-                            if shouldShowDetail && !isToday {
+                            if showDetail && !isToday {
                                 Text(task.taskCategory ?? "Normal")
                                     .transition(.opacity.combined(with: .scale))
                                     .font(.callout)
                                     .foregroundStyle(.secondary)
                             }
                         }
-                        .animation(.spring, value: shouldShowDetail)
+                        .animation(.spring, value: showDetail)
 
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
@@ -79,7 +79,7 @@ struct TaskCard: View {
                     .hLeading()
 
                     VStack {
-                        if shouldShowDetail, let description = task.taskDescription {
+                        if showDetail, let description = task.taskDescription {
                             Text(description)
                                 .font(.callout)
                                 .foregroundStyle(.secondary)
@@ -87,7 +87,7 @@ struct TaskCard: View {
                                 .lineLimit(nil)
                         }
                     }
-                    .animation(.spring, value: shouldShowDetail)
+                    .animation(.spring, value: showDetail)
                 }
                 .hLeading()
             }
@@ -118,13 +118,13 @@ struct TaskCard: View {
         .background {
             Color.black
                 .opacity(0.85)
-                .cornerRadius(shouldShowDetail ? 15 : 25)
+                .cornerRadius(showDetail ? 15 : 25)
         }
         .scaleEffect(showCardTap ? 0.95 : 1)
-        .scaleEffect(shouldShowDetail ? 1.05 : 1)
+        .scaleEffect(showDetail ? 1.05 : 1)
         .onTapGesture {
             withAnimation(.smooth(duration: 0.3, extraBounce: 0.5)) {
-                shouldShowDetail.toggle()
+                showDetail.toggle()
             }
         }
         .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
