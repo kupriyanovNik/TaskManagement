@@ -202,6 +202,19 @@ class CoreDataViewModel: ObservableObject {
         onRemove?(date)
     }
 
+    func updateHabit(
+        habit: HabitModel,
+        title: String,
+        description: String,
+        color: String
+    ) {
+        habit.title = title
+        habit.habitDescription = description
+        habit.color = color
+
+        saveContext()
+    }
+
     func fetchAllHabits() {
         let request = NSFetchRequest<HabitModel>(entityName: coreDataNames.habitModel)
         request.sortDescriptors = [.init(keyPath: \HabitModel.dateAdded, ascending: true)]
