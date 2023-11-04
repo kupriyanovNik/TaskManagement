@@ -217,7 +217,7 @@ struct TaskCardView: View {
                     }
 
                     Button {
-                        coreDataViewModel.removeTask(task: task, date: task.taskDate ?? .now) { _ in
+                        coreDataViewModel.removeTask(task: task) { _ in
                             self.onRemove?()
                             if coreDataViewModel.allTasks.isEmpty {
                                 navigationViewModel.selectedTab = .home

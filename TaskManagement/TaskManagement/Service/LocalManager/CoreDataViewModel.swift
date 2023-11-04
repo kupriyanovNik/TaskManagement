@@ -56,11 +56,13 @@ class CoreDataViewModel: ObservableObject {
 
     func removeTask(
         task: TaskModel,
-        date: Date,
         onRemove: ((Date) -> ())? = nil
     ) {
         viewContext.delete(task)
         saveContext()
+        
+        let date = task.taskDate ?? .now
+
         self.fetchTasksFilteredByDate(dateToFilter: date)
         onRemove?(date)
     }
@@ -186,6 +188,13 @@ class CoreDataViewModel: ObservableObject {
         saveContext()
         self.fetchAllHabits()
         onAdded?(habit)
+    }
+
+    func removeHabit(
+        habit: HabitModel,
+        onRemove: ((Date) -> ())? = nil
+    ) {
+        
     }
 
     func fetchAllHabits() {
