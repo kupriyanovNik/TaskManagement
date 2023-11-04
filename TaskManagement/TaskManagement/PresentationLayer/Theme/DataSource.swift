@@ -6,7 +6,7 @@ import SwiftUI
 
 enum DataSource {
 
-    // MARK: - Internal Properties
+    // MARK: - Static Properties
 
     static let themes: [Theme] = [
         Theme0(),
@@ -25,7 +25,7 @@ enum DataSource {
         Self.themes.count
     }
 
-    // MARK: - Internal Functions
+    // MARK: - Static Functions
 
     static func getTheme(themeIndex: Int) -> Theme {
         Self.themes[themeIndex]

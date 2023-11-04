@@ -6,23 +6,29 @@ import CoreData
 
 struct PersistenceController {
 
+    // MARK: - Static Properties
+
     static let shared = PersistenceController()
 
-    let container: NSPersistentContainer
-
-    var viewContext: NSManagedObjectContext {
-        container.viewContext
-    }
+    // MARK: - Inits
 
     init() {
         container = NSPersistentContainer(name: Constants.CoreDataNames.taskManagement)
 
         container.loadPersistentStores { description, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+            if let error  {
+                fatalError("Unresolved error \(error.localizedDescription)")
             }
         }
-        
+
         viewContext.automaticallyMergesChangesFromParent = true
+    }
+
+    // MARK: - Internal Properties
+
+    let container: NSPersistentContainer
+
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
     }
 }

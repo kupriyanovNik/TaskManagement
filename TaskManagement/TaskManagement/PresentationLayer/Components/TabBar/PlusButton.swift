@@ -9,6 +9,7 @@ struct PlusButton: View {
     // MARK: - Property Wrappers
 
     @ObservedObject var tabBarViewModel: TabBarViewModel
+
     @State private var scale: Double = 1
     @State private var rotation: Double = 0
 
@@ -55,8 +56,10 @@ struct PlusButton: View {
                         tabBarViewModel.gradientLineWidth = 6
                         generateFeedback(style: .soft)
                     }
+
                     delay(0.2) {
                         longAction()
+
                         delay(0.3) {
                             scale = 1
                             rotation = 0

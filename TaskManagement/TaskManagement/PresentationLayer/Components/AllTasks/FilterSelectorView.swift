@@ -16,6 +16,7 @@ struct FilterSelectorView: View {
     var accentColor: Color
 
     // MARK: - Body
+    
     var body: some View {
         VStack {
             Text(title)

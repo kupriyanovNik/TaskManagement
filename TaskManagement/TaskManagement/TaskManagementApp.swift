@@ -66,7 +66,7 @@ struct TaskManagementApp: App {
                                 .ignoresSafeArea(edges: .top)
                         }
                     }
-                    .animation(.spring(), value: shouldShowOnboarding)
+                    .animation(.spring, value: shouldShowOnboarding)
             }
             .preferredColorScheme(.light)
         }
