@@ -6,12 +6,20 @@ import SwiftUI
 
 struct HabitCardView: View {
 
+    // MARK: - Embedded
+
+    private enum CardState {
+        case basic
+        case description
+        case extended
+    }
+
     // MARK: - Property Wrappers
 
     @ObservedObject var habitsViewModel: HabitsViewModel
     @ObservedObject var coreDataViewModel: CoreDataViewModel
 
-    @State private var showDetail: Bool = false
+    @State private var cardState: CardState = .basic
 
     // MARK: - Internal Properties
 
@@ -62,7 +70,7 @@ struct HabitCardView: View {
             }
 
             VStack(spacing: 6) {
-                if !showDetail {
+                if cardState == .basic {
                     HStack {
                         var count: Int { habit.weekDays?.count ?? 0 }
 
@@ -77,7 +85,7 @@ struct HabitCardView: View {
 
                         Spacer()
                     }
-                    .animation(.spring, value: showDetail)
+                    .animation(.spring, value: cardState)
                 }
 
                 Text(habit.title ?? "Default Title")
@@ -86,10 +94,12 @@ struct HabitCardView: View {
                     .lineLimit(nil)
                     .foregroundColor(.white)
                     .hLeading()
-                    .animation(.spring, value: showDetail)
+                    .animation(.spring, value: cardState)
 
                 VStack {
-                    if let description = habit.habitDescription, description != "", showDetail {
+                    if let description = habit.habitDescription,
+                       description != "",
+                        cardState == .description || cardState == .extended {
                         Text(description)
                             .font(.callout)
                             .foregroundColor(.gray)
@@ -98,9 +108,9 @@ struct HabitCardView: View {
                             .hLeading()
                     }
                 }
-                .animation(.spring, value: showDetail)
+                .animation(.spring, value: cardState)
 
-                if showDetail {
+                if cardState == .extended {
                     HStack(spacing: 0) {
                         ForEach(activePlot.indices, id: \.self) { index in
                             let item = activePlot[index]
@@ -143,11 +153,13 @@ struct HabitCardView: View {
             .background {
                 Color.black
                     .opacity(0.85)
-                    .cornerRadius(showDetail ? 15 : 25)
+                    .cornerRadius(cardState != .basic ? 15 : 25)
             }
             .onTapGesture {
                 withAnimation(.easeOut) {
-                    showDetail.toggle()
+                    if cardState == .basic { cardState = .description }
+                    else if cardState == .description { cardState = .extended }
+                    else if cardState == .extended { cardState = .basic }
                 }
             }
         }
