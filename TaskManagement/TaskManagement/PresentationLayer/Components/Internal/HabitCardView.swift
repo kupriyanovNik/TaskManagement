@@ -162,7 +162,11 @@ struct HabitCardView: View {
             }
             .onTapGesture {
                 withAnimation(.easeOut) {
-                    if cardState == .basic { cardState = .description }
+                    if cardState == .basic {
+                        if let description = habit.habitDescription,
+                           description != "" { cardState = .description }
+                        else { cardState = .extended }
+                    }
                     else if cardState == .description { cardState = .extended }
                     else if cardState == .extended { cardState = .basic }
                 }
