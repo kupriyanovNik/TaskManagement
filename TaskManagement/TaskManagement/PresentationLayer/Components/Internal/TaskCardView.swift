@@ -122,11 +122,14 @@ struct TaskCard: View {
         }
         .scaleEffect(showCardTap ? 0.95 : 1)
         .scaleEffect(showDetail ? 1.05 : 1)
-        .onTapGesture {
-            withAnimation(.smooth(duration: 0.3, extraBounce: 0.5)) {
-                showDetail.toggle()
-            }
-        }
+        .highPriorityGesture(
+            TapGesture()
+                .onEnded { _ in
+                    withAnimation(.easeOut) {
+                        showDetail.toggle()
+                    }
+                }
+        )
         .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
             withAnimation {
                 generateFeedback()
