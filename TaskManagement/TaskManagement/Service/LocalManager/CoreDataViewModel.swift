@@ -27,6 +27,7 @@ class CoreDataViewModel: ObservableObject {
     init() {
         self.viewContext = PersistenceController.shared.viewContext
         self.fetchTasksFilteredByDate(dateToFilter: .now)
+        self.fetchAllHabits()
     }
 
     // MARK: - Internal Functions

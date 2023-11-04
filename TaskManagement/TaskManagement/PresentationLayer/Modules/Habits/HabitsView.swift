@@ -40,13 +40,13 @@ struct HabitsView: View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
                 HStack {
-                    Text("Get Better")
-                        .foregroundColor(.gray)
-
                     if habitsViewModel.showGreetings {
                         Text("✅")
-                            .transition(.move(edge: .trailing).combined(with: .opacity))
+                            .transition(.move(edge: .leading).combined(with: .opacity))
                     }
+
+                    Text("Get Better")
+                        .foregroundColor(.gray)
                 }
 
                 Text("Habits")

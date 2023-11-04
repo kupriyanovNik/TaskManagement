@@ -52,7 +52,6 @@ struct HomeView: View {
             .padding(.top)
         }
         .onAppear {
-            coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
             delay(3) {
                 withAnimation(.default) {
                     homeViewModel.showGreetings = false

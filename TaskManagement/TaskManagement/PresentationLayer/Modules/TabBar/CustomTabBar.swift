@@ -151,12 +151,12 @@ struct CustomTabBar: View {
         .padding(.horizontal, 30)
         .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)
         .sheet(isPresented: $navigationViewModel.showTaskAddingView) {
-            addingViewDismissAction()
+            taskAddingViewDismissAction()
         } content: {
             taskAddingView
         }
         .sheet(isPresented: $navigationViewModel.showHabitAddingView) {
-            habitAddingViewModel.reset()
+            habitAddingViewDismissAction()
         } content: {
             habitAddingView
         }
@@ -182,7 +182,7 @@ struct CustomTabBar: View {
         }
     }
 
-    private func addingViewDismissAction() {
+    private func taskAddingViewDismissAction() {
         dismissEditInAllScreens()
         homeViewModel.editTask = nil
         coreDataViewModel.fetchAllTasks()
@@ -192,7 +192,13 @@ struct CustomTabBar: View {
         }
         taskAddingViewModel.reset()
     }
-    
+
+    private func habitAddingViewDismissAction() {
+        dismissEditInAllScreens()
+        habitAddingViewModel.reset()
+        coreDataViewModel.fetchAllTasks()
+    }
+
     private func dismissEditInAllScreens() {
         withAnimation {
             homeViewModel.isEditing = false
