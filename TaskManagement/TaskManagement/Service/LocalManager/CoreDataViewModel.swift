@@ -194,7 +194,12 @@ class CoreDataViewModel: ObservableObject {
         habit: HabitModel,
         onRemove: ((Date) -> ())? = nil
     ) {
-        
+        viewContext.delete(habit)
+        saveContext()
+
+        let date = habit.dateAdded ?? .now
+
+        onRemove?(date)
     }
 
     func fetchAllHabits() {
