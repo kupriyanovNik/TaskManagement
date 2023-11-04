@@ -18,6 +18,14 @@ enum Localizable {
 
     enum HabitAdding {
         static let title = "Новая привычка"
+        static let habitTitle = "Habit Title"
+        static let habitDescription = "Habit Description"
+        static let frequency = "Frequency"
+        static let reminder = "Reminder"
+        static let justNotifications = "Just Notifications"
+        static let reminderText = "Reminder Text"
+        static let save = "Save"
+        static let notificationTitle = "Reminder Title"
     }
 
     enum Home {
@@ -29,6 +37,15 @@ enum Localizable {
         static let noTasks = localized("Home.noTasks")
         static let noTasksDescription = localized("Home.noTasksDescription")
         static let willNotificate = localized("Home.willNotificate")
+    }
+
+    enum Habits {
+        static let title = "Habits"
+        static let subtitle = "Get Better"
+        static let done = "Done"
+        static let edit = "Edit"
+        static let noHabits = "No Habits Found"
+        static let noHabitsDescription = "Here you will your habits.\nHold \"+\" to add a new one"
     }
 
     enum Profile {
@@ -72,5 +89,10 @@ enum Localizable {
         static let noTasks = localized("Home.noTasks")
         static let markAsCompleted = localized("Home.markAsCompleted")
         static let markedAsCompleted = localized("Home.markedAsCompleted")
+    }
+
+    enum HabitCard {
+        static let everyday = "Everyday"
+        static let timeAweek = "times a week"
     }
 }

@@ -27,6 +27,11 @@ struct HabitCardView: View {
 
     var editAction: ((HabitModel) -> ())? = nil
 
+    // MARK: - Private Properties
+
+    private let systemImages = ImageNames.System.self
+    private let strings = Localizable.HabitCard.self
+
     // MARK: - Body
 
     var body: some View {
@@ -48,7 +53,7 @@ struct HabitCardView: View {
                     Button {
                         editAction?(habit)
                     } label: {
-                        Image(systemName: ImageNames.System.pencilCircleFill)
+                        Image(systemName: systemImages.pencilCircleFill)
                             .font(.title2)
                             .foregroundColor(.primary)
                     }
@@ -60,7 +65,7 @@ struct HabitCardView: View {
                             }
                         }
                     } label: {
-                        Image(systemName: ImageNames.System.minusCircleFill)
+                        Image(systemName: systemImages.minusCircleFill)
                             .font(.title2)
                             .foregroundColor(.red)
                     }
@@ -74,12 +79,12 @@ struct HabitCardView: View {
                     HStack {
                         var count: Int { habit.weekDays?.count ?? 0 }
 
-                        Text(count == 7 ? "Everyday" : "\(count) times a week")
+                        Text(count == 7 ? strings.everyday : "\(count) \(strings.timeAweek)")
                             .font(.callout)
                             .foregroundColor(.white)
                             .opacity(0.7)
 
-                        Image(systemName: "bell.badge.fill")
+                        Image(systemName: systemImages.bellBadge)
                             .foregroundColor((habit.color ?? "Card-1").toColor())
                             .opacity(habit.isReminderOn ? 1 : 0)
 
@@ -157,7 +162,11 @@ struct HabitCardView: View {
             }
             .onTapGesture {
                 withAnimation(.easeOut) {
-                    if cardState == .basic { cardState = .description }
+                    if cardState == .basic {
+                        if let description = habit.habitDescription,
+                           description != "" { cardState = .description }
+                        else { cardState = .extended }
+                    }
                     else if cardState == .description { cardState = .extended }
                     else if cardState == .extended { cardState = .basic }
                 }
@@ -169,7 +178,7 @@ struct HabitCardView: View {
 
     func getDate(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd"
+        formatter.dateFormat = Constants.DateFormats.forDateNumber
 
         return formatter.string(from: date)
     }

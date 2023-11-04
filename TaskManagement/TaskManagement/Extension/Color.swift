@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-
+// MARK: - For converting 'special' String to Color
 extension String {
     func toColor() -> Color {
         switch self {

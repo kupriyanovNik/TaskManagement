@@ -26,7 +26,7 @@ struct RadioButton: View {
                     .fill(accentColor)
                     .padding(2)
                     .overlay {
-                        Image(systemName: "checkmark")
+                        Image(systemName: ImageNames.System.checkmark)
                             .foregroundColor(.white)
                     }
                     .transition(.opacity.combined(with: .scale))
@@ -42,6 +42,9 @@ struct RadioButton: View {
 // MARK: - Preview
 
 #Preview {
-    RadioButton(isSelected: .constant(true), accentColor: .purple)
-        .frame(width: 30, height: 30)
+    RadioButton(
+        isSelected: .constant(true),
+        accentColor: .purple
+    )
+    .frame(width: 30, height: 30)
 }

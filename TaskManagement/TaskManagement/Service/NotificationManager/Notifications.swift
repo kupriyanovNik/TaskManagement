@@ -9,9 +9,15 @@ import UserNotifications
 
 class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
+    // MARK: - Static Properties
+
     static let shared = NotificationManager()
 
+    // MARK: - Inits
+
     private override init() { super.init() }
+
+    // MARK: - Internal Functions
 
     func requestAuthorization() {
         UNUserNotificationCenter.current()
@@ -23,7 +29,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    // MARK: - For sending notification in foreground app phase
+    /// For sending notification in foreground app phase
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
@@ -66,19 +72,18 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current()
             .add(request) { error in
                 if let error {
-                    print(error.localizedDescription)
+                    print("DEBUG: \(error.localizedDescription)")
                 }
             }
     }
 
     @discardableResult
     func cheduleNotification(
-        title: String = "Habit Remainder",
+        title: String = "Habit Reminder",
         subtitle: String,
         weekDays: [Int],
         reminderDate: Date
     ) -> [String] {
-        
         let content = UNMutableNotificationContent()
         content.title = title
         content.subtitle = subtitle

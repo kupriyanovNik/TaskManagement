@@ -71,7 +71,8 @@ class CoreDataViewModel: ObservableObject {
         task: TaskModel,
         title: String,
         description: String?,
-        shouldNotificate: Bool
+        shouldNotificate: Bool,
+        onUpdate: ((Date) -> ())? = nil
     ) {
         task.taskTitle = title
         task.taskDescription = description
@@ -209,7 +210,8 @@ class CoreDataViewModel: ObservableObject {
         weekDays: [Int],
         color: String,
         shouldNotificate: Bool,
-        reminderText: String
+        reminderText: String,
+        onUpdate: ((Date) -> ())? = nil
     ) {
         habit.title = title
         habit.habitDescription = description

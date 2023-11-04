@@ -27,14 +27,14 @@ struct HabitAddingView: View {
             VStack(spacing: 16) {
                 CustomTextField(
                     inputText: $habitAddingViewModel.habitTitle,
-                    placeHolder: "Habit Title",
+                    placeHolder: strings.habitTitle,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
                 .continueEditing()
 
                 CustomTextField(
                     inputText: $habitAddingViewModel.habitDescription,
-                    placeHolder: "Habit Description",
+                    placeHolder: strings.habitDescription,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
                 .continueEditing()
@@ -48,7 +48,7 @@ struct HabitAddingView: View {
                             .frame(width: 35, height: 35)
                             .overlay {
                                 if color == habitAddingViewModel.habitColor {
-                                    Image(systemName: "checkmark")
+                                    Image(systemName: systemImages.checkmark)
                                         .transition(
                                             .asymmetric(
                                                 insertion: .scale,
@@ -74,7 +74,7 @@ struct HabitAddingView: View {
                 .padding(.vertical)
 
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Frequency")
+                    Text(strings.frequency)
                         .font(.callout.bold())
 
                     let weekDays = Calendar.current.weekdaySymbols
@@ -121,10 +121,10 @@ struct HabitAddingView: View {
 
                 HStack {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Remainder")
+                        Text(strings.reminder)
                             .fontWeight(.semibold)
 
-                        Text("Just Notifications")
+                        Text(strings.justNotifications)
                             .font(.caption)
                             .foregroundStyle(.gray)
                     }
@@ -141,7 +141,7 @@ struct HabitAddingView: View {
                         Label {
                             Text(habitAddingViewModel.remainderDate.formatted(date: .omitted, time: .shortened))
                         } icon: {
-                            Image(systemName: "clock")
+                            Image(systemName: systemImages.clock)
                         }
                         .padding(.horizontal)
                         .padding(.vertical, 12)
@@ -157,7 +157,7 @@ struct HabitAddingView: View {
 
                         CustomTextField(
                             inputText: $habitAddingViewModel.reminderText,
-                            placeHolder: "Reminder Text",
+                            placeHolder: strings.reminderText,
                             strokeColor: themeManager.selectedTheme.accentColor
                         )
                         .continueEditing()
@@ -240,7 +240,7 @@ struct HabitAddingView: View {
                 Button {
                     saveAction()
                 } label: {
-                    Text("Save")
+                    Text(strings.save)
                         .foregroundStyle(themeManager.selectedTheme.accentColor)
                 }
                 .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
@@ -263,7 +263,7 @@ struct HabitAddingView: View {
                 NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
 
                 habit.notificationIDs = NotificationManager.shared.cheduleNotification(
-                    title: "Habit Reminder",
+                    title: strings.notificationTitle,
                     subtitle: habitAddingViewModel.reminderText,
                     weekDays: habitAddingViewModel.weekDaysIndicies,
                     reminderDate: habitAddingViewModel.remainderDate
@@ -290,7 +290,7 @@ struct HabitAddingView: View {
                 color: habitAddingViewModel.habitColor,
                 shouldNotificate: habitAddingViewModel.shouldNotificate,
                 notificationIDs: NotificationManager.shared.cheduleNotification(
-                    title: "Habit Reminder",
+                    title: strings.notificationTitle,
                     subtitle: habitAddingViewModel.reminderText,
                     weekDays: habitAddingViewModel.weekDaysIndicies,
                     reminderDate: habitAddingViewModel.remainderDate

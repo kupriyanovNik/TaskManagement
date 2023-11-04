@@ -7,9 +7,11 @@ import Foundation
 enum ImageNames {
     enum System {
         static let plus = "plus"
-        static let gear = "gear"
+        static let clock = "clock"
+        static let gear = "gearshape"
         static let checkmark = "checkmark"
         static let noteText = "note.text"
+        static let bellBadge = "bell.badge.fill"
         static let backArrow = "chevron.left"
         static let xmarkCircleFill = "xmark.circle.fill"
         static let pencilCircleFill = "pencil.circle.fill"

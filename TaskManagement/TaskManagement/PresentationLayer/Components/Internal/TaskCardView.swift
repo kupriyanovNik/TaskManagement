@@ -79,7 +79,7 @@ struct TaskCard: View {
                     .hLeading()
 
                     VStack {
-                        if showDetail, let description = task.taskDescription {
+                        if let description = task.taskDescription, showDetail {
                             Text(description)
                                 .font(.callout)
                                 .foregroundStyle(.secondary)

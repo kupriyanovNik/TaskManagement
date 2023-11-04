@@ -109,6 +109,7 @@ struct HomeView: View {
                 .contentShape(Capsule())
                 .onTapGesture {
                     generateFeedback()
+                    
                     withAnimation {
                         homeViewModel.currentDay = day
                     }

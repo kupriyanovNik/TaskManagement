@@ -111,6 +111,7 @@ struct SettingsView: View {
     }
 
     // MARK: - Body
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
