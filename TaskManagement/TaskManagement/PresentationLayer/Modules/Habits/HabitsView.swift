@@ -75,7 +75,7 @@ struct HabitsView: View {
 
                 Image(systemName: "bell.badge.fill")
                     .font(.callout)
-                    .foregroundColor(habit.color?.toColor() ?? "Card-1".toColor())
+                    .foregroundColor((habit.color ?? "Card-1").toColor())
                     .scaleEffect(0.9)
                     .opacity(habit.isReminderOn ? 1 : 0)
 
@@ -88,21 +88,32 @@ struct HabitsView: View {
             }
             .padding(.horizontal, 10)
 
+            let calendar = Calendar.current
+            let currentWeek = calendar.dateInterval(of: .weekOfMonth, for: .now)
+            let symbols = calendar.weekdaySymbols
+            let startDate = currentWeek?.start ?? .now
+
+            let activeWeekDays = habit.weekDays ?? []
+
+            let activePlot = symbols.indices.compactMap { index -> (Int, Date) in
+                let currentDate = calendar.date(byAdding: .day, value: index, to: startDate)
+                return (index, currentDate ?? .now)
+            }
+
             HStack(spacing: 0) {
-                ForEach(habitsViewModel.currentWeek.indices, id: \.self) { index in
-                    let day = habitsViewModel.currentWeek[index]
-                    let dayLiteral = habitsViewModel.weekDays[index]
+                ForEach(activePlot.indices, id: \.self) { index in
+                    let item = activePlot[index]
 
                     VStack(spacing: 6) {
-                        Text(dayLiteral.prefix(3))
+                        Text(symbols[item.0].prefix(3))
                             .font(.caption)
                             .foregroundStyle(.gray)
 
-                        let status = (habit.weekDays ?? []).contains { day in
-                            day == dayLiteral
+                        let status = activeWeekDays.contains { day in
+                            day == item.0
                         }
 
-                        Text(self.dateFormatter.string(from: day))
+                        Text(getDate(date: item.1))
                             .font(.system(size: 14))
                             .fontWeight(.semibold)
                             .padding(8)
@@ -123,6 +134,13 @@ struct HabitsView: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.gray.opacity(0.2))
         }
+    }
+
+    func getDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd"
+
+        return formatter.string(from: date)
     }
 
     @ViewBuilder func headerView() -> some View {

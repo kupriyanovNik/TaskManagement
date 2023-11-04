@@ -171,7 +171,7 @@ class CoreDataViewModel: ObservableObject {
         shouldNotificate: Bool,
         notificationIDs: [String]?,
         notificationText: String,
-        weekDays: [String],
+        weekDays: [Int],
         onAdded: ((HabitModel) -> ())? = nil
     ) {
         let habit = HabitModel(context: viewContext)

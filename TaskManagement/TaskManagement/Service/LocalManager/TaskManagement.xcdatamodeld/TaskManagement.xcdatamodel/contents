@@ -9,7 +9,7 @@
         <attribute name="notificationIDs" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="reminderText" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
-        <attribute name="weekDays" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="weekDays" attributeType="Transformable" customClassName="[Int]"/>
     </entity>
     <entity name="TaskModel" representedClassName="TaskModel" syncable="YES" codeGenerationType="class">
         <attribute name="isCompleted" attributeType="Boolean" usesScalarValueType="YES"/>

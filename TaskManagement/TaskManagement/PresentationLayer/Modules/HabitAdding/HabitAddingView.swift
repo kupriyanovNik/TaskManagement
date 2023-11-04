@@ -76,23 +76,15 @@ struct HabitAddingView: View {
                     Text("Frequency")
                         .font(.callout.bold())
 
+                    let weekDays = Calendar.current.weekdaySymbols
 
                     HStack {
-                        ForEach(habitAddingViewModel.currentWeek, id: \.self) { weekDay in
-                            let dayOfWeek = habitAddingViewModel.extractDate(
-                                date: weekDay,
-                                format: Constants.DateFormats.forDateLiteral
-                            )
-
-                            let index = habitAddingViewModel.weekDays.firstIndex { value in
-                                return value == dayOfWeek
-                            } ?? -1
-
-                            let insIndex = habitAddingViewModel.weekDays.firstIndex {
+                        ForEach(weekDays, id: \.self) { dayOfWeek in
+                            let index = weekDays.firstIndex {
                                 $0 == dayOfWeek
                             } ?? -1
 
-                            let isSelected = habitAddingViewModel.weekDays.contains(dayOfWeek)
+                            let isSelected = habitAddingViewModel.weekDaysIndicies.contains(index)
 
                             let selectedColor = habitAddingViewModel.habitColor.toColor()
 
@@ -103,20 +95,23 @@ struct HabitAddingView: View {
                                 .background {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(isSelected ? selectedColor : .gray.opacity(0.4))
-                                        .animation(.linear.delay(Double(insIndex) * 0.05), value: habitAddingViewModel.habitColor)
+                                        .animation(
+                                            .linear.delay(Double(index) * 0.05),
+                                            value: habitAddingViewModel.habitColor
+                                        )
 
                                 }
                                 .scaleEffect(isSelected ? 1 : 0.9)
                                 .onTapGesture {
                                     withAnimation {
-                                        if index != -1 {
-                                            habitAddingViewModel.weekDays.remove(at: index)
+                                        if let firstIndex = habitAddingViewModel.weekDaysIndicies.firstIndex(of: index) {
+                                            habitAddingViewModel.weekDaysIndicies.remove(at: firstIndex)
                                         } else {
-                                            habitAddingViewModel.weekDays.append(dayOfWeek)
+                                            habitAddingViewModel.weekDaysIndicies.append(index)
                                         }
                                     }
                                 }
-                                .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.weekDays)
+                                .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.weekDaysIndicies)
                         }
                     }
                     .padding(.top, 15)
@@ -173,9 +168,6 @@ struct HabitAddingView: View {
             }
             .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.shouldNotificate)
             .padding()
-        }
-        .onAppear {
-            habitAddingViewModel.fetchCurrentWeek()
         }
         .makeCustomNavBar {
             headerView()
@@ -244,9 +236,10 @@ struct HabitAddingView: View {
             }
         }
         .animation(.bouncy, value: habitAddingViewModel.shouldNotificate)
+        .animation(.bouncy, value: habitAddingViewModel.remainderDate)
         .animation(.bouncy, value: habitAddingViewModel.remainderText)
         .animation(.bouncy, value: habitAddingViewModel.habitTitle)
-        .animation(.bouncy, value: habitAddingViewModel.weekDays.isEmpty)
+        .animation(.bouncy, value: habitAddingViewModel.weekDaysIndicies.isEmpty)
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding([.horizontal, .top])
     }
@@ -263,8 +256,10 @@ struct HabitAddingView: View {
             shouldNotificate: habitAddingViewModel.shouldNotificate,
             notificationIDs: [],
             notificationText: "",
-            weekDays: habitAddingViewModel.weekDays
+            weekDays: habitAddingViewModel.weekDaysIndicies
         )
+
+        print("DEBUG: \(habitAddingViewModel.weekDaysIndicies)")
 
         dismiss()
     }
