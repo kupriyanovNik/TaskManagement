@@ -90,4 +90,9 @@ enum Localizable {
         static let markAsCompleted = localized("Home.markAsCompleted")
         static let markedAsCompleted = localized("Home.markedAsCompleted")
     }
+
+    enum HabitCard {
+        static let everyday = "Everyday"
+        static let timeAweek = "times a week"
+    }
 }
