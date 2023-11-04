@@ -6,56 +6,31 @@ import Foundation
 
 class HabitAddingViewModel: ObservableObject {
 
+    // MARK: - Property Wrappers
+
     @Published var showTimePicker: Bool = false
 
     @Published var habitTitle: String = ""
     @Published var habitDescription: String = ""
     @Published var habitColor: String = "Card-1"
-    @Published var weekDays: [String] = []
-    @Published var isRemainderOn: Bool = false
-    @Published var remainderText: String = ""
+    @Published var weekDaysIndicies: [Int] = []
+    @Published var shouldNotificate: Bool = false
+    @Published var reminderText: String = ""
     @Published var remainderDate: Date = .now
 
-    @Published var currentWeek: [Date] = []
-
-    private var calendar = Calendar.current
-
-    func fetchCurrentWeek() {
-        currentWeek = []
-        let today = Date()
-        let week = calendar.dateInterval(of: .weekOfMonth, for: today)
-        guard let firstWeekDay = week?.start else { return }
-
-        (0...6).forEach {
-            if let weekday = calendar.date(byAdding: .day, value: $0, to: firstWeekDay) {
-                self.currentWeek.append(weekday)
-            }
-        }
-    }
-
-    func extractDate(date: Date, format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: date)
-    }
+    // MARK: - Internal Functions
 
     func isAbleToSave() -> Bool {
-        let remainderStatus = isRemainderOn ? remainderText == "" : false
-
-        if habitTitle == "" || weekDays.isEmpty || remainderStatus {
-            return false
-        }
-
-        return true
+        return !(habitTitle == "" || weekDaysIndicies.isEmpty || (shouldNotificate ? reminderText == "" : false))
     }
 
     func reset() {
         habitTitle = ""
         habitDescription = ""
         habitColor = "Card-1"
-        weekDays = []
-        isRemainderOn = false
-        remainderText = ""
+        weekDaysIndicies = []
+        shouldNotificate = false
+        reminderText = ""
         remainderDate = .now
     }
 }

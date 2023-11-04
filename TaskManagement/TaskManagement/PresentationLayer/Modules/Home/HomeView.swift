@@ -29,7 +29,7 @@ struct HomeView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
                 if coreDataViewModel.tasksFilteredByDate.isEmpty {
-                    NoTasksFoundView(
+                    NotFoundView(
                         title: strings.noTasks,
                         description: strings.noTasksDescription,
                         accentColor: themeManager.selectedTheme.accentColor
@@ -52,7 +52,6 @@ struct HomeView: View {
             .padding(.top)
         }
         .onAppear {
-            coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
             delay(3) {
                 withAnimation(.default) {
                     homeViewModel.showGreetings = false

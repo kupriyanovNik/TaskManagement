@@ -15,6 +15,8 @@ class CoreDataViewModel: ObservableObject {
     @Published var tasksFilteredByDate: [TaskModel] = []
     @Published var tasksFilteredByCategory: [TaskModel] = []
 
+    @Published var allHabits: [HabitModel] = []
+
     // MARK: - Private Properties
 
     private var viewContext: NSManagedObjectContext
@@ -25,6 +27,7 @@ class CoreDataViewModel: ObservableObject {
     init() {
         self.viewContext = PersistenceController.shared.viewContext
         self.fetchTasksFilteredByDate(dateToFilter: .now)
+        self.fetchAllHabits()
     }
 
     // MARK: - Internal Functions
@@ -36,7 +39,7 @@ class CoreDataViewModel: ObservableObject {
         date: Date,
         category: TaskCategory,
         shouldNotificate: Bool,
-        onAdded: ((Date, TaskModel) -> ())?
+        onAdded: ((Date, TaskModel) -> ())? = nil
     ) {
         let task = TaskModel(context: viewContext)
         task.taskID = id
@@ -53,11 +56,13 @@ class CoreDataViewModel: ObservableObject {
 
     func removeTask(
         task: TaskModel,
-        date: Date,
         onRemove: ((Date) -> ())? = nil
     ) {
         viewContext.delete(task)
         saveContext()
+        
+        let date = task.taskDate ?? .now
+
         self.fetchTasksFilteredByDate(dateToFilter: date)
         onRemove?(date)
     }
@@ -97,6 +102,7 @@ class CoreDataViewModel: ObservableObject {
     func fetchAllTasks() {
         let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
         request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
+
         do {
             self.allTasks = try viewContext.fetch(request)
         } catch {
@@ -152,6 +158,75 @@ class CoreDataViewModel: ObservableObject {
         
         do {
             self.tasksFilteredByCategory = try viewContext.fetch(request)
+        } catch {
+            print("DEBUG: \(error.localizedDescription)")
+        }
+    }
+
+    func addHabit(
+        id: String,
+        title: String,
+        description: String,
+        color: String,
+        shouldNotificate: Bool,
+        notificationIDs: [String]?,
+        notificationText: String,
+        weekDays: [Int],
+        onAdded: ((HabitModel) -> ())? = nil
+    ) {
+        let habit = HabitModel(context: viewContext)
+        habit.habitID = id
+        habit.title = title
+        habit.habitDescription = description
+        habit.color = color
+        habit.isReminderOn = shouldNotificate
+        habit.notificationIDs = notificationIDs
+        habit.reminderText = notificationText
+        habit.weekDays = weekDays
+        habit.dateAdded = .now
+
+        saveContext()
+        self.fetchAllHabits()
+        onAdded?(habit)
+    }
+
+    func removeHabit(
+        habit: HabitModel,
+        onRemove: ((Date) -> ())? = nil
+    ) {
+        viewContext.delete(habit)
+        saveContext()
+
+        let date = habit.dateAdded ?? .now
+
+        onRemove?(date)
+    }
+
+    func updateHabit(
+        habit: HabitModel,
+        title: String,
+        description: String,
+        weekDays: [Int],
+        color: String,
+        shouldNotificate: Bool,
+        reminderText: String
+    ) {
+        habit.title = title
+        habit.habitDescription = description
+        habit.weekDays = weekDays
+        habit.color = color
+        habit.isReminderOn = shouldNotificate
+        habit.reminderText = reminderText
+
+        saveContext()
+    }
+
+    func fetchAllHabits() {
+        let request = NSFetchRequest<HabitModel>(entityName: coreDataNames.habitModel)
+        request.sortDescriptors = [.init(keyPath: \HabitModel.dateAdded, ascending: true)]
+
+        do {
+            self.allHabits = try viewContext.fetch(request)
         } catch {
             print("DEBUG: \(error.localizedDescription)")
         }

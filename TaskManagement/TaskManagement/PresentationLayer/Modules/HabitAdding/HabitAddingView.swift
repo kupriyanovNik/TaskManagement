@@ -9,6 +9,8 @@ struct HabitAddingView: View {
     // MARK: - Property Wrappers
 
     @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
+    @EnvironmentObject var habitsViewModel: HabitsViewModel
+    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     @Environment(\.dismiss) var dismiss
@@ -75,23 +77,15 @@ struct HabitAddingView: View {
                     Text("Frequency")
                         .font(.callout.bold())
 
+                    let weekDays = Calendar.current.weekdaySymbols
 
                     HStack {
-                        ForEach(habitAddingViewModel.currentWeek, id: \.self) { weekDay in
-                            let dayOfWeek = habitAddingViewModel.extractDate(
-                                date: weekDay,
-                                format: Constants.DateFormats.forDateLiteral
-                            )
-
-                            let index = habitAddingViewModel.weekDays.firstIndex { value in
-                                return value == dayOfWeek
-                            } ?? -1
-
-                            let insIndex = habitAddingViewModel.weekDays.firstIndex {
+                        ForEach(weekDays, id: \.self) { dayOfWeek in
+                            let index = weekDays.firstIndex {
                                 $0 == dayOfWeek
                             } ?? -1
 
-                            let isSelected = habitAddingViewModel.weekDays.contains(dayOfWeek)
+                            let isSelected = habitAddingViewModel.weekDaysIndicies.contains(index)
 
                             let selectedColor = habitAddingViewModel.habitColor.toColor()
 
@@ -102,20 +96,23 @@ struct HabitAddingView: View {
                                 .background {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(isSelected ? selectedColor : .gray.opacity(0.4))
-                                        .animation(.linear.delay(Double(insIndex) * 0.05), value: habitAddingViewModel.habitColor)
+                                        .animation(
+                                            .linear.delay(Double(index) * 0.05),
+                                            value: habitAddingViewModel.habitColor
+                                        )
 
                                 }
                                 .scaleEffect(isSelected ? 1 : 0.9)
                                 .onTapGesture {
                                     withAnimation {
-                                        if index != -1 {
-                                            habitAddingViewModel.weekDays.remove(at: index)
+                                        if let firstIndex = habitAddingViewModel.weekDaysIndicies.firstIndex(of: index) {
+                                            habitAddingViewModel.weekDaysIndicies.remove(at: firstIndex)
                                         } else {
-                                            habitAddingViewModel.weekDays.append(dayOfWeek)
+                                            habitAddingViewModel.weekDaysIndicies.append(index)
                                         }
                                     }
                                 }
-                                .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.weekDays)
+                                .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.weekDaysIndicies)
                         }
                     }
                     .padding(.top, 15)
@@ -133,13 +130,13 @@ struct HabitAddingView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Toggle(isOn: $habitAddingViewModel.isRemainderOn) { }
+                    Toggle(isOn: $habitAddingViewModel.shouldNotificate) { }
                         .labelsHidden()
                         .tint(themeManager.selectedTheme.accentColor)
                 }
                 .padding(.vertical)
 
-                if habitAddingViewModel.isRemainderOn {
+                if habitAddingViewModel.shouldNotificate {
                     HStack(spacing: 12) {
                         Label {
                             Text(habitAddingViewModel.remainderDate.formatted(date: .omitted, time: .shortened))
@@ -159,8 +156,8 @@ struct HabitAddingView: View {
                         }
 
                         CustomTextField(
-                            inputText: $habitAddingViewModel.remainderText,
-                            placeHolder: "Remainder Text",
+                            inputText: $habitAddingViewModel.reminderText,
+                            placeHolder: "Reminder Text",
                             strokeColor: themeManager.selectedTheme.accentColor
                         )
                         .continueEditing()
@@ -170,11 +167,18 @@ struct HabitAddingView: View {
                     .transition(.move(edge: .top).combined(with: .opacity))
                 }
             }
-            .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.isRemainderOn)
+            .animation(.smooth(extraBounce: 0.5), value: habitAddingViewModel.shouldNotificate)
             .padding()
         }
         .onAppear {
-            habitAddingViewModel.fetchCurrentWeek()
+            if let habit = habitsViewModel.editHabit {
+                habitAddingViewModel.habitTitle = habit.title ?? ""
+                habitAddingViewModel.habitDescription = habit.habitDescription ?? ""
+                habitAddingViewModel.habitColor = habit.color ?? ""
+                habitAddingViewModel.weekDaysIndicies = habit.weekDays ?? []
+                habitAddingViewModel.shouldNotificate = habit.isReminderOn
+                habitAddingViewModel.reminderText = habit.reminderText ?? ""
+            }
         }
         .makeCustomNavBar {
             headerView()
@@ -242,16 +246,61 @@ struct HabitAddingView: View {
                 .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
             }
         }
-        .animation(.bouncy, value: habitAddingViewModel.isRemainderOn)
-        .animation(.bouncy, value: habitAddingViewModel.remainderText)
+        .animation(.bouncy, value: habitAddingViewModel.shouldNotificate)
+        .animation(.bouncy, value: habitAddingViewModel.remainderDate)
+        .animation(.bouncy, value: habitAddingViewModel.reminderText)
         .animation(.bouncy, value: habitAddingViewModel.habitTitle)
-        .animation(.bouncy, value: habitAddingViewModel.weekDays.isEmpty)
+        .animation(.bouncy, value: habitAddingViewModel.weekDaysIndicies.isEmpty)
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding([.horizontal, .top])
     }
 
-    private func saveAction() {
+    // MARK: - Private Functions
 
+    private func saveAction() {
+        if let habit = habitsViewModel.editHabit {
+            if habitAddingViewModel.shouldNotificate {
+                NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
+
+                habit.notificationIDs = NotificationManager.shared.cheduleNotification(
+                    title: "Habit Reminder",
+                    subtitle: habitAddingViewModel.reminderText,
+                    weekDays: habitAddingViewModel.weekDaysIndicies,
+                    reminderDate: habitAddingViewModel.remainderDate
+                )
+            } else {
+                if habit.isReminderOn {
+                    NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
+                }
+            }
+            coreDataViewModel.updateHabit(
+                habit: habit,
+                title: habitAddingViewModel.habitTitle,
+                description: habitAddingViewModel.habitDescription,
+                weekDays: habitAddingViewModel.weekDaysIndicies,
+                color: habitAddingViewModel.habitColor,
+                shouldNotificate: habitAddingViewModel.shouldNotificate,
+                reminderText: habitAddingViewModel.reminderText
+            )
+        } else {
+            coreDataViewModel.addHabit(
+                id: UUID().uuidString,
+                title: habitAddingViewModel.habitTitle,
+                description: habitAddingViewModel.habitDescription,
+                color: habitAddingViewModel.habitColor,
+                shouldNotificate: habitAddingViewModel.shouldNotificate,
+                notificationIDs: NotificationManager.shared.cheduleNotification(
+                    title: "Habit Reminder",
+                    subtitle: habitAddingViewModel.reminderText,
+                    weekDays: habitAddingViewModel.weekDaysIndicies,
+                    reminderDate: habitAddingViewModel.remainderDate
+                ),
+                notificationText: habitAddingViewModel.reminderText,
+                weekDays: habitAddingViewModel.weekDaysIndicies
+            )
+        }
+
+        dismiss()
     }
 
 }
@@ -261,5 +310,7 @@ struct HabitAddingView: View {
 #Preview {
     HabitAddingView()
         .environmentObject(HabitAddingViewModel())
+        .environmentObject(HabitsViewModel())
+        .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())
 }

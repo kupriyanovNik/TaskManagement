@@ -53,6 +53,9 @@ struct MainNavigationView: View {
                     case .habits:
                         HabitsView()
                             .environmentObject(habitsViewModel)
+                            .environmentObject(settingsViewModel)
+                            .environmentObject(navigationViewModel)
+                            .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)
                     }
                 }
@@ -64,6 +67,7 @@ struct MainNavigationView: View {
                     .environmentObject(homeViewModel)
                     .environmentObject(allTasksViewModel)
                     .environmentObject(settingsViewModel)
+                    .environmentObject(habitsViewModel)
                     .environmentObject(coreDataViewModel)
                     .environmentObject(taskAddingViewModel)
                     .environmentObject(habitAddingViewModel)

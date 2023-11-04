@@ -11,7 +11,7 @@ struct TaskCard: View {
 
     @ObservedObject var coreDataViewModel: CoreDataViewModel
 
-    @State private var shouldShowDetail: Bool = false
+    @State private var showDetail: Bool = false
     @State private var showCardTap: Bool = false
 
     // MARK: - Internal Properties
@@ -35,35 +35,40 @@ struct TaskCard: View {
                         HStack(spacing: 10) {
                             if isToday {
                                 Text(taskDate.formatted(date: .omitted, time: .shortened))
-                                    .foregroundColor(.white.opacity(shouldShowDetail ? 1 : 0.7))
+                                    .foregroundColor(.white.opacity(showDetail ? 1 : 0.7))
                             }
 
-                            if shouldShowDetail && !isToday {
+                            if showDetail && !isToday {
                                 Text(taskDate.formatted(date: .omitted, time: .shortened))
-                                    .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                                    .transition(.opacity.combined(with: .scale))
                                     .foregroundColor(.white)
                             }
 
                             if !isToday {
                                 Text(taskDate.formatted(date: .abbreviated, time: .omitted))
-                                    .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                                    .transition(.opacity.combined(with: .scale))
                             }
 
-                            if shouldShowDetail && isToday {
-                                Text(task.taskCategory ?? "Normal")
-                                    .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
+                            VStack {
+                                if showDetail && isToday {
+                                    Text(task.taskCategory ?? "Normal")
+                                        .transition(.opacity.combined(with: .scale))
+                                }
                             }
-
                         }
                         .font(.callout)
                         .foregroundStyle(.secondary)
+                        .animation(.spring, value: showDetail)
 
-                        if shouldShowDetail && !isToday {
-                            Text(task.taskCategory ?? "Normal")
-                                .transition(.move(edge: isToday ? .top :  .trailing).combined(with: .opacity).combined(with: .scale))
-                                .font(.callout)
-                                .foregroundStyle(.secondary)
+                        VStack {
+                            if showDetail && !isToday {
+                                Text(task.taskCategory ?? "Normal")
+                                    .transition(.opacity.combined(with: .scale))
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
+                        .animation(.spring, value: showDetail)
 
                         Text(task.taskTitle ?? "Default Title")
                             .font(.title2)
@@ -73,13 +78,16 @@ struct TaskCard: View {
                     }
                     .hLeading()
 
-                    if shouldShowDetail, let description = task.taskDescription {
-                        Text(description)
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-                            .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-                            .lineLimit(nil)
+                    VStack {
+                        if showDetail, let description = task.taskDescription {
+                            Text(description)
+                                .font(.callout)
+                                .foregroundStyle(.secondary)
+                                .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                                .lineLimit(nil)
+                        }
                     }
+                    .animation(.spring, value: showDetail)
                 }
                 .hLeading()
             }
@@ -108,14 +116,15 @@ struct TaskCard: View {
         .padding(16)
         .hLeading()
         .background {
-            Color.black.opacity(0.85)
-                .cornerRadius(25)
+            Color.black
+                .opacity(0.85)
+                .cornerRadius(showDetail ? 15 : 25)
         }
         .scaleEffect(showCardTap ? 0.95 : 1)
-        .scaleEffect(shouldShowDetail ? 1.05 : 1)
+        .scaleEffect(showDetail ? 1.05 : 1)
         .onTapGesture {
-            withAnimation(.spring) {
-                shouldShowDetail.toggle()
+            withAnimation(.easeOut) {
+                showDetail.toggle()
             }
         }
         .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
@@ -124,7 +133,6 @@ struct TaskCard: View {
 
                 if task.isCompleted {
                     coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
-                    sendNotification(task: task)
                 } else {
                     doneTask()
                 }
@@ -153,16 +161,18 @@ struct TaskCard: View {
         let hour = calendar.component(.hour, from: date)
         let day = calendar.component(.day, from: date)
 
-        NotificationManager.shared.sendNotification(
-            id: task.taskID ?? "",
-            minute: minute,
-            hour: hour,
-            day: day,
-            title: date.greeting(),
-            subtitle: Localizable.TaskAdding.unfinishedTask,
-            body: body,
-            isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
-        )
+        if task.shouldNotificate {
+            NotificationManager.shared.sendNotification(
+                id: task.taskID ?? "",
+                minute: minute,
+                hour: hour,
+                day: day,
+                title: date.greeting(),
+                subtitle: Localizable.TaskAdding.unfinishedTask,
+                body: body,
+                isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
+            )
+        }
     }
 
 }
@@ -195,7 +205,9 @@ struct TaskCardView: View {
                             withAnimation(.spring) {
                                 coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
                             }
-                            sendNotification(task: task)
+                            if task.shouldNotificate {
+                                sendNotification(task: task)
+                            }
                         } label: {
                             Image(systemName: ImageNames.System.xmarkCircleFill)
                                 .font(.title2)
@@ -215,10 +227,10 @@ struct TaskCardView: View {
                     }
 
                     Button {
-                        coreDataViewModel.removeTask(task: task, date: task.taskDate ?? .now) { _ in
+                        coreDataViewModel.removeTask(task: task) { _ in
                             self.onRemove?()
                             if coreDataViewModel.allTasks.isEmpty {
-                                navigationViewModel.selectedTab = .home
+                                navigationViewModel.showAllTasksView = false
                             }
                         }
                     } label: {
@@ -245,7 +257,9 @@ struct TaskCardView: View {
                                     withAnimation(.spring) {
                                         coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
                                     }
-                                    sendNotification(task: task)
+                                    if task.shouldNotificate {
+                                        sendNotification(task: task)
+                                    }
                                 }
                             }
                         }
