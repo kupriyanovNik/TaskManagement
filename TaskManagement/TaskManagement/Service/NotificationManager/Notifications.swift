@@ -29,17 +29,14 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    /// For sending notification in foreground app phase
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-            completionHandler([.sound, .banner])
-    }
-
     func removeNotification(with id: String) {
         UNUserNotificationCenter.current()
             .removePendingNotificationRequests(withIdentifiers: [id])
+    }
+
+    func removeNotifications(with ids: [String]) {
+        UNUserNotificationCenter.current()
+            .removePendingNotificationRequests(withIdentifiers: ids)
     }
 
     func sendNotification(
@@ -119,5 +116,15 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         }
 
         return notificationsIDs
+    }
+
+    // MARK: - Crutches
+
+    /// For sending notification in foreground app phase
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.sound, .banner])
     }
 }

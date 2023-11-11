@@ -60,8 +60,9 @@ struct HabitCardView: View {
 
                     Button {
                         withAnimation {
-                            coreDataViewModel.removeHabit(habit: habit) { _ in
+                            coreDataViewModel.removeHabit(habit: habit) { _, ids in
                                 coreDataViewModel.fetchAllHabits()
+                                NotificationManager.shared.removeNotifications(with: ids)
                             }
                         }
                     } label: {
