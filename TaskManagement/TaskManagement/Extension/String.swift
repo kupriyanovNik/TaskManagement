@@ -26,3 +26,15 @@ extension String {
     }
 }
 
+// MARK: - For Removing " " in start of String
+extension String {
+    func removeLeadingSpacing() -> String {
+        var inside = self
+
+        while inside.first == " " {
+            inside.removeFirst()
+        }
+
+        return inside
+    }
+}

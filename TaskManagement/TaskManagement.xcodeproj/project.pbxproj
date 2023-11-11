@@ -54,7 +54,7 @@
 		B7DC658C2AD56967009DA010 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC658B2AD56967009DA010 /* ThemeManager.swift */; };
 		B7DC65902AD569BC009DA010 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC658F2AD569BC009DA010 /* DataSource.swift */; };
 		B7DC65922AD571ED009DA010 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC65912AD571ED009DA010 /* Localizable.swift */; };
-		B7DFBFF52AF44DE10000960D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DFBFF42AF44DE10000960D /* Color.swift */; };
+		B7DFBFF52AF44DE10000960D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DFBFF42AF44DE10000960D /* String.swift */; };
 		B7F016312AD4752200B9F670 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F016302AD4752200B9F670 /* Date.swift */; };
 		B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F016352AD487C900B9F670 /* UINavigationController.swift */; };
 		B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F016392AD48DB600B9F670 /* SettingsView.swift */; };
@@ -115,7 +115,7 @@
 		B7DC658B2AD56967009DA010 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		B7DC658F2AD569BC009DA010 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		B7DC65912AD571ED009DA010 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
-		B7DFBFF42AF44DE10000960D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B7DFBFF42AF44DE10000960D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B7F016302AD4752200B9F670 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		B7F016352AD487C900B9F670 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		B7F016392AD48DB600B9F670 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				B73213CE2ACCAC0600E42B1D /* Internal.swift */,
 				B7F016302AD4752200B9F670 /* Date.swift */,
 				B7F016352AD487C900B9F670 /* UINavigationController.swift */,
-				B7DFBFF42AF44DE10000960D /* Color.swift */,
+				B7DFBFF42AF44DE10000960D /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -543,7 +543,7 @@
 				B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */,
 				B7F016312AD4752200B9F670 /* Date.swift in Sources */,
 				B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */,
-				B7DFBFF52AF44DE10000960D /* Color.swift in Sources */,
+				B7DFBFF52AF44DE10000960D /* String.swift in Sources */,
 				B7DC658A2AD568C3009DA010 /* ThemeDefinitions.swift in Sources */,
 				B73213CD2ACC965400E42B1D /* View.swift in Sources */,
 				B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */,

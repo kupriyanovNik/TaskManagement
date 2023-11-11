@@ -21,7 +21,11 @@ class HabitAddingViewModel: ObservableObject {
     // MARK: - Internal Functions
 
     func isAbleToSave() -> Bool {
-        return !(habitTitle == "" || weekDaysIndicies.isEmpty || (shouldNotificate ? reminderText == "" : false))
+        return !(
+            habitTitle.removeLeadingSpacing() == "" || 
+            weekDaysIndicies.isEmpty ||
+            (shouldNotificate ? reminderText.removeLeadingSpacing() == "" : false)
+        )
     }
 
     func reset() {
