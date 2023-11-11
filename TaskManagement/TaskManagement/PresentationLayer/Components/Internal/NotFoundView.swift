@@ -28,6 +28,7 @@ struct NotFoundView: View {
 
             if let description, shouldShowDetail {
                 Text(description)
+                    .padding(.top, 3)
                     .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
             }
         }

@@ -31,12 +31,14 @@ struct TaskAddingView: View {
                     placeHolder: strings.taskTitle,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
+                .continueEditing()
 
                 CustomTextField(
                     inputText: $taskAddingViewModel.taskDescription,
                     placeHolder: strings.taskDescription,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
+                .continueEditing()
 
                 if homeViewModel.editTask != nil {
                     HStack {
@@ -114,6 +116,7 @@ struct TaskAddingView: View {
                 taskAddingViewModel.shouldSendNotification = task.shouldNotificate
             }
         }
+        .endEditing()
     }
 
     // MARK: - ViewBuilders

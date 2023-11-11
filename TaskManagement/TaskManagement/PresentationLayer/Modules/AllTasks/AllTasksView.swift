@@ -76,7 +76,7 @@ struct AllTasksView: View {
                                 .clipShape(
                                     RoundedShape(
                                         corners: [.bottomLeft, .bottomRight],
-                                        radius: 30 - (allTasksViewModel.verticalOffset / 7)
+                                        radius: 30 + (allTasksViewModel.verticalOffset / 7)
                                     )
                                 )
                                 .ignoresSafeArea()

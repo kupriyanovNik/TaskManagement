@@ -246,11 +246,7 @@ struct HabitAddingView: View {
                 .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
             }
         }
-        .animation(.bouncy, value: habitAddingViewModel.shouldNotificate)
-        .animation(.bouncy, value: habitAddingViewModel.remainderDate)
-        .animation(.bouncy, value: habitAddingViewModel.reminderText)
-        .animation(.bouncy, value: habitAddingViewModel.habitTitle)
-        .animation(.bouncy, value: habitAddingViewModel.weekDaysIndicies.isEmpty)
+        .animation(.bouncy, value: isAbleToSave)
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding([.horizontal, .top])
     }
@@ -263,7 +259,7 @@ struct HabitAddingView: View {
                 NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
 
                 habit.notificationIDs = NotificationManager.shared.cheduleNotification(
-                    title: strings.notificationTitle,
+                    title: strings.notificationTitle.removeLeadingSpacing(),
                     subtitle: habitAddingViewModel.reminderText,
                     weekDays: habitAddingViewModel.weekDaysIndicies,
                     reminderDate: habitAddingViewModel.remainderDate
@@ -273,9 +269,10 @@ struct HabitAddingView: View {
                     NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
                 }
             }
+
             coreDataViewModel.updateHabit(
                 habit: habit,
-                title: habitAddingViewModel.habitTitle,
+                title: habitAddingViewModel.habitTitle.removeLeadingSpacing(),
                 description: habitAddingViewModel.habitDescription,
                 weekDays: habitAddingViewModel.weekDaysIndicies,
                 color: habitAddingViewModel.habitColor,
@@ -285,17 +282,17 @@ struct HabitAddingView: View {
         } else {
             coreDataViewModel.addHabit(
                 id: UUID().uuidString,
-                title: habitAddingViewModel.habitTitle,
+                title: habitAddingViewModel.habitTitle.removeLeadingSpacing(),
                 description: habitAddingViewModel.habitDescription,
                 color: habitAddingViewModel.habitColor,
                 shouldNotificate: habitAddingViewModel.shouldNotificate,
                 notificationIDs: NotificationManager.shared.cheduleNotification(
-                    title: strings.notificationTitle,
-                    subtitle: habitAddingViewModel.reminderText,
+                    title: strings.notificationTitle.removeLeadingSpacing(),
+                    subtitle: habitAddingViewModel.reminderText.removeLeadingSpacing(),
                     weekDays: habitAddingViewModel.weekDaysIndicies,
                     reminderDate: habitAddingViewModel.remainderDate
                 ),
-                notificationText: habitAddingViewModel.reminderText,
+                notificationText: habitAddingViewModel.reminderText.removeLeadingSpacing(),
                 weekDays: habitAddingViewModel.weekDaysIndicies
             )
         }

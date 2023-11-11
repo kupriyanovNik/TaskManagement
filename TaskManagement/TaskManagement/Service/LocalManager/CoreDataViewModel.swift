@@ -193,14 +193,14 @@ class CoreDataViewModel: ObservableObject {
 
     func removeHabit(
         habit: HabitModel,
-        onRemove: ((Date) -> ())? = nil
+        onRemove: ((Date, [String]) -> ())? = nil
     ) {
         viewContext.delete(habit)
         saveContext()
 
         let date = habit.dateAdded ?? .now
 
-        onRemove?(date)
+        onRemove?(date, habit.notificationIDs ?? [])
     }
 
     func updateHabit(
