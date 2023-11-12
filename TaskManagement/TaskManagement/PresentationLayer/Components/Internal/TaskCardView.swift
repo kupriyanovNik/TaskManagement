@@ -240,7 +240,7 @@ struct TaskCardView: View {
                             .foregroundColor(.red)
                     }
                 }
-                .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                .transition(.move(edge: .leading).combined(with: .opacity))
 
             } else {
                 VStack(spacing: 10) {
