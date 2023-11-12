@@ -95,8 +95,8 @@ struct TaskAddingView: View {
                         }
                         .padding([.horizontal, .bottom])
                         .padding(.top, 5)
+                        .endEditing()
                     }
-                    .endEditing()
                     .background {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(

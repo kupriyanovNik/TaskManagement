@@ -44,7 +44,11 @@ struct HomeView: View {
                             themeManager: themeManager,
                             isEditing: $homeViewModel.isEditing,
                             task: $task
-                        )
+                        ) { taskDate in
+                            coreDataViewModel.fetchTasksFilteredByDate(
+                                dateToFilter: homeViewModel.currentDay
+                            )
+                        }
                     }
                 }
             }

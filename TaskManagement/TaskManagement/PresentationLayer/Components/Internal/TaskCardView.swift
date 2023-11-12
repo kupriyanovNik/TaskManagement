@@ -192,7 +192,7 @@ struct TaskCardView: View {
 
     // MARK: - Internal Properties
 
-    var onRemove: (() -> ())? = nil
+    var onRemove: ((Date) -> ())? = nil
 
     // MARK: - Body
 
@@ -227,8 +227,9 @@ struct TaskCardView: View {
                     }
 
                     Button {
-                        coreDataViewModel.removeTask(task: task) { _ in
-                            self.onRemove?()
+                        coreDataViewModel.removeTask(task: task) { taskDate in
+                            self.onRemove?(taskDate)
+
                             if coreDataViewModel.allTasks.isEmpty {
                                 navigationViewModel.showAllTasksView = false
                             }
