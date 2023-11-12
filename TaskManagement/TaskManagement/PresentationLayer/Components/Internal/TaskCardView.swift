@@ -117,7 +117,7 @@ struct TaskCard: View {
         .hLeading()
         .background {
             Color.black
-                .opacity(0.85)
+                .opacity(showDetail ? 0.95 : 0.85)
                 .cornerRadius(showDetail ? 15 : 25)
         }
         .scaleEffect(showCardTap ? 0.95 : 1)
