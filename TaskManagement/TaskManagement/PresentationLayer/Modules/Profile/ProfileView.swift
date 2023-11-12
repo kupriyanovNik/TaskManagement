@@ -100,6 +100,7 @@ struct ProfileView: View {
                     .foregroundColor(.black)
                     .font(.title2)
             }
+            .buttonStyle(HeaderButtonStyle())
 
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))

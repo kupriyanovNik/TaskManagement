@@ -33,6 +33,7 @@
 		B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38A2AF174D500055510 /* HabitAddingView.swift */; };
 		B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */; };
 		B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BD3922AF17AE800055510 /* PlusButton.swift */; };
+		B74985662B0122E000AB6EDB /* HeaderButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74985652B0122E000AB6EDB /* HeaderButtonStyle.swift */; };
 		B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084312AEEA55E006A04E1 /* HabitsView.swift */; };
 		B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084342AEEA570006A04E1 /* HabitsViewModel.swift */; };
 		B76287272AD95061003EE58D /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76287262AD95061003EE58D /* RoundedShape.swift */; };
@@ -93,6 +94,7 @@
 		B73BD38A2AF174D500055510 /* HabitAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingView.swift; sourceTree = "<group>"; };
 		B73BD38C2AF174DD00055510 /* HabitAddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingViewModel.swift; sourceTree = "<group>"; };
 		B73BD3922AF17AE800055510 /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
+		B74985652B0122E000AB6EDB /* HeaderButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderButtonStyle.swift; sourceTree = "<group>"; };
 		B75084312AEEA55E006A04E1 /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
 		B75084342AEEA570006A04E1 /* HabitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModel.swift; sourceTree = "<group>"; };
 		B76287262AD95061003EE58D /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */,
+				B74985652B0122E000AB6EDB /* HeaderButtonStyle.swift */,
 			);
 			path = ButtonStyles;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */,
 				B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */,
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
+				B74985662B0122E000AB6EDB /* HeaderButtonStyle.swift in Sources */,
 				B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */,
 				B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */,
 				B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */,
