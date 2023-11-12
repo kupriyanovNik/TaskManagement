@@ -34,7 +34,6 @@ struct HomeView: View {
                         description: strings.noTasksDescription,
                         accentColor: themeManager.selectedTheme.accentColor
                     )
-                    .padding(.top, -32)
                 } else {
                     ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
                         TaskCardView(
@@ -135,8 +134,10 @@ struct HomeView: View {
                     }
 
                     HStack {
-                        if !homeViewModel.showCalendar || homeViewModel.showHeaderTap {
+                        if !homeViewModel.showCalendar || homeViewModel.showHeaderTap,
+                                !coreDataViewModel.allTasks.isEmpty {
                             Image(systemName: "chevron.down")
+                                .font(.title3)
                                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
                                 .opacity(homeViewModel.showHeaderTap ? 0.75 : 1)
                                 .scaleEffect(homeViewModel.showHeaderTap ? 0.75 : 1)
@@ -153,7 +154,12 @@ struct HomeView: View {
                 .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
                     withAnimation {
                         generateFeedback()
-                        homeViewModel.showCalendar.toggle()
+
+                        if coreDataViewModel.allTasks.isEmpty {
+                            navigationViewModel.showTaskAddingView.toggle()
+                        } else {
+                            homeViewModel.showCalendar.toggle()
+                        }
                     }
                 } onPressingChanged: { isPressed in
                     withAnimation {

@@ -158,7 +158,7 @@ struct HabitCardView: View {
             .padding(.horizontal)
             .background {
                 Color.black
-                    .opacity(cardState == .description ? 0.95 : 0.85)
+                    .opacity(cardState != .basic ? 0.95 : 0.85)
                     .cornerRadius(cardState != .basic ? 15 : 25)
             }
             .onTapGesture {
