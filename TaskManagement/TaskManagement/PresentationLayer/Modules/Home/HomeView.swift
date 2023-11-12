@@ -141,6 +141,11 @@ struct HomeView: View {
                                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
                                 .opacity(homeViewModel.showHeaderTap ? 0.75 : 1)
                                 .scaleEffect(homeViewModel.showHeaderTap ? 0.75 : 1)
+                                .onTapGesture {
+                                    withAnimation {
+                                        homeViewModel.showCalendar = true 
+                                    }
+                                }
                         }
                         
                         Text(strings.today)
