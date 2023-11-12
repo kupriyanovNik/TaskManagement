@@ -34,7 +34,6 @@ struct HomeView: View {
                         description: strings.noTasksDescription,
                         accentColor: themeManager.selectedTheme.accentColor
                     )
-                    .padding(.top, -32)
                 } else {
                     ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
                         TaskCardView(
@@ -50,7 +49,6 @@ struct HomeView: View {
                 }
             }
             .padding()
-            .padding(.top)
         }
         .onAppear {
             delay(3) {
@@ -135,12 +133,44 @@ struct HomeView: View {
                             .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
                     }
 
-                    Text(strings.today)
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                    HStack {
+                        if !homeViewModel.showCalendar || homeViewModel.showHeaderTap,
+                                !coreDataViewModel.allTasks.isEmpty {
+                            Image(systemName: "chevron.down")
+                                .font(.title3)
+                                .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                                .opacity(homeViewModel.showHeaderTap ? 0.75 : 1)
+                                .scaleEffect(homeViewModel.showHeaderTap ? 0.75 : 1)
+                                .onTapGesture {
+                                    withAnimation {
+                                        homeViewModel.showCalendar = true 
+                                    }
+                                }
+                        }
+                        
+                        Text(strings.today)
+                            .bold()
+                            .font(.largeTitle)
+                            .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                            .scaleEffect(homeViewModel.showHeaderTap ? 1.1 : 1)
+                    }
                 }
                 .hLeading()
+                .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
+                    withAnimation {
+                        generateFeedback()
+
+                        if coreDataViewModel.allTasks.isEmpty {
+                            navigationViewModel.showTaskAddingView.toggle()
+                        } else {
+                            homeViewModel.showCalendar.toggle()
+                        }
+                    }
+                } onPressingChanged: { isPressed in
+                    withAnimation {
+                        homeViewModel.showHeaderTap = isPressed
+                    }
+                }
 
                 if !coreDataViewModel.tasksFilteredByDate.isEmpty {
                     Group {
@@ -150,6 +180,7 @@ struct HomeView: View {
                                     homeViewModel.isEditing.toggle()
                                 }
                             }
+                            .buttonStyle(HeaderButtonStyle())
                             .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
                         } else {
                             Button(strings.edit) {
@@ -157,6 +188,7 @@ struct HomeView: View {
                                     homeViewModel.isEditing.toggle()
                                 }
                             }
+                            .buttonStyle(HeaderButtonStyle())
                             .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
                         }
                     }
@@ -169,11 +201,11 @@ struct HomeView: View {
             .padding(.bottom, 5)
             .animation(.linear, value: coreDataViewModel.tasksFilteredByDate.isEmpty)
 
-            if !coreDataViewModel.allTasks.isEmpty {
+            if !coreDataViewModel.allTasks.isEmpty && homeViewModel.showCalendar {
                 ScrollView(.horizontal, showsIndicators: false) {
                     calendarView()
                 }
-                .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
     }

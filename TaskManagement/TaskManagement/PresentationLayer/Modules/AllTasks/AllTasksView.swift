@@ -203,6 +203,7 @@ struct AllTasksView: View {
                                 allTasksViewModel.isEditing.toggle()
                             }
                         }
+                        .buttonStyle(HeaderButtonStyle())
                         .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
 
                     } else {
@@ -211,6 +212,7 @@ struct AllTasksView: View {
                                 allTasksViewModel.isEditing.toggle()
                             }
                         }
+                        .buttonStyle(HeaderButtonStyle())
                         .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
                     }
                 }

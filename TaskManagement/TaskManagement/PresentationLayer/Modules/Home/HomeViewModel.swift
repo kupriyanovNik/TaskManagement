@@ -9,6 +9,9 @@ class HomeViewModel: ObservableObject {
 
     // MARK: - Property Wrappers
 
+    @Published var showCalendar: Bool = true 
+    @Published var showHeaderTap: Bool = false
+
     @Published var currentWeek: [Date] = []
     @Published var currentDay = Date()
 
