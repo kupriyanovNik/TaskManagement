@@ -150,7 +150,7 @@ struct AllTasksView: View {
                     themeManager: themeManager,
                     isEditing: $allTasksViewModel.isEditing,
                     task: $task
-                ) {
+                ) { _ in 
                     fetchTasksFilteredByCategory()
                 }
             }

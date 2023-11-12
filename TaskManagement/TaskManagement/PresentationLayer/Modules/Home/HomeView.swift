@@ -44,7 +44,14 @@ struct HomeView: View {
                             themeManager: themeManager,
                             isEditing: $homeViewModel.isEditing,
                             task: $task
-                        )
+                        ) { taskDate in
+                            coreDataViewModel.fetchTasksFilteredByDate(
+                                dateToFilter: homeViewModel.currentDay
+                            )
+                            if coreDataViewModel.tasksFilteredByDate.isEmpty { 
+                                homeViewModel.currentDay = .now
+                            }
+                        }
                     }
                 }
             }
@@ -120,17 +127,21 @@ struct HomeView: View {
     }
 
     @ViewBuilder func headerView() -> some View {
+        var isToday = Calendar.current.isDateInToday(homeViewModel.currentDay)
+
         VStack(spacing: 0) {
             HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 3) {
-                    if homeViewModel.showGreetings {
-                        Text("\(Date().greeting()), \(settingsViewModel.userName)")
-                            .foregroundColor(.gray)
-                            .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-                    } else {
-                        Text(Date().formatted(date: .abbreviated, time: .omitted))
-                            .foregroundColor(.gray)
-                            .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                    if isToday {
+                        if homeViewModel.showGreetings {
+                            Text("\(Date().greeting()), \(settingsViewModel.userName)")
+                                .foregroundColor(.gray)
+                                .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
+                        } else {
+                            Text(Date().formatted(date: .abbreviated, time: .omitted))
+                                .foregroundColor(.gray)
+                                .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                        }
                     }
 
                     HStack {
@@ -148,11 +159,17 @@ struct HomeView: View {
                                 }
                         }
                         
-                        Text(strings.today)
-                            .bold()
-                            .font(.largeTitle)
-                            .foregroundColor(themeManager.selectedTheme.pageTitleColor)
-                            .scaleEffect(homeViewModel.showHeaderTap ? 1.1 : 1)
+                        Text(isToday ?
+                             strings.today :
+                                homeViewModel.currentDay.formatted(
+                                    date: .abbreviated,
+                                    time: .omitted
+                                )
+                        )
+                        .bold()
+                        .font(isToday ? .largeTitle : .title)
+                        .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                        .scaleEffect(homeViewModel.showHeaderTap ? 1.1 : 1)
                     }
                 }
                 .hLeading()
