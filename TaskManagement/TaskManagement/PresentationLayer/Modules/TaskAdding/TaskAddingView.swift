@@ -57,6 +57,7 @@ struct TaskAddingView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                     }
+                    .endEditing()
                 }
 
                 if homeViewModel.editTask == nil {
@@ -95,12 +96,14 @@ struct TaskAddingView: View {
                         .padding([.horizontal, .bottom])
                         .padding(.top, 5)
                     }
+                    .endEditing()
                     .background {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(
                                 themeManager.selectedTheme.accentColor,
                                 lineWidth: 1
                             )
+                            .endEditing()
                     }
                 }
             }
@@ -108,6 +111,7 @@ struct TaskAddingView: View {
         }
         .makeCustomNavBar {
             headerView()
+                .endEditing()
         }
         .onAppear {
             if let task = homeViewModel.editTask {
@@ -116,7 +120,6 @@ struct TaskAddingView: View {
                 taskAddingViewModel.shouldSendNotification = task.shouldNotificate
             }
         }
-        .endEditing()
     }
 
     // MARK: - ViewBuilders
