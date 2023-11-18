@@ -7,7 +7,7 @@ import Foundation
 
 struct CustomTimePicker: View {
 
-    // onDisappear: changetomin = false 
+    // onDisappear: changetomin = false
 
     @State var selectedDate: Date = .now
 
@@ -15,7 +15,6 @@ struct CustomTimePicker: View {
     @State var minutes = 0
 
     @State var changeToMin = false
-    @State var symbol = "AM"
 
     @State var angle: Double = 0
 
@@ -53,91 +52,73 @@ struct CustomTimePicker: View {
                         }
                 }
 
-                VStack(spacing: 8) {
-                    Text("AM")
-                        .font(.title2)
-                        .fontWeight(symbol == "AM" ? .bold : .light)
-                        .onTapGesture {
-                            symbol = "AM"
-                        }
-
-                    Text("PM")
-                        .font(.title2)
-                        .fontWeight(symbol == "PM" ? .bold : .light)
-                        .onTapGesture {
-                            symbol = "PM"
-                        }
-                }
-                .frame(width: 45)
+//                VStack(spacing: 8) {
+//                    Text("AM")
+//                        .font(.title2)
+//                        .fontWeight(symbol == "AM" ? .bold : .light)
+//                        .onTapGesture {
+//                            symbol = "AM"
+//                        }
+//
+//                    Text("PM")
+//                        .font(.title2)
+//                        .fontWeight(symbol == "PM" ? .bold : .light)
+//                        .onTapGesture {
+//                            symbol = "PM"
+//                        }
+//                }
+//                .frame(width: 45)
             }
             .padding()
             .background(.ultraThinMaterial)
 
-            TimePicker(angle: $angle, changeToMin: $changeToMin, hour: $hour, minutes: $minutes)
+            GeometryReader { reader in
+                let width = reader.frame(in: .global).width / 2
+
+                ZStack {
+
+                    Circle()
+                        .fill(.blue)
+                        .frame(width: 40, height: 40)
+                        .offset(x: width - 50)
+                        .rotationEffect(.degrees(angle))
+                        .gesture(
+                            DragGesture()
+                                .onChanged(onChanged)
+                                .onEnded(onEnded)
+                        )
+                        .rotationEffect(.degrees(-90))
+
+                    ForEach(1...12, id: \.self) { index in
+                        VStack {
+                            Text("\(changeToMin ? index * 5 : index)")
+                                .font(.title3)
+                                .foregroundColor(.black)
+                                .offset(y: -width + 50)
+                                .rotationEffect(.degrees(Double(index) * 30))
+                        }
+                    }
+
+                    Circle()
+                        .fill(.blue)
+                        .frame(width: 10, height: 10)
+                        .overlay(alignment: .bottom) {
+                            Rectangle()
+                                .fill(.blue)
+                                .frame(width: 2, height: 10 + width / 2)
+                        }
+                        .rotationEffect(.degrees(angle))
+
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+
+            }
+            .frame(height: 300)
 
         }
         .frame(width: UIScreen.main.bounds.width - 120)
         .background(.ultraThinMaterial)
         .cornerRadius(10)
-    }
-}
-
-#Preview {
-    CustomTimePicker()
-}
-
-
-struct TimePicker: View {
-
-    @Binding var angle: Double
-    @Binding var changeToMin: Bool
-
-    @Binding var hour: Int
-    @Binding var minutes: Int
-
-    var body: some View {
-        GeometryReader { reader in
-            let width = reader.frame(in: .global).width / 2
-
-            ZStack {
-
-                Circle()
-                    .fill(.blue)
-                    .frame(width: 40, height: 40)
-                    .offset(x: width - 50)
-                    .rotationEffect(.degrees(angle))
-                    .gesture(
-                        DragGesture()
-                            .onChanged(onChanged)
-                            .onEnded(onEnded)
-                    )
-                    .rotationEffect(.degrees(-90))
-
-                ForEach(1...12, id: \.self) { index in
-                    VStack {
-                        Text("\(changeToMin ? index * 5 : index)")
-                            .font(.title3)
-                            .foregroundColor(.black)
-                            .offset(y: -width + 50)
-                            .rotationEffect(.degrees(Double(index) * 30))
-                    }
-                }
-
-                Circle()
-                    .fill(.blue)
-                    .frame(width: 10, height: 10)
-                    .overlay(alignment: .bottom) {
-                        Rectangle()
-                            .fill(.blue)
-                            .frame(width: 2, height: 10 + width / 2)
-                    }
-                    .rotationEffect(.degrees(angle))
-
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-
-        }
-        .frame(height: 300)
     }
 
     func onChanged(value: DragGesture.Value) {
@@ -171,5 +152,9 @@ struct TimePicker: View {
             }
         }
     }
-
 }
+
+#Preview {
+    CustomTimePicker()
+}
+
