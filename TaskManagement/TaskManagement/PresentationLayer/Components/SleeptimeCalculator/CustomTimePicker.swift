@@ -7,16 +7,14 @@ import Foundation
 
 struct CustomTimePicker: View {
 
-    // onDisappear: changetomin = false
-
-    @State var selectedDate: Date = .now
-
     @State var hour = 12
     @State var minutes = 0
 
     @State var changeToMin = false
 
     @State var angle: Double = 0
+
+    @State var symbol = "AM"
 
     var body: some View {
         VStack {
@@ -52,22 +50,22 @@ struct CustomTimePicker: View {
                         }
                 }
 
-//                VStack(spacing: 8) {
-//                    Text("AM")
-//                        .font(.title2)
-//                        .fontWeight(symbol == "AM" ? .bold : .light)
-//                        .onTapGesture {
-//                            symbol = "AM"
-//                        }
-//
-//                    Text("PM")
-//                        .font(.title2)
-//                        .fontWeight(symbol == "PM" ? .bold : .light)
-//                        .onTapGesture {
-//                            symbol = "PM"
-//                        }
-//                }
-//                .frame(width: 45)
+                VStack(spacing: 8) {
+                    Text("AM")
+                        .font(.title2)
+                        .fontWeight(symbol == "AM" ? .bold : .light)
+                        .onTapGesture {
+                            symbol = "AM"
+                        }
+
+                    Text("PM")
+                        .font(.title2)
+                        .fontWeight(symbol == "PM" ? .bold : .light)
+                        .onTapGesture {
+                            symbol = "PM"
+                        }
+                }
+                .frame(width: 45)
             }
             .padding()
             .background(.ultraThinMaterial)
@@ -122,9 +120,7 @@ struct CustomTimePicker: View {
     }
 
     func onChanged(value: DragGesture.Value) {
-        let vector = CGVector(dx: value.location.x, dy: value.location.y)
-
-        let radians = atan2(vector.dy - 20, vector.dx - 20)
+        let radians = atan2(value.location.y - 20, value.location.x - 20)
 
         var angle = radians * 180 / .pi
 
