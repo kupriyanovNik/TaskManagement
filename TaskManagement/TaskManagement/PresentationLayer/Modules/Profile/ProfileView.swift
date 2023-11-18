@@ -10,6 +10,7 @@ struct ProfileView: View {
     // MARK: - Property Wrappers
 
     @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -72,6 +73,7 @@ struct ProfileView: View {
     @ViewBuilder func sleepTimeCard() -> some View {
             NavigationLink {
                 SleeptimeCalculatorView()
+                    .environmentObject(sleeptimeCalculatorViewModel)
                     .environmentObject(settingsViewModel)
                     .environmentObject(themeManager)
             } label: {
@@ -162,6 +164,7 @@ struct ProfileView: View {
 #Preview {
     ProfileView()
         .environmentObject(ProfileViewModel())
+        .environmentObject(SleeptimeCalculatorViewModel())
         .environmentObject(SettingsViewModel())
         .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())

@@ -8,25 +8,11 @@ struct SleeptimeCalculatorView: View {
 
     // MARK: - Property Wrappers
 
+    @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     @Environment(\.dismiss) var dismiss
-
-    @State private var wakeUp = defaultWakeTime
-    @State private var sleepAmount = 8.0
-    @State private var coffeeAmount = 1
-
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
-    @State private var showingAlert = false
-
-    static var defaultWakeTime: Date {
-        var components = DateComponents()
-        components.hour = 7
-        components.minute = 0
-        return Calendar.current.date(from: components) ?? Date.now
-    }
 
     // MARK: - Private Properties
 
@@ -40,20 +26,24 @@ struct SleeptimeCalculatorView: View {
                 Text("When do you want to wake up?")
                     .font(.headline)
 
-                DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
+                DatePicker(
+                    "",
+                    selection: $sleeptimeCalculatorViewModel.wakeUp,
+                    displayedComponents: .hourAndMinute
+                )
+                .labelsHidden()
 
 
                 Text("Desired amount of sleep")
                     .font(.headline)
 
-                Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.5)
+                Stepper("\(sleeptimeCalculatorViewModel.sleepAmount.formatted()) hours", value: $sleeptimeCalculatorViewModel.sleepAmount, in: 4...12, step: 0.5)
 
                 coffeeIntakeRow()
-                    .alert(alertTitle, isPresented: $showingAlert) {
+                    .alert(sleeptimeCalculatorViewModel.alertTitle, isPresented: $sleeptimeCalculatorViewModel.showingAlert) {
                         Button("OK") { }
                     } message: {
-                        Text(alertMessage)
+                        Text(sleeptimeCalculatorViewModel.alertMessage)
                     }
             }
             .padding(.horizontal)
@@ -64,29 +54,21 @@ struct SleeptimeCalculatorView: View {
             headerView()
         }
         .safeAreaInset(edge: .bottom) {
-            Button {
-                if let output = NeuralManager.shared.calculateBedtime(
-                    wakeUpTime: wakeUp,
-                    sleepAmount: sleepAmount,
-                    coffeeAmount: coffeeAmount,
-                    userAge: Int(settingsViewModel.userAge) ?? 15
-                ) {
-                    alertTitle = "HGDSA"
-                    alertMessage = output
-                    showingAlert.toggle()
-                }
-            } label: {
-                HStack {
-                    Label("Check", systemImage: systemImages.checkmark)
-                }
-                .padding()
-                .foregroundColor(.white)
-                .hCenter()
-                .background(themeManager.selectedTheme.pageTitleColor)
-                .cornerRadius(10)
+            VStack {
+                checkButton()
+
+                Label("Result calculated by Neural Network", systemImage: "network")
+                    .font(.caption2)
+                    .foregroundColor(.blue)
+                    .padding(.top, 3)
+                    .onTapGesture {
+                        if let url = URL(string: "https://developer.apple.com/machine-learning/core-ml/") {
+                            if UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                    }
             }
-            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
-            .padding(.horizontal)
         }
     }
 
@@ -99,27 +81,59 @@ struct SleeptimeCalculatorView: View {
 
             HStack(spacing: 20) {
                 ForEach(1..<6) { index in
-                    let isSelected = index <= coffeeAmount
+                    let isSelected = index <= sleeptimeCalculatorViewModel.coffeeAmount
                     let appendingString = isSelected ? ".fill" : ""
 
                     Image(systemName: (systemImages.cupOfCoffee + appendingString))
                         .resizable()
                         .scaledToFit()
-                        .animation(.smooth, value: coffeeAmount)
+                        .animation(
+                            .smooth,
+                            value: sleeptimeCalculatorViewModel.coffeeAmount
+                        )
                         .frame(width: 40, height: 40)
                         .scaleEffect(isSelected ? 1.2 : 1)
-                        .animation(.smooth(extraBounce: 0.7), value: coffeeAmount)
+                        .animation(
+                            .smooth(extraBounce: 0.7),
+                            value: sleeptimeCalculatorViewModel.coffeeAmount
+                        )
                         .onTapGesture {
-                            if index == coffeeAmount {
-                                coffeeAmount = 0
+                            if index == sleeptimeCalculatorViewModel.coffeeAmount {
+                                sleeptimeCalculatorViewModel.coffeeAmount = 0
                             } else {
-                                coffeeAmount = index
+                                sleeptimeCalculatorViewModel.coffeeAmount = index
                             }
                         }
                 }
             }
         }
         .hLeading()
+    }
+
+    @ViewBuilder func checkButton() -> some View {
+        Button {
+            if let output = NeuralManager.shared.calculateBedtime(
+                wakeUpTime: sleeptimeCalculatorViewModel.wakeUp,
+                sleepAmount: sleeptimeCalculatorViewModel.sleepAmount,
+                coffeeAmount: sleeptimeCalculatorViewModel.coffeeAmount,
+                userAge: Int(settingsViewModel.userAge) ?? 15
+            ) {
+                sleeptimeCalculatorViewModel.alertTitle = "HGDSA"
+                sleeptimeCalculatorViewModel.alertMessage = output
+                sleeptimeCalculatorViewModel.showingAlert.toggle()
+            }
+        } label: {
+            HStack {
+                Label("Check", systemImage: systemImages.checkmark)
+            }
+            .padding()
+            .foregroundColor(.white)
+            .hCenter()
+            .background(themeManager.selectedTheme.pageTitleColor)
+            .cornerRadius(10)
+        }
+        .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+        .padding(.horizontal)
     }
 
     @ViewBuilder func headerView() -> some View {
@@ -147,6 +161,7 @@ struct SleeptimeCalculatorView: View {
 
 #Preview {
     SleeptimeCalculatorView()
+        .environmentObject(SleeptimeCalculatorViewModel())
         .environmentObject(SettingsViewModel())
         .environmentObject(ThemeManager())
 }

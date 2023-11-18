@@ -16,6 +16,7 @@ struct MainNavigationView: View {
     @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
     @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
+    @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -46,6 +47,7 @@ struct MainNavigationView: View {
                     case .profile:
                         ProfileView()
                             .environmentObject(profileViewModel)
+                            .environmentObject(sleeptimeCalculatorViewModel)
                             .environmentObject(settingsViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)

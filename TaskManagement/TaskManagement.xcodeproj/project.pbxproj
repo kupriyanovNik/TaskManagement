@@ -51,6 +51,7 @@
 		B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F152AE17F8C000F19EE /* TaskCardView.swift */; };
 		B77D34C52B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
+		B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
 		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
 		B7DC65882AD56858009DA010 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC65872AD56858009DA010 /* Theme.swift */; };
@@ -116,6 +117,7 @@
 		B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorView.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorViewModel.swift; sourceTree = "<group>"; };
 		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		B7DC65872AD56858009DA010 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */,
+				B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */,
 			);
 			path = SleeptimeCalculator;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				B7F515C92ACB27060001A282 /* MainNavigationView.swift in Sources */,
 				B77D34C52B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift in Sources */,
 				B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */,
+				B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */,
 				B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */,
 				B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */,
 				B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */,
