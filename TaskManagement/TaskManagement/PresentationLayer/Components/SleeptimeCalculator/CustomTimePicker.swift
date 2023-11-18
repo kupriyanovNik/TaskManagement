@@ -53,7 +53,6 @@ struct CustomTimePicker: View {
                 }
             }
             .padding()
-            .background(.ultraThinMaterial)
 
             GeometryReader { reader in
                 let width = reader.frame(in: .global).width / 2
@@ -104,7 +103,7 @@ struct CustomTimePicker: View {
                         .overlay(alignment: .bottom) {
                             Rectangle()
                                 .fill(accentColor.opacity(0.7))
-                                .frame(width: 3, height: width / 1.5)
+                                .frame(width: 3, height: 50)
                         }
                         .rotationEffect(.degrees(angle))
 
