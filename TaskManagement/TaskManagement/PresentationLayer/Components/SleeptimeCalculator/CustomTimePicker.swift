@@ -81,7 +81,10 @@ struct CustomTimePicker: View {
                     }
 
                     Circle()
-                        .fill(.blue.opacity(0.5))
+                        .stroke(
+                            Color.blue, style: .init(lineWidth: 2)
+                        )
+                        .background(Color.white.opacity(0.1))
                         .frame(width: 40, height: 40)
                         .offset(x: width - 50)
                         .rotationEffect(.degrees(angle))
@@ -97,8 +100,8 @@ struct CustomTimePicker: View {
                         .frame(width: 10, height: 10)
                         .overlay(alignment: .bottom) {
                             Rectangle()
-                                .fill(.blue.opacity(0.4))
-                                .frame(width: 2, height: width / 2)
+                                .fill(.blue)
+                                .frame(width: 2, height: width / 1.55)
                         }
                         .rotationEffect(.degrees(angle))
 
@@ -106,10 +109,9 @@ struct CustomTimePicker: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
             }
-            .frame(height: 300)
+            .frame(height: UIScreen.main.bounds.height / 2.5)
 
         }
-        .frame(width: UIScreen.main.bounds.width - 120)
         .background(.ultraThinMaterial)
         .cornerRadius(10)
         .onAppear {
