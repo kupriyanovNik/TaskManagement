@@ -77,14 +77,12 @@ struct SleeptimeCalculatorView: View {
                 }
             } label: {
                 HStack {
-                    Image(systemName: systemImages.checkmark)
-
-                    Text("Check")
+                    Label("Check", systemImage: systemImages.checkmark)
                 }
                 .padding()
                 .foregroundColor(.white)
                 .hCenter()
-                .background(.black)
+                .background(themeManager.selectedTheme.pageTitleColor)
                 .cornerRadius(10)
             }
             .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
@@ -99,7 +97,7 @@ struct SleeptimeCalculatorView: View {
             Text("Daily coffee intake")
                 .font(.headline)
 
-            HStack {
+            HStack(spacing: 20) {
                 ForEach(1..<6) { index in
                     let isSelected = index <= coffeeAmount
                     let appendingString = isSelected ? ".fill" : ""
@@ -107,9 +105,10 @@ struct SleeptimeCalculatorView: View {
                     Image(systemName: (systemImages.cupOfCoffee + appendingString))
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .scaleEffect(isSelected ? 1.1 : 1)
                         .animation(.smooth, value: coffeeAmount)
+                        .frame(width: 40, height: 40)
+                        .scaleEffect(isSelected ? 1.2 : 1)
+                        .animation(.smooth(extraBounce: 0.7), value: coffeeAmount)
                         .onTapGesture {
                             if index == coffeeAmount {
                                 coffeeAmount = 0
