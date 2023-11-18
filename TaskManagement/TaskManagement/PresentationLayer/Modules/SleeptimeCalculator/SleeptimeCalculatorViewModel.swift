@@ -8,10 +8,10 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     
     // MARK: - Property Wrappers
 
-    @Published var hour = 12
+    @Published var hour = 7
     @Published var minutes = 0
 
-    @Published var symbol = "AM"
+    @Published var quizIndex: Int = 0
 
     @Published var sleepAmount = 8.0
     @Published var coffeeAmount = 1
@@ -19,5 +19,13 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     @Published var alertTitle = ""
     @Published var alertMessage = ""
     @Published var showingAlert = false
+
+    func reset() {
+        hour = 7
+        minutes = 0
+        quizIndex = 0
+        alertTitle = ""
+        alertMessage = ""
+    }
 
 }
