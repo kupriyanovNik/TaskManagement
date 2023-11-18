@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B70C87632B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B70C87622B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel */; };
+		B70C87662B08E14300EBD924 /* NeuralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70C87652B08E14300EBD924 /* NeuralManager.swift */; };
 		B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */; };
 		B7181BE72AD45DC8002F3D82 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */; };
 		B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE92AD4638D002F3D82 /* OnboardingView.swift */; };
@@ -69,6 +71,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B70C87622B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleeptimeCalculatorModel.mlmodel; sourceTree = "<group>"; };
+		B70C87652B08E14300EBD924 /* NeuralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralManager.swift; sourceTree = "<group>"; };
 		B7181BE32AD45647002F3D82 /* TaskAddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddingViewModel.swift; sourceTree = "<group>"; };
 		B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		B7181BE92AD4638D002F3D82 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -143,6 +147,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B70C875F2B08E08B00EBD924 /* MLModels */ = {
+			isa = PBXGroup;
+			children = (
+				B70C87622B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel */,
+			);
+			path = MLModels;
+			sourceTree = "<group>";
+		};
+		B70C87642B08E10E00EBD924 /* NeuralManager */ = {
+			isa = PBXGroup;
+			children = (
+				B70C87652B08E14300EBD924 /* NeuralManager.swift */,
+			);
+			path = NeuralManager;
+			sourceTree = "<group>";
+		};
 		B7181BE52AD45C59002F3D82 /* NavBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +215,7 @@
 		B73213B82ACC8CA800E42B1D /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
+				B70C875F2B08E08B00EBD924 /* MLModels */,
 				B7F515CA2ACB27070001A282 /* Assets.xcassets */,
 				B7DC65852AD56756009DA010 /* Localizable */,
 				B73213C52ACC8E9F00E42B1D /* Strings.swift */,
@@ -368,6 +389,7 @@
 		B7D949A82AE04B5800FE5CAE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				B70C87642B08E10E00EBD924 /* NeuralManager */,
 				B7D949AA2AE04B7A00FE5CAE /* NotificationManager */,
 				B73213C92ACC8EF100E42B1D /* LocalManager */,
 			);
@@ -548,6 +570,7 @@
 				B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */,
 				B7DFBFF52AF44DE10000960D /* String.swift in Sources */,
 				B7DC658A2AD568C3009DA010 /* ThemeDefinitions.swift in Sources */,
+				B70C87632B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel in Sources */,
 				B73213CD2ACC965400E42B1D /* View.swift in Sources */,
 				B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */,
 				B73213C82ACC8EEB00E42B1D /* Persistence.swift in Sources */,
@@ -570,6 +593,7 @@
 				B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */,
 				B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */,
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
+				B70C87662B08E14300EBD924 /* NeuralManager.swift in Sources */,
 				B74985662B0122E000AB6EDB /* HeaderButtonStyle.swift in Sources */,
 				B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */,
 				B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */,
