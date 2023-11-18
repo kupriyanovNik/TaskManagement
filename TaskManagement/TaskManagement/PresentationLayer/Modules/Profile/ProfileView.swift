@@ -42,6 +42,8 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
+                sleepTimeCard()
+
                 if !coreDataViewModel.allTodayTasks.isEmpty {
                     StatisticsGauge(
                         title: strings.todayDoneTasks,
@@ -68,6 +70,31 @@ struct ProfileView: View {
     }
 
     // MARK: - ViewBuilders
+
+    @ViewBuilder func sleepTimeCard() -> some View {
+            NavigationLink {
+                Text("a")
+            } label: {
+                HStack {
+                    Text("Sleeptime Calculator")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                }
+                .padding()
+                .background {
+                    themeManager.selectedTheme.accentColor
+                        .opacity(0.2)
+                        .cornerRadius(10)
+                }
+            }
+            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+            .padding(.horizontal)
+            .padding(.bottom, 5)
+        }
 
     @ViewBuilder func headerView() -> some View {
         HStack {
