@@ -6,6 +6,17 @@ import Foundation
 import CoreML
 
 class NeuralManager {
+
+    // MARK: - Static Properties
+
+    static let shared = NeuralManager()
+
+    // MARK: - Inits
+
+    private init() { }
+
+    // MARK: - Internal Functions
+
     func calculateBedtime(
         wakeUpTime: Date,
         sleepAmount: Double,
@@ -24,7 +35,7 @@ class NeuralManager {
             let prediction = try model.prediction(
                 wake: Int64(Double(hour + minute)),
                 estimatedSleep: sleepAmount,
-                coffee: Int64(coffeeAmount),
+                coffee: Int64(10 - 2 * coffeeAmount),
                 age: Int64(userAge)
             )
 

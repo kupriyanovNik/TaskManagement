@@ -49,6 +49,7 @@
 		B7739F0F2AE15272000F19EE /* TaskCategorySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */; };
 		B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */; };
 		B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F152AE17F8C000F19EE /* TaskCardView.swift */; };
+		B77D34C52B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
 		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
@@ -112,6 +113,7 @@
 		B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySelector.swift; sourceTree = "<group>"; };
 		B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorButtonStyle.swift; sourceTree = "<group>"; };
 		B7739F152AE17F8C000F19EE /* TaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
+		B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorView.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				B72972952AD8546800B9F8BF /* AllTasks */,
 				B75084302AEEA555006A04E1 /* Habits */,
 				B73213D52ACCB07000E42B1D /* Profile */,
+				B77D34C32B08E6AA00D4E4D1 /* SleeptimeCalculator */,
 				B7F016382AD48D8600B9F670 /* Settings */,
 				B73BD3892AF1749300055510 /* HabitAdding */,
 				B73213C02ACC8CCD00E42B1D /* TaskAdding */,
@@ -384,6 +387,14 @@
 				B74985652B0122E000AB6EDB /* HeaderButtonStyle.swift */,
 			);
 			path = ButtonStyles;
+			sourceTree = "<group>";
+		};
+		B77D34C32B08E6AA00D4E4D1 /* SleeptimeCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */,
+			);
+			path = SleeptimeCalculator;
 			sourceTree = "<group>";
 		};
 		B7D949A82AE04B5800FE5CAE /* Service */ = {
@@ -587,6 +598,7 @@
 				B73213C32ACC8D1000E42B1D /* NavigationViewModel.swift in Sources */,
 				B73213BF2ACC8CCA00E42B1D /* HomeViewModel.swift in Sources */,
 				B7F515C92ACB27060001A282 /* MainNavigationView.swift in Sources */,
+				B77D34C52B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift in Sources */,
 				B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */,
 				B73213D72ACCB07A00E42B1D /* ProfileView.swift in Sources */,
 				B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */,

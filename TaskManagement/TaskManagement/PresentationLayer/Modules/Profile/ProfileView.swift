@@ -35,8 +35,6 @@ struct ProfileView: View {
         doneTodayTasksPercentage == 1
     }
 
-    private let screenWidth = UIScreen.main.bounds.width
-
     // MARK: - Body
 
     var body: some View {
@@ -73,7 +71,9 @@ struct ProfileView: View {
 
     @ViewBuilder func sleepTimeCard() -> some View {
             NavigationLink {
-                Text("a")
+                SleeptimeCalculatorView()
+                    .environmentObject(settingsViewModel)
+                    .environmentObject(themeManager)
             } label: {
                 HStack {
                     Text("Sleeptime Calculator")
@@ -82,7 +82,8 @@ struct ProfileView: View {
 
                     Spacer()
 
-                    Image(systemName: "chevron.right")
+                    Image(systemName: systemImages.backArrow)
+                        .rotationEffect(.degrees(180))
                 }
                 .padding()
                 .background {
