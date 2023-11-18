@@ -36,29 +36,35 @@ struct SleeptimeCalculatorView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading) {
                 Text("When do you want to wake up?")
                     .font(.headline)
 
                 DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
                     .labelsHidden()
-            }
 
-            VStack(alignment: .leading, spacing: 0) {
+
                 Text("Desired amount of sleep")
                     .font(.headline)
 
                 Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.5)
+
+                coffeeIntakeRow()
+                    .alert(alertTitle, isPresented: $showingAlert) {
+                        Button("OK") { }
+                    } message: {
+                        Text(alertMessage)
+                    }
             }
-
-            VStack(alignment: .leading, spacing: 0) {
-                Text("Daily coffee intake")
-                    .font(.headline)
-
-                Stepper(coffeeAmount == 1 ? "1 cup" : "\(coffeeAmount) cups", value: $coffeeAmount, in: 0...5)
-            }
-
-            Button("Calculate") {
+            .padding(.horizontal)
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
+        .makeCustomNavBar {
+            headerView()
+        }
+        .safeAreaInset(edge: .bottom) {
+            Button {
                 if let output = NeuralManager.shared.calculateBedtime(
                     wakeUpTime: wakeUp,
                     sleepAmount: sleepAmount,
@@ -69,21 +75,53 @@ struct SleeptimeCalculatorView: View {
                     alertMessage = output
                     showingAlert.toggle()
                 }
+            } label: {
+                HStack {
+                    Image(systemName: systemImages.checkmark)
+
+                    Text("Check")
+                }
+                .padding()
+                .foregroundColor(.white)
+                .hCenter()
+                .background(.black)
+                .cornerRadius(10)
             }
-            .alert(alertTitle, isPresented: $showingAlert) {
-                Button("OK") { }
-            } message: {
-                Text(alertMessage)
-            }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden()
-        .makeCustomNavBar {
-            headerView()
+            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+            .padding(.horizontal)
         }
     }
 
     // MARK: - View Builders
+
+    @ViewBuilder func coffeeIntakeRow() -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Daily coffee intake")
+                .font(.headline)
+
+            HStack {
+                ForEach(1..<6) { index in
+                    let isSelected = index <= coffeeAmount
+                    let appendingString = isSelected ? ".fill" : ""
+
+                    Image(systemName: (systemImages.cupOfCoffee + appendingString))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .scaleEffect(isSelected ? 1.1 : 1)
+                        .animation(.smooth, value: coffeeAmount)
+                        .onTapGesture {
+                            if index == coffeeAmount {
+                                coffeeAmount = 0
+                            } else {
+                                coffeeAmount = index
+                            }
+                        }
+                }
+            }
+        }
+        .hLeading()
+    }
 
     @ViewBuilder func headerView() -> some View {
         HStack {

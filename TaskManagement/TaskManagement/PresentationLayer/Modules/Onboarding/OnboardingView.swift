@@ -67,7 +67,7 @@ struct OnboardingView: View {
                     .background(.black)
                     .cornerRadius(10)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
         }
         .padding()
     }
