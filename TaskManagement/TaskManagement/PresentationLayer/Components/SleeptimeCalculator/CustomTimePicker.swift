@@ -7,14 +7,14 @@ import Foundation
 
 struct CustomTimePicker: View {
 
-    @State var hour = 12
-    @State var minutes = 0
+    @Binding var hour: Int
+    @Binding var minutes: Int
 
     @State var changeToMin = false
 
     @State var angle: Double = 0
 
-    @State var symbol = "AM"
+    @Binding var symbol: String
 
     var body: some View {
         VStack {
@@ -148,9 +148,5 @@ struct CustomTimePicker: View {
             }
         }
     }
-}
-
-#Preview {
-    CustomTimePicker()
 }
 

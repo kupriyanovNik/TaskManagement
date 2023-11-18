@@ -26,12 +26,11 @@ struct SleeptimeCalculatorView: View {
                 Text("When do you want to wake up?")
                     .font(.headline)
 
-                DatePicker(
-                    "",
-                    selection: $sleeptimeCalculatorViewModel.wakeUp,
-                    displayedComponents: .hourAndMinute
+                CustomTimePicker(
+                    hour: $sleeptimeCalculatorViewModel.hour,
+                    minutes: $sleeptimeCalculatorViewModel.minutes,
+                    symbol: $sleeptimeCalculatorViewModel.symbol
                 )
-                .labelsHidden()
 
 
                 Text("Desired amount of sleep")
@@ -113,7 +112,8 @@ struct SleeptimeCalculatorView: View {
     @ViewBuilder func checkButton() -> some View {
         Button {
             if let output = NeuralManager.shared.calculateBedtime(
-                wakeUpTime: sleeptimeCalculatorViewModel.wakeUp,
+                hour: sleeptimeCalculatorViewModel.hour,
+                minute: sleeptimeCalculatorViewModel.minutes,
                 sleepAmount: sleeptimeCalculatorViewModel.sleepAmount,
                 coffeeAmount: sleeptimeCalculatorViewModel.coffeeAmount,
                 userAge: Int(settingsViewModel.userAge) ?? 15

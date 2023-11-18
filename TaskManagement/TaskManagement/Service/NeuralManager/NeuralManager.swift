@@ -18,7 +18,8 @@ class NeuralManager {
     // MARK: - Internal Functions
 
     func calculateBedtime(
-        wakeUpTime: Date,
+        hour: Int,
+        minute: Int,
         sleepAmount: Double,
         coffeeAmount: Int = 0,
         userAge: Int,
@@ -28,10 +29,6 @@ class NeuralManager {
             let config = MLModelConfiguration()
             let model = try SleeptimeCalculatorModel(configuration: config)
 
-            let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUpTime)
-            let hour = (components.hour ?? 0) * 60 * 60
-            let minute = (components.minute ?? 0) * 60
-
             let prediction = try model.prediction(
                 wake: Int64(Double(hour + minute)),
                 estimatedSleep: sleepAmount,
@@ -39,7 +36,11 @@ class NeuralManager {
                 age: Int64(userAge)
             )
 
-            let sleepTime = wakeUpTime - prediction.actualSleep
+            var components = DateComponents()
+            components.hour = hour
+            components.minute = minute
+
+            let sleepTime = (Calendar.current.date(from: components) ?? Date.now) - prediction.actualSleep
 
             return sleepTime.formatted(date: .omitted, time: .shortened)
         } catch {
@@ -48,3 +49,4 @@ class NeuralManager {
         }
     }
 }
+
