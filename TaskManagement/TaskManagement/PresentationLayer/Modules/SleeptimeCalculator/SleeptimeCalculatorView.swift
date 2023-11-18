@@ -97,6 +97,9 @@ struct SleeptimeCalculatorView: View {
         } message: {
             Text(sleeptimeCalculatorViewModel.alertMessage)
         }
+        .onDisappear {
+            sleeptimeCalculatorViewModel.reset()
+        }
     }
 
     // MARK: - View Builders
@@ -179,7 +182,6 @@ struct SleeptimeCalculatorView: View {
         HStack {
             Button {
                 dismiss()
-                sleeptimeCalculatorViewModel.reset()
             } label: {
                 Image(systemName: systemImages.backArrow)
                     .foregroundColor(.black)
