@@ -23,26 +23,7 @@ struct SleeptimeCalculatorView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
-            //                Text("When do you want to wake up?")
-            //                    .font(.headline)
-            //
-            //                CustomTimePicker(
-            //                    hour: $sleeptimeCalculatorViewModel.hour,
-            //                    minutes: $sleeptimeCalculatorViewModel.minutes
-            //                )
-            //
-            //
-            //                Text("Desired amount of sleep")
-            //                    .font(.headline)
-            //
-            //                Stepper("\(sleeptimeCalculatorViewModel.sleepAmount.formatted()) hours", value: $sleeptimeCalculatorViewModel.sleepAmount, in: 4...12, step: 0.5)
-            //
-            //                coffeeIntakeRow()
-            //                    .alert(sleeptimeCalculatorViewModel.alertTitle, isPresented: $sleeptimeCalculatorViewModel.showingAlert) {
-            //                        Button("OK") { }
-            //                    } message: {
-            //                        Text(sleeptimeCalculatorViewModel.alertMessage)
-            //                    }
+
             switch sleeptimeCalculatorViewModel.quizIndex {
             case 0:
                 Text("When do you want to wake up?")
@@ -50,7 +31,8 @@ struct SleeptimeCalculatorView: View {
 
                 CustomTimePicker(
                     hour: $sleeptimeCalculatorViewModel.hour,
-                    minutes: $sleeptimeCalculatorViewModel.minutes
+                    minutes: $sleeptimeCalculatorViewModel.minutes,
+                    accentColor: themeManager.selectedTheme.accentColor
                 )
 
             case 1:

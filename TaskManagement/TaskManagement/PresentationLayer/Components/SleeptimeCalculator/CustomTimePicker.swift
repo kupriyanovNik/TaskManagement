@@ -14,6 +14,8 @@ struct CustomTimePicker: View {
 
     @State var angle: Double = 0
 
+    var accentColor: Color
+
     var body: some View {
         VStack {
 
@@ -82,7 +84,8 @@ struct CustomTimePicker: View {
 
                     Circle()
                         .stroke(
-                            Color.blue, style: .init(lineWidth: 2)
+                            accentColor,
+                            style: .init(lineWidth: 5)
                         )
                         .background(Color.white.opacity(0.1))
                         .frame(width: 40, height: 40)
@@ -96,12 +99,12 @@ struct CustomTimePicker: View {
                         .rotationEffect(.degrees(-90))
 
                     Circle()
-                        .fill(.blue)
-                        .frame(width: 10, height: 10)
+                        .fill(accentColor)
+                        .frame(width: 20, height: 20)
                         .overlay(alignment: .bottom) {
                             Rectangle()
-                                .fill(.blue)
-                                .frame(width: 2, height: width / 1.55)
+                                .fill(accentColor.opacity(0.7))
+                                .frame(width: 3, height: width / 1.5)
                         }
                         .rotationEffect(.degrees(angle))
 
@@ -112,7 +115,7 @@ struct CustomTimePicker: View {
             .frame(height: UIScreen.main.bounds.height / 2.5)
 
         }
-        .background(.ultraThinMaterial)
+        .background(accentColor.opacity(0.2))
         .cornerRadius(10)
         .onAppear {
             self.angle = Double(self.hour * 30)
