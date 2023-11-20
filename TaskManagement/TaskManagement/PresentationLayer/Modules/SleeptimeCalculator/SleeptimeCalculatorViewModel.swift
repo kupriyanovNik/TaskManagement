@@ -10,8 +10,6 @@ class SleeptimeCalculatorViewModel: ObservableObject {
 
     @Published var selectedWakeUpTime: Date = defaultWakeTime
 
-    @Published var quizIndex: Int = 0
-
     @Published var sleepAmount = 8.0
     @Published var coffeeAmount = 1
 
@@ -27,7 +25,8 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     }
 
     func reset() {
-        selectedWakeUpTime = .now
+        selectedWakeUpTime = SleeptimeCalculatorViewModel.defaultWakeTime
+        coffeeAmount = 1
         alertTitle = ""
         alertMessage = ""
     }

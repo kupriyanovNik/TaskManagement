@@ -27,12 +27,16 @@ struct SleeptimeCalculatorView: View {
     var body: some View {
         VStack {
             Spacer()
-
+            
             wakeUpTimeRow()
+
+            Divider()
 
             desiredAmountOfSleepRow()
 
             if userAge > 10 {
+                Divider()
+
                 coffeeIntakeRow()
             }
 
@@ -47,22 +51,29 @@ struct SleeptimeCalculatorView: View {
         .safeAreaInset(edge: .bottom) {
             VStack {
                 nextButton()
-
-                Label("Result calculated by Neural Network", systemImage: "network")
-                    .font(.caption2)
-                    .foregroundColor(.blue)
-                    .padding(.top, 3)
-                    .onTapGesture {
-                        if let url = URL(string: "https://developer.apple.com/machine-learning/core-ml/") {
-                            if UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.open(url)
-                            }
+                    
+                Button {
+                    if let url = URL(string: "https://developer.apple.com/machine-learning/core-ml/") {
+                        if UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url)
                         }
                     }
+                } label: {
+                    Label("Result will be calculated by Neural Network", systemImage: "network")
+                        .font(.caption2)
+                        .foregroundColor(themeManager.selectedTheme.accentColor.opacity(0.7))
+                        .padding(.top, 3)
+                }
+                .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
             }
         }
         .alert(sleeptimeCalculatorViewModel.alertTitle, isPresented: $sleeptimeCalculatorViewModel.showingAlert) {
-            Button("OK") { }
+            Button("OK") { 
+//                delay(1) {
+//                    dismiss()
+//                }
+                dismiss()
+            }
         } message: {
             Text(sleeptimeCalculatorViewModel.alertMessage)
         }
