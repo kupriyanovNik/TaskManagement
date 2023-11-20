@@ -8,8 +8,7 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     
     // MARK: - Property Wrappers
 
-    @Published var hour = 7
-    @Published var minutes = 0
+    @Published var selectedWakeUpTime: Date = .now
 
     @Published var quizIndex: Int = 0
 
@@ -21,9 +20,7 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     @Published var showingAlert = false
 
     func reset() {
-        hour = 7
-        minutes = 0
-        quizIndex = 0
+        selectedWakeUpTime = .now
         alertTitle = ""
         alertMessage = ""
     }

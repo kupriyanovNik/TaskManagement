@@ -21,37 +21,18 @@ struct SleeptimeCalculatorView: View {
     // MARK: - Body
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
             Spacer()
 
-            switch sleeptimeCalculatorViewModel.quizIndex {
-            case 0:
-                Text("When do you want to wake up?")
-                    .font(.headline)
+            wakeUpTimeRow()
 
-                CustomTimePicker(
-                    hour: $sleeptimeCalculatorViewModel.hour,
-                    minutes: $sleeptimeCalculatorViewModel.minutes,
-                    accentColor: themeManager.selectedTheme.accentColor
-                )
+            desiredAmountOfSleepRow()
 
-            case 1:
-                Text("Desired amount of sleep")
-                    .font(.headline)
-
-                Stepper("\(sleeptimeCalculatorViewModel.sleepAmount.formatted()) hours", value: $sleeptimeCalculatorViewModel.sleepAmount, in: 4...12, step: 0.5)
-
-            case 2:
-                coffeeIntakeRow()
-
-            default:
-                Text("Unowned")
-            }
+            coffeeIntakeRow()
 
             Spacer()
         }
         .padding(.horizontal)
-
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
@@ -86,13 +67,42 @@ struct SleeptimeCalculatorView: View {
 
     // MARK: - View Builders
 
+    @ViewBuilder func wakeUpTimeRow() -> some View {
+        VStack {
+            Text("When do you want to wake up?")
+                .font(.headline)
+
+            DatePicker(
+                "",
+                selection: $sleeptimeCalculatorViewModel.selectedWakeUpTime,
+                displayedComponents: .hourAndMinute
+            )
+            .datePickerStyle(.wheel)
+            .labelsHidden()
+        }
+    }
+
+    @ViewBuilder func desiredAmountOfSleepRow() -> some View {
+        VStack {
+            Text("Desired amount of sleep")
+                .font(.headline)
+
+            Stepper(
+                "\(sleeptimeCalculatorViewModel.sleepAmount.formatted()) hours",
+                value: $sleeptimeCalculatorViewModel.sleepAmount,
+                in: 4...12, 
+                step: 0.5
+            )
+        }
+    }
+
     @ViewBuilder func coffeeIntakeRow() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack {
             Text("Daily coffee intake")
                 .font(.headline)
 
             HStack(spacing: 20) {
-                ForEach(1..<6) { index in
+                ForEach(1..<7) { index in
                     let isSelected = index <= sleeptimeCalculatorViewModel.coffeeAmount
                     let appendingString = isSelected ? ".fill" : ""
 
@@ -116,6 +126,7 @@ struct SleeptimeCalculatorView: View {
                                 sleeptimeCalculatorViewModel.coffeeAmount = index
                             }
                         }
+                        .hCenter()
                 }
             }
         }
@@ -123,31 +134,33 @@ struct SleeptimeCalculatorView: View {
     }
 
     @ViewBuilder func nextButton() -> some View {
-        let isAbleToShowNext = sleeptimeCalculatorViewModel.quizIndex < 2
-
         Button {
-            if isAbleToShowNext {
-                withAnimation {
-                    sleeptimeCalculatorViewModel.quizIndex += 1
-                }
-            } else {
-                if let output = NeuralManager.shared.calculateBedtime(
-                    hour: sleeptimeCalculatorViewModel.hour,
-                    minute: sleeptimeCalculatorViewModel.minutes,
-                    sleepAmount: sleeptimeCalculatorViewModel.sleepAmount,
-                    coffeeAmount: sleeptimeCalculatorViewModel.coffeeAmount,
-                    userAge: Int(settingsViewModel.userAge) ?? 15
-                ) {
-                    sleeptimeCalculatorViewModel.alertTitle = "HGDSA"
-                    sleeptimeCalculatorViewModel.alertMessage = output
-                    sleeptimeCalculatorViewModel.showingAlert.toggle()
-                }
+            let components = Calendar.current.dateComponents(
+                [.hour, .minute],
+                from: sleeptimeCalculatorViewModel.selectedWakeUpTime
+            )
+
+            let hour = (components.hour ?? 0)
+            let minute = (components.minute ?? 0)
+
+            let userAge = Int(settingsViewModel.userAge) ?? 10
+
+            if let output = NeuralManager.shared.calculateBedtime(
+                hour: hour,
+                minute: minute,
+                sleepAmount: sleeptimeCalculatorViewModel.sleepAmount,
+                coffeeAmount: userAge > 10 ? sleeptimeCalculatorViewModel.coffeeAmount : 0,
+                userAge: userAge
+            ) {
+                sleeptimeCalculatorViewModel.alertTitle = "Sleeptime:"
+                sleeptimeCalculatorViewModel.alertMessage = output
+                sleeptimeCalculatorViewModel.showingAlert.toggle()
             }
         } label: {
             HStack {
                 Label(
-                    isAbleToShowNext ? "Next" : "Check",
-                    systemImage: isAbleToShowNext ? "" : systemImages.checkmark
+                    "Check",
+                    systemImage: systemImages.checkmark
                 )
             }
             .padding()
