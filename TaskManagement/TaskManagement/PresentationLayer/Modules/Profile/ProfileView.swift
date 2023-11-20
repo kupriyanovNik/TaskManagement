@@ -10,6 +10,7 @@ struct ProfileView: View {
     // MARK: - Property Wrappers
 
     @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -35,13 +36,13 @@ struct ProfileView: View {
         doneTodayTasksPercentage == 1
     }
 
-    private let screenWidth = UIScreen.main.bounds.width
-
     // MARK: - Body
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
+                sleepTimeCard()
+
                 if !coreDataViewModel.allTodayTasks.isEmpty {
                     StatisticsGauge(
                         title: strings.todayDoneTasks,
@@ -68,6 +69,35 @@ struct ProfileView: View {
     }
 
     // MARK: - ViewBuilders
+
+    @ViewBuilder func sleepTimeCard() -> some View {
+            NavigationLink {
+                SleeptimeCalculatorView()
+                    .environmentObject(sleeptimeCalculatorViewModel)
+                    .environmentObject(settingsViewModel)
+                    .environmentObject(themeManager)
+            } label: {
+                HStack {
+                    Text("Sleeptime Calculator")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
+                    Spacer()
+
+                    Image(systemName: systemImages.backArrow)
+                        .rotationEffect(.degrees(180))
+                }
+                .padding()
+                .background {
+                    themeManager.selectedTheme.accentColor
+                        .opacity(0.2)
+                        .cornerRadius(10)
+                }
+            }
+            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+            .padding(.horizontal)
+            .padding(.bottom, 5)
+        }
 
     @ViewBuilder func headerView() -> some View {
         HStack {
@@ -134,6 +164,7 @@ struct ProfileView: View {
 #Preview {
     ProfileView()
         .environmentObject(ProfileViewModel())
+        .environmentObject(SleeptimeCalculatorViewModel())
         .environmentObject(SettingsViewModel())
         .environmentObject(CoreDataViewModel())
         .environmentObject(ThemeManager())

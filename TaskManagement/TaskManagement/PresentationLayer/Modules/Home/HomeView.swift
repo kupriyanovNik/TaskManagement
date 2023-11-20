@@ -127,7 +127,7 @@ struct HomeView: View {
     }
 
     @ViewBuilder func headerView() -> some View {
-        var isToday = Calendar.current.isDateInToday(homeViewModel.currentDay)
+        let isToday = Calendar.current.isDateInToday(homeViewModel.currentDay)
 
         VStack(spacing: 0) {
             HStack(spacing: 10) {

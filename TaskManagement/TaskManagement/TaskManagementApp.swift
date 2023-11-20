@@ -20,6 +20,7 @@ struct TaskManagementApp: App {
     @StateObject private var taskAddingViewModel = TaskAddingViewModel()
     @StateObject private var habitAddingViewModel = HabitAddingViewModel()
     @StateObject private var profileViewModel = ProfileViewModel()
+    @StateObject private var sleeptimeCalculatorViewModel = SleeptimeCalculatorViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
     @StateObject private var themeManager = ThemeManager()
 
@@ -41,6 +42,7 @@ struct TaskManagementApp: App {
                     .environmentObject(taskAddingViewModel)
                     .environmentObject(habitAddingViewModel)
                     .environmentObject(profileViewModel)
+                    .environmentObject(sleeptimeCalculatorViewModel)
                     .environmentObject(settingsViewModel)
                     .environmentObject(themeManager)
                     .opacity(shouldShowOnboarding ? 0.5 : 1)
