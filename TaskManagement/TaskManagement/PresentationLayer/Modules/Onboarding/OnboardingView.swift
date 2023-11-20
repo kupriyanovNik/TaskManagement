@@ -15,7 +15,7 @@ struct OnboardingView: View {
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Onboarding.self
+    private let strings = Localizable.Onboarding.self
 
     private var greetingsView: some View {
         VStack(spacing: 30) {
@@ -54,7 +54,10 @@ struct OnboardingView: View {
             Spacer()
 
             Button {
-                if settingsViewModel.userName.isEmpty || settingsViewModel.userAge.isEmpty || settingsViewModel.userName.count > 15 || settingsViewModel.userAge.count > 15 {
+                if settingsViewModel.userName.isEmpty ||
+                    settingsViewModel.userAge.isEmpty ||
+                    settingsViewModel.userName.count > 15 ||
+                    settingsViewModel.userAge.count > 15 {
                     onboardingViewModel.showError = true
                 } else {
                     hideOnboarding()
@@ -70,13 +73,6 @@ struct OnboardingView: View {
             .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
         }
         .padding()
-    }
-
-    // MARK: Inits
-
-    init(shouldShowOnboarding: Binding<Bool>) {
-        // Because 'OnboardingView' initializer is inaccessible due to 'private' protection level
-        self._shouldShowOnboarding = shouldShowOnboarding
     }
 
     // MARK: Body

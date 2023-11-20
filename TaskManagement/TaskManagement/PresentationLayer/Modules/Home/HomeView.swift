@@ -83,7 +83,7 @@ struct HomeView: View {
     @ViewBuilder func calendarView() -> some View {
         HStack(spacing: 10) {
             ForEach(homeViewModel.currentWeek, id: \.timeIntervalSince1970) { day in
-                let isToday = homeViewModel.isToday(date: day)
+                let isToday = homeViewModel.isSameAsSelectedDay(date: day)
                 let dateNumber = homeViewModel.extractDate(date: day, format: dateFormats.forDateNumber)
                 let dateLiteral = homeViewModel.extractDate(date: day, format: dateFormats.forDateLiteral)
 

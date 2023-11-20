@@ -27,19 +27,13 @@ struct SleeptimeCalculatorView: View {
     var body: some View {
         VStack {
             Spacer()
-            
             wakeUpTimeRow()
-
             Divider()
-
             desiredAmountOfSleepRow()
-
             if userAge > 10 {
                 Divider()
-
                 coffeeIntakeRow()
             }
-
             Spacer()
         }
         .padding(.horizontal)
