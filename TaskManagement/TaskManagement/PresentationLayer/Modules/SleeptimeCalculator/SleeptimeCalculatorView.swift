@@ -68,10 +68,7 @@ struct SleeptimeCalculatorView: View {
             }
         }
         .alert(sleeptimeCalculatorViewModel.alertTitle, isPresented: $sleeptimeCalculatorViewModel.showingAlert) {
-            Button("OK") { 
-//                delay(1) {
-//                    dismiss()
-//                }
+            Button("OK") {
                 dismiss()
             }
         } message: {
