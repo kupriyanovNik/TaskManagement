@@ -219,6 +219,7 @@
 		B73213B82ACC8CA800E42B1D /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
+				B7F515CC2ACB27070001A282 /* Preview Content */,
 				B70C875F2B08E08B00EBD924 /* MLModels */,
 				B7F515CA2ACB27070001A282 /* Assets.xcassets */,
 				B7DC65852AD56756009DA010 /* Localizable */,
@@ -483,7 +484,6 @@
 			isa = PBXGroup;
 			children = (
 				B7F515C62ACB27060001A282 /* TaskManagementApp.swift */,
-				B7F515CC2ACB27070001A282 /* Preview Content */,
 				B73213B82ACC8CA800E42B1D /* Resourse */,
 				B7D949A82AE04B5800FE5CAE /* Service */,
 				B73213B62ACC8C9A00E42B1D /* Extension */,
@@ -782,7 +782,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TaskManagement/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TaskManagement/Resourse/Preview Content\"";
 				DEVELOPMENT_TEAM = 7HDF545ZQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -813,7 +813,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TaskManagement/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"TaskManagement/Resourse/Preview Content\"";
 				DEVELOPMENT_TEAM = 7HDF545ZQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

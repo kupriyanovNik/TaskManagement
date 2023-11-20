@@ -110,6 +110,15 @@ struct SettingsView: View {
         }
     }
 
+    private var removeAllNotificationsRow: some View {
+        Button {
+            NotificationManager.shared.removeAllNotifications()
+        } label: {
+            Text("remove all notifications")
+        }
+        .padding(.horizontal)
+    }
+
     // MARK: - Body
     
     var body: some View {
@@ -124,6 +133,7 @@ struct SettingsView: View {
                 Divider()
                 #if DEBUG
                 showOnboardingRow
+                removeAllNotificationsRow
                 #endif
             }
         }
