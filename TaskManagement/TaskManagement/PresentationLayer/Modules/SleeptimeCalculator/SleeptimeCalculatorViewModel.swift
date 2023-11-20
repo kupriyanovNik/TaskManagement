@@ -8,7 +8,7 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     
     // MARK: - Property Wrappers
 
-    @Published var selectedWakeUpTime: Date = .now
+    @Published var selectedWakeUpTime: Date = defaultWakeTime
 
     @Published var quizIndex: Int = 0
 
@@ -18,6 +18,13 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     @Published var alertTitle = ""
     @Published var alertMessage = ""
     @Published var showingAlert = false
+
+    static var defaultWakeTime: Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? Date.now
+    }
 
     func reset() {
         selectedWakeUpTime = .now

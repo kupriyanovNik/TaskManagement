@@ -18,6 +18,10 @@ struct SleeptimeCalculatorView: View {
 
     private var systemImages = ImageNames.System.self
 
+    private var userAge: Int {
+        Int(settingsViewModel.userAge) ?? 10
+    }
+
     // MARK: - Body
 
     var body: some View {
@@ -28,7 +32,9 @@ struct SleeptimeCalculatorView: View {
 
             desiredAmountOfSleepRow()
 
-            coffeeIntakeRow()
+            if userAge > 10 {
+                coffeeIntakeRow()
+            }
 
             Spacer()
         }
@@ -140,17 +146,15 @@ struct SleeptimeCalculatorView: View {
                 from: sleeptimeCalculatorViewModel.selectedWakeUpTime
             )
 
-            let hour = (components.hour ?? 0)
-            let minute = (components.minute ?? 0)
-
-            let userAge = Int(settingsViewModel.userAge) ?? 10
+            let hour = components.hour ?? 0
+            let minute = components.minute ?? 0
 
             if let output = NeuralManager.shared.calculateBedtime(
                 hour: hour,
                 minute: minute,
                 sleepAmount: sleeptimeCalculatorViewModel.sleepAmount,
-                coffeeAmount: userAge > 10 ? sleeptimeCalculatorViewModel.coffeeAmount : 0,
-                userAge: userAge
+                coffeeAmount: self.userAge > 10 ? sleeptimeCalculatorViewModel.coffeeAmount : 0,
+                userAge: self.userAge
             ) {
                 sleeptimeCalculatorViewModel.alertTitle = "Sleeptime:"
                 sleeptimeCalculatorViewModel.alertMessage = output
