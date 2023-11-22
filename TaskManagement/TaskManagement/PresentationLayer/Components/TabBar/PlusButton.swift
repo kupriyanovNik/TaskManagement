@@ -47,27 +47,22 @@ struct PlusButton: View {
         }
         .scaleEffect(scale)
         .rotationEffect(.degrees(rotation))
-        .simultaneousGesture(
-            LongPressGesture(minimumDuration: 0.1, maximumDistance: 50)
-                .onEnded { _ in
-                    withAnimation {
-                        scale = 1.2
-                        rotation = 45
-                        tabBarViewModel.gradientLineWidth = 6
-                        generateFeedback(style: .soft)
-                    }
+        .onLongPressGesture(minimumDuration: 0.2, maximumDistance: 50) {
+            longAction()
+            generateFeedback(style: .soft)
 
-                    delay(0.2) {
-                        longAction()
-
-                        delay(0.3) {
-                            scale = 1
-                            rotation = 0
-                            tabBarViewModel.gradientLineWidth = 5
-                        }
-                    }
-                }
-        )
+            delay(0.3) {
+                scale = 1
+                rotation = 0
+                tabBarViewModel.gradientLineWidth = 5
+            }
+        } onPressingChanged: { isPressed in
+            withAnimation(.linear) {
+                rotation = isPressed ? 45 : 0
+                tabBarViewModel.gradientLineWidth = isPressed ? 6 : 5
+                scale = isPressed ? 1.1 : 1
+            }
+        }
         .highPriorityGesture(
             TapGesture()
                 .onEnded { _ in
