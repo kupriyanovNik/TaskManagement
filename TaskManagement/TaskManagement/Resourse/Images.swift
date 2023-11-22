@@ -9,6 +9,7 @@ enum ImageNames {
         static let plus = "plus"
         static let clock = "clock"
         static let gear = "gearshape"
+        static let network = "network"
         static let checkmark = "checkmark"
         static let noteText = "note.text"
         static let bellBadge = "bell.badge.fill"

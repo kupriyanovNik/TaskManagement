@@ -50,7 +50,15 @@
 "Profile.profile" = "Profile";
 "Profile.doneTasks" = "Done Tasks";
 "Profile.todayDoneTasks" = "Today Done Tasks";
-"Profile.sleeptimeCalculator" = "Sleeptime Calculator";
+"Profile.sleeptimeCalculator" = "Better Rest";
+
+// MARK: - SleeptimeCalculator
+
+"SleeptimeCalculator.wakeUpTime" = "When do you want to Wake up?";
+"SleeptimeCalculator.desiredAmount" = "Desired amount of sleep";
+"SleeptimeCalculator.coffeeIntake" = "Daily coffee\tea intake";
+"SleeptimeCalculator.check" = "Check";
+"SleeptimeCalculator.alertTitle" = "You should go to bed at:";
 
 // MARK: - Onboarding
 

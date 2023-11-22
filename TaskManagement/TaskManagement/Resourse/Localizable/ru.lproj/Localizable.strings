@@ -52,6 +52,14 @@
 "Profile.todayDoneTasks" = "Сегодняшние выполненные задачи";
 "Profile.sleeptimeCalculator" = "Время сна";
 
+// MARK: - SleeptimeCalculator
+
+"SleeptimeCalculator.wakeUpTime" = "Когда хотите проснуться?";
+"SleeptimeCalculator.desiredAmount" = "Нужно чтобы выспаться";
+"SleeptimeCalculator.coffeeIntake" = "Ежедневный прием кофе/чая";
+"SleeptimeCalculator.check" = "Узнать";
+"SleeptimeCalculator.alertTitle" = "Стоит лечь в:";
+
 // MARK: - Onboarding
 
 "Onboarding.application" = "Приложение для контроля и отслеживания выполнения задач";
