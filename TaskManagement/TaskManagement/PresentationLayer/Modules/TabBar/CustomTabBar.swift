@@ -79,6 +79,7 @@ struct CustomTabBar: View {
 
     private var habitsButton: some View {
         let isSelected = navigationViewModel.selectedTab == .habits
+        
         return Button {
             navigationViewModel.selectedTab = .habits
         } label: {
