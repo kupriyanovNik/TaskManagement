@@ -83,6 +83,11 @@
 "AllTasks.done" = "Done";
 "AllTasks.edit" = "Edit";
 
+// MARK: - HabitCard
+
+"HabitCard.everyday" = "Everyday";
+"HabitCard.timesAWeek" = "times a week";
+
 // MARK: - TaskCategory
 
 "TaskCategory.normal" = "Normal";

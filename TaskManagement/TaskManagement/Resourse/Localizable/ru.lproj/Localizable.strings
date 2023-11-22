@@ -83,6 +83,11 @@
 "AllTasks.done" = "Готово";
 "AllTasks.edit" = "Изменить";
 
+// MARK: - HabitCard
+
+"HabitCard.everyday" = "Каждый день";
+"HabitCard.timesAWeek" = "раз в неделю";
+
 // MARK: - TaskCategory
 
 "TaskCategory.normal" = "Обычное";

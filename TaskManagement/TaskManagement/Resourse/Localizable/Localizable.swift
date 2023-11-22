@@ -92,7 +92,7 @@ enum Localizable {
     }
 
     enum HabitCard {
-        static let everyday = "Everyday"
-        static let timeAweek = "times a week"
+        static let everyday = localized("HabitCard.everyday")
+        static let timeAweek = localized("HabitCard.timesAWeek")
     }
 }
