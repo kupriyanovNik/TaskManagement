@@ -50,6 +50,7 @@
 "Profile.profile" = "Profile";
 "Profile.doneTasks" = "Done Tasks";
 "Profile.todayDoneTasks" = "Today Done Tasks";
+"Profile.sleeptimeCalculator" = "Sleeptime Calculator";
 
 // MARK: - Onboarding
 

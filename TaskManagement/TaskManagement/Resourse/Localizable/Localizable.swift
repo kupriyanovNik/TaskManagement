@@ -53,6 +53,7 @@ enum Localizable {
         static let profile = localized("Profile.profile")
         static let doneTasks = localized("Profile.doneTasks")
         static let todayDoneTasks = localized("Profile.todayDoneTasks")
+        static let sleeptimeCalculator = localized("Profile.sleeptimeCalculator")
     }
 
     enum Onboarding {
