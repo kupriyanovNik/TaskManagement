@@ -27,7 +27,9 @@ struct CustomTabBar: View {
     private var tabBarImages = ImageNames.TabBarImages.self
 
     private var homeButton: some View {
-        Button {
+        let isSelected = navigationViewModel.selectedTab == .home
+
+        return Button {
             if navigationViewModel.selectedTab == .home {
                 if !coreDataViewModel.allTasks.isEmpty {
                     navigationViewModel.showAllTasksView.toggle()
@@ -38,7 +40,7 @@ struct CustomTabBar: View {
         } label: {
             HStack {
                 Group {
-                    Image(systemName: navigationViewModel.selectedTab == .home ? tabBarImages.Active.home : tabBarImages.Inactive.home)
+                    Image(systemName: isSelected ? tabBarImages.Active.home : tabBarImages.Inactive.home)
                         .resizable()
                         .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
                 }
@@ -48,41 +50,50 @@ struct CustomTabBar: View {
         }
         .buttonStyle(.plain)
         .padding(.horizontal)
-        .scaleEffect(navigationViewModel.selectedTab == .home ? 1.15 : 1)
-        .opacity(navigationViewModel.selectedTab == .home ? 1 : 0.5)
+        .scaleEffect(isSelected ? 1.15 : 1)
+        .opacity(isSelected ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
+        .shadow(color: .black.opacity(0.4), radius: isSelected ? 10 : 0)
+        .animation(.interpolatingSpring, value: isSelected)
     }
 
     private var profileButton: some View {
-        Button {
+        let isSelected = navigationViewModel.selectedTab == .profile
+        
+        return Button {
             navigationViewModel.selectedTab = .profile
         } label: {
-            Image(systemName: navigationViewModel.selectedTab == .profile ? tabBarImages.Active.profile : tabBarImages.Inactive.profile)
+            Image(systemName: isSelected ? tabBarImages.Active.profile : tabBarImages.Inactive.profile)
                 .resizable()
                 .frame(width: 25, height: 25)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
         }
         .buttonStyle(.plain)
         .padding(.horizontal)
-        .scaleEffect(navigationViewModel.selectedTab == .profile ? 1.15 : 1)
-        .opacity(navigationViewModel.selectedTab == .profile ? 1 : 0.5)
+        .scaleEffect(isSelected ? 1.15 : 1)
+        .opacity(isSelected ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
+        .shadow(color: .black.opacity(0.4), radius: isSelected ? 10 : 0)
+        .animation(.interpolatingSpring, value: isSelected)
     }
 
     private var habitsButton: some View {
-        Button {
+        let isSelected = navigationViewModel.selectedTab == .habits
+        return Button {
             navigationViewModel.selectedTab = .habits
         } label: {
-            Image(systemName: navigationViewModel.selectedTab == .habits ? tabBarImages.Active.allTasks : tabBarImages.Inactive.allTasks)
+            Image(systemName: isSelected ? tabBarImages.Active.allTasks : tabBarImages.Inactive.allTasks)
                 .resizable()
                 .frame(width: 25, height: 25)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
         }
         .buttonStyle(.plain)
         .padding(.horizontal)
-        .scaleEffect(navigationViewModel.selectedTab == .habits ? 1.15 : 1)
-        .opacity(navigationViewModel.selectedTab == .habits ? 1 : 0.5)
+        .scaleEffect(isSelected ? 1.15 : 1)
+        .opacity(isSelected ? 1 : 0.5)
         .animation(.linear, value: navigationViewModel.selectedTab)
+        .shadow(color: .black.opacity(0.4), radius: isSelected ? 10 : 0)
+        .animation(.interpolatingSpring, value: isSelected)
     }
 
     private var plusButton: some View {
