@@ -32,8 +32,17 @@
 "Home.edit" = "Изменить";
 "Home.done" = "Готово";
 "Home.noTasks" = "Не найдено задач";
-"Home.noTasksDescription" = "Здесь появятся ваши задачи.\nНажмите \"+\", чтобы добавить новое";
+"Home.noTasksDescription" = "Здесь появятся ваши задачи.\nНажмите \"+\", чтобы добавить новую";
 "Home.willNotificate" = " - мы напомним";
+
+// MARK: - Habits
+
+"Habits.title" = "Привычки";
+"Habits.getBetter" = "Становись Лучше";
+"Habits.done" = "Готово";
+"Habits.edit" = "Изменить";
+"Habits.notFound" = "Не найдено привычек";
+"Habits.noHabitsDescription" = "Здесь появятся ваши привычки.\nУдержите \"+\", чтобы добавить новую";
 
 // MARK: - Profile
 

@@ -40,12 +40,12 @@ enum Localizable {
     }
 
     enum Habits {
-        static let title = "Habits"
-        static let subtitle = "Get Better"
-        static let done = "Done"
-        static let edit = "Edit"
-        static let noHabits = "No Habits Found"
-        static let noHabitsDescription = "Here you will your habits.\nHold \"+\" to add a new one"
+        static let title = localized("Habits.title")
+        static let subtitle = localized("Habits.getBetter")
+        static let done = localized("Habits.done")
+        static let edit = localized("Habits.edit")
+        static let noHabits = localized("Habits.notFound")
+        static let noHabitsDescription = localized("Habits.noHabitsDescription")
     }
 
     enum Profile {

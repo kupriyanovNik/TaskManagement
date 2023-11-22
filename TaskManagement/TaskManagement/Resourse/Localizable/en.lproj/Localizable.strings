@@ -35,6 +35,15 @@
 "Home.noTasksDescription" = "Here You will see your tasks.\nTap \"+\" to add a new one";
 "Home.willNotificate" = " - we will notificate";
 
+// MARK: - Habits
+
+"Habits.title" = "Habits";
+"Habits.getBetter" = "Get Better";
+"Habits.done" = "Done";
+"Habits.edit" = "Edit";
+"Habits.notFound" = "No Habits Found";
+"Habits.noHabitsDescription" = "Here you will see your habits.\nHold \"+\" to add a new one";
+
 // MARK: - Profile
 
 "Profile.your" = "Your";
