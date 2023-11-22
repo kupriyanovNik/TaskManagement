@@ -233,6 +233,7 @@ struct HabitAddingView: View {
                 .bold()
                 .font(.title)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+                .animation(.none, value: isAbleToSave)
 
             Spacer()
 
