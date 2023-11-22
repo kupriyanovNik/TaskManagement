@@ -2,15 +2,27 @@
   Localizable.strings (en)
 */
 
-// MARK: - Adding
+// MARK: - Task Adding
 
-"Adding.title" = "Add new task";
+"Adding.title" = "New task";
 "Adding.save" = "Save";
-"Adding.taskTitle" = "Task title";
-"Adding.taskDescription" = "Task description";
-"Adding.taskDate" = "Task date";
+"Adding.taskTitle" = "Title";
+"Adding.taskDescription" = "Description";
+"Adding.taskDate" = "Deadline";
 "Adding.shouldNotificate" = "Remind?";
 "Adding.unfinishedTask" = "Unfinished task";
+
+// MARK: - Habit Adding
+
+"HabitAdding.newHabit" = "New habit";
+"HabitAdding.habitTitle" = "Title";
+"HabitAdding.habitDescription" = "Description";
+"HabitAdding.frequency" = "Frequency";
+"HabitAdding.reminder" = "Reminder";
+"HabitAdding.justNotification" = "Notification";
+"HabitAdding.reminderText" = "Reminder Text";
+"HabitAdding.save" = "Save";
+"HabitAdding.reminderTitle" = "Habit...";
 
 // MARK: - Home
 

@@ -16,7 +16,7 @@ class HabitAddingViewModel: ObservableObject {
     @Published var weekDaysIndicies: [Int] = []
     @Published var shouldNotificate: Bool = false
     @Published var reminderText: String = ""
-    @Published var remainderDate: Date = .now
+    @Published var reminderDate: Date = .now
 
     // MARK: - Internal Functions
 
@@ -35,6 +35,6 @@ class HabitAddingViewModel: ObservableObject {
         weekDaysIndicies = []
         shouldNotificate = false
         reminderText = ""
-        remainderDate = .now
+        reminderDate = .now
     }
 }

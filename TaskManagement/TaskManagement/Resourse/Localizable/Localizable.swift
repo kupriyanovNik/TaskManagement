@@ -17,15 +17,15 @@ enum Localizable {
     }
 
     enum HabitAdding {
-        static let title = "Новая привычка"
-        static let habitTitle = "Habit Title"
-        static let habitDescription = "Habit Description"
-        static let frequency = "Frequency"
-        static let reminder = "Reminder"
-        static let justNotifications = "Just Notifications"
-        static let reminderText = "Reminder Text"
-        static let save = "Save"
-        static let notificationTitle = "Reminder Title"
+        static let title = localized("HabitAdding.newHabit")
+        static let habitTitle = localized("HabitAdding.habitTitle")
+        static let habitDescription = localized("HabitAdding.habitDescription")
+        static let frequency = localized("HabitAdding.frequency")
+        static let reminder = localized("HabitAdding.reminder")
+        static let justNotifications = localized("HabitAdding.justNotification")
+        static let reminderText = localized("HabitAdding.reminderText")
+        static let save = localized("HabitAdding.save")
+        static let notificationTitle = localized("HabitAdding.reminderTitle")
     }
 
     enum Home {

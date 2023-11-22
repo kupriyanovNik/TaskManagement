@@ -2,15 +2,27 @@
   Localizable.strings (ru)
 */
 
-// MARK: - Adding
+// MARK: - Task Adding
 
 "Adding.title" = "Добавление";
 "Adding.save" = "Сохранить";
-"Adding.taskTitle" = "Имя задачи";
-"Adding.taskDescription" = "Описание задачи";
-"Adding.taskDate" = "Дедлайн задачи";
+"Adding.taskTitle" = "Заголовок";
+"Adding.taskDescription" = "Описание";
+"Adding.taskDate" = "Срок выполнения";
 "Adding.shouldNotificate" = "Напомнить?";
 "Adding.unfinishedTask" = "Невыполненная задача";
+
+// MARK: - Habit Adding
+
+"HabitAdding.newHabit" = "Новая привычка";
+"HabitAdding.habitTitle" = "Заголовок";
+"HabitAdding.habitDescription" = "Описание";
+"HabitAdding.frequency" = "Частота";
+"HabitAdding.reminder" = "Напоминание";
+"HabitAdding.justNotification" = "Сообщение";
+"HabitAdding.reminderText" = "Текст сообщения";
+"HabitAdding.save" = "Сохранить";
+"HabitAdding.reminderTitle" = "Привычка...";
 
 // MARK: - Home
 
