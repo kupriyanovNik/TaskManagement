@@ -34,7 +34,7 @@ extension View {
         content: @escaping () -> Content
     ) -> some View {
         self.safeAreaInset(edge: .top) {
-            CustomNavBar(showBackground: showBackground, backgroundColor: .white) {
+            CustomNavBar(showBackground: showBackground, backgroundColor: backgroundColor) {
                 content()
             }
         }
@@ -44,16 +44,17 @@ extension View {
 // MARK: - Text Field Functions
 extension View {
     func endEditing() -> some View {
-        self
-            .onTapGesture {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
+        onTapGesture {
+            UIApplication.shared.sendAction(
+                #selector(UIResponder.resignFirstResponder), 
+                to: nil,
+                from: nil,
+                for: nil
+            )
+        }
     }
 
     func continueEditing() -> some View {
-        self
-            .onTapGesture {
-
-            }
+        onTapGesture {}
     }
 }

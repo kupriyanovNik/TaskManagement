@@ -79,7 +79,7 @@ struct HabitsView: View {
     @ViewBuilder func headerView() -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 3) {
-                HStack {
+                HStack(spacing: 0) {
                     if habitsViewModel.showGreetings {
                         Text("✅")
                             .transition(.move(edge: .leading).combined(with: .opacity))
@@ -87,6 +87,12 @@ struct HabitsView: View {
 
                     Text(strings.subtitle)
                         .foregroundColor(.gray)
+
+                    if habitsViewModel.showGreetings {
+                        Text("!")
+                            .foregroundColor(.gray)
+                            .transition(.move(edge: .trailing).combined(with: .opacity))
+                    }
                 }
 
                 Text(strings.title)

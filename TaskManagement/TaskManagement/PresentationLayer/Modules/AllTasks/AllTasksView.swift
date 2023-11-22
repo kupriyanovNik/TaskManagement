@@ -27,7 +27,6 @@ struct AllTasksView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             // MARK: I encountered bugs with redrawing due to the Lazy
-
             VStack(spacing: 20) {
                 if coreDataViewModel.allTasks.isEmpty {
                     Text(strings.noTasks)

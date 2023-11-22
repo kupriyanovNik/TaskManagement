@@ -2,15 +2,27 @@
   Localizable.strings (en)
 */
 
-// MARK: - Adding
+// MARK: - Task Adding
 
-"Adding.title" = "Add new task";
+"Adding.title" = "New task";
 "Adding.save" = "Save";
-"Adding.taskTitle" = "Task title";
-"Adding.taskDescription" = "Task description";
-"Adding.taskDate" = "Task date";
+"Adding.taskTitle" = "Title";
+"Adding.taskDescription" = "Description";
+"Adding.taskDate" = "Deadline";
 "Adding.shouldNotificate" = "Remind?";
 "Adding.unfinishedTask" = "Unfinished task";
+
+// MARK: - Habit Adding
+
+"HabitAdding.newHabit" = "New habit";
+"HabitAdding.habitTitle" = "Title";
+"HabitAdding.habitDescription" = "Description";
+"HabitAdding.frequency" = "Frequency";
+"HabitAdding.reminder" = "Reminder";
+"HabitAdding.justNotification" = "Notification";
+"HabitAdding.reminderText" = "Reminder Text";
+"HabitAdding.save" = "Save";
+"HabitAdding.reminderTitle" = "Habit...";
 
 // MARK: - Home
 
@@ -23,12 +35,30 @@
 "Home.noTasksDescription" = "Here You will see your tasks.\nTap \"+\" to add a new one";
 "Home.willNotificate" = " - we will notificate";
 
+// MARK: - Habits
+
+"Habits.title" = "Habits";
+"Habits.getBetter" = "Get Better";
+"Habits.done" = "Done";
+"Habits.edit" = "Edit";
+"Habits.notFound" = "No Habits Found";
+"Habits.noHabitsDescription" = "Here you will see your habits.\nHold \"+\" to add a new one";
+
 // MARK: - Profile
 
 "Profile.your" = "Your";
 "Profile.profile" = "Profile";
 "Profile.doneTasks" = "Done Tasks";
 "Profile.todayDoneTasks" = "Today Done Tasks";
+"Profile.sleeptimeCalculator" = "Better Rest";
+
+// MARK: - SleeptimeCalculator
+
+"SleeptimeCalculator.wakeUpTime" = "When do you want to Wake up?";
+"SleeptimeCalculator.desiredAmount" = "Desired amount of sleep";
+"SleeptimeCalculator.coffeeIntake" = "Daily coffee\tea intake";
+"SleeptimeCalculator.check" = "Check";
+"SleeptimeCalculator.alertTitle" = "You should go to bed at:";
 
 // MARK: - Onboarding
 
@@ -61,6 +91,11 @@
 "AllTasks.tasks" = "Tasks";
 "AllTasks.done" = "Done";
 "AllTasks.edit" = "Edit";
+
+// MARK: - HabitCard
+
+"HabitCard.everyday" = "Everyday";
+"HabitCard.timesAWeek" = "times a week";
 
 // MARK: - TaskCategory
 

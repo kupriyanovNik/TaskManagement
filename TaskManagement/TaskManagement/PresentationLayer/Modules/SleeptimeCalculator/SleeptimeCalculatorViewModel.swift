@@ -17,12 +17,16 @@ class SleeptimeCalculatorViewModel: ObservableObject {
     @Published var alertMessage = ""
     @Published var showingAlert = false
 
+    // MARK: - Static Properties
+
     static var defaultWakeTime: Date {
         var components = DateComponents()
         components.hour = 7
         components.minute = 0
         return Calendar.current.date(from: components) ?? Date.now
     }
+
+    // MARK: - Internal Functions 
 
     func reset() {
         selectedWakeUpTime = SleeptimeCalculatorViewModel.defaultWakeTime

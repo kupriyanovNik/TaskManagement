@@ -139,7 +139,7 @@ struct HabitAddingView: View {
                 if habitAddingViewModel.shouldNotificate {
                     HStack(spacing: 12) {
                         Label {
-                            Text(habitAddingViewModel.remainderDate.formatted(date: .omitted, time: .shortened))
+                            Text(habitAddingViewModel.reminderDate.formatted(date: .omitted, time: .shortened))
                         } icon: {
                             Image(systemName: systemImages.clock)
                         }
@@ -198,7 +198,7 @@ struct HabitAddingView: View {
 
                     DatePicker(
                         "",
-                        selection: $habitAddingViewModel.remainderDate,
+                        selection: $habitAddingViewModel.reminderDate,
                         displayedComponents: [.hourAndMinute]
                     )
                     .datePickerStyle(.wheel)
@@ -233,6 +233,7 @@ struct HabitAddingView: View {
                 .bold()
                 .font(.title)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+                .animation(.none, value: isAbleToSave)
 
             Spacer()
 
@@ -259,10 +260,10 @@ struct HabitAddingView: View {
                 NotificationManager.shared.removeNotification(with: habit.habitID ?? "")
 
                 habit.notificationIDs = NotificationManager.shared.cheduleNotification(
-                    title: strings.notificationTitle.removeLeadingSpacing(),
-                    subtitle: habitAddingViewModel.reminderText,
+                    title: strings.notificationTitle,
+                    subtitle: habitAddingViewModel.reminderText.removeLeadingSpacing(),
                     weekDays: habitAddingViewModel.weekDaysIndicies,
-                    reminderDate: habitAddingViewModel.remainderDate
+                    reminderDate: habitAddingViewModel.reminderDate
                 )
             } else {
                 if habit.isReminderOn {
@@ -290,7 +291,7 @@ struct HabitAddingView: View {
                     title: strings.notificationTitle.removeLeadingSpacing(),
                     subtitle: habitAddingViewModel.reminderText.removeLeadingSpacing(),
                     weekDays: habitAddingViewModel.weekDaysIndicies,
-                    reminderDate: habitAddingViewModel.remainderDate
+                    reminderDate: habitAddingViewModel.reminderDate
                 ),
                 notificationText: habitAddingViewModel.reminderText.removeLeadingSpacing(),
                 weekDays: habitAddingViewModel.weekDaysIndicies

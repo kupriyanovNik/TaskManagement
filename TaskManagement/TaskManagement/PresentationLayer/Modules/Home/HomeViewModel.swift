@@ -48,14 +48,11 @@ class HomeViewModel: ObservableObject {
     func extractDate(date: Date, format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        
         return formatter.string(from: date)
     }
 
-    func isToday(date: Date) -> Bool {
+    func isSameAsSelectedDay(date: Date) -> Bool {
         calendar.isDate(date, inSameDayAs: currentDay)
-    }
-
-    func isCurrentHour(date: Date) -> Bool {
-        return calendar.component(.hour, from: date) == calendar.component(.hour, from: Date()) && calendar.isDateInToday(date)
     }
 }

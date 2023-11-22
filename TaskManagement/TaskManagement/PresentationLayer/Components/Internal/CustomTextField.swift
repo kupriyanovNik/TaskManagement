@@ -4,11 +4,13 @@
 
 import SwiftUI
 
-enum CustomTextFieldStyle {
-    case underlined, stroked
-}
-
 struct CustomTextField: View {
+
+    // MARK: - Embedded
+
+    enum CustomTextFieldStyle {
+        case underlined, stroked
+    }
 
     // MARK: - Property Wrappers
 
@@ -66,6 +68,8 @@ struct CustomTextField: View {
         .animation(.linear, value: isFocused)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     CustomTextField(

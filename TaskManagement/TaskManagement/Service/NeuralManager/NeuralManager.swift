@@ -43,8 +43,10 @@ class NeuralManager {
             let sleepTime = (Calendar.current.date(from: components) ?? Date.now) - prediction.actualSleep
 
             return sleepTime.formatted(date: .omitted, time: .shortened)
+
         } catch {
             print("DEBUG: \(error.localizedDescription)")
+
             return nil
         }
     }

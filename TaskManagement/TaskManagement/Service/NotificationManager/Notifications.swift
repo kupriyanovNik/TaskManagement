@@ -127,4 +127,11 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
             completionHandler([.sound, .banner])
     }
+
+    // MARK: - Debug
+
+    func removeAllNotifications() {
+        UNUserNotificationCenter.current()
+            .removeAllPendingNotificationRequests()
+    }
 }

@@ -78,7 +78,7 @@ struct MainNavigationView: View {
             }
             .ignoresSafeArea(.keyboard)
             .animation(
-                settingsViewModel.shouldShowTabBarAnimation ? .linear(duration: 0.3) : .linear(duration: 0),
+                .linear(duration: settingsViewModel.shouldShowTabBarAnimation ? 0.3 : 0.0),
                 value: navigationViewModel.selectedTab
             )
         }

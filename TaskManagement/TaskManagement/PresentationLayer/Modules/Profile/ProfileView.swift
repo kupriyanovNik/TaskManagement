@@ -78,7 +78,7 @@ struct ProfileView: View {
                     .environmentObject(themeManager)
             } label: {
                 HStack {
-                    Text("Sleeptime Calculator")
+                    Text(strings.sleeptimeCalculator)
                         .font(.title2)
                         .fontWeight(.semibold)
 

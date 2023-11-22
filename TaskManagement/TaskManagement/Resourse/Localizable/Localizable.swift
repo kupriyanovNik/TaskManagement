@@ -17,15 +17,15 @@ enum Localizable {
     }
 
     enum HabitAdding {
-        static let title = "Новая привычка"
-        static let habitTitle = "Habit Title"
-        static let habitDescription = "Habit Description"
-        static let frequency = "Frequency"
-        static let reminder = "Reminder"
-        static let justNotifications = "Just Notifications"
-        static let reminderText = "Reminder Text"
-        static let save = "Save"
-        static let notificationTitle = "Reminder Title"
+        static let title = localized("HabitAdding.newHabit")
+        static let habitTitle = localized("HabitAdding.habitTitle")
+        static let habitDescription = localized("HabitAdding.habitDescription")
+        static let frequency = localized("HabitAdding.frequency")
+        static let reminder = localized("HabitAdding.reminder")
+        static let justNotifications = localized("HabitAdding.justNotification")
+        static let reminderText = localized("HabitAdding.reminderText")
+        static let save = localized("HabitAdding.save")
+        static let notificationTitle = localized("HabitAdding.reminderTitle")
     }
 
     enum Home {
@@ -40,12 +40,12 @@ enum Localizable {
     }
 
     enum Habits {
-        static let title = "Habits"
-        static let subtitle = "Get Better"
-        static let done = "Done"
-        static let edit = "Edit"
-        static let noHabits = "No Habits Found"
-        static let noHabitsDescription = "Here you will your habits.\nHold \"+\" to add a new one"
+        static let title = localized("Habits.title")
+        static let subtitle = localized("Habits.getBetter")
+        static let done = localized("Habits.done")
+        static let edit = localized("Habits.edit")
+        static let noHabits = localized("Habits.notFound")
+        static let noHabitsDescription = localized("Habits.noHabitsDescription")
     }
 
     enum Profile {
@@ -53,6 +53,16 @@ enum Localizable {
         static let profile = localized("Profile.profile")
         static let doneTasks = localized("Profile.doneTasks")
         static let todayDoneTasks = localized("Profile.todayDoneTasks")
+        static let sleeptimeCalculator = localized("Profile.sleeptimeCalculator")
+    }
+
+    enum SleeptimeCalculator {
+        static let title = localized("Profile.sleeptimeCalculator")
+        static let wakeUpTime = localized("SleeptimeCalculator.wakeUpTime")
+        static let desiredAmount = localized("SleeptimeCalculator.desiredAmount")
+        static let coffeeIntake = localized("SleeptimeCalculator.coffeeIntake")
+        static let check = localized("SleeptimeCalculator.check")
+        static let alertTitle = localized("SleeptimeCalculator.alertTitle")
     }
 
     enum Onboarding {
@@ -92,7 +102,7 @@ enum Localizable {
     }
 
     enum HabitCard {
-        static let everyday = "Everyday"
-        static let timeAweek = "times a week"
+        static let everyday = localized("HabitCard.everyday")
+        static let timeAweek = localized("HabitCard.timesAWeek")
     }
 }

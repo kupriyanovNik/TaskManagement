@@ -16,6 +16,7 @@ struct SleeptimeCalculatorView: View {
 
     // MARK: - Private Properties
 
+    private var strings = Localizable.SleeptimeCalculator.self
     private var systemImages = ImageNames.System.self
 
     private var userAge: Int {
@@ -27,19 +28,13 @@ struct SleeptimeCalculatorView: View {
     var body: some View {
         VStack {
             Spacer()
-            
             wakeUpTimeRow()
-
             Divider()
-
             desiredAmountOfSleepRow()
-
             if userAge > 10 {
                 Divider()
-
                 coffeeIntakeRow()
             }
-
             Spacer()
         }
         .padding(.horizontal)
@@ -59,7 +54,7 @@ struct SleeptimeCalculatorView: View {
                         }
                     }
                 } label: {
-                    Label("Result will be calculated by Neural Network", systemImage: "network")
+                    Label("Result will be calculated by Neural Network", systemImage: systemImages.network)
                         .font(.caption2)
                         .foregroundColor(themeManager.selectedTheme.accentColor.opacity(0.7))
                         .padding(.top, 3)
@@ -83,7 +78,7 @@ struct SleeptimeCalculatorView: View {
 
     @ViewBuilder func wakeUpTimeRow() -> some View {
         VStack {
-            Text("When do you want to wake up?")
+            Text(strings.wakeUpTime)
                 .font(.headline)
 
             DatePicker(
@@ -98,7 +93,7 @@ struct SleeptimeCalculatorView: View {
 
     @ViewBuilder func desiredAmountOfSleepRow() -> some View {
         VStack {
-            Text("Desired amount of sleep")
+            Text(strings.desiredAmount)
                 .font(.headline)
 
             Stepper(
@@ -112,7 +107,7 @@ struct SleeptimeCalculatorView: View {
 
     @ViewBuilder func coffeeIntakeRow() -> some View {
         VStack {
-            Text("Daily coffee intake")
+            Text(strings.coffeeIntake)
                 .font(.headline)
 
             HStack(spacing: 20) {
@@ -164,14 +159,14 @@ struct SleeptimeCalculatorView: View {
                 coffeeAmount: self.userAge > 10 ? sleeptimeCalculatorViewModel.coffeeAmount : 0,
                 userAge: self.userAge
             ) {
-                sleeptimeCalculatorViewModel.alertTitle = "Sleeptime:"
+                sleeptimeCalculatorViewModel.alertTitle = strings.alertTitle
                 sleeptimeCalculatorViewModel.alertMessage = output
                 sleeptimeCalculatorViewModel.showingAlert.toggle()
             }
         } label: {
             HStack {
                 Label(
-                    "Check",
+                    strings.check,
                     systemImage: systemImages.checkmark
                 )
             }
@@ -195,7 +190,7 @@ struct SleeptimeCalculatorView: View {
                     .font(.title2)
             }
 
-            Text("Sleeptime")
+            Text(strings.title)
                 .bold()
                 .font(.largeTitle)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
