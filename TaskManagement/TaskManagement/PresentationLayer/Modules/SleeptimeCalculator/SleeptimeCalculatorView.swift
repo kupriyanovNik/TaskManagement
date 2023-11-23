@@ -26,18 +26,20 @@ struct SleeptimeCalculatorView: View {
     // MARK: - Body
 
     var body: some View {
-        VStack {
-            Spacer()
-            wakeUpTimeRow()
-            Divider()
-            desiredAmountOfSleepRow()
-            if userAge > 10 {
+        ScrollView(showsIndicators: false) {
+            VStack {
+                wakeUpTimeRow()
                 Divider()
-                coffeeIntakeRow()
+                desiredAmountOfSleepRow()
+
+                if userAge > 10 {
+                    Divider()
+                    coffeeIntakeRow()
+                }
             }
-            Spacer()
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
+
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
@@ -136,6 +138,23 @@ struct SleeptimeCalculatorView: View {
                             }
                         }
                         .hCenter()
+                        .foregroundStyle(
+                            .linearGradient(
+                                colors: [
+                                    .black,
+                                    themeManager.selectedTheme.accentColor
+                                        .opacity(0.8)
+                                ],
+                                startPoint: .bottom,
+                                endPoint: .top
+                            )
+                        )
+                        .shadow(
+                            color: themeManager.selectedTheme.accentColor.opacity(isSelected ? 0.3 : 0),
+                            radius: 10,
+                            x: 0,
+                            y: 10
+                        )
                 }
             }
         }
