@@ -13,6 +13,7 @@ struct ProfileView: View {
     @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
@@ -41,7 +42,13 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                sleepTimeCard()
+
+                HStack {
+                    sleepTimeCard()
+                    newsFeedCard()
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 5)
 
                 if !coreDataViewModel.allTodayTasks.isEmpty {
                     StatisticsGauge(
@@ -95,8 +102,32 @@ struct ProfileView: View {
                 }
             }
             .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
-            .padding(.horizontal)
-            .padding(.bottom, 5)
+        }
+
+    @ViewBuilder func newsFeedCard() -> some View {
+            NavigationLink {
+                NewsView()
+                    .environmentObject(sleeptimeCalculatorViewModel)
+                    .environmentObject(themeManager)
+            } label: {
+                HStack {
+                    Text("News Feed")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
+                    Spacer()
+
+                    Image(systemName: systemImages.backArrow)
+                        .rotationEffect(.degrees(180))
+                }
+                .padding()
+                .background {
+                    themeManager.selectedTheme.accentColor
+                        .opacity(0.2)
+                        .cornerRadius(10)
+                }
+            }
+            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
         }
 
     @ViewBuilder func headerView() -> some View {
@@ -167,5 +198,6 @@ struct ProfileView: View {
         .environmentObject(SleeptimeCalculatorViewModel())
         .environmentObject(SettingsViewModel())
         .environmentObject(CoreDataViewModel())
+        .environmentObject(NetworkManager())
         .environmentObject(ThemeManager())
 }

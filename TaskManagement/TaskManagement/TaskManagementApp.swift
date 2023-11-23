@@ -45,6 +45,7 @@ struct TaskManagementApp: App {
                     .environmentObject(profileViewModel)
                     .environmentObject(sleeptimeCalculatorViewModel)
                     .environmentObject(settingsViewModel)
+                    .environmentObject(networkManager)
                     .environmentObject(themeManager)
                     .opacity(shouldShowOnboarding ? 0.5 : 1)
                     .clipShape(

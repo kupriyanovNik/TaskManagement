@@ -62,6 +62,8 @@
 		B7BA60382B0FC16000D1DE5A /* ApiMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60302B0FC16000D1DE5A /* ApiMethods.swift */; };
 		B7BA603C2B0FC23B00D1DE5A /* SpaceNewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA603B2B0FC23B00D1DE5A /* SpaceNewModel.swift */; };
 		B7BA603E2B0FC32D00D1DE5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA603D2B0FC32D00D1DE5A /* NetworkManager.swift */; };
+		B7BA60412B0FC65700D1DE5A /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60402B0FC65700D1DE5A /* NewsView.swift */; };
+		B7BA60432B0FC66100D1DE5A /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60422B0FC66100D1DE5A /* NewsViewModel.swift */; };
 		B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */; };
 		B7C605962B0F8C060029090E /* HabitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
@@ -151,6 +153,8 @@
 		B7BA60302B0FC16000D1DE5A /* ApiMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiMethods.swift; sourceTree = "<group>"; };
 		B7BA603B2B0FC23B00D1DE5A /* SpaceNewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceNewModel.swift; sourceTree = "<group>"; };
 		B7BA603D2B0FC32D00D1DE5A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B7BA60402B0FC65700D1DE5A /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		B7BA60422B0FC66100D1DE5A /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorViewModel.swift; sourceTree = "<group>"; };
 		B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModelTests.swift; sourceTree = "<group>"; };
 		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -274,6 +278,7 @@
 		B73213B92ACC8CAE00E42B1D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B7BA603F2B0FC64B00D1DE5A /* News */,
 				B7181BE82AD46384002F3D82 /* Onboarding */,
 				B73213D02ACCACC900E42B1D /* TabBar */,
 				B73213BB2ACC8CB800E42B1D /* Home */,
@@ -457,9 +462,9 @@
 		B7BA60282B0FC14800D1DE5A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B7BA603D2B0FC32D00D1DE5A /* NetworkManager.swift */,
 				B7BA603A2B0FC23300D1DE5A /* Model */,
 				B7BA60392B0FC22C00D1DE5A /* Base */,
-				B7BA603D2B0FC32D00D1DE5A /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -483,6 +488,15 @@
 				B7BA603B2B0FC23B00D1DE5A /* SpaceNewModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B7BA603F2B0FC64B00D1DE5A /* News */ = {
+			isa = PBXGroup;
+			children = (
+				B7BA60402B0FC65700D1DE5A /* NewsView.swift */,
+				B7BA60422B0FC66100D1DE5A /* NewsViewModel.swift */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 		B7D949A82AE04B5800FE5CAE /* Service */ = {
@@ -711,6 +725,7 @@
 				B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */,
 				B7F016312AD4752200B9F670 /* Date.swift in Sources */,
 				B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */,
+				B7BA60412B0FC65700D1DE5A /* NewsView.swift in Sources */,
 				B7DFBFF52AF44DE10000960D /* String.swift in Sources */,
 				B7DC658A2AD568C3009DA010 /* ThemeDefinitions.swift in Sources */,
 				B70C87632B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel in Sources */,
@@ -766,6 +781,7 @@
 				B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */,
 				B76D5F2B2AF6C6CA0092D11D /* HabitCardView.swift in Sources */,
 				B7F515C72ACB27060001A282 /* TaskManagementApp.swift in Sources */,
+				B7BA60432B0FC66100D1DE5A /* NewsViewModel.swift in Sources */,
 				B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */,
 				B7DC65902AD569BC009DA010 /* DataSource.swift in Sources */,
 				B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */,

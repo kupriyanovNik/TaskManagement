@@ -19,6 +19,7 @@ struct MainNavigationView: View {
     @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Inits
@@ -50,6 +51,7 @@ struct MainNavigationView: View {
                             .environmentObject(sleeptimeCalculatorViewModel)
                             .environmentObject(settingsViewModel)
                             .environmentObject(coreDataViewModel)
+                            .environmentObject(networkManager)
                             .environmentObject(themeManager)
                         
                     case .habits:
