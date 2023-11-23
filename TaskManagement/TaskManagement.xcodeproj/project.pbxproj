@@ -64,6 +64,7 @@
 		B7BA603E2B0FC32D00D1DE5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA603D2B0FC32D00D1DE5A /* NetworkManager.swift */; };
 		B7BA60412B0FC65700D1DE5A /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60402B0FC65700D1DE5A /* NewsView.swift */; };
 		B7BA60432B0FC66100D1DE5A /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60422B0FC66100D1DE5A /* NewsViewModel.swift */; };
+		B7BA60462B0FCB4400D1DE5A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B7BA60452B0FCB4400D1DE5A /* Kingfisher */; };
 		B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */; };
 		B7C605962B0F8C060029090E /* HabitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
@@ -190,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7BA60462B0FCB4400D1DE5A /* Kingfisher in Frameworks */,
 				B736A2A32AE4456B00977067 /* SPConfetti in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,7 +280,6 @@
 		B73213B92ACC8CAE00E42B1D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				B7BA603F2B0FC64B00D1DE5A /* News */,
 				B7181BE82AD46384002F3D82 /* Onboarding */,
 				B73213D02ACCACC900E42B1D /* TabBar */,
 				B73213BB2ACC8CB800E42B1D /* Home */,
@@ -286,6 +287,7 @@
 				B75084302AEEA555006A04E1 /* Habits */,
 				B73213D52ACCB07000E42B1D /* Profile */,
 				B77D34C32B08E6AA00D4E4D1 /* SleeptimeCalculator */,
+				B7BA603F2B0FC64B00D1DE5A /* News */,
 				B7F016382AD48D8600B9F670 /* Settings */,
 				B73BD3892AF1749300055510 /* HabitAdding */,
 				B73213C02ACC8CCD00E42B1D /* TaskAdding */,
@@ -637,6 +639,7 @@
 			name = TaskManagement;
 			packageProductDependencies = (
 				B736A2A22AE4456B00977067 /* SPConfetti */,
+				B7BA60452B0FCB4400D1DE5A /* Kingfisher */,
 			);
 			productName = TaskManagement;
 			productReference = B7F515C32ACB27060001A282 /* TaskManagement.app */;
@@ -673,6 +676,7 @@
 			mainGroup = B7F515BA2ACB27060001A282;
 			packageReferences = (
 				B736A2A12AE4456B00977067 /* XCRemoteSwiftPackageReference "SPConfetti" */,
+				B7BA60442B0FCB4400D1DE5A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = B7F515C42ACB27060001A282 /* Products */;
 			projectDirPath = "";
@@ -1081,6 +1085,14 @@
 				minimumVersion = 1.4.1;
 			};
 		};
+		B7BA60442B0FCB4400D1DE5A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.10.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1088,6 +1100,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B736A2A12AE4456B00977067 /* XCRemoteSwiftPackageReference "SPConfetti" */;
 			productName = SPConfetti;
+		};
+		B7BA60452B0FCB4400D1DE5A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7BA60442B0FCB4400D1DE5A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 
