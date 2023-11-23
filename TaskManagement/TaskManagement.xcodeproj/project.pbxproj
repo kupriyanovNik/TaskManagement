@@ -44,7 +44,6 @@
 		B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */; };
 		B76D5F2B2AF6C6CA0092D11D /* HabitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76D5F2A2AF6C6CA0092D11D /* HabitCardView.swift */; };
 		B7739C932B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */; };
-		B7739C972B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739C962B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift */; };
 		B7739C992B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */; };
 		B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */; };
 		B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F092AE1473B000F19EE /* AnimatedGradient.swift */; };
@@ -56,6 +55,7 @@
 		B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */; };
+		B7C605962B0F8C060029090E /* HabitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
 		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
 		B7DC65882AD56858009DA010 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC65872AD56858009DA010 /* Theme.swift */; };
@@ -123,7 +123,6 @@
 		B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B76D5F2A2AF6C6CA0092D11D /* HabitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCardView.swift; sourceTree = "<group>"; };
 		B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingViewModelTests.swift; sourceTree = "<group>"; };
-		B7739C962B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HabitsViewModelTests.swift; path = "../../../../Library/Mobile Documents/.Trash/TaskManagement/TaskManagement/TaskManagementTests/HabitsViewModelTests.swift"; sourceTree = "<group>"; };
 		B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksViewModelTests.swift; sourceTree = "<group>"; };
 		B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerCell.swift; sourceTree = "<group>"; };
 		B7739F092AE1473B000F19EE /* AnimatedGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradient.swift; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorViewModel.swift; sourceTree = "<group>"; };
+		B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModelTests.swift; sourceTree = "<group>"; };
 		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		B7DC65872AD56858009DA010 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 			children = (
 				B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */,
 				B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */,
-				B7739C962B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift */,
+				B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */,
 				B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */,
 			);
 			path = TaskManagementTests;
@@ -649,7 +649,7 @@
 			files = (
 				B7739C932B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift in Sources */,
 				B7739C992B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift in Sources */,
-				B7739C972B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift in Sources */,
+				B7C605962B0F8C060029090E /* HabitsViewModelTests.swift in Sources */,
 				B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
