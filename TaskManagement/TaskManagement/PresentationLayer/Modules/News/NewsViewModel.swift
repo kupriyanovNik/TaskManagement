@@ -32,4 +32,8 @@ class NewsViewModel: ObservableObject {
         timer?.invalidate()
     }
 
+    func resetLeastTime() {
+        leastTime = 30 * 60 / 150
+    }
+
 }

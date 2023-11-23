@@ -38,6 +38,10 @@ struct ProfileView: View {
         doneTodayTasksPercentage == 1
     }
 
+    private var isToday: Bool {
+        Calendar.current.isDateInToday(Date(timeIntervalSince1970: newsViewModel.lastSeenNews))
+    }
+
     // MARK: - Body
 
     var body: some View {
@@ -45,7 +49,28 @@ struct ProfileView: View {
             VStack {
                 HStack {
                     sleepTimeCard()
+
                     newsFeedCard()
+                        .blur(radius: isToday ? 3 : 0)
+                        .brightness(isToday ? 0.7 : 0)
+                        .overlay {
+                            if isToday {
+                                ZStack {
+                                    Color.black
+                                        .opacity(0.2)
+
+                                    HStack {
+                                        Text("До завтра")
+                                            .bold()
+
+                                        Image(systemName: systemImages.lock)
+                                    }
+                                    .font(.title2)
+                                    .foregroundStyle(.black)
+                                }
+                                .cornerRadius(10)
+                            }
+                        }
                 }
                 .padding(.horizontal)
                 .padding(.top, 5)
