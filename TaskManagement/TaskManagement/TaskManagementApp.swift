@@ -22,6 +22,7 @@ struct TaskManagementApp: App {
     @StateObject private var profileViewModel = ProfileViewModel()
     @StateObject private var sleeptimeCalculatorViewModel = SleeptimeCalculatorViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
+    @StateObject private var networkManager = NetworkManager()
     @StateObject private var themeManager = ThemeManager()
 
     // MARK: - Body
