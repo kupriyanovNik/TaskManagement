@@ -43,6 +43,9 @@
 		B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C22AD5B21000F5631E /* ProfileViewModel.swift */; };
 		B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */; };
 		B76D5F2B2AF6C6CA0092D11D /* HabitCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76D5F2A2AF6C6CA0092D11D /* HabitCardView.swift */; };
+		B7739C932B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */; };
+		B7739C972B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739C962B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift */; };
+		B7739C992B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */; };
 		B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */; };
 		B7739F0A2AE1473B000F19EE /* AnimatedGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F092AE1473B000F19EE /* AnimatedGradient.swift */; };
 		B7739F0C2AE14D6B000F19EE /* TaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */; };
@@ -50,6 +53,7 @@
 		B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */; };
 		B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F152AE17F8C000F19EE /* TaskCardView.swift */; };
 		B77D34C52B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */; };
+		B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */; };
 		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
@@ -71,6 +75,16 @@
 		B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515DC2ACB27C30001A282 /* HomeView.swift */; };
 		B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F515E22ACB2C2E0001A282 /* TaskAddingView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B7A7C1502B0EB5F9000F54BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7F515BB2ACB27060001A282 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7F515C22ACB27060001A282;
+			remoteInfo = TaskManagement;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B70C87622B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleeptimeCalculatorModel.mlmodel; sourceTree = "<group>"; };
@@ -108,6 +122,9 @@
 		B76646C22AD5B21000F5631E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		B76646C62AD5D7D200F5631E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B76D5F2A2AF6C6CA0092D11D /* HabitCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCardView.swift; sourceTree = "<group>"; };
+		B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitAddingViewModelTests.swift; sourceTree = "<group>"; };
+		B7739C962B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HabitsViewModelTests.swift; path = "../../../../Library/Mobile Documents/.Trash/TaskManagement/TaskManagement/TaskManagementTests/HabitsViewModelTests.swift"; sourceTree = "<group>"; };
+		B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksViewModelTests.swift; sourceTree = "<group>"; };
 		B7739F072AE13A9C000F19EE /* ThemePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerCell.swift; sourceTree = "<group>"; };
 		B7739F092AE1473B000F19EE /* AnimatedGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradient.swift; sourceTree = "<group>"; };
 		B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategory.swift; sourceTree = "<group>"; };
@@ -115,6 +132,8 @@
 		B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorButtonStyle.swift; sourceTree = "<group>"; };
 		B7739F152AE17F8C000F19EE /* TaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
 		B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorView.swift; sourceTree = "<group>"; };
+		B7A7C14C2B0EB5F9000F54BD /* TaskManagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskManagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7ACC1852AD9BAC200FEEE0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorViewModel.swift; sourceTree = "<group>"; };
@@ -140,6 +159,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B7A7C1492B0EB5F9000F54BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7F515C02ACB27060001A282 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,6 +427,17 @@
 			path = SleeptimeCalculator;
 			sourceTree = "<group>";
 		};
+		B7A7C14D2B0EB5F9000F54BD /* TaskManagementTests */ = {
+			isa = PBXGroup;
+			children = (
+				B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */,
+				B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */,
+				B7739C962B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift */,
+				B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */,
+			);
+			path = TaskManagementTests;
+			sourceTree = "<group>";
+		};
 		B7D949A82AE04B5800FE5CAE /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				B7F515C52ACB27060001A282 /* TaskManagement */,
+				B7A7C14D2B0EB5F9000F54BD /* TaskManagementTests */,
 				B7F515C42ACB27060001A282 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -476,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				B7F515C32ACB27060001A282 /* TaskManagement.app */,
+				B7A7C14C2B0EB5F9000F54BD /* TaskManagementTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -503,6 +542,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B7A7C14B2B0EB5F9000F54BD /* TaskManagementTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7A7C1542B0EB5F9000F54BD /* Build configuration list for PBXNativeTarget "TaskManagementTests" */;
+			buildPhases = (
+				B7A7C1482B0EB5F9000F54BD /* Sources */,
+				B7A7C1492B0EB5F9000F54BD /* Frameworks */,
+				B7A7C14A2B0EB5F9000F54BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B7A7C1512B0EB5F9000F54BD /* PBXTargetDependency */,
+			);
+			name = TaskManagementTests;
+			productName = TaskManagementTests;
+			productReference = B7A7C14C2B0EB5F9000F54BD /* TaskManagementTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B7F515C22ACB27060001A282 /* TaskManagement */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7F515D62ACB27070001A282 /* Build configuration list for PBXNativeTarget "TaskManagement" */;
@@ -530,9 +587,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					B7A7C14B2B0EB5F9000F54BD = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = B7F515C22ACB27060001A282;
+					};
 					B7F515C22ACB27060001A282 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -556,11 +617,19 @@
 			projectRoot = "";
 			targets = (
 				B7F515C22ACB27060001A282 /* TaskManagement */,
+				B7A7C14B2B0EB5F9000F54BD /* TaskManagementTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B7A7C14A2B0EB5F9000F54BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7F515C12ACB27060001A282 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -574,6 +643,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B7A7C1482B0EB5F9000F54BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7739C932B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift in Sources */,
+				B7739C992B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift in Sources */,
+				B7739C972B0F7E0A00C2B0F3 /* HabitsViewModelTests.swift in Sources */,
+				B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B7F515BF2ACB27060001A282 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -642,6 +722,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		B7A7C1512B0EB5F9000F54BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7F515C22ACB27060001A282 /* TaskManagement */;
+			targetProxy = B7A7C1502B0EB5F9000F54BD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -655,6 +743,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B7A7C1522B0EB5F9000F54BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7HDF545ZQ6;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kupriyanov.TaskManagementTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TaskManagement.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TaskManagement";
+			};
+			name = Debug;
+		};
+		B7A7C1532B0EB5F9000F54BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7HDF545ZQ6;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kupriyanov.TaskManagementTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TaskManagement.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TaskManagement";
+			};
+			name = Release;
+		};
 		B7F515D42ACB27070001A282 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -840,6 +971,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B7A7C1542B0EB5F9000F54BD /* Build configuration list for PBXNativeTarget "TaskManagementTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7A7C1522B0EB5F9000F54BD /* Debug */,
+				B7A7C1532B0EB5F9000F54BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B7F515BE2ACB27060001A282 /* Build configuration list for PBXProject "TaskManagement" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

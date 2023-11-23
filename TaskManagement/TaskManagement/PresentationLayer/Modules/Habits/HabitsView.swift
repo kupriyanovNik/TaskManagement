@@ -104,25 +104,12 @@ struct HabitsView: View {
             Spacer()
 
             if !coreDataViewModel.allHabits.isEmpty {
-                Group {
-                    if habitsViewModel.isEditing {
-                        Button(strings.done) {
-                            withAnimation {
-                                habitsViewModel.isEditing.toggle()
-                            }
-                        }
-                        .buttonStyle(HeaderButtonStyle())
-                        .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
-                    } else {
-                        Button(strings.edit) {
-                            withAnimation {
-                                habitsViewModel.isEditing.toggle()
-                            }
-                        }
-                        .buttonStyle(HeaderButtonStyle())
-                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                Button(habitsViewModel.editText) {
+                    withAnimation {
+                        habitsViewModel.isEditing.toggle()
                     }
                 }
+                .buttonStyle(HeaderButtonStyle())
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
         }

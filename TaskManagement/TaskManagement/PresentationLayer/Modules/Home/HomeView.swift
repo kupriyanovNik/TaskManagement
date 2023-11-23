@@ -190,25 +190,12 @@ struct HomeView: View {
                 }
 
                 if !coreDataViewModel.tasksFilteredByDate.isEmpty {
-                    Group {
-                        if homeViewModel.isEditing {
-                            Button(strings.done) {
-                                withAnimation {
-                                    homeViewModel.isEditing.toggle()
-                                }
-                            }
-                            .buttonStyle(HeaderButtonStyle())
-                            .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
-                        } else {
-                            Button(strings.edit) {
-                                withAnimation {
-                                    homeViewModel.isEditing.toggle()
-                                }
-                            }
-                            .buttonStyle(HeaderButtonStyle())
-                            .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                    Button(homeViewModel.editText) {
+                        withAnimation {
+                            homeViewModel.isEditing.toggle()
                         }
                     }
+                    .buttonStyle(HeaderButtonStyle())
                     .foregroundColor(themeManager.selectedTheme.pageTitleColor)
                 }
 

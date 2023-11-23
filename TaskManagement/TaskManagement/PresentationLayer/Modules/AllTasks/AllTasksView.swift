@@ -195,26 +195,12 @@ struct AllTasksView: View {
 
 
             if !coreDataViewModel.allTasks.isEmpty {
-                Group {
-                    if allTasksViewModel.isEditing {
-                        Button(strings.done) {
-                            withAnimation {
-                                allTasksViewModel.isEditing.toggle()
-                            }
-                        }
-                        .buttonStyle(HeaderButtonStyle())
-                        .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
-
-                    } else {
-                        Button(strings.edit) {
-                            withAnimation {
-                                allTasksViewModel.isEditing.toggle()
-                            }
-                        }
-                        .buttonStyle(HeaderButtonStyle())
-                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                Button(allTasksViewModel.editText) {
+                    withAnimation {
+                        allTasksViewModel.isEditing.toggle()
                     }
                 }
+                .buttonStyle(HeaderButtonStyle())
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
         }

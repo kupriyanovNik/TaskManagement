@@ -15,4 +15,14 @@ class AllTasksViewModel: ObservableObject {
     @Published var filteringCategory: TaskCategory?
 
     @Published var verticalOffset: CGFloat = .zero
+
+    // MARK: - Internal Properties
+
+    var editText: String {
+        isEditing ? strings.done : strings.edit
+    }
+
+    // MARK: - Private Properties
+
+    private var strings = Localizable.AllTasks.self
 }
