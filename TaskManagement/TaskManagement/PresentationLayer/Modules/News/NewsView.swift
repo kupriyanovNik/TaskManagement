@@ -9,11 +9,10 @@ struct NewsView: View {
 
     // MARK: - Property Wrappers
 
+    @EnvironmentObject var newsViewModel: NewsViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
-
-    @StateObject private var newsViewModel = NewsViewModel()
 
     @Environment(\.dismiss) var dismiss
 
@@ -25,10 +24,11 @@ struct NewsView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading) {
+            LazyVStack(alignment: .leading) {
                 if networkManager.news.isEmpty {
                     ProgressView()
                         .tint(themeManager.selectedTheme.accentColor)
+                        .hCenter()
                 } else {
                     ForEach(networkManager.news, id: \.id) { new in
                         if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
@@ -56,6 +56,18 @@ struct NewsView: View {
         .onAppear {
             if networkManager.news.isEmpty {
                 networkManager.getNews()
+            }
+            
+            newsViewModel.startTimer()
+        }
+        .onDisappear {
+            newsViewModel.stopTimer()
+        }
+        .onChange(of: newsViewModel.leastTime) { newValue in
+            if newValue <= 0 {
+                newsViewModel.lastSeenNews = Date().timeIntervalSince1970
+
+                dismiss()
             }
         }
     }
@@ -95,6 +107,8 @@ struct NewsView: View {
     }
 
     @ViewBuilder func headerView() -> some View {
+        let time = newsViewModel.leastTime
+
         HStack {
             if !newsViewModel.showHeaderTap {
                 Button {
@@ -138,6 +152,20 @@ struct NewsView: View {
                 }
 
             Spacer()
+
+            HStack(spacing: 3) {
+                Image(systemName: systemImages.lock)
+                Text("\(time / 60):\(time % 60)\((time % 60 < 10 && time / 60 != 0)  ? "0" : "")")
+            }
+            .foregroundColor(.black)
+            .font(.caption)
+            .padding(5)
+            .background {
+                themeManager.selectedTheme.accentColor
+                    .opacity(0.2)
+                    .cornerRadius(10)
+            }
+            .frame(alignment: .trailing)
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
@@ -148,6 +176,7 @@ struct NewsView: View {
 
 #Preview {
     NewsView()
+        .environmentObject(NewsViewModel())
         .environmentObject(SettingsViewModel())
         .environmentObject(NetworkManager())
         .environmentObject(ThemeManager())

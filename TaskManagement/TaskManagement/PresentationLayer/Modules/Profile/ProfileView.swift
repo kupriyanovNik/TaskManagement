@@ -12,6 +12,7 @@ struct ProfileView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var newsViewModel: NewsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
@@ -42,13 +43,12 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-
                 HStack {
                     sleepTimeCard()
                     newsFeedCard()
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 5)
+                .padding(.top, 5)
 
                 if !coreDataViewModel.allTodayTasks.isEmpty {
                     StatisticsGauge(
@@ -107,7 +107,8 @@ struct ProfileView: View {
     @ViewBuilder func newsFeedCard() -> some View {
             NavigationLink {
                 NewsView()
-                    .environmentObject(sleeptimeCalculatorViewModel)
+                    .environmentObject(newsViewModel)
+                    .environmentObject(settingsViewModel)
                     .environmentObject(themeManager)
             } label: {
                 HStack {
@@ -197,6 +198,7 @@ struct ProfileView: View {
         .environmentObject(ProfileViewModel())
         .environmentObject(SleeptimeCalculatorViewModel())
         .environmentObject(SettingsViewModel())
+        .environmentObject(NewsViewModel())
         .environmentObject(CoreDataViewModel())
         .environmentObject(NetworkManager())
         .environmentObject(ThemeManager())
