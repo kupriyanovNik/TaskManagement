@@ -21,9 +21,16 @@ class HomeViewModel: ObservableObject {
     @Published var isEditing: Bool = false
     @Published var showGreetings: Bool = true
 
+    // MARK: - Internal Properties
+
+    var editText: String {
+        isEditing ? strings.done : strings.edit
+    }
+
     // MARK: - Private Properties
 
     private var calendar = Calendar.current
+    private var strings = Localizable.Home.self
 
     // MARK: - Inits
 

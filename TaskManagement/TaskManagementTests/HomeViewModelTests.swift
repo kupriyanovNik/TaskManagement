@@ -5,36 +5,31 @@
 import XCTest
 @testable import TaskManagement
 
-final class TaskManagementTests: XCTestCase {
+final class HomeViewModelTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    // MARK: - Private Properties
+
+    private var viewModel: HomeViewModel!
+    private var strings = Localizable.Home.self
+
+    // MARK: - Internal Functions
+
+    override func setUp() {
+        super.setUp()
+        viewModel = HomeViewModel()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testCurrentWeekIsNotEmpty() {
+        XCTAssertEqual(viewModel.currentWeek.count, 7)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testEditText() {
+        XCTAssertEqual(viewModel.editText, strings.edit)
+        viewModel.isEditing = true
+        XCTAssertEqual(viewModel.editText, strings.done)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure(
-            metrics: [
-                XCTClockMetric(),
-                XCTCPUMetric(),
-                XCTStorageMetric(),
-                XCTMemoryMetric()
-            ]
-        ) {
-            NeuralManager.shared.calculateBedtime(hour: 7, minute: 0, sleepAmount: 8.0, userAge: 10)
-        }
+    func testIsSameAsSelectedDay() {
+        XCTAssert(viewModel.isSameAsSelectedDay(date: .now))
     }
-
 }
