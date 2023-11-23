@@ -11,12 +11,6 @@ class NetworkManager: ObservableObject {
 
     @Published var news: [SpaceNewsModel] = []
 
-    // MARK: - Init
-
-    init() {
-        getNews()
-    }
-
     // MARK: - Internal Functions 
 
     func getNews() {
