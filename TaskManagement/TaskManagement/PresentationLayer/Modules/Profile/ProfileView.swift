@@ -56,7 +56,7 @@ struct ProfileView: View {
                         .overlay {
                             if isToday {
                                 ZStack {
-                                    Color.black
+                                    themeManager.selectedTheme.accentColor
                                         .opacity(0.2)
 
                                     HStack {
