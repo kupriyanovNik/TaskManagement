@@ -13,6 +13,8 @@ struct NewsView: View {
     @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
 
+    @StateObject private var newsViewModel = NewsViewModel()
+
     @Environment(\.dismiss) var dismiss
 
     // MARK: - Private Properties
@@ -84,24 +86,16 @@ struct NewsView: View {
 
     @ViewBuilder func headerView() -> some View {
         HStack {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: systemImages.backArrow)
-                    .foregroundColor(.black)
-                    .font(.title2)
-            }
-
-            Text("News Feed")
-                .bold()
-                .font(.largeTitle)
-                .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
-
-            Spacer()
-
-            Button {
-                networkManager.getNews()
-            } label: {
+            if !newsViewModel.showHeaderTap {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: systemImages.backArrow)
+                        .foregroundColor(.black)
+                        .font(.title2)
+                }
+                .transition(.move(edge: .leading).combined(with: .opacity))
+            } else {
                 HStack(spacing: 3) {
                     Image(systemName: "antenna.radiowaves.left.and.right")
                     Text("Reload")
@@ -114,8 +108,26 @@ struct NewsView: View {
                         .opacity(0.2)
                         .cornerRadius(10)
                 }
+                .transition(.move(edge: .top).combined(with: .opacity))
             }
-            .buttonStyle(HeaderButtonStyle())
+
+            Text("News Feed")
+                .bold()
+                .font(.largeTitle)
+                .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+                .onLongPressGesture(minimumDuration: 1.5, maximumDistance: 50) {
+                    withAnimation {
+                        generateFeedback()
+
+                        networkManager.getNews()
+                    }
+                } onPressingChanged: { isPressed in
+                    withAnimation {
+                        newsViewModel.showHeaderTap = isPressed
+                    }
+                }
+
+            Spacer()
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
