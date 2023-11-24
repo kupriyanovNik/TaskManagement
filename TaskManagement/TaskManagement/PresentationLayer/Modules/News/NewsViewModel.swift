@@ -21,11 +21,9 @@ class NewsViewModel: ObservableObject {
 
     var timer =  Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
-    // MARK: - Internal Functions
+    private let calendar = Calendar.current
 
-    func startTimer() {
-        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    }
+    // MARK: - Internal Functions
 
     func stopTimer() {
         timer.upstream.connect().cancel()
@@ -39,4 +37,23 @@ class NewsViewModel: ObservableObject {
         leastTime = 30 //* 60
     }
 
+    func appearAction() {
+        let isLastOpenToday = calendar.isDateInToday(Date(timeIntervalSince1970: lastOpenNews))
+
+        if !isLastOpenToday {
+            lastOpenNews = Date().timeIntervalSince1970
+        }
+
+        startTimer()
+
+        if leastTime == -1 || !isLastOpenToday {
+            resetLeastTime()
+        }
+    }
+
+    // MARK: - Private Functions
+
+    private func startTimer() {
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    }
 }
