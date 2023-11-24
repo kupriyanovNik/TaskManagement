@@ -97,13 +97,17 @@ struct SettingsView: View {
                 .foregroundColor(.gray)
                 .frame(width: 250, height: 60)
                 .background {
-                    AnimatedGradient(colors: [.yellow, .orange, .green, .purple])
-                        .cornerRadius(10)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.white)
-                                .padding(5)
-                        }
+                    LinearGradient(
+                        colors: [.yellow, .orange, .green, .purple],
+                        startPoint: .bottomTrailing,
+                        endPoint: .topLeading
+                    )
+                    .cornerRadius(10)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .padding(5)
+                    }
                 }
                 .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
             }
@@ -119,20 +123,48 @@ struct SettingsView: View {
         .padding(.horizontal)
     }
 
+    private var disabledNotificationsRow: some View {
+        VStack(alignment: .leading) {
+            Text("You disabled notifications")
+                .font(.title2)
+
+            Button("Tap to open settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            }
+
+            Divider()
+        }
+        .padding(.horizontal)
+    }
+
     // MARK: - Body
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
                 themeSelectionRow
+
                 Divider()
+
                 if #available(iOS 17, *) {
                     shouldShowScrollAnimationRow
                 }
+
                 shouldShowTabBarAnimationRow
+
                 Divider()
+
+                if NotificationManager.shared.isNotificationEnabled == false {
+                    disabledNotificationsRow
+                }
+
                 #if DEBUG
                 showOnboardingRow
+
                 removeAllNotificationsRow
                 #endif
             }
@@ -144,6 +176,9 @@ struct SettingsView: View {
         }
         .makeCustomNavBar {
             headerView()
+        }
+        .onDisappear {
+            settingsViewModel.showInformation = false 
         }
     }
 

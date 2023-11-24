@@ -6,7 +6,6 @@ import Foundation
 import UserNotificationsUI
 import UserNotifications
 
-
 class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     // MARK: - Static Properties
@@ -15,7 +14,15 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     // MARK: - Inits
 
-     override init() { super.init() }
+    override init() {
+        super.init()
+
+        checkNotificationStatus()
+    }
+
+    // MARK: - Internal Properties
+
+    var isNotificationEnabled: Bool?
 
     // MARK: - Internal Functions
 
@@ -133,5 +140,18 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     func removeAllNotifications() {
         UNUserNotificationCenter.current()
             .removeAllPendingNotificationRequests()
+    }
+
+    func checkNotificationStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings { status in
+            switch status.authorizationStatus {
+            case .notDetermined, .denied, .provisional, .ephemeral:
+                self.isNotificationEnabled = false
+            case .authorized:
+                self.isNotificationEnabled = true
+            @unknown default:
+                print("DEBUG: unowned notification status")
+            }
+        }
     }
 }
