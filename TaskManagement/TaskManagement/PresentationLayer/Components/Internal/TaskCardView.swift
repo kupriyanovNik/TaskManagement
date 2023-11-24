@@ -241,77 +241,11 @@ struct TaskCardView: View {
     var body: some View {
         HStack(alignment: (isEditing ? .center : .top), spacing: 30) {
             if isEditing {
-                VStack(spacing: 10) {
-                    if task.isCompleted {
-                        Button {
-                            withAnimation(.spring) {
-                                coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
-                            }
-                            if task.shouldNotificate {
-                                sendNotification(task: task)
-                            }
-                        } label: {
-                            Image(systemName: ImageNames.System.xmarkCircleFill)
-                                .font(.title2)
-                                .foregroundColor(.primary)
-                        }
-                    }
-
-                    if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
-                        Button {
-                            homeViewModel.editTask = task
-                            navigationViewModel.showTaskAddingView.toggle()
-                        } label: {
-                            Image(systemName: ImageNames.System.pencilCircleFill)
-                                .font(.title2)
-                                .foregroundColor(.primary)
-                        }
-                    }
-
-                    Button {
-                        coreDataViewModel.removeTask(task: task) { taskDate in
-                            self.onRemove?(taskDate)
-
-                            if coreDataViewModel.allTasks.isEmpty {
-                                navigationViewModel.showAllTasksView = false
-                            }
-                        }
-                    } label: {
-                        Image(systemName: ImageNames.System.minusCircleFill)
-                            .font(.title2)
-                            .foregroundColor(.red)
-                    }
-                }
-                .transition(.move(edge: .leading).combined(with: .opacity))
-
+                taskCardEditView()
+                    .transition(.move(edge: .leading).combined(with: .opacity))
             } else {
-                VStack(spacing: 10) {
-                    Circle()
-                        .fill(task.isCompleted ? .green : themeManager.selectedTheme.accentColor)
-                        .frame(width: 15, height: 15)
-                        .background {
-                            Circle()
-                                .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
-                                .padding(-3)
-                        }
-                        .onTapGesture {
-                            withAnimation(.spring) {
-                                if task.isCompleted {
-                                    withAnimation(.spring) {
-                                        coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
-                                    }
-                                    if task.shouldNotificate {
-                                        sendNotification(task: task)
-                                    }
-                                }
-                            }
-                        }
-
-                    Rectangle()
-                        .fill(themeManager.selectedTheme.accentColor)
-                        .frame(width: 3)
-                }
-                .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
+                taskCardNotEditView()
+                    .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
 
             if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
@@ -341,6 +275,81 @@ struct TaskCardView: View {
         }
         .hLeading()
         .animation(.spring, value: task.isCompleted)
+    }
+
+    // MARK: - ViewBuilders
+
+    @ViewBuilder func taskCardEditView() -> some View {
+        VStack(spacing: 10) {
+            if task.isCompleted {
+                Button {
+                    withAnimation(.spring) {
+                        coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                    }
+                    if task.shouldNotificate {
+                        sendNotification(task: task)
+                    }
+                } label: {
+                    Image(systemName: ImageNames.System.xmarkCircleFill)
+                        .font(.title2)
+                        .foregroundColor(.primary)
+                }
+            }
+
+            if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
+                Button {
+                    homeViewModel.editTask = task
+                    navigationViewModel.showTaskAddingView.toggle()
+                } label: {
+                    Image(systemName: ImageNames.System.pencilCircleFill)
+                        .font(.title2)
+                        .foregroundColor(.primary)
+                }
+            }
+
+            Button {
+                coreDataViewModel.removeTask(task: task) { taskDate in
+                    self.onRemove?(taskDate)
+
+                    if coreDataViewModel.allTasks.isEmpty {
+                        navigationViewModel.showAllTasksView = false
+                    }
+                }
+            } label: {
+                Image(systemName: ImageNames.System.minusCircleFill)
+                    .font(.title2)
+                    .foregroundColor(.red)
+            }
+        }
+    }
+
+    @ViewBuilder func taskCardNotEditView() -> some View {
+        VStack(spacing: 10) {
+            Circle()
+                .fill(task.isCompleted ? .green : themeManager.selectedTheme.accentColor)
+                .frame(width: 15, height: 15)
+                .background {
+                    Circle()
+                        .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
+                        .padding(-3)
+                }
+                .onTapGesture {
+                    withAnimation(.spring) {
+                        if task.isCompleted {
+                            withAnimation(.spring) {
+                                coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                            }
+                            if task.shouldNotificate {
+                                sendNotification(task: task)
+                            }
+                        }
+                    }
+                }
+
+            Rectangle()
+                .fill(themeManager.selectedTheme.accentColor)
+                .frame(width: 3)
+        }
     }
 
     // MARK: - Private Functions
