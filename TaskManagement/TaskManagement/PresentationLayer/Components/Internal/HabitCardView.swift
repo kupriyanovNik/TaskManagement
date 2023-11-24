@@ -41,52 +41,56 @@ struct HabitCardView: View {
                 habitCardEditView()
             }
 
-            VStack(spacing: 6) {
-                if cardState == .basic {
-                    habitCardDayCounter()
+            habitCardView()
+                .padding(.vertical)
+                .padding(.horizontal)
+                .background {
+                    Color.black
+                        .opacity(cardState != .basic ? 0.95 : 0.85)
+                        .cornerRadius(cardState != .basic ? 15 : 25)
                 }
-
-                Text(habit.title ?? "Default Title")
-                    .font(.title2)
-                    .bold()
-                    .lineLimit(nil)
-                    .foregroundColor(.white)
-                    .hLeading()
-                    .animation(.spring, value: cardState)
-
-                VStack {
-                    if let description = habit.habitDescription,
-                       description != "",
-                        cardState == .description || cardState == .extended {
-                        Text(description)
-                            .font(.callout)
-                            .foregroundColor(.gray)
-                            .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-                            .lineLimit(nil)
-                            .hLeading()
-                    }
+                .onTapGesture {
+                    habitCardTapAction()
                 }
-                .animation(.spring, value: cardState)
-
-                if cardState == .extended {
-                    habitCardCalendarView()
-                }
-            }
-            .padding(.vertical)
-            .padding(.horizontal)
-            .background {
-                Color.black
-                    .opacity(cardState != .basic ? 0.95 : 0.85)
-                    .cornerRadius(cardState != .basic ? 15 : 25)
-            }
-            .onTapGesture {
-                habitCardTapAction()
-            }
-            .scaleEffect(cardState == .extended ? 1.02 : 1)
+                .scaleEffect(cardState == .extended ? 1.02 : 1)
         }
     }
 
     // MARK: - ViewBuilders
+
+    @ViewBuilder func habitCardView() -> some View {
+        VStack(spacing: 6) {
+            if cardState == .basic {
+                habitCardDayCounter()
+            }
+
+            Text(habit.title ?? "Default Title")
+                .font(.title2)
+                .bold()
+                .lineLimit(nil)
+                .foregroundColor(.white)
+                .hLeading()
+                .animation(.spring, value: cardState)
+
+            VStack {
+                if let description = habit.habitDescription,
+                   description != "",
+                    cardState == .description || cardState == .extended {
+                    Text(description)
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
+                        .lineLimit(nil)
+                        .hLeading()
+                }
+            }
+            .animation(.spring, value: cardState)
+
+            if cardState == .extended {
+                habitCardCalendarView()
+            }
+        }
+    }
 
     @ViewBuilder func habitCardDayCounter() -> some View {
         var count: Int { habit.weekDays?.count ?? 0 }
