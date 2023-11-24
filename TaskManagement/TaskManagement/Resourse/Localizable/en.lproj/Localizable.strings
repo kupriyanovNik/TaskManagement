@@ -51,6 +51,8 @@
 "Profile.doneTasks" = "Done Tasks";
 "Profile.todayDoneTasks" = "Today Done Tasks";
 "Profile.sleeptimeCalculator" = "Better Rest";
+"Profile.newsFeed" = "News Feed";
+"Profile.tomorrow" = "Tomorrow";
 
 // MARK: - SleeptimeCalculator
 
@@ -59,6 +61,11 @@
 "SleeptimeCalculator.coffeeIntake" = "Daily coffee\tea intake";
 "SleeptimeCalculator.check" = "Check";
 "SleeptimeCalculator.alertTitle" = "You should go to bed at:";
+
+// MARK: - News
+
+"News.refresh" = "Refresh";
+"News.newsFeed" = "News Feed";
 
 // MARK: - Onboarding
 

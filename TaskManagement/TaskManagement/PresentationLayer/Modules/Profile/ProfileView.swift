@@ -12,7 +12,9 @@ struct ProfileView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var newsViewModel: NewsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
@@ -36,12 +38,42 @@ struct ProfileView: View {
         doneTodayTasksPercentage == 1
     }
 
+    private var isTodayLastSeenFeed: Bool {
+        Calendar.current.isDateInToday(Date(timeIntervalSince1970: newsViewModel.lastSeenNews))
+    }
+
     // MARK: - Body
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
-                sleepTimeCard()
+                HStack {
+                    sleepTimeCard()
+
+                    newsFeedCard()
+                        .blur(radius: isTodayLastSeenFeed ? 3 : 0)
+                        .brightness(isTodayLastSeenFeed ? 0.7 : 0)
+                        .overlay {
+                            if isTodayLastSeenFeed {
+                                ZStack {
+                                    themeManager.selectedTheme.accentColor
+                                        .opacity(0.2)
+
+                                    HStack {
+                                        Text(strings.tomorrow)
+                                            .bold()
+
+                                        Image(systemName: systemImages.lock)
+                                    }
+                                    .font(.title2)
+                                    .foregroundStyle(.black)
+                                }
+                                .cornerRadius(10)
+                            }
+                        }
+                }
+                .padding(.horizontal)
+                .padding(.top, 5)
 
                 if !coreDataViewModel.allTodayTasks.isEmpty {
                     StatisticsGauge(
@@ -95,8 +127,33 @@ struct ProfileView: View {
                 }
             }
             .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
-            .padding(.horizontal)
-            .padding(.bottom, 5)
+        }
+
+    @ViewBuilder func newsFeedCard() -> some View {
+            NavigationLink {
+                NewsView()
+                    .environmentObject(newsViewModel)
+                    .environmentObject(settingsViewModel)
+                    .environmentObject(themeManager)
+            } label: {
+                HStack {
+                    Text(strings.newsFeed)
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
+                    Spacer()
+
+                    Image(systemName: systemImages.backArrow)
+                        .rotationEffect(.degrees(180))
+                }
+                .padding()
+                .background {
+                    themeManager.selectedTheme.accentColor
+                        .opacity(0.2)
+                        .cornerRadius(10)
+                }
+            }
+            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
         }
 
     @ViewBuilder func headerView() -> some View {
@@ -166,6 +223,8 @@ struct ProfileView: View {
         .environmentObject(ProfileViewModel())
         .environmentObject(SleeptimeCalculatorViewModel())
         .environmentObject(SettingsViewModel())
+        .environmentObject(NewsViewModel())
         .environmentObject(CoreDataViewModel())
+        .environmentObject(NetworkManager())
         .environmentObject(ThemeManager())
 }

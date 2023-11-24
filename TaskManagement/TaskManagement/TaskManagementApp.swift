@@ -22,6 +22,8 @@ struct TaskManagementApp: App {
     @StateObject private var profileViewModel = ProfileViewModel()
     @StateObject private var sleeptimeCalculatorViewModel = SleeptimeCalculatorViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
+    @StateObject private var newsViewModel = NewsViewModel()
+    @StateObject private var networkManager = NetworkManager()
     @StateObject private var themeManager = ThemeManager()
 
     // MARK: - Body
@@ -44,6 +46,8 @@ struct TaskManagementApp: App {
                     .environmentObject(profileViewModel)
                     .environmentObject(sleeptimeCalculatorViewModel)
                     .environmentObject(settingsViewModel)
+                    .environmentObject(newsViewModel)
+                    .environmentObject(networkManager)
                     .environmentObject(themeManager)
                     .opacity(shouldShowOnboarding ? 0.5 : 1)
                     .clipShape(

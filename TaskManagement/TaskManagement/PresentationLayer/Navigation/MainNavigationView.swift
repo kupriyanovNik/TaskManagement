@@ -19,6 +19,8 @@ struct MainNavigationView: View {
     @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var newsViewModel: NewsViewModel
+    @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Inits
@@ -43,14 +45,6 @@ struct MainNavigationView: View {
                             .environmentObject(settingsViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(themeManager)
-
-                    case .profile:
-                        ProfileView()
-                            .environmentObject(profileViewModel)
-                            .environmentObject(sleeptimeCalculatorViewModel)
-                            .environmentObject(settingsViewModel)
-                            .environmentObject(coreDataViewModel)
-                            .environmentObject(themeManager)
                         
                     case .habits:
                         HabitsView()
@@ -58,6 +52,16 @@ struct MainNavigationView: View {
                             .environmentObject(settingsViewModel)
                             .environmentObject(navigationViewModel)
                             .environmentObject(coreDataViewModel)
+                            .environmentObject(themeManager)
+
+                    case .profile:
+                        ProfileView()
+                            .environmentObject(profileViewModel)
+                            .environmentObject(sleeptimeCalculatorViewModel)
+                            .environmentObject(settingsViewModel)
+                            .environmentObject(newsViewModel)
+                            .environmentObject(coreDataViewModel)
+                            .environmentObject(networkManager)
                             .environmentObject(themeManager)
                     }
                 }

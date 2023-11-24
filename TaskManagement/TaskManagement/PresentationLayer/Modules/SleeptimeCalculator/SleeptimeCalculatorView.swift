@@ -26,18 +26,20 @@ struct SleeptimeCalculatorView: View {
     // MARK: - Body
 
     var body: some View {
-        VStack {
-            Spacer()
-            wakeUpTimeRow()
-            Divider()
-            desiredAmountOfSleepRow()
-            if userAge > 10 {
+        ScrollView(showsIndicators: false) {
+            VStack {
+                wakeUpTimeRow()
                 Divider()
-                coffeeIntakeRow()
+                desiredAmountOfSleepRow()
+
+                if userAge > 10 {
+                    Divider()
+                    coffeeIntakeRow()
+                }
             }
-            Spacer()
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
+
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
@@ -45,7 +47,7 @@ struct SleeptimeCalculatorView: View {
         }
         .safeAreaInset(edge: .bottom) {
             VStack {
-                nextButton()
+                checkButton()
                     
                 Button {
                     if let url = URL(string: "https://developer.apple.com/machine-learning/core-ml/") {
@@ -106,6 +108,8 @@ struct SleeptimeCalculatorView: View {
     }
 
     @ViewBuilder func coffeeIntakeRow() -> some View {
+        let accentColor = themeManager.selectedTheme.accentColor
+
         VStack {
             Text(strings.coffeeIntake)
                 .font(.headline)
@@ -136,13 +140,29 @@ struct SleeptimeCalculatorView: View {
                             }
                         }
                         .hCenter()
+                        .foregroundStyle(
+                            .linearGradient(
+                                colors: [
+                                    .black,
+                                    (isSelected ? accentColor : .black).opacity(0.8)
+                                ],
+                                startPoint: .bottom,
+                                endPoint: .top
+                            )
+                        )
+                        .shadow(
+                            color: accentColor.opacity(isSelected ? 0.3 : 0),
+                            radius: 10,
+                            x: 0,
+                            y: 10
+                        )
                 }
             }
         }
         .hLeading()
     }
 
-    @ViewBuilder func nextButton() -> some View {
+    @ViewBuilder func checkButton() -> some View {
         Button {
             let components = Calendar.current.dateComponents(
                 [.hour, .minute],
