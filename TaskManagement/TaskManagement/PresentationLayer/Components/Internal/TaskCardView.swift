@@ -26,15 +26,15 @@ struct TaskCard: View {
 
     private let calendar = Calendar.current
 
-    var isCompleted: Bool {
+    private var isCompleted: Bool {
         taskObject.isCompleted
     }
 
-    var taskDate: Date {
+    private var taskDate: Date {
         taskObject.taskDate ?? .now
     }
 
-    var isToday: Bool {
+    private var isToday: Bool {
         calendar.isDateInToday(taskDate)
     }
 
