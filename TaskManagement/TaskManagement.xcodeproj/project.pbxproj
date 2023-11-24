@@ -52,6 +52,7 @@
 		B7739F0F2AE15272000F19EE /* TaskCategorySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */; };
 		B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */; };
 		B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7739F152AE17F8C000F19EE /* TaskCardView.swift */; };
+		B773DDED2B10FEB0008DAFE9 /* NeuralManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B773DDEC2B10FEB0008DAFE9 /* NeuralManagerTests.swift */; };
 		B77D34C52B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */; };
 		B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
@@ -143,6 +144,7 @@
 		B7739F0E2AE15272000F19EE /* TaskCategorySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCategorySelector.swift; sourceTree = "<group>"; };
 		B7739F132AE179FE000F19EE /* CategorySelectorButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectorButtonStyle.swift; sourceTree = "<group>"; };
 		B7739F152AE17F8C000F19EE /* TaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardView.swift; sourceTree = "<group>"; };
+		B773DDEC2B10FEB0008DAFE9 /* NeuralManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralManagerTests.swift; sourceTree = "<group>"; };
 		B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorView.swift; sourceTree = "<group>"; };
 		B7A7C14C2B0EB5F9000F54BD /* TaskManagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskManagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
@@ -443,6 +445,19 @@
 			path = ButtonStyles;
 			sourceTree = "<group>";
 		};
+		B773DDEB2B10FE71008DAFE9 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */,
+				B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */,
+				B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */,
+				B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */,
+				B756B6042B10E3F7002297BA /* NetworkManagerTests.swift */,
+				B773DDEC2B10FEB0008DAFE9 /* NeuralManagerTests.swift */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
 		B77D34C32B08E6AA00D4E4D1 /* SleeptimeCalculator */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,11 +470,7 @@
 		B7A7C14D2B0EB5F9000F54BD /* TaskManagementTests */ = {
 			isa = PBXGroup;
 			children = (
-				B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */,
-				B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */,
-				B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */,
-				B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */,
-				B756B6042B10E3F7002297BA /* NetworkManagerTests.swift */,
+				B773DDEB2B10FE71008DAFE9 /* UnitTests */,
 			);
 			path = TaskManagementTests;
 			sourceTree = "<group>";
@@ -716,6 +727,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B773DDED2B10FEB0008DAFE9 /* NeuralManagerTests.swift in Sources */,
 				B756B6052B10E3F7002297BA /* NetworkManagerTests.swift in Sources */,
 				B7739C932B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift in Sources */,
 				B7739C992B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift in Sources */,

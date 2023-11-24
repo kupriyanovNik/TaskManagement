@@ -11,12 +11,9 @@ class NeuralManager {
 
     static let shared = NeuralManager()
 
-    // MARK: - Inits
-
-    private init() { }
-
     // MARK: - Internal Functions
 
+    @discardableResult
     func calculateBedtime(
         hour: Int,
         minute: Int,

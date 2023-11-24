@@ -15,7 +15,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     // MARK: - Inits
 
-    private override init() { super.init() }
+     override init() { super.init() }
 
     // MARK: - Internal Functions
 
