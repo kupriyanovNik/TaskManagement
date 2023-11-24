@@ -59,6 +59,10 @@ struct NewsView: View {
             }
 
             newsViewModel.startTimer()
+
+            if newsViewModel.leastTime == -1 {
+                newsViewModel.resetLeastTime()
+            }
         }
         .onDisappear {
             newsViewModel.stopTimer()

@@ -11,7 +11,7 @@ class NewsViewModel: ObservableObject {
 
     @Published var showHeaderTap: Bool = false
 
-    @Published var leastTime: Int = 30 //* 60 // 30 min in seconds 
+    @AppStorage("leastTime") var leastTime: Int = 30 * 60 // 30 min in seconds
 
     @AppStorage("lastSeenNews") var lastSeenNews: Double = 0
 
@@ -33,9 +33,8 @@ class NewsViewModel: ObservableObject {
         self.leastTime -= 1
     }
 
-
     func resetLeastTime() {
-        leastTime = 30 // * 60
+        leastTime = 30 * 60
     }
 
 }
