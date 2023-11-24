@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class NewsViewModel: ObservableObject {
 
@@ -10,30 +11,31 @@ class NewsViewModel: ObservableObject {
 
     @Published var showHeaderTap: Bool = false
 
-    @Published var leastTime: Int = 30 * 60 / 150
+    @Published var leastTime: Int = 30 //* 60 // 30 min in seconds 
 
     @AppStorage("lastSeenNews") var lastSeenNews: Double = 0
 
     // MARK: - Private Properties
 
-    private var timer: Timer?
+    var timer =  Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     // MARK: - Internal Functions
 
     func startTimer() {
-        if leastTime != 0 {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                self.leastTime -= 1
-            }
-        }
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     }
 
     func stopTimer() {
-        timer?.invalidate()
+        timer.upstream.connect().cancel()
     }
 
+    func timerTick() {
+        self.leastTime -= 1
+    }
+
+
     func resetLeastTime() {
-        leastTime = 30 * 60 / 150
+        leastTime = 30 // * 60
     }
 
 }

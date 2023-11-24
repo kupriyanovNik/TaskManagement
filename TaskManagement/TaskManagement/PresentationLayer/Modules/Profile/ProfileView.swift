@@ -38,7 +38,7 @@ struct ProfileView: View {
         doneTodayTasksPercentage == 1
     }
 
-    private var isToday: Bool {
+    private var isTodayLastSeenFeed: Bool {
         Calendar.current.isDateInToday(Date(timeIntervalSince1970: newsViewModel.lastSeenNews))
     }
 
@@ -51,10 +51,10 @@ struct ProfileView: View {
                     sleepTimeCard()
 
                     newsFeedCard()
-                        .blur(radius: isToday ? 3 : 0)
-                        .brightness(isToday ? 0.7 : 0)
+                        .blur(radius: isTodayLastSeenFeed ? 3 : 0)
+                        .brightness(isTodayLastSeenFeed ? 0.7 : 0)
                         .overlay {
-                            if isToday {
+                            if isTodayLastSeenFeed {
                                 ZStack {
                                     themeManager.selectedTheme.accentColor
                                         .opacity(0.2)

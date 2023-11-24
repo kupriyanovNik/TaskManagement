@@ -7,7 +7,7 @@ import Foundation
 @MainActor
 class NetworkManager: ObservableObject {
 
-    // MARK: - Internal Properties
+    // MARK: - Property Wrappers
 
     @Published var news: [SpaceNewsModel] = []
 

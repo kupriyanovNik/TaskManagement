@@ -57,14 +57,16 @@ struct NewsView: View {
             if networkManager.news.isEmpty {
                 networkManager.getNews()
             }
-            
+
             newsViewModel.startTimer()
         }
         .onDisappear {
             newsViewModel.stopTimer()
         }
-        .onChange(of: newsViewModel.leastTime) { newValue in
-            if newValue <= 0 {
+        .onReceive(newsViewModel.timer) { timer in
+            newsViewModel.timerTick()
+
+            if newsViewModel.leastTime < 0 {
                 newsViewModel.lastSeenNews = Date().timeIntervalSince1970
 
                 dismiss()
