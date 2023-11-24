@@ -125,7 +125,7 @@ struct NewsView: View {
                 .transition(.move(edge: .leading).combined(with: .opacity))
             } else {
                 HStack(spacing: 3) {
-                    Image(systemName: "antenna.radiowaves.left.and.right")
+                    Image(systemName: systemImages.antenna)
                     
                     Text(strings.refresh)
                 }
