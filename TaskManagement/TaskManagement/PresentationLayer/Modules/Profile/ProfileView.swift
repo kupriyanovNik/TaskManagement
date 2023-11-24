@@ -60,7 +60,7 @@ struct ProfileView: View {
                                         .opacity(0.2)
 
                                     HStack {
-                                        Text("До завтра")
+                                        Text(strings.tomorrow)
                                             .bold()
 
                                         Image(systemName: systemImages.lock)
@@ -137,7 +137,7 @@ struct ProfileView: View {
                     .environmentObject(themeManager)
             } label: {
                 HStack {
-                    Text("News Feed")
+                    Text(strings.newsFeed)
                         .font(.title2)
                         .fontWeight(.semibold)
 

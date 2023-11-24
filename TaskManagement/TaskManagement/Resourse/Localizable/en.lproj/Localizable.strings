@@ -51,6 +51,8 @@
 "Profile.doneTasks" = "Done Tasks";
 "Profile.todayDoneTasks" = "Today Done Tasks";
 "Profile.sleeptimeCalculator" = "Better Rest";
+"Profile.newsFeed" = "News Feed";
+"Profile.tomorrow" = "Tomorrow";
 
 // MARK: - SleeptimeCalculator
 

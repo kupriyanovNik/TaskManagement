@@ -51,6 +51,8 @@
 "Profile.doneTasks" = "Выполненные задачи";
 "Profile.todayDoneTasks" = "Сегодняшние выполненные задачи";
 "Profile.sleeptimeCalculator" = "Время сна";
+"Profile.newsFeed" = "Новости";
+"Profile.tomorrow" = "Завтра";
 
 // MARK: - SleeptimeCalculator
 
