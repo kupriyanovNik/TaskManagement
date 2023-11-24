@@ -20,6 +20,8 @@ struct NewsView: View {
 
     private var systemImages = ImageNames.System.self
 
+    private var strings = Localizable.News.self
+
     // MARK: - Body
 
     var body: some View {
@@ -124,7 +126,8 @@ struct NewsView: View {
             } else {
                 HStack(spacing: 3) {
                     Image(systemName: "antenna.radiowaves.left.and.right")
-                    Text("Reload")
+                    
+                    Text(strings.refresh)
                 }
                 .foregroundColor(.black)
                 .font(.caption)
@@ -137,7 +140,7 @@ struct NewsView: View {
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
 
-            Text("News Feed")
+            Text(strings.newsFeed)
                 .bold()
                 .font(.largeTitle)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)

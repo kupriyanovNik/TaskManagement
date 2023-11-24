@@ -62,6 +62,11 @@
 "SleeptimeCalculator.check" = "Узнать";
 "SleeptimeCalculator.alertTitle" = "Стоит лечь в:";
 
+// MARK: - News
+
+"News.refresh" = "Обновить";
+"News.newsFeed" = "Новости";
+
 // MARK: - Onboarding
 
 "Onboarding.application" = "Приложение для контроля и отслеживания выполнения задач";

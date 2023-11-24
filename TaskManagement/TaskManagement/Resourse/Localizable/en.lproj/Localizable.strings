@@ -62,6 +62,11 @@
 "SleeptimeCalculator.check" = "Check";
 "SleeptimeCalculator.alertTitle" = "You should go to bed at:";
 
+// MARK: - News
+
+"News.refresh" = "Refresh";
+"News.newsFeed" = "News Feed";
+
 // MARK: - Onboarding
 
 "Onboarding.application" = "Application for monitoring and tracking task completion";

@@ -67,6 +67,11 @@ enum Localizable {
         static let alertTitle = localized("SleeptimeCalculator.alertTitle")
     }
 
+    enum News {
+        static let newsFeed = localized("News.newsFeed")
+        static let refresh = localized("News.refresh")
+    }
+
     enum Onboarding {
         static let application = localized("Onboarding.application")
         static let username = localized("Onboarding.username")
