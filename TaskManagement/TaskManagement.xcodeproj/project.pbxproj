@@ -38,6 +38,7 @@
 		B74985662B0122E000AB6EDB /* HeaderButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74985652B0122E000AB6EDB /* HeaderButtonStyle.swift */; };
 		B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084312AEEA55E006A04E1 /* HabitsView.swift */; };
 		B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75084342AEEA570006A04E1 /* HabitsViewModel.swift */; };
+		B756B6052B10E3F7002297BA /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B756B6042B10E3F7002297BA /* NetworkManagerTests.swift */; };
 		B76287272AD95061003EE58D /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76287262AD95061003EE58D /* RoundedShape.swift */; };
 		B76646C12AD5AA6200F5631E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C02AD5AA6200F5631E /* CustomTextField.swift */; };
 		B76646C32AD5B21000F5631E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76646C22AD5B21000F5631E /* ProfileViewModel.swift */; };
@@ -128,6 +129,7 @@
 		B74985652B0122E000AB6EDB /* HeaderButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderButtonStyle.swift; sourceTree = "<group>"; };
 		B75084312AEEA55E006A04E1 /* HabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsView.swift; sourceTree = "<group>"; };
 		B75084342AEEA570006A04E1 /* HabitsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModel.swift; sourceTree = "<group>"; };
+		B756B6042B10E3F7002297BA /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		B76287262AD95061003EE58D /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
 		B76646C02AD5AA6200F5631E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		B76646C22AD5B21000F5631E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				B7739C982B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift */,
 				B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */,
 				B7739C922B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift */,
+				B756B6042B10E3F7002297BA /* NetworkManagerTests.swift */,
 			);
 			path = TaskManagementTests;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B756B6052B10E3F7002297BA /* NetworkManagerTests.swift in Sources */,
 				B7739C932B0F79A700C2B0F3 /* HabitAddingViewModelTests.swift in Sources */,
 				B7739C992B0F7F2900C2B0F3 /* AllTasksViewModelTests.swift in Sources */,
 				B7C605962B0F8C060029090E /* HabitsViewModelTests.swift in Sources */,
