@@ -40,7 +40,7 @@ struct TaskAddingView: View {
                 )
                 .continueEditing()
 
-                if homeViewModel.editTask != nil {
+                if homeViewModel.editTask != nil, NotificationManager.shared.isNotificationEnabled == true {
                     HStack {
                         Text(strings.shouldRemind)
 
@@ -82,20 +82,22 @@ struct TaskAddingView: View {
                             .fill(themeManager.selectedTheme.accentColor)
                             .frame(height: 1)
 
-                        HStack {
-                            Text(strings.shouldRemind)
+                        if NotificationManager.shared.isNotificationEnabled == true {
+                            HStack {
+                                Text(strings.shouldRemind)
 
-                            Spacer()
+                                Spacer()
 
-                            RadioButton(
-                                isSelected: $taskAddingViewModel.shouldSendNotification,
-                                accentColor: themeManager.selectedTheme.accentColor
-                            )
-                            .frame(width: 30, height: 30)
+                                RadioButton(
+                                    isSelected: $taskAddingViewModel.shouldSendNotification,
+                                    accentColor: themeManager.selectedTheme.accentColor
+                                )
+                                .frame(width: 30, height: 30)
+                            }
+                            .padding([.horizontal, .bottom])
+                            .padding(.top, 5)
+                            .endEditing()
                         }
-                        .padding([.horizontal, .bottom])
-                        .padding(.top, 5)
-                        .endEditing()
                     }
                     .background {
                         RoundedRectangle(cornerRadius: 10)

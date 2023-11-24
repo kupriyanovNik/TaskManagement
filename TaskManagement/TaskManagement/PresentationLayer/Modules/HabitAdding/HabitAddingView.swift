@@ -119,22 +119,24 @@ struct HabitAddingView: View {
                 }
                 .padding(.vertical)
 
-                HStack {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(strings.reminder)
-                            .fontWeight(.semibold)
-
-                        Text(strings.justNotifications)
-                            .font(.caption)
-                            .foregroundStyle(.gray)
+                if NotificationManager.shared.isNotificationEnabled == true {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text(strings.reminder)
+                                .fontWeight(.semibold)
+                            
+                            Text(strings.justNotifications)
+                                .font(.caption)
+                                .foregroundStyle(.gray)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Toggle(isOn: $habitAddingViewModel.shouldNotificate) { }
+                            .labelsHidden()
+                            .tint(themeManager.selectedTheme.accentColor)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Toggle(isOn: $habitAddingViewModel.shouldNotificate) { }
-                        .labelsHidden()
-                        .tint(themeManager.selectedTheme.accentColor)
+                    .padding(.vertical)
                 }
-                .padding(.vertical)
 
                 if habitAddingViewModel.shouldNotificate {
                     HStack(spacing: 12) {
