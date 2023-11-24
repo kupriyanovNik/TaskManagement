@@ -26,6 +26,12 @@ struct TaskManagementApp: App {
     @StateObject private var networkManager = NetworkManager()
     @StateObject private var themeManager = ThemeManager()
 
+    // MARK: - Inits
+
+    init() {
+        NotificationManager.shared.checkNotificationStatus()
+    }
+
     // MARK: - Body
 
     var body: some Scene {

@@ -16,8 +16,6 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     override init() {
         super.init()
-
-        checkNotificationStatus()
     }
 
     // MARK: - Internal Properties
@@ -145,9 +143,9 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     func checkNotificationStatus() {
         UNUserNotificationCenter.current().getNotificationSettings { status in
             switch status.authorizationStatus {
-            case .notDetermined, .denied, .provisional, .ephemeral:
+            case .denied, .ephemeral:
                 self.isNotificationEnabled = false
-            case .authorized:
+            case .authorized, .notDetermined, .provisional:
                 self.isNotificationEnabled = true
             @unknown default:
                 print("DEBUG: unowned notification status")
