@@ -60,7 +60,13 @@ struct NewsView: View {
 
             newsViewModel.startTimer()
 
-            if newsViewModel.leastTime == -1 {
+            let isLastOpenToday = Calendar.current.isDateInToday(Date(timeIntervalSince1970: newsViewModel.lastOpenNews))
+
+            if !isLastOpenToday {
+                newsViewModel.lastOpenNews = Date().timeIntervalSince1970
+            }
+
+            if newsViewModel.leastTime == -1 || !isLastOpenToday {
                 newsViewModel.resetLeastTime()
             }
         }
