@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct HomeView: View {
 
@@ -71,6 +72,11 @@ struct HomeView: View {
         .onChange(of: coreDataViewModel.tasksFilteredByDate) { newFilteredTasks in
             if newFilteredTasks.isEmpty {
                 homeViewModel.isEditing = false
+            }
+        }
+        .onChange(of: coreDataViewModel.allTasks.count) { newValue in
+            if newValue % 10 == 0 {
+                requestReview()
             }
         }
         .makeCustomNavBar {
@@ -213,6 +219,17 @@ struct HomeView: View {
             }
         }
     }
+
+    // MARK: - Private Functions
+
+    private func requestReview() {
+        if let scene = UIApplication.shared
+            .connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
+        }
+    }
+
 }
 
 // MARK: - Preview
