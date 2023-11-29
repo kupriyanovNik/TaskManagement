@@ -145,6 +145,7 @@ struct TaskCard: View {
                         .transition(.move(edge: .top).combined(with: .opacity))
                 } else {
                     Text(markAsCompletedName)
+                        .opacity(0.6)
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
