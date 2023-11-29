@@ -134,6 +134,10 @@ struct HomeView: View {
 
     @ViewBuilder func headerView() -> some View {
         let isToday = Calendar.current.isDateInToday(homeViewModel.currentDay)
+        let headerText = isToday ? strings.today : homeViewModel.currentDay.formatted(
+            date: .abbreviated,
+            time: .omitted
+        )
 
         VStack(spacing: 0) {
             HStack(spacing: 10) {
@@ -164,18 +168,21 @@ struct HomeView: View {
                                     }
                                 }
                         }
-                        
-                        Text(isToday ?
-                             strings.today :
-                                homeViewModel.currentDay.formatted(
-                                    date: .abbreviated,
-                                    time: .omitted
-                                )
-                        )
-                        .bold()
+
+                        Group {
+                            if #available(iOS 16, *) {
+                                Text(headerText)
+                                .bold()
+                                .contentTransition(.numericText())
+                            } else {
+                                Text(headerText)
+                                .bold()
+                            }
+                        }
                         .font(isToday ? .largeTitle : .title)
                         .foregroundColor(themeManager.selectedTheme.pageTitleColor)
                         .scaleEffect(homeViewModel.showHeaderTap ? 1.1 : 1)
+
                     }
                 }
                 .hLeading()
