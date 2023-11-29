@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct HomeView: View {
 
@@ -73,6 +74,11 @@ struct HomeView: View {
                 homeViewModel.isEditing = false
             }
         }
+        .onChange(of: coreDataViewModel.allTasks.count) { newValue in
+            if newValue % 10 == 0 {
+                requestReview()
+            }
+        }
         .makeCustomNavBar {
             headerView()
         }
@@ -128,6 +134,10 @@ struct HomeView: View {
 
     @ViewBuilder func headerView() -> some View {
         let isToday = Calendar.current.isDateInToday(homeViewModel.currentDay)
+        let headerText = isToday ? strings.today : homeViewModel.currentDay.formatted(
+            date: .abbreviated,
+            time: .omitted
+        )
 
         VStack(spacing: 0) {
             HStack(spacing: 10) {
@@ -158,18 +168,21 @@ struct HomeView: View {
                                     }
                                 }
                         }
-                        
-                        Text(isToday ?
-                             strings.today :
-                                homeViewModel.currentDay.formatted(
-                                    date: .abbreviated,
-                                    time: .omitted
-                                )
-                        )
-                        .bold()
+
+                        Group {
+                            if #available(iOS 16, *) {
+                                Text(headerText)
+                                    .bold()
+                                    .contentTransition(.numericText())
+                            } else {
+                                Text(headerText)
+                                    .bold()
+                            }
+                        }
                         .font(isToday ? .largeTitle : .title)
                         .foregroundColor(themeManager.selectedTheme.pageTitleColor)
                         .scaleEffect(homeViewModel.showHeaderTap ? 1.1 : 1)
+
                     }
                 }
                 .hLeading()
@@ -213,6 +226,17 @@ struct HomeView: View {
             }
         }
     }
+
+    // MARK: - Private Functions
+
+    private func requestReview() {
+        if let scene = UIApplication.shared
+            .connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
+        }
+    }
+
 }
 
 // MARK: - Preview

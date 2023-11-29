@@ -145,6 +145,7 @@ struct TaskCard: View {
                         .transition(.move(edge: .top).combined(with: .opacity))
                 } else {
                     Text(markAsCompletedName)
+                        .opacity(0.6)
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
@@ -326,7 +327,7 @@ struct TaskCardView: View {
     @ViewBuilder func taskCardNotEditView() -> some View {
         VStack(spacing: 10) {
             Circle()
-                .fill(task.isCompleted ? .green : themeManager.selectedTheme.accentColor)
+                .fill(themeManager.selectedTheme.accentColor.opacity(task.isCompleted ? 1 : 0.1))
                 .frame(width: 15, height: 15)
                 .background {
                     Circle()
