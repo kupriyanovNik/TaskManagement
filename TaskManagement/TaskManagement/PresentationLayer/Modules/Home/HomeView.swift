@@ -172,11 +172,11 @@ struct HomeView: View {
                         Group {
                             if #available(iOS 16, *) {
                                 Text(headerText)
-                                .bold()
-                                .contentTransition(.numericText())
+                                    .bold()
+                                    .contentTransition(.numericText())
                             } else {
                                 Text(headerText)
-                                .bold()
+                                    .bold()
                             }
                         }
                         .font(isToday ? .largeTitle : .title)
