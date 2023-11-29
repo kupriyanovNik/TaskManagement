@@ -326,7 +326,7 @@ struct TaskCardView: View {
     @ViewBuilder func taskCardNotEditView() -> some View {
         VStack(spacing: 10) {
             Circle()
-                .fill(task.isCompleted ? .green : themeManager.selectedTheme.accentColor)
+                .fill(themeManager.selectedTheme.accentColor.opacity(task.isCompleted ? 1 : 0.1))
                 .frame(width: 15, height: 15)
                 .background {
                     Circle()
