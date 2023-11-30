@@ -105,7 +105,8 @@ struct TaskCard: View {
                 .hLeading()
 
                 VStack {
-                    if let description = taskObject.taskDescription, showDetail {
+                    if let description = taskObject.taskDescription, 
+                        showDetail, description != "" {
                         Text(description)
                             .font(.callout)
                             .foregroundStyle(.secondary)
@@ -140,13 +141,19 @@ struct TaskCard: View {
             .buttonStyle(HeaderButtonStyle())
 
             Group {
-                if isCompleted {
-                    Text(markedAsCompletedName)
-                        .transition(.move(edge: .top).combined(with: .opacity))
+                if #available(iOS 16, *) {
+                    Text(isCompleted ? markedAsCompletedName : markAsCompletedName)
+                        .opacity(isCompleted ? 1 : 0.6)
+                        .contentTransition(.numericText())
                 } else {
-                    Text(markAsCompletedName)
-                        .opacity(0.6)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                    if isCompleted {
+                        Text(markedAsCompletedName)
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                    } else {
+                        Text(markAsCompletedName)
+                            .opacity(0.6)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                    }
                 }
             }
             .font(.system(size: 15))
@@ -330,19 +337,27 @@ struct TaskCardView: View {
     @ViewBuilder func taskCardNotEditView() -> some View {
         VStack(spacing: 10) {
             Circle()
-                .fill(themeManager.selectedTheme.accentColor.opacity(task.isCompleted ? 1 : 0.1))
+                .fill(
+                    themeManager.selectedTheme.accentColor
+                        .opacity(task.isCompleted ? 1 : 0.1)
+                )
                 .frame(width: 15, height: 15)
                 .background {
                     Circle()
-                        .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
+                        .stroke(
+                            themeManager.selectedTheme.accentColor,
+                            lineWidth: 1
+                        )
                         .padding(-3)
                 }
+                .scaleEffect(task.isCompleted ? 1.1 : 1)
                 .onTapGesture {
                     withAnimation(.spring) {
                         if task.isCompleted {
                             withAnimation(.spring) {
                                 coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
                             }
+
                             if task.shouldNotificate {
                                 sendNotification(task: task)
                             }

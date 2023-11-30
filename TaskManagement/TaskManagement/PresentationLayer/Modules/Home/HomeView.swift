@@ -90,46 +90,6 @@ struct HomeView: View {
 
     // MARK: - ViewBuilders
 
-    @ViewBuilder func noTasksView() -> some View {
-        VStack {
-            Spacer()
-
-            NotFoundView(
-                title: strings.noTasks,
-                description: strings.noTasksDescription,
-                accentColor: themeManager.selectedTheme.accentColor
-            )
-
-            Spacer()
-        }
-    }
-
-    @ViewBuilder func tasksView() -> some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 20) {
-                ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
-                    TaskCardView(
-                        homeViewModel: homeViewModel,
-                        navigationViewModel: navigationViewModel,
-                        coreDataViewModel: coreDataViewModel,
-                        settingsViewModel: settingsViewModel,
-                        themeManager: themeManager,
-                        isEditing: $homeViewModel.isEditing,
-                        task: $task
-                    ) { taskDate in
-                        coreDataViewModel.fetchTasksFilteredByDate(
-                            dateToFilter: homeViewModel.currentDay
-                        )
-                        if coreDataViewModel.tasksFilteredByDate.isEmpty {
-                            homeViewModel.currentDay = .now
-                        }
-                    }
-                }
-            }
-            .padding()
-        }
-    }
-
     @ViewBuilder func calendarView() -> some View {
         HStack(spacing: 10) {
             ForEach(homeViewModel.currentWeek, id: \.timeIntervalSince1970) { day in
