@@ -146,11 +146,11 @@ struct HomeView: View {
                         if homeViewModel.showGreetings {
                             Text("\(Date().greeting()), \(settingsViewModel.userName)")
                                 .foregroundColor(.gray)
-                                .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
+                                .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale(scale: 0.7)))
                         } else {
                             Text(Date().formatted(date: .abbreviated, time: .omitted))
                                 .foregroundColor(.gray)
-                                .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                                .transition(.move(edge: .top).combined(with: .opacity))
                         }
                     }
 
