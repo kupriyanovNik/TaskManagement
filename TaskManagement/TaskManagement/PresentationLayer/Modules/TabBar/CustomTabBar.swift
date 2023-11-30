@@ -9,7 +9,7 @@ struct CustomTabBar: View {
     // MARK: - Property Wrappers
 
     @Environment(\.colorScheme) var colorScheme
-    
+
     @EnvironmentObject var tabBarViewModel: TabBarViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
@@ -39,27 +39,19 @@ struct CustomTabBar: View {
             }
         } label: {
             HStack {
-                Group {
-                    Image(systemName: isSelected ? tabBarImages.Active.home : tabBarImages.Inactive.home)
-                        .resizable()
-                        .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
-                }
-                .frame(width: 25, height: 25)
-                .foregroundColor(themeManager.selectedTheme.pageTitleColor)
+                Image(systemName: isSelected ? tabBarImages.Active.home : tabBarImages.Inactive.home)
+                    .resizable()
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(themeManager.selectedTheme.pageTitleColor)
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(TabItemButtonStyle(isSelected: isSelected))
         .padding(.horizontal)
-        .scaleEffect(isSelected ? 1.15 : 1)
-        .opacity(isSelected ? 1 : 0.5)
-        .animation(.linear, value: navigationViewModel.selectedTab)
-        .shadow(color: .black.opacity(0.4), radius: isSelected ? 10 : 0)
-        .animation(.interpolatingSpring, value: isSelected)
     }
 
     private var profileButton: some View {
         let isSelected = navigationViewModel.selectedTab == .profile
-        
+
         return Button {
             navigationViewModel.selectedTab = .profile
         } label: {
@@ -68,18 +60,13 @@ struct CustomTabBar: View {
                 .frame(width: 25, height: 25)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(TabItemButtonStyle(isSelected: isSelected))
         .padding(.horizontal)
-        .scaleEffect(isSelected ? 1.15 : 1)
-        .opacity(isSelected ? 1 : 0.5)
-        .animation(.linear, value: navigationViewModel.selectedTab)
-        .shadow(color: .black.opacity(0.4), radius: isSelected ? 10 : 0)
-        .animation(.interpolatingSpring, value: isSelected)
     }
 
     private var habitsButton: some View {
         let isSelected = navigationViewModel.selectedTab == .habits
-        
+
         return Button {
             navigationViewModel.selectedTab = .habits
         } label: {
@@ -88,13 +75,8 @@ struct CustomTabBar: View {
                 .frame(width: 25, height: 25)
                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(TabItemButtonStyle(isSelected: isSelected))
         .padding(.horizontal)
-        .scaleEffect(isSelected ? 1.15 : 1)
-        .opacity(isSelected ? 1 : 0.5)
-        .animation(.linear, value: navigationViewModel.selectedTab)
-        .shadow(color: .black.opacity(0.4), radius: isSelected ? 10 : 0)
-        .animation(.interpolatingSpring, value: isSelected)
     }
 
     private var plusButton: some View {
@@ -198,7 +180,7 @@ struct CustomTabBar: View {
 
     private func taskAddingViewDismissAction() {
         dismissEditInAllScreens()
-        
+
         homeViewModel.editTask = nil
         coreDataViewModel.fetchAllTasks()
         coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)

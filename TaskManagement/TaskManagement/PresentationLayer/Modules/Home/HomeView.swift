@@ -29,32 +29,27 @@ struct HomeView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
-                if coreDataViewModel.tasksFilteredByDate.isEmpty {
-                    NotFoundView(
-                        title: strings.noTasks,
-                        description: strings.noTasksDescription,
-                        accentColor: themeManager.selectedTheme.accentColor
-                    )
-                } else {
-                    ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
-                        TaskCardView(
-                            homeViewModel: homeViewModel,
-                            navigationViewModel: navigationViewModel,
-                            coreDataViewModel: coreDataViewModel,
-                            settingsViewModel: settingsViewModel,
-                            themeManager: themeManager,
-                            isEditing: $homeViewModel.isEditing,
-                            task: $task
-                        ) { taskDate in
-                            coreDataViewModel.fetchTasksFilteredByDate(
-                                dateToFilter: homeViewModel.currentDay
-                            )
-                            if coreDataViewModel.tasksFilteredByDate.isEmpty { 
-                                homeViewModel.currentDay = .now
-                            }
+                ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
+                    TaskCardView(
+                        homeViewModel: homeViewModel,
+                        navigationViewModel: navigationViewModel,
+                        coreDataViewModel: coreDataViewModel,
+                        settingsViewModel: settingsViewModel,
+                        themeManager: themeManager,
+                        isEditing: $homeViewModel.isEditing,
+                        task: $task
+                    ) { taskDate in
+                        coreDataViewModel.fetchTasksFilteredByDate(
+                            dateToFilter: homeViewModel.currentDay
+                        )
+                        
+                        if coreDataViewModel.tasksFilteredByDate.isEmpty {
+                            homeViewModel.currentDay = .now
                         }
                     }
                 }
+
+                Spacer()
             }
             .padding()
         }
@@ -81,6 +76,15 @@ struct HomeView: View {
         }
         .makeCustomNavBar {
             headerView()
+        }
+        .overlay {
+            if coreDataViewModel.tasksFilteredByDate.isEmpty {
+                NotFoundView(
+                    title: strings.noTasks,
+                    description: strings.noTasksDescription,
+                    accentColor: themeManager.selectedTheme.accentColor
+                )
+            }
         }
     }
 
@@ -121,7 +125,7 @@ struct HomeView: View {
                 .contentShape(Capsule())
                 .onTapGesture {
                     generateFeedback()
-                    
+
                     withAnimation {
                         homeViewModel.currentDay = day
                     }
@@ -146,17 +150,17 @@ struct HomeView: View {
                         if homeViewModel.showGreetings {
                             Text("\(Date().greeting()), \(settingsViewModel.userName)")
                                 .foregroundColor(.gray)
-                                .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
+                                .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale(scale: 0.7)))
                         } else {
                             Text(Date().formatted(date: .abbreviated, time: .omitted))
                                 .foregroundColor(.gray)
-                                .transition(.move(edge: .leading).combined(with: .opacity).combined(with: .scale))
+                                .transition(.move(edge: .top).combined(with: .opacity))
                         }
                     }
 
                     HStack {
                         if !homeViewModel.showCalendar || homeViewModel.showHeaderTap,
-                                !coreDataViewModel.allTasks.isEmpty {
+                           !coreDataViewModel.allTasks.isEmpty {
                             Image(systemName: "chevron.down")
                                 .font(.title3)
                                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
@@ -164,7 +168,7 @@ struct HomeView: View {
                                 .scaleEffect(homeViewModel.showHeaderTap ? 0.75 : 1)
                                 .onTapGesture {
                                     withAnimation {
-                                        homeViewModel.showCalendar = true 
+                                        homeViewModel.showCalendar = true
                                     }
                                 }
                         }
