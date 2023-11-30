@@ -87,12 +87,6 @@ struct HabitsView: View {
 
                     Text(strings.subtitle)
                         .foregroundColor(.gray)
-
-                    if habitsViewModel.showGreetings {
-                        Text("!")
-                            .foregroundColor(.gray)
-                            .transition(.move(edge: .trailing).combined(with: .opacity))
-                    }
                 }
 
                 Text(strings.title)
