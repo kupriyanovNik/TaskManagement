@@ -287,6 +287,7 @@ struct TaskCardView: View {
                     withAnimation(.spring) {
                         coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
                     }
+
                     if task.shouldNotificate {
                         sendNotification(task: task)
                     }
@@ -309,11 +310,13 @@ struct TaskCardView: View {
             }
 
             Button {
-                coreDataViewModel.removeTask(task: task) { taskDate in
-                    self.onRemove?(taskDate)
+                withAnimation {
+                    coreDataViewModel.removeTask(task: task) { taskDate in
+                        self.onRemove?(taskDate)
 
-                    if coreDataViewModel.allTasks.isEmpty {
-                        navigationViewModel.showAllTasksView = false
+                        if coreDataViewModel.allTasks.isEmpty {
+                            navigationViewModel.showAllTasksView = false
+                        }
                     }
                 }
             } label: {
