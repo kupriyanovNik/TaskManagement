@@ -29,32 +29,27 @@ struct HomeView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
-                if coreDataViewModel.tasksFilteredByDate.isEmpty {
-                    NotFoundView(
-                        title: strings.noTasks,
-                        description: strings.noTasksDescription,
-                        accentColor: themeManager.selectedTheme.accentColor
-                    )
-                } else {
-                    ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
-                        TaskCardView(
-                            homeViewModel: homeViewModel,
-                            navigationViewModel: navigationViewModel,
-                            coreDataViewModel: coreDataViewModel,
-                            settingsViewModel: settingsViewModel,
-                            themeManager: themeManager,
-                            isEditing: $homeViewModel.isEditing,
-                            task: $task
-                        ) { taskDate in
-                            coreDataViewModel.fetchTasksFilteredByDate(
-                                dateToFilter: homeViewModel.currentDay
-                            )
-                            if coreDataViewModel.tasksFilteredByDate.isEmpty { 
-                                homeViewModel.currentDay = .now
-                            }
+                ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
+                    TaskCardView(
+                        homeViewModel: homeViewModel,
+                        navigationViewModel: navigationViewModel,
+                        coreDataViewModel: coreDataViewModel,
+                        settingsViewModel: settingsViewModel,
+                        themeManager: themeManager,
+                        isEditing: $homeViewModel.isEditing,
+                        task: $task
+                    ) { taskDate in
+                        coreDataViewModel.fetchTasksFilteredByDate(
+                            dateToFilter: homeViewModel.currentDay
+                        )
+                        
+                        if coreDataViewModel.tasksFilteredByDate.isEmpty {
+                            homeViewModel.currentDay = .now
                         }
                     }
                 }
+
+                Spacer()
             }
             .padding()
         }
@@ -82,9 +77,58 @@ struct HomeView: View {
         .makeCustomNavBar {
             headerView()
         }
+        .overlay {
+            if coreDataViewModel.tasksFilteredByDate.isEmpty {
+                NotFoundView(
+                    title: strings.noTasks,
+                    description: strings.noTasksDescription,
+                    accentColor: themeManager.selectedTheme.accentColor
+                )
+            }
+        }
     }
 
     // MARK: - ViewBuilders
+
+    @ViewBuilder func noTasksView() -> some View {
+        VStack {
+            Spacer()
+
+            NotFoundView(
+                title: strings.noTasks,
+                description: strings.noTasksDescription,
+                accentColor: themeManager.selectedTheme.accentColor
+            )
+
+            Spacer()
+        }
+    }
+
+    @ViewBuilder func tasksView() -> some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(spacing: 20) {
+                ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
+                    TaskCardView(
+                        homeViewModel: homeViewModel,
+                        navigationViewModel: navigationViewModel,
+                        coreDataViewModel: coreDataViewModel,
+                        settingsViewModel: settingsViewModel,
+                        themeManager: themeManager,
+                        isEditing: $homeViewModel.isEditing,
+                        task: $task
+                    ) { taskDate in
+                        coreDataViewModel.fetchTasksFilteredByDate(
+                            dateToFilter: homeViewModel.currentDay
+                        )
+                        if coreDataViewModel.tasksFilteredByDate.isEmpty {
+                            homeViewModel.currentDay = .now
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+    }
 
     @ViewBuilder func calendarView() -> some View {
         HStack(spacing: 10) {
@@ -121,7 +165,7 @@ struct HomeView: View {
                 .contentShape(Capsule())
                 .onTapGesture {
                     generateFeedback()
-                    
+
                     withAnimation {
                         homeViewModel.currentDay = day
                     }
@@ -156,7 +200,7 @@ struct HomeView: View {
 
                     HStack {
                         if !homeViewModel.showCalendar || homeViewModel.showHeaderTap,
-                                !coreDataViewModel.allTasks.isEmpty {
+                           !coreDataViewModel.allTasks.isEmpty {
                             Image(systemName: "chevron.down")
                                 .font(.title3)
                                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
@@ -164,7 +208,7 @@ struct HomeView: View {
                                 .scaleEffect(homeViewModel.showHeaderTap ? 0.75 : 1)
                                 .onTapGesture {
                                     withAnimation {
-                                        homeViewModel.showCalendar = true 
+                                        homeViewModel.showCalendar = true
                                     }
                                 }
                         }
