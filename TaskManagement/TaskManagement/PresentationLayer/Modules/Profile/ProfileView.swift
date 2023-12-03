@@ -189,7 +189,7 @@ struct ProfileView: View {
                     .font(.title2)
             }
             .buttonStyle(HeaderButtonStyle())
-            .padding(.trailing, 5)            
+            .padding(.trailing)            
 
             NavigationLink {
                 SettingsView()
