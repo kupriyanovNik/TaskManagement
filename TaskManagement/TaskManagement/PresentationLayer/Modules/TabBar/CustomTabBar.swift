@@ -142,7 +142,8 @@ struct CustomTabBar: View {
         }
         .onChange(of: navigationViewModel.selectedTab) { _ in
             dismissEditInAllScreens()
-            generateFeedback(style: .rigid)
+            
+            ImpactManager.shared.generateFeedback(style: .rigid)
         }
         .padding(.horizontal, 30)
         .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)

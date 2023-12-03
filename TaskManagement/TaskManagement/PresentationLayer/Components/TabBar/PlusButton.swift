@@ -49,7 +49,8 @@ struct PlusButton: View {
         .rotationEffect(.degrees(rotation))
         .onLongPressGesture(minimumDuration: 0.2, maximumDistance: 50) {
             longAction()
-            generateFeedback(style: .soft)
+
+            ImpactManager.shared.generateFeedback(style: .soft)
 
             delay(0.3) {
                 scale = 1

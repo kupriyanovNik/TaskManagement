@@ -62,9 +62,9 @@ struct TaskCard: View {
             }
         }
         .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
+            ImpactManager.shared.generateFeedback()
+            
             withAnimation {
-                generateFeedback()
-
                 if isCompleted {
                     coreDataViewModel.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
                 } else {

@@ -146,7 +146,7 @@ struct NewsView: View {
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
                 .onLongPressGesture(minimumDuration: 1.5, maximumDistance: 50) {
                     withAnimation {
-                        generateFeedback()
+                        ImpactManager.shared.generateFeedback()
 
                         networkManager.getNews()
                     }

@@ -124,7 +124,7 @@ struct HomeView: View {
                 }
                 .contentShape(Capsule())
                 .onTapGesture {
-                    generateFeedback()
+                    ImpactManager.shared.generateFeedback()
 
                     withAnimation {
                         homeViewModel.currentDay = day
@@ -192,7 +192,7 @@ struct HomeView: View {
                 .hLeading()
                 .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
                     withAnimation {
-                        generateFeedback()
+                        ImpactManager.shared.generateFeedback()
 
                         if coreDataViewModel.allTasks.isEmpty {
                             navigationViewModel.showTaskAddingView.toggle()

@@ -183,8 +183,9 @@ struct AllTasksView: View {
             }
             .hLeading()
             .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
+                ImpactManager.shared.generateFeedback()
+                
                 withAnimation {
-                    generateFeedback()
                     allTasksViewModel.showFilteringView = true
                 }
             } onPressingChanged: { isPressed in
