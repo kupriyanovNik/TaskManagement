@@ -86,34 +86,6 @@ struct SettingsView: View {
         .padding(.horizontal)
     }
 
-    private var applicationInformationView: some View {
-        Group {
-            if settingsViewModel.showInformation {
-                VStack {
-                    Text("Created by Nikita Kupriyanov with ♡")
-                    Text("SwiftUI - less code")
-                }
-                .font(.caption)
-                .foregroundColor(.gray)
-                .frame(width: 250, height: 60)
-                .background {
-                    LinearGradient(
-                        colors: [.yellow, .orange, .green, .purple],
-                        startPoint: .bottomTrailing,
-                        endPoint: .topLeading
-                    )
-                    .cornerRadius(10)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.white)
-                            .padding(5)
-                    }
-                }
-                .transition(.move(edge: .bottom).combined(with: .opacity).combined(with: .scale))
-            }
-        }
-    }
-
     private var removeAllNotificationsRow: some View {
         Button {
             NotificationManager.shared.removeAllNotifications()
@@ -171,14 +143,8 @@ struct SettingsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
-        .safeAreaInset(edge: .bottom) {
-            applicationInformationView
-        }
         .makeCustomNavBar {
             headerView()
-        }
-        .onDisappear {
-            settingsViewModel.showInformation = false 
         }
     }
 
@@ -198,11 +164,6 @@ struct SettingsView: View {
                 .bold()
                 .font(.largeTitle)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
-                .onTapGesture(count: 5) {
-                    withAnimation {
-                        settingsViewModel.showInformation = true
-                    }
-                }
 
             Spacer()
         }
