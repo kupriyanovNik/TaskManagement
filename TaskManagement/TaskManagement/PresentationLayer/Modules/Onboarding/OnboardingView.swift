@@ -40,7 +40,7 @@ struct OnboardingView: View {
                 strokeColor: .black,
                 shouldExpandVertically: false
             )
-            .continueEditing()
+            .onTapContinueEditing()
 
             CustomTextField(
                 inputText: $settingsViewModel.userAge,
@@ -49,7 +49,7 @@ struct OnboardingView: View {
                 shouldExpandVertically: false
             )
             .keyboardType(.numberPad)
-            .continueEditing()
+            .onTapContinueEditing()
 
             Spacer()
 
@@ -81,7 +81,7 @@ struct OnboardingView: View {
         ZStack {
             Color.white
                 .ignoresSafeArea()
-                .endEditing()
+                .onTapEndEditing()
 
             Group {
                 if onboardingViewModel.showGreetings {
