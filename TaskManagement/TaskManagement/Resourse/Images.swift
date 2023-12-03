@@ -14,6 +14,7 @@ enum ImageNames {
         static let antenna = "antenna.radiowaves.left.and.right"
         static let checkmark = "checkmark"
         static let paperplane = "paperplane"
+        static let nosign = "nosign.app"
         static let noteText = "note.text"
         static let bellBadge = "bell.badge.fill"
         static let backArrow = "chevron.left"

@@ -108,6 +108,7 @@ struct InformationView: View {
         VStack(alignment: .leading) {
             openInTelegramCard()
             openInGitHubCard()
+            openInAppStoreCard()
 
             Spacer()
         }
@@ -180,6 +181,30 @@ struct InformationView: View {
                 Spacer()
 
                 Image(systemName: systemImages.network)
+                    .font(.title2)
+            }
+            .padding()
+            .background {
+                themeManager.selectedTheme.accentColor
+                    .opacity(0.2)
+                    .cornerRadius(10)
+            }
+        }
+        .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+    }
+
+    @ViewBuilder func openInAppStoreCard() -> some View {
+        Button {
+            // TODO: - open in AppStore
+        } label: {
+            HStack {
+                Text("Мы в AppStore")
+                    .fontWeight(.semibold)
+                    .font(.title2)
+
+                Spacer()
+
+                Image(systemName: systemImages.nosign)
                     .font(.title2)
             }
             .padding()
