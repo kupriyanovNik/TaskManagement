@@ -55,6 +55,8 @@
 		B773DDED2B10FEB0008DAFE9 /* NeuralManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B773DDEC2B10FEB0008DAFE9 /* NeuralManagerTests.swift */; };
 		B779C02F2B1920DF00FCF5DF /* TabItemButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B779C02E2B1920DF00FCF5DF /* TabItemButtonStyle.swift */; };
 		B77D34C52B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */; };
+		B77F6E5D2B1CE1A4006AD86E /* ImpactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77F6E5C2B1CE1A4006AD86E /* ImpactManager.swift */; };
+		B77F6E612B1CE434006AD86E /* ScrollTransitionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77F6E602B1CE434006AD86E /* ScrollTransitionModifier.swift */; };
 		B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7BA60312B0FC16000D1DE5A /* SessionDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60292B0FC15F00D1DE5A /* SessionDispatch.swift */; };
@@ -148,6 +150,8 @@
 		B773DDEC2B10FEB0008DAFE9 /* NeuralManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuralManagerTests.swift; sourceTree = "<group>"; };
 		B779C02E2B1920DF00FCF5DF /* TabItemButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemButtonStyle.swift; sourceTree = "<group>"; };
 		B77D34C42B08E6CD00D4E4D1 /* SleeptimeCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorView.swift; sourceTree = "<group>"; };
+		B77F6E5C2B1CE1A4006AD86E /* ImpactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactManager.swift; sourceTree = "<group>"; };
+		B77F6E602B1CE434006AD86E /* ScrollTransitionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTransitionModifier.swift; sourceTree = "<group>"; };
 		B7A7C14C2B0EB5F9000F54BD /* TaskManagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskManagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -274,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				B7F515CC2ACB27070001A282 /* Preview Content */,
+				B77F6E5E2B1CE291006AD86E /* CDModels */,
 				B70C875F2B08E08B00EBD924 /* MLModels */,
 				B7F515CA2ACB27070001A282 /* Assets.xcassets */,
 				B7DC65852AD56756009DA010 /* Localizable */,
@@ -304,6 +309,7 @@
 		B73213BA2ACC8CB100E42B1D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B77F6E5F2B1CE427006AD86E /* Modifiers */,
 				B73BD3912AF17AE200055510 /* TabBar */,
 				B736A2A72AE4554100977067 /* AllTasks */,
 				B7F298492AE30D4400F4A8E3 /* Profile */,
@@ -348,7 +354,6 @@
 			isa = PBXGroup;
 			children = (
 				B73213C72ACC8EEB00E42B1D /* Persistence.swift */,
-				B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */,
 				B71FD0FE2AD437910039270D /* CoreDataViewModel.swift */,
 				B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */,
 			);
@@ -470,6 +475,30 @@
 			path = SleeptimeCalculator;
 			sourceTree = "<group>";
 		};
+		B77F6E5B2B1CE197006AD86E /* Impact */ = {
+			isa = PBXGroup;
+			children = (
+				B77F6E5C2B1CE1A4006AD86E /* ImpactManager.swift */,
+			);
+			path = Impact;
+			sourceTree = "<group>";
+		};
+		B77F6E5E2B1CE291006AD86E /* CDModels */ = {
+			isa = PBXGroup;
+			children = (
+				B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */,
+			);
+			path = CDModels;
+			sourceTree = "<group>";
+		};
+		B77F6E5F2B1CE427006AD86E /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				B77F6E602B1CE434006AD86E /* ScrollTransitionModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		B7A7C14D2B0EB5F9000F54BD /* TaskManagementTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +550,7 @@
 		B7D949A82AE04B5800FE5CAE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				B77F6E5B2B1CE197006AD86E /* Impact */,
 				B7BA60282B0FC14800D1DE5A /* Network */,
 				B70C87642B08E10E00EBD924 /* Neural */,
 				B7D949AA2AE04B7A00FE5CAE /* Notification */,
@@ -761,6 +791,7 @@
 				B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */,
 				B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */,
 				B7BA60342B0FC16000D1DE5A /* ApiError.swift in Sources */,
+				B77F6E612B1CE434006AD86E /* ScrollTransitionModifier.swift in Sources */,
 				B71FD1022AD43E810039270D /* TaskManagement.xcdatamodeld in Sources */,
 				B76646C72AD5D7D200F5631E /* SettingsViewModel.swift in Sources */,
 				B76287272AD95061003EE58D /* RoundedShape.swift in Sources */,
@@ -810,6 +841,7 @@
 				B7DC65902AD569BC009DA010 /* DataSource.swift in Sources */,
 				B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */,
 				B7BA60372B0FC16000D1DE5A /* RequestImplimentation.swift in Sources */,
+				B77F6E5D2B1CE1A4006AD86E /* ImpactManager.swift in Sources */,
 				B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */,
 				B7BA60382B0FC16000D1DE5A /* ApiMethods.swift in Sources */,
 				B7DC658C2AD56967009DA010 /* ThemeManager.swift in Sources */,

@@ -23,6 +23,9 @@ enum Constants {
         static let shouldShowScrollAnimation = "shouldShowScrollAnimation"
         static let shouldShowTabBarAnimation = "shouldShowTabBarAnimation"
         static let selectedAppIcon = "selectedAppIcon"
+        static let leastTime = "leastTime"
+        static let lastSeenNews = "lastSeenNews"
+        static let lastOpenNews = "lastOpenNews"
     }
 
     enum CoreDataNames {

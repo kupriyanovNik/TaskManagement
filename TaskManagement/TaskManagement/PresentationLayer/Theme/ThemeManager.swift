@@ -9,8 +9,10 @@ class ThemeManager: ObservableObject {
     // MARK: - Property Wrappers
 
     @Published var selectedTheme: Theme = Theme1()
-    
-    @AppStorage(Constants.UserDefaultsKeys.selectedTheme) var selectedThemeIndex: Int = 0 {
+
+    @AppStorage(
+        Constants.UserDefaultsKeys.selectedTheme
+    ) var selectedThemeIndex: Int = 0 {
         willSet {
             objectWillChange.send()
         }
@@ -18,7 +20,7 @@ class ThemeManager: ObservableObject {
             updateTheme()
         }
     }
-
+    
     // MARK: - Inits
 
     init() {

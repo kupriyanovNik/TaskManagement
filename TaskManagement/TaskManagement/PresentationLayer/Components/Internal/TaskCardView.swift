@@ -62,9 +62,9 @@ struct TaskCard: View {
             }
         }
         .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
+            ImpactManager.shared.generateFeedback()
+            
             withAnimation {
-                generateFeedback()
-
                 if isCompleted {
                     coreDataViewModel.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
                 } else {
@@ -256,30 +256,15 @@ struct TaskCardView: View {
                     .transition(.move(edge: .trailing).combined(with: .opacity).combined(with: .scale))
             }
 
-            if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
-                TaskCard(
-                    coreDataViewModel: coreDataViewModel,
-                    taskObject: task,
-                    doneImageName: ImageNames.System.checkmark,
-                    markAsCompletedName: Localizable.Home.markAsCompleted,
-                    markedAsCompletedName: Localizable.Home.markedAsCompleted
-                )
-                .scrollTransition(.animated(.bouncy)) { effect, phase in
-                    effect
-                        .scaleEffect(phase.isIdentity ? 1 : 0.95)
-                        .opacity(phase.isIdentity ? 1 : 0.8)
-                        .blur(radius: phase.isIdentity ? 0 : 2)
-                        .brightness(phase.isIdentity ? 0 : 0.3)
-                }
-            } else {
-                TaskCard(
-                    coreDataViewModel: coreDataViewModel,
-                    taskObject: task,
-                    doneImageName: ImageNames.System.checkmark,
-                    markAsCompletedName: Localizable.Home.markAsCompleted,
-                    markedAsCompletedName: Localizable.Home.markedAsCompleted
-                )
-            }
+            TaskCard(
+                coreDataViewModel: coreDataViewModel,
+                taskObject: task,
+                doneImageName: ImageNames.System.checkmark,
+                markAsCompletedName: Localizable.Home.markAsCompleted,
+                markedAsCompletedName: Localizable.Home.markedAsCompleted
+            )
+            .modifier(ScrollTransitionModifier(condition: $settingsViewModel.shouldShowScrollAnimation))
+
         }
         .hLeading()
         .animation(.spring, value: task.isCompleted)

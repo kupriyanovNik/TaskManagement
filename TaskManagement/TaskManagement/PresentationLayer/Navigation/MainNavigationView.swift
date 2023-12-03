@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainNavigationView.swift
 //
 
 import SwiftUI
