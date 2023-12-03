@@ -8,6 +8,7 @@ struct InformationView: View {
 
     // MARK: - Property Wrappers
 
+    @EnvironmentObject var informationViewModel: InformationViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
     @Environment(\.dismiss) var dismiss
@@ -18,14 +19,18 @@ struct InformationView: View {
     private let systemImages = ImageNames.System.self
     private let bundle = Bundle.main
 
+    private var timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
+
     private var appInformationRow: some View {
         VStack {
             Text("myHabits")
-                .font(.title3)
+                .font(.headline)
                 .bold()
 
-            Text("Версия: \(bundle.appVersionLong) Сборка \(bundle.appBuild)")
+            Text("Версия \(bundle.appVersionLong) Сборка \(bundle.appBuild)")
                 .multilineTextAlignment(.center)
+                .font(.caption)
+                .foregroundStyle(.gray)
         }
         .hCenter()
         .padding(.horizontal, 24)
@@ -40,7 +45,9 @@ struct InformationView: View {
         .padding(.bottom, 5)
         .onTapGesture {
             withAnimation {
-                // TODO: - Show Information
+                withAnimation {
+                    informationViewModel.showInformation.toggle()
+                }
             }
         }
     }
@@ -48,19 +55,35 @@ struct InformationView: View {
     private var createdByRow: some View {
         VStack {
             Group {
-                Text("Created by Nikita Kupriyanov🧑‍💻")
-                Text("Designed by Anfisa Oparina👧🏻")
+                if #available(iOS 16, *) {
+                    Text(
+                        informationViewModel.showDeveloper ?
+                            "Created by Nikita Kupriyanov🧑‍💻" :
+                            "Designed by Anfisa Oparina👧🏻"
+                    )
+                    .bold()
+                    .contentTransition(.numericText())
+                } else {
+                    if informationViewModel.showDeveloper {
+                        Text("Created by Nikita Kupriyanov🧑‍💻")
+                            .bold()
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                    } else {
+                        Text("Designed by Anfisa Oparina👧🏻")
+                            .bold()
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                    }
+                }
             }
             .font(.headline)
 
             Text("❤️SwiftUI - less code❤️")
                 .font(.caption)
                 .foregroundStyle(.gray)
-                .padding(.top, 5)
         }
         .hCenter()
         .padding(.horizontal, 24)
-        .padding(.vertical)
+        .frame(height: 72)
         .background {
             RoundedRectangle(cornerRadius: 10)
                 .fill(.white)
@@ -69,6 +92,14 @@ struct InformationView: View {
         }
         .padding(.horizontal, 24)
         .padding(.bottom, 5)
+        .onTapGesture {
+            withAnimation {
+                withAnimation {
+                    informationViewModel.showInformation.toggle()
+                }
+            }
+        }
+        .animation(.default, value: informationViewModel.showDeveloper)
     }
 
     // MARK: - Body
@@ -84,8 +115,21 @@ struct InformationView: View {
         }
         .safeAreaInset(edge: .bottom) {
             VStack {
-                appInformationRow
-                createdByRow
+                if informationViewModel.showInformation {
+                    createdByRow
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                } else {
+                    appInformationRow
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+            }
+        }
+        .onReceive(timer) { _ in
+            informationViewModel.showDeveloper.toggle()
+        }
+        .onDisappear {
+            withAnimation {
+                informationViewModel.showInformation = false 
             }
         }
     }
@@ -119,5 +163,6 @@ struct InformationView: View {
 
 #Preview {
     InformationView()
+        .environmentObject(InformationViewModel())
         .environmentObject(ThemeManager())
 }

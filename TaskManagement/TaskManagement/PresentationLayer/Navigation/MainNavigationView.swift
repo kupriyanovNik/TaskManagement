@@ -19,6 +19,7 @@ struct MainNavigationView: View {
     @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var informationViewModel: InformationViewModel
     @EnvironmentObject var newsViewModel: NewsViewModel
     @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
@@ -59,6 +60,7 @@ struct MainNavigationView: View {
                             .environmentObject(profileViewModel)
                             .environmentObject(sleeptimeCalculatorViewModel)
                             .environmentObject(settingsViewModel)
+                            .environmentObject(informationViewModel)
                             .environmentObject(newsViewModel)
                             .environmentObject(coreDataViewModel)
                             .environmentObject(networkManager)

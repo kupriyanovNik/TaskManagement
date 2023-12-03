@@ -5,5 +5,9 @@
 import Foundation
 
 class InformationViewModel: ObservableObject {
-    @Published var showInformation: Bool = false 
+    
+    // MARK: - Property Wrappers
+
+    @Published var showInformation: Bool = false
+    @Published var showDeveloper: Bool = true 
 }
