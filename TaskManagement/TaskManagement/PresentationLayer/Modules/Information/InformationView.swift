@@ -19,7 +19,7 @@ struct InformationView: View {
     private let systemImages = ImageNames.System.self
     private let bundle = Bundle.main
 
-    private var timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
+    private var timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
     private var appInformationRow: some View {
         VStack {
