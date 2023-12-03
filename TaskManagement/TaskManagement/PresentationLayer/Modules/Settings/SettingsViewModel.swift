@@ -8,8 +8,6 @@ class SettingsViewModel: ObservableObject {
 
     // MARK: - Property Wrappers
 
-    @Published var showInformation: Bool = false
-
     @AppStorage(
         Constants.UserDefaultsKeys.userName
     ) var userName: String = "" {

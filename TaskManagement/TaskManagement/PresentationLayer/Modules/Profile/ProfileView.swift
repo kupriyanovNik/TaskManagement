@@ -12,6 +12,7 @@ struct ProfileView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var informationViewModel: InformationViewModel
     @EnvironmentObject var newsViewModel: NewsViewModel
     @EnvironmentObject var coreDataViewModel: CoreDataViewModel
     @EnvironmentObject var networkManager: NetworkManager
@@ -177,7 +178,19 @@ struct ProfileView: View {
             }
 
             Spacer()
-            
+
+            NavigationLink {
+                InformationView()
+                    .environmentObject(informationViewModel)
+                    .environmentObject(themeManager)
+            } label: {
+                Image(systemName: systemImages.infoBubble)
+                    .foregroundColor(.black)
+                    .font(.title2)
+            }
+            .buttonStyle(HeaderButtonStyle())
+            .padding(.trailing)            
+
             NavigationLink {
                 SettingsView()
                     .environmentObject(settingsViewModel)
@@ -223,6 +236,7 @@ struct ProfileView: View {
         .environmentObject(ProfileViewModel())
         .environmentObject(SleeptimeCalculatorViewModel())
         .environmentObject(SettingsViewModel())
+        .environmentObject(InformationViewModel())
         .environmentObject(NewsViewModel())
         .environmentObject(CoreDataViewModel())
         .environmentObject(NetworkManager())
