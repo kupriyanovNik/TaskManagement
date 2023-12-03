@@ -31,14 +31,14 @@ struct TaskAddingView: View {
                     placeHolder: strings.taskTitle,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
-                .continueEditing()
+                .onTapContinueEditing()
 
                 CustomTextField(
                     inputText: $taskAddingViewModel.taskDescription,
                     placeHolder: strings.taskDescription,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
-                .continueEditing()
+                .onTapContinueEditing()
 
                 if homeViewModel.editTask != nil, NotificationManager.shared.isNotificationEnabled == true {
                     HStack {
@@ -57,7 +57,7 @@ struct TaskAddingView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(themeManager.selectedTheme.accentColor, lineWidth: 1)
                     }
-                    .endEditing()
+                    .onTapEndEditing()
                 }
 
                 if homeViewModel.editTask == nil {
@@ -96,7 +96,7 @@ struct TaskAddingView: View {
                             }
                             .padding([.horizontal, .bottom])
                             .padding(.top, 5)
-                            .endEditing()
+                            .onTapEndEditing()
                         }
                     }
                     .background {
@@ -105,7 +105,7 @@ struct TaskAddingView: View {
                                 themeManager.selectedTheme.accentColor,
                                 lineWidth: 1
                             )
-                            .endEditing()
+                            .onTapEndEditing()
                     }
                 }
             }
@@ -113,7 +113,7 @@ struct TaskAddingView: View {
         }
         .makeCustomNavBar {
             headerView()
-                .endEditing()
+                .onTapEndEditing()
         }
         .onAppear {
             if let task = homeViewModel.editTask {
@@ -121,6 +121,12 @@ struct TaskAddingView: View {
                 taskAddingViewModel.taskDescription = task.taskDescription ?? ""
                 taskAddingViewModel.shouldSendNotification = task.shouldNotificate
             }
+        }
+        .onChange(of: taskAddingViewModel.taskDate) { _ in
+            hideKeyboard()
+        }
+        .onChange(of: taskAddingViewModel.taskCategory) { _ in
+            hideKeyboard()
         }
     }
 

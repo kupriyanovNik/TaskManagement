@@ -30,14 +30,14 @@ struct HabitAddingView: View {
                     placeHolder: strings.habitTitle,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
-                .continueEditing()
+                .onTapContinueEditing()
 
                 CustomTextField(
                     inputText: $habitAddingViewModel.habitDescription,
                     placeHolder: strings.habitDescription,
                     strokeColor: themeManager.selectedTheme.accentColor
                 )
-                .continueEditing()
+                .onTapContinueEditing()
 
                 HStack {
                     ForEach(1..<7) { index in
@@ -152,6 +152,8 @@ struct HabitAddingView: View {
                             in: RoundedRectangle(cornerRadius: 10)
                         )
                         .onTapGesture {
+                            hideKeyboard()
+                            
                             withAnimation {
                                 habitAddingViewModel.showTimePicker.toggle()
                             }
@@ -162,7 +164,7 @@ struct HabitAddingView: View {
                             placeHolder: strings.reminderText,
                             strokeColor: themeManager.selectedTheme.accentColor
                         )
-                        .continueEditing()
+                        .onTapContinueEditing()
                         .padding(.horizontal)
 
                     }
@@ -185,7 +187,7 @@ struct HabitAddingView: View {
         .makeCustomNavBar {
             headerView()
         }
-        .endEditing()
+        .onTapEndEditing()
         .overlay {
             if habitAddingViewModel.showTimePicker {
                 ZStack {

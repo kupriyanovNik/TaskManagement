@@ -43,18 +43,13 @@ extension View {
 
 // MARK: - Text Field Functions
 extension View {
-    func endEditing() -> some View {
+    func onTapEndEditing() -> some View {
         onTapGesture {
-            UIApplication.shared.sendAction(
-                #selector(UIResponder.resignFirstResponder), 
-                to: nil,
-                from: nil,
-                for: nil
-            )
+            hideKeyboard()
         }
     }
 
-    func continueEditing() -> some View {
-        onTapGesture {}
+    func onTapContinueEditing() -> some View {
+        onTapGesture { }
     }
 }
