@@ -106,28 +106,7 @@ struct InformationView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Button {
-                if let url = URL(string: "https://t.me/+aiEd-3N-sHlmMWYy"), UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url)
-                }
-            } label: {
-                HStack {
-                    Text("Чат в Telegram")
-                        .fontWeight(.semibold)
-                        .font(.title2)
-
-                    Spacer()
-
-                    Image(systemName: systemImages.paperplane)
-                }
-                .padding()
-                .background {
-                    themeManager.selectedTheme.accentColor
-                        .opacity(0.2)
-                        .cornerRadius(10)
-                }
-            }
-            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+            openInTelegramCard()
 
             Spacer()
         }
@@ -159,6 +138,31 @@ struct InformationView: View {
     }
 
     // MARK: - ViewBuilders
+
+    @ViewBuilder func openInTelegramCard() -> some View {
+        Button {
+            if let url = URL(string: "https://t.me/+aiEd-3N-sHlmMWYy"), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        } label: {
+            HStack {
+                Text("Чат в Telegram")
+                    .fontWeight(.semibold)
+                    .font(.title2)
+
+                Spacer()
+
+                Image(systemName: systemImages.paperplane)
+            }
+            .padding()
+            .background {
+                themeManager.selectedTheme.accentColor
+                    .opacity(0.2)
+                    .cornerRadius(10)
+            }
+        }
+        .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+    }
 
     @ViewBuilder func headerView() -> some View {
         HStack {
