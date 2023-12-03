@@ -152,6 +152,8 @@ struct HabitAddingView: View {
                             in: RoundedRectangle(cornerRadius: 10)
                         )
                         .onTapGesture {
+                            hideKeyboard()
+                            
                             withAnimation {
                                 habitAddingViewModel.showTimePicker.toggle()
                             }
