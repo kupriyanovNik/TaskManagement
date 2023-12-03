@@ -107,6 +107,7 @@ struct InformationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             openInTelegramCard()
+            openInGitHubCard()
 
             Spacer()
         }
@@ -153,6 +154,31 @@ struct InformationView: View {
                 Spacer()
 
                 Image(systemName: systemImages.paperplane)
+            }
+            .padding()
+            .background {
+                themeManager.selectedTheme.accentColor
+                    .opacity(0.2)
+                    .cornerRadius(10)
+            }
+        }
+        .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+    }
+
+    @ViewBuilder func openInGitHubCard() -> some View {
+        Button {
+            if let url = URL(string: "https://github.com/kupriyanovNik/TaskManagement"), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        } label: {
+            HStack {
+                Text("Мы на GitHub")
+                    .fontWeight(.semibold)
+                    .font(.title2)
+
+                Spacer()
+
+                Image(systemName: systemImages.network)
             }
             .padding()
             .background {
