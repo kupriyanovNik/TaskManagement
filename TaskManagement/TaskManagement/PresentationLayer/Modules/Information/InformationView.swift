@@ -154,6 +154,7 @@ struct InformationView: View {
                 Spacer()
 
                 Image(systemName: systemImages.paperplane)
+                    .font(.title2)
             }
             .padding()
             .background {
@@ -179,6 +180,7 @@ struct InformationView: View {
                 Spacer()
 
                 Image(systemName: systemImages.network)
+                    .font(.title2)
             }
             .padding()
             .background {
