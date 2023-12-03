@@ -21,7 +21,9 @@ struct InformationView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-
+            VStack(alignment: .leading) {
+                Text("Версия: \(Bundle.main.appVersionLong)")
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()

@@ -58,6 +58,7 @@
 		B77F6E5D2B1CE1A4006AD86E /* ImpactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77F6E5C2B1CE1A4006AD86E /* ImpactManager.swift */; };
 		B77F6E612B1CE434006AD86E /* ScrollTransitionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77F6E602B1CE434006AD86E /* ScrollTransitionModifier.swift */; };
 		B77F6E642B1CE84E006AD86E /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77F6E632B1CE84E006AD86E /* InformationView.swift */; };
+		B77F6E662B1CE9CA006AD86E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77F6E652B1CE9CA006AD86E /* Bundle.swift */; };
 		B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7BA60312B0FC16000D1DE5A /* SessionDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60292B0FC15F00D1DE5A /* SessionDispatch.swift */; };
@@ -154,6 +155,7 @@
 		B77F6E5C2B1CE1A4006AD86E /* ImpactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactManager.swift; sourceTree = "<group>"; };
 		B77F6E602B1CE434006AD86E /* ScrollTransitionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTransitionModifier.swift; sourceTree = "<group>"; };
 		B77F6E632B1CE84E006AD86E /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
+		B77F6E652B1CE9CA006AD86E /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		B7A7C14C2B0EB5F9000F54BD /* TaskManagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskManagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				B7F016302AD4752200B9F670 /* Date.swift */,
 				B7F016352AD487C900B9F670 /* UINavigationController.swift */,
 				B7DFBFF42AF44DE10000960D /* String.swift */,
+				B77F6E652B1CE9CA006AD86E /* Bundle.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -847,6 +850,7 @@
 				B7181BF02AD46466002F3D82 /* OnboardingIndicator.swift in Sources */,
 				B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */,
 				B76D5F2B2AF6C6CA0092D11D /* HabitCardView.swift in Sources */,
+				B77F6E662B1CE9CA006AD86E /* Bundle.swift in Sources */,
 				B7F515C72ACB27060001A282 /* TaskManagementApp.swift in Sources */,
 				B7BA60432B0FC66100D1DE5A /* NewsViewModel.swift in Sources */,
 				B7739F162AE17F8C000F19EE /* TaskCardView.swift in Sources */,
@@ -1068,7 +1072,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kupriyanov.TaskManagement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1099,7 +1103,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kupriyanov.TaskManagement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
