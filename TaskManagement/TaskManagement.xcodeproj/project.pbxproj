@@ -276,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				B7F515CC2ACB27070001A282 /* Preview Content */,
+				B77F6E5E2B1CE291006AD86E /* CDModels */,
 				B70C875F2B08E08B00EBD924 /* MLModels */,
 				B7F515CA2ACB27070001A282 /* Assets.xcassets */,
 				B7DC65852AD56756009DA010 /* Localizable */,
@@ -350,7 +351,6 @@
 			isa = PBXGroup;
 			children = (
 				B73213C72ACC8EEB00E42B1D /* Persistence.swift */,
-				B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */,
 				B71FD0FE2AD437910039270D /* CoreDataViewModel.swift */,
 				B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */,
 			);
@@ -478,6 +478,14 @@
 				B77F6E5C2B1CE1A4006AD86E /* ImpactManager.swift */,
 			);
 			path = Impact;
+			sourceTree = "<group>";
+		};
+		B77F6E5E2B1CE291006AD86E /* CDModels */ = {
+			isa = PBXGroup;
+			children = (
+				B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */,
+			);
+			path = CDModels;
 			sourceTree = "<group>";
 		};
 		B7A7C14D2B0EB5F9000F54BD /* TaskManagementTests */ = {
