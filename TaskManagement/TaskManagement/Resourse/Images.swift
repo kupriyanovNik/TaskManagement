@@ -16,6 +16,7 @@ enum ImageNames {
         static let noteText = "note.text"
         static let bellBadge = "bell.badge.fill"
         static let backArrow = "chevron.left"
+        static let infoBubble = "info.bubble"
         static let cupOfCoffee = "cup.and.saucer"
         static let xmarkCircleFill = "xmark.circle.fill"
         static let pencilCircleFill = "pencil.circle.fill"

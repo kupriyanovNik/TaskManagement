@@ -177,7 +177,19 @@ struct ProfileView: View {
             }
 
             Spacer()
-            
+
+            NavigationLink {
+                InformationView()
+                    .environmentObject(settingsViewModel)
+                    .environmentObject(themeManager)
+            } label: {
+                Image(systemName: systemImages.infoBubble)
+                    .foregroundColor(.black)
+                    .font(.title2)
+            }
+            .buttonStyle(HeaderButtonStyle())
+            .padding(.trailing, 5)            
+
             NavigationLink {
                 SettingsView()
                     .environmentObject(settingsViewModel)
