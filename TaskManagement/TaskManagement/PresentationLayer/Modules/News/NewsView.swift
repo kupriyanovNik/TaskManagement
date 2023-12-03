@@ -33,18 +33,8 @@ struct NewsView: View {
                         .hCenter()
                 } else {
                     ForEach(networkManager.news, id: \.id) { new in
-                        if #available(iOS 17, *), settingsViewModel.shouldShowScrollAnimation {
-                            spaceNewCard(new: new)
-                                .scrollTransition(.animated(.bouncy)) { effect, phase in
-                                    effect
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.95)
-                                        .opacity(phase.isIdentity ? 1 : 0.8)
-                                        .blur(radius: phase.isIdentity ? 0 : 2)
-                                        .brightness(phase.isIdentity ? 0 : 0.3)
-                                }
-                        } else {
-                            spaceNewCard(new: new)
-                        }
+                        spaceNewCard(new: new)
+                            .modifier(ScrollTransitionModifier(condition: $settingsViewModel.shouldShowScrollAnimation))
                     }
                 }
             }
