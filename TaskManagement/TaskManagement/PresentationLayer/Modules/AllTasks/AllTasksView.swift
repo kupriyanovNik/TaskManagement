@@ -59,65 +59,74 @@ struct AllTasksView: View {
         }
         .overlay {
             if allTasksViewModel.showFilteringView {
-                ZStack {
-                    Color.black
-                        .opacity(0.8)
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation {
-                                allTasksViewModel.showFilteringView = false
-                            }
-                        }
-
-                    VStack {
-                        ZStack {
-                            Color.white
-                                .clipShape(
-                                    RoundedShape(
-                                        corners: [.bottomLeft, .bottomRight],
-                                        radius: 30 + (allTasksViewModel.verticalOffset / 7)
-                                    )
-                                )
-                                .ignoresSafeArea()
-
-                            FilterSelectorView(
-                                selectedCategory: $allTasksViewModel.filteringCategory,
-                                title: strings.selectCategory,
-                                accentColor: themeManager.selectedTheme.accentColor
-                            )
-                            .opacity(1.0 - (abs(allTasksViewModel.verticalOffset) / 150.0))
-                        }
-                        .frame(maxHeight: 200)
-
-                        Spacer()
-                    }
-                    .offset(y: allTasksViewModel.verticalOffset)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                withAnimation {
-                                    allTasksViewModel.verticalOffset = min(0, value.translation.height)
-                                }
-                            }
-                            .onEnded { value in
-                                if value.translation.height < -100 {
-                                    withAnimation {
-                                        allTasksViewModel.showFilteringView = false
-                                            allTasksViewModel.verticalOffset = 0
-                                    }
-                                } else {
-                                    withAnimation(.spring) {
-                                        allTasksViewModel.verticalOffset = 0
-                                    }
-                                }
-                            }
-                    )
-                }
+                filteringView()
             }
+        }
+        .onDisappear {
+            coreDataViewModel.fetchTasksFilteredByDate(
+                dateToFilter: homeViewModel.currentDay
+            )
         }
     }
 
     // MARK: - ViewBuilders
+
+    @ViewBuilder func filteringView() -> some View {
+        ZStack {
+            Color.black
+                .opacity(0.8)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    withAnimation {
+                        allTasksViewModel.showFilteringView = false
+                    }
+                }
+
+            VStack {
+                ZStack {
+                    Color.white
+                        .clipShape(
+                            RoundedShape(
+                                corners: [.bottomLeft, .bottomRight],
+                                radius: 30 + (allTasksViewModel.verticalOffset / 15)
+                            )
+                        )
+                        .ignoresSafeArea()
+
+                    FilterSelectorView(
+                        selectedCategory: $allTasksViewModel.filteringCategory,
+                        title: strings.selectCategory,
+                        accentColor: themeManager.selectedTheme.accentColor
+                    )
+                    .opacity(1.0 - (abs(allTasksViewModel.verticalOffset) / 150.0))
+                }
+                .frame(maxHeight: 200)
+
+                Spacer()
+            }
+            .offset(y: allTasksViewModel.verticalOffset)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        withAnimation {
+                            allTasksViewModel.verticalOffset = min(0, value.translation.height)
+                        }
+                    }
+                    .onEnded { value in
+                        if value.translation.height < -100 {
+                            withAnimation {
+                                allTasksViewModel.showFilteringView = false
+                                    allTasksViewModel.verticalOffset = 0
+                            }
+                        } else {
+                            withAnimation(.spring) {
+                                allTasksViewModel.verticalOffset = 0
+                            }
+                        }
+                    }
+            )
+        }
+    }
 
     @ViewBuilder func allTasks() -> some View {
         ForEach($coreDataViewModel.allTasks, id: \.id) { $task in
