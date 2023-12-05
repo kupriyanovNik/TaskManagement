@@ -27,17 +27,17 @@ struct SettingsView: View {
                 HStack(spacing: -10) {
                     ForEach(0..<DataSource.themesCount) { themeIndex in
                         let theme = DataSource.getTheme(themeIndex: themeIndex)
+                        let isSelected = theme.themeName == themeManager.selectedTheme.themeName
 
                         ThemePickerCell(
-                            accentColor: theme.accentColor,
-                            pageTitleColor: theme.pageTitleColor,
-                            themeName: theme.themeName
+                            theme: theme,
+                            isSelected: isSelected
                         ) {
                             withAnimation {
                                 themeManager.selectedThemeIndex = themeIndex
                             }
                         }
-                        .padding(.leading)
+                        .padding()
                     }
                 }
             }
