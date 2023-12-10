@@ -18,26 +18,40 @@ struct SettingsView: View {
     private var systemImages = ImageNames.System.self
 
     private var themeSelectionRow: some View {
-        Group {
-            Text(strings.selectTheme)
-                .font(.title2)
-                .padding(.leading)
+        let isExpanded = settingsViewModel.showExpandedThemePicker
+        
+        return Group {
+            HStack {
+                Text(strings.selectTheme)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: -10) {
-                    ForEach(0..<DataSource.themesCount) { themeIndex in
-                        let theme = DataSource.getTheme(themeIndex: themeIndex)
+                Image(systemName: systemImages.backArrow)
+                    .rotationEffect(.degrees(isExpanded ? 90 : -90))
+            }
+            .font(.headline)
+            .padding(.leading)
+            .onTapGesture {
+                withAnimation {
+                    settingsViewModel.showExpandedThemePicker.toggle()
+                }
+            }
 
-                        ThemePickerCell(
-                            accentColor: theme.accentColor,
-                            pageTitleColor: theme.pageTitleColor,
-                            themeName: theme.themeName
-                        ) {
-                            withAnimation {
-                                themeManager.selectedThemeIndex = themeIndex
+            if isExpanded {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: -10) {
+                        ForEach(0..<DataSource.themesCount) { themeIndex in
+                            let theme = DataSource.getTheme(themeIndex: themeIndex)
+                            let isSelected = theme.accentColor == themeManager.selectedTheme.accentColor
+
+                            ThemePickerCell(
+                                theme: theme,
+                                isSelected: isSelected
+                            ) {
+                                withAnimation {
+                                    themeManager.selectedThemeIndex = themeIndex
+                                }
                             }
+                            .padding()
                         }
-                        .padding(.leading)
                     }
                 }
             }
@@ -47,7 +61,7 @@ struct SettingsView: View {
     private var shouldShowScrollAnimationRow: some View {
         HStack {
             Text(strings.showScrollAnimations)
-                .font(.title2)
+                .font(.headline)
 
             Spacer()
 
@@ -63,7 +77,7 @@ struct SettingsView: View {
     private var shouldShowTabBarAnimationRow: some View {
         HStack {
             Text(strings.showTabBarAnimations)
-                .font(.title2)
+                .font(.headline)
 
             Spacer()
 
@@ -77,21 +91,21 @@ struct SettingsView: View {
     }
     
     /// debug option
-    private var showOnboardingRow: some View {
-        Button {
-            UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
-        } label: {
-            Text("show onboarding")
-        }
-        .padding(.horizontal)
-    }
+    private var debugOptionsRow: some View {
+        let accentColor = themeManager.selectedTheme.accentColor
 
-    private var removeAllNotificationsRow: some View {
-        Button {
-            NotificationManager.shared.removeAllNotifications()
-        } label: {
-            Text("remove all notifications")
+        return VStack(alignment: .center) {
+            Button("show onboarding") {
+                UserDefaults.standard
+                    .setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
+            }
+
+            Button("remove all notifications") {
+                NotificationManager.shared.removeAllNotifications()
+            }
         }
+        .font(.headline)
+        .foregroundColor(accentColor)
         .padding(.horizontal)
     }
 
@@ -133,18 +147,15 @@ struct SettingsView: View {
                 if NotificationManager.shared.isNotificationEnabled == false {
                     disabledNotificationsRow
                 }
-
-                #if DEBUG
-                showOnboardingRow
-
-                removeAllNotificationsRow
-                #endif
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
             headerView()
+        }
+        .safeAreaInset(edge: .bottom) {
+            bottomDebugMenu()
         }
     }
 
@@ -164,11 +175,41 @@ struct SettingsView: View {
                 .bold()
                 .font(.largeTitle)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+                .onTapGesture {
+                    withAnimation {
+                        settingsViewModel.showDebugOptions.toggle()
+                    }
+                }
 
             Spacer()
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
+        .onDisappear {
+            settingsViewModel.showDebugOptions = false 
+        }
+    }
+
+    @ViewBuilder func bottomDebugMenu() -> some View {
+        VStack {
+            if settingsViewModel.showDebugOptions {
+                VStack {
+                    debugOptionsRow
+                }
+                .hCenter()
+                .padding(.horizontal, 24)
+                .frame(height: 72)
+                .background {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.white)
+                        .shadow(color: .white, radius: 100, x: 0, y: 100)
+                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 5)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
     }
 }
 
