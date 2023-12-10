@@ -25,7 +25,7 @@ struct SettingsView: View {
                 Text(strings.selectTheme)
 
                 Image(systemName: systemImages.backArrow)
-                    .rotationEffect(.degrees(90 * (isExpanded ? 1 : -1)))
+                    .rotationEffect(.degrees(isExpanded ? 90 : -90))
             }
             .font(.headline)
             .padding(.leading)
