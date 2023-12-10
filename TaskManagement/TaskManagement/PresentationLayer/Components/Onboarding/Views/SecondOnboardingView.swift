@@ -31,17 +31,17 @@ struct SecondOnboardingView: View {
             )
 
             VStack(alignment: .leading) {
-                Text("kpregth\nzxcvcxb")
+                Text("Управляйте своим временем\nэффективно")
                     .font(.largeTitle)
                     .bold()
 
                 TypingEffectView(
                     isExpanded: $isExpanded,
                     fullText: """
-                    fagjafdnjgndf
-                    sfagdjknaskjdngksfgde
-                    sadgasfgefqgrg
-                    meow meow sgfamg
+                    Создавайте задачи, отслеживайте их
+                    выполнение и повышайте продуктивность
+                    с нашим интуитивно понятным
+                    трекером задач и привычек
                     """
                 )
             }

@@ -32,18 +32,17 @@ struct FirstOnboardingView: View {
             )
 
             VStack(alignment: .leading) {
-                Text("gfksnkgnasf\ndsfgsd")
+                Text("Добро пожаловать!")
                     .font(.largeTitle)
                     .bold()
 
                 TypingEffectView(
                     isExpanded: $isExpanded,
                     fullText: """
-                    meow meow meow meow meow
-                    meow meow meow 
-                    fagjafdnjgndf
-                    sfagdjknaskjdngksfgde
-                    sadgasfgefqgrg
+                    Мы поможем Вам управлять
+                    задачами и формировать полезные привычки
+                    с помощью передовых технологий
+                    и нейронных сетей.
                     """
                 )
             }

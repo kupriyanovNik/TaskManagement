@@ -22,7 +22,7 @@ struct TypingEffectView: View {
     var body: some View {
         VStack {
             Text(displayedText)
-                .font(.custom("Courier", size: 25))
+                .font(.custom("Courier", size: 15))
                 .foregroundColor(.black)
                 .frame(width: 350, height: 150, alignment: .topLeading)
         }
