@@ -156,21 +156,24 @@ struct SettingsView: View {
         }
         .safeAreaInset(edge: .bottom) {
             VStack {
-                #if DEBUG
-                debugOptionsRow
-                #endif
+                if settingsViewModel.showDebugOptions {
+                    VStack {
+                        debugOptionsRow
+                    }
+                    .hCenter()
+                    .padding(.horizontal, 24)
+                    .frame(height: 72)
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.white)
+                            .shadow(color: .white, radius: 100, x: 0, y: 100)
+                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 5)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
             }
-            .hCenter()
-            .padding(.horizontal, 24)
-            .frame(height: 72)
-            .background {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.white)
-                    .shadow(color: .white, radius: 100, x: 0, y: 100)
-                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
-            }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 5)
         }
     }
 
@@ -190,11 +193,19 @@ struct SettingsView: View {
                 .bold()
                 .font(.largeTitle)
                 .foregroundStyle(themeManager.selectedTheme.pageTitleColor)
+                .onTapGesture {
+                    withAnimation {
+                        settingsViewModel.showDebugOptions.toggle()
+                    }
+                }
 
             Spacer()
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
+        .onDisappear {
+            settingsViewModel.showDebugOptions = false 
+        }
     }
 }
 

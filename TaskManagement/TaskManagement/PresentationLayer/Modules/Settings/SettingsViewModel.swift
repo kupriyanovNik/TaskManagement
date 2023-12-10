@@ -10,6 +10,8 @@ class SettingsViewModel: ObservableObject {
 
     @Published var showExpandedThemePicker: Bool = false 
 
+    @Published var showDebugOptions: Bool = false 
+
     @AppStorage(
         Constants.UserDefaultsKeys.userName
     ) var userName: String = "" {
