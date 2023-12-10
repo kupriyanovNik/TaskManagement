@@ -155,25 +155,7 @@ struct SettingsView: View {
             headerView()
         }
         .safeAreaInset(edge: .bottom) {
-            VStack {
-                if settingsViewModel.showDebugOptions {
-                    VStack {
-                        debugOptionsRow
-                    }
-                    .hCenter()
-                    .padding(.horizontal, 24)
-                    .frame(height: 72)
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.white)
-                            .shadow(color: .white, radius: 100, x: 0, y: 100)
-                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 5)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-            }
+            bottomDebugMenu()
         }
     }
 
@@ -205,6 +187,28 @@ struct SettingsView: View {
         .padding(.horizontal)
         .onDisappear {
             settingsViewModel.showDebugOptions = false 
+        }
+    }
+
+    @ViewBuilder func bottomDebugMenu() -> some View {
+        VStack {
+            if settingsViewModel.showDebugOptions {
+                VStack {
+                    debugOptionsRow
+                }
+                .hCenter()
+                .padding(.horizontal, 24)
+                .frame(height: 72)
+                .background {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.white)
+                        .shadow(color: .white, radius: 100, x: 0, y: 100)
+                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 5)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
         }
     }
 }
