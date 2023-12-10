@@ -62,10 +62,14 @@ struct TaskManagementApp: App {
                     .opacity(shouldShowOnboarding ? 0.5 : 1)
                     .ignoresSafeArea()
                     .overlay {
-                        if shouldShowOnboarding {
-                            OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
-                                .environmentObject(settingsViewModel)
+                        VStack {
+                            if shouldShowOnboarding {
+                                OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
+                                    .environmentObject(settingsViewModel)
+                                    .transition(.move(edge: .top).combined(with: .opacity))
+                            }
                         }
+                        .transition(.move(edge: .top).combined(with: .opacity))
                     }
                     .animation(.spring, value: shouldShowOnboarding)
             }

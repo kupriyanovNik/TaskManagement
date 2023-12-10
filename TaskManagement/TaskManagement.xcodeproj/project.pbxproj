@@ -23,6 +23,7 @@
 		B72D16CD2B25E83F006CCD2D /* FirstOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D16CC2B25E83F006CCD2D /* FirstOnboardingView.swift */; };
 		B72D16CF2B25E8A1006CCD2D /* SecondOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D16CE2B25E8A1006CCD2D /* SecondOnboardingView.swift */; };
 		B72D16D12B25EAB1006CCD2D /* ShowOnboardingViewAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D16D02B25EAB1006CCD2D /* ShowOnboardingViewAnimated.swift */; };
+		B72D16D32B25ED67006CCD2D /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72D16D22B25ED67006CCD2D /* RegistrationView.swift */; };
 		B73165AE2AEC244700BF2CA7 /* NotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73165AD2AEC244700BF2CA7 /* NotFoundView.swift */; };
 		B73213BF2ACC8CCA00E42B1D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213BE2ACC8CCA00E42B1D /* HomeViewModel.swift */; };
 		B73213C32ACC8D1000E42B1D /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73213C22ACC8D1000E42B1D /* NavigationViewModel.swift */; };
@@ -126,6 +127,7 @@
 		B72D16CC2B25E83F006CCD2D /* FirstOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingView.swift; sourceTree = "<group>"; };
 		B72D16CE2B25E8A1006CCD2D /* SecondOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingView.swift; sourceTree = "<group>"; };
 		B72D16D02B25EAB1006CCD2D /* ShowOnboardingViewAnimated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowOnboardingViewAnimated.swift; sourceTree = "<group>"; };
+		B72D16D22B25ED67006CCD2D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		B73165AD2AEC244700BF2CA7 /* NotFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundView.swift; sourceTree = "<group>"; };
 		B73213BE2ACC8CCA00E42B1D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B73213C22ACC8D1000E42B1D /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 			children = (
 				B72D16CC2B25E83F006CCD2D /* FirstOnboardingView.swift */,
 				B72D16CE2B25E8A1006CCD2D /* SecondOnboardingView.swift */,
+				B72D16D22B25ED67006CCD2D /* RegistrationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				B7739F082AE13A9C000F19EE /* ThemePickerCell.swift in Sources */,
 				B72972992AD8606D00B9F8BF /* AllTasksViewModel.swift in Sources */,
 				B7BA603C2B0FC23B00D1DE5A /* SpaceNewModel.swift in Sources */,
+				B72D16D32B25ED67006CCD2D /* RegistrationView.swift in Sources */,
 				B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */,
 				B70C87662B08E14300EBD924 /* NeuralManager.swift in Sources */,
 				B7BA60312B0FC16000D1DE5A /* SessionDispatch.swift in Sources */,
