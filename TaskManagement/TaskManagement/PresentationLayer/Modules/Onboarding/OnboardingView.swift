@@ -101,13 +101,7 @@ struct OnboardingView: View {
     // MARK: Private Functions
 
     private func hideOnboarding() {
-        UIApplication.shared
-            .sendAction(
-                #selector(UIResponder.resignFirstResponder), 
-                to: nil,
-                from: nil,
-                for: nil
-            )
+        hideKeyboard()
 
         delay(1) {
             withAnimation(.linear) {
