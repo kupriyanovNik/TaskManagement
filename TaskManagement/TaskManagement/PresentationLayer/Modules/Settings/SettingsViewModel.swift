@@ -8,6 +8,8 @@ class SettingsViewModel: ObservableObject {
 
     // MARK: - Property Wrappers
 
+    @Published var showExpandedThemePicker: Bool = false 
+
     @AppStorage(
         Constants.UserDefaultsKeys.userName
     ) var userName: String = "" {

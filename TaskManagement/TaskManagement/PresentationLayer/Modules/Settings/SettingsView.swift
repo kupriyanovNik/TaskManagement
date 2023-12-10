@@ -18,26 +18,40 @@ struct SettingsView: View {
     private var systemImages = ImageNames.System.self
 
     private var themeSelectionRow: some View {
-        Group {
-            Text(strings.selectTheme)
-                .font(.title2)
-                .padding(.leading)
+        let isExpanded = settingsViewModel.showExpandedThemePicker
+        
+        return Group {
+            HStack {
+                Text(strings.selectTheme)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: -10) {
-                    ForEach(0..<DataSource.themesCount) { themeIndex in
-                        let theme = DataSource.getTheme(themeIndex: themeIndex)
-                        let isSelected = theme.themeName == themeManager.selectedTheme.themeName
+                Image(systemName: systemImages.backArrow)
+                    .rotationEffect(.degrees(90 * (isExpanded ? 1 : -1)))
+            }
+            .font(.headline)
+            .padding(.leading)
+            .onTapGesture {
+                withAnimation {
+                    settingsViewModel.showExpandedThemePicker.toggle()
+                }
+            }
 
-                        ThemePickerCell(
-                            theme: theme,
-                            isSelected: isSelected
-                        ) {
-                            withAnimation {
-                                themeManager.selectedThemeIndex = themeIndex
+            if isExpanded {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: -10) {
+                        ForEach(0..<DataSource.themesCount) { themeIndex in
+                            let theme = DataSource.getTheme(themeIndex: themeIndex)
+                            let isSelected = theme.accentColor == themeManager.selectedTheme.accentColor
+
+                            ThemePickerCell(
+                                theme: theme,
+                                isSelected: isSelected
+                            ) {
+                                withAnimation {
+                                    themeManager.selectedThemeIndex = themeIndex
+                                }
                             }
+                            .padding()
                         }
-                        .padding()
                     }
                 }
             }
@@ -47,7 +61,7 @@ struct SettingsView: View {
     private var shouldShowScrollAnimationRow: some View {
         HStack {
             Text(strings.showScrollAnimations)
-                .font(.title2)
+                .font(.headline)
 
             Spacer()
 
@@ -63,7 +77,7 @@ struct SettingsView: View {
     private var shouldShowTabBarAnimationRow: some View {
         HStack {
             Text(strings.showTabBarAnimations)
-                .font(.title2)
+                .font(.headline)
 
             Spacer()
 
