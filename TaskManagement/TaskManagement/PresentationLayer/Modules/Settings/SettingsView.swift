@@ -91,21 +91,21 @@ struct SettingsView: View {
     }
     
     /// debug option
-    private var showOnboardingRow: some View {
-        Button {
-            UserDefaults.standard.setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
-        } label: {
-            Text("show onboarding")
-        }
-        .padding(.horizontal)
-    }
+    private var debugOptionsRow: some View {
+        let accentColor = themeManager.selectedTheme.accentColor
 
-    private var removeAllNotificationsRow: some View {
-        Button {
-            NotificationManager.shared.removeAllNotifications()
-        } label: {
-            Text("remove all notifications")
+        return VStack(alignment: .center) {
+            Button("show onboarding") {
+                UserDefaults.standard
+                    .setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
+            }
+
+            Button("remove all notifications") {
+                NotificationManager.shared.removeAllNotifications()
+            }
         }
+        .font(.headline)
+        .foregroundColor(accentColor)
         .padding(.horizontal)
     }
 
@@ -147,18 +147,30 @@ struct SettingsView: View {
                 if NotificationManager.shared.isNotificationEnabled == false {
                     disabledNotificationsRow
                 }
-
-                #if DEBUG
-                showOnboardingRow
-
-                removeAllNotificationsRow
-                #endif
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
             headerView()
+        }
+        .safeAreaInset(edge: .bottom) {
+            VStack {
+                #if DEBUG
+                debugOptionsRow
+                #endif
+            }
+            .hCenter()
+            .padding(.horizontal, 24)
+            .frame(height: 72)
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.white)
+                    .shadow(color: .white, radius: 100, x: 0, y: 100)
+                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, 5)
         }
     }
 
