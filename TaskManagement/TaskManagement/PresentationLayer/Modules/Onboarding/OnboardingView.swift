@@ -17,7 +17,6 @@ struct OnboardingView: View {
     @State private var showTView: Bool = false
     @State private var showFView: Bool = false
 
-
     // MARK: - Private Properties
 
     private let strings = Localizable.Onboarding.self
@@ -31,6 +30,7 @@ struct OnboardingView: View {
 
             Text("My\nHabits")
                 .bold()
+                .multilineTextAlignment(.center)
                 .font(.largeTitle)
                 .offset(y: -100)
 
