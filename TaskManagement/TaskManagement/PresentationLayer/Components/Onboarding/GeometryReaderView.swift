@@ -17,8 +17,12 @@ struct GeometryReaderView: View {
     var color: Color
     var text: String = "Next"
     var showNextView: Binding<Bool>?
+    var canShowPreviousView: Bool = true
+    var onTapAction: (() -> ())? = nil
 
-    var shouldToggleExpand: Bool = true
+    // MARK: - Private Properties
+
+    private let systemImages = ImageNames.System.self
 
     // MARK: - Body
 
@@ -37,7 +41,8 @@ struct GeometryReaderView: View {
                         Text(text)
                             .bold()
 
-                        Image(systemName: "arrow.right")
+                        Image(systemName: systemImages.backArrow)
+                            .rotationEffect(.degrees(180))
                     }
                     .font(.system(size: 20))
                     .foregroundColor(.black)
@@ -51,19 +56,19 @@ struct GeometryReaderView: View {
         }
         .onTapGesture {
             withAnimation(.spring(response: 0.9, dampingFraction: 0.8)) {
-                if shouldToggleExpand {
+                if canShowPreviousView {
                     isExpanded.toggle()
-                } else {
-                    isExpanded = true
-                }
 
-                showText.toggle()
-                startTyping = true
+                    showText.toggle()
+                    startTyping = true
 
-                if let showNextView {
-                    delay(0.1) {
-                        showNextView.wrappedValue.toggle()
+                    if let showNextView {
+                        delay(0.1) {
+                            showNextView.wrappedValue.toggle()
+                        }
                     }
+                } else {
+                    onTapAction?()
                 }
             }
         }

@@ -16,13 +16,21 @@ struct RegistrationView: View {
     @State var startTyping: Bool = false
     @State var showText: Bool = false
 
+    @FocusState private var isFocusedUsername: Bool
+    @FocusState private var isFocusedUserAge: Bool
+
     // MARK: - Internal Properties
 
     var dismissAction: () -> ()
 
     // MARK: - Private Properties
 
+    private let screenSize = UIScreen.main.bounds
     private let strings = Localizable.Onboarding.self
+
+    private var canShowPreviousView: Bool {
+        !isFocusedUsername && !isFocusedUserAge
+    }
 
     // MARK: - Body
 
@@ -33,48 +41,54 @@ struct RegistrationView: View {
                 startTyping: $startTyping,
                 showText: $showText,
                 color: .white,
-                text: "Next",
-                showNextView: $showNextView
-            )
-
-            if isExpanded {
-                VStack(spacing: 16) {
-                    Spacer()
-
-                    CustomTextField(
-                        inputText: $settingsViewModel.userName,
-                        placeHolder: strings.username,
-                        strokeColor: .black,
-                        shouldExpandVertically: false
-                    )
-                    .onTapContinueEditing()
-
-                    CustomTextField(
-                        inputText: $settingsViewModel.userAge,
-                        placeHolder: strings.userage,
-                        strokeColor: .black,
-                        shouldExpandVertically: false
-                    )
-                    .keyboardType(.numberPad)
-                    .onTapContinueEditing()
-
-                    Spacer()
-
-                    Button {
-                        dismissAction()
-                    } label: {
-                        Text(strings.login)
-                            .padding()
-                            .foregroundColor(.white)
-                            .hCenter()
-                            .background(.black)
-                            .cornerRadius(10)
-                    }
-                    .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 32)
+                text: "Далее",
+                showNextView: $showNextView,
+                canShowPreviousView: canShowPreviousView
+            ) {
+                isFocusedUsername = false
+                isFocusedUserAge = false 
             }
+
+            VStack(spacing: 16) {
+                Spacer()
+
+                CustomTextField(
+                    inputText: $settingsViewModel.userName,
+                    isFocused: _isFocusedUsername,
+                    placeHolder: strings.username,
+                    strokeColor: .black,
+                    shouldExpandVertically: false
+                )
+                .onTapContinueEditing()
+
+                CustomTextField(
+                    inputText: $settingsViewModel.userAge,
+                    isFocused: _isFocusedUserAge,
+                    placeHolder: strings.userage,
+                    strokeColor: .black,
+                    shouldExpandVertically: false
+                )
+                .keyboardType(.numberPad)
+                .onTapContinueEditing()
+
+                Spacer()
+
+                Button {
+                    dismissAction()
+                } label: {
+                    Text(strings.login)
+                        .padding()
+                        .foregroundColor(.white)
+                        .hCenter()
+                        .background(.black)
+                        .cornerRadius(10)
+                }
+                .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 32)
+            .offset(x: isExpanded ? 0 : screenSize.width)
+            .opacity(isExpanded ? 1 : 0)
         }
         .animation(.smooth, value: showNextView)
         .ignoresSafeArea()

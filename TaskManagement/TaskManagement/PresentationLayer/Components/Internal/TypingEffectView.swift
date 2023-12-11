@@ -22,9 +22,13 @@ struct TypingEffectView: View {
     var body: some View {
         VStack {
             Text(displayedText)
-                .font(.custom("Courier", size: 15))
+                .font(.headline)
                 .foregroundColor(.black)
-                .frame(width: 350, height: 150, alignment: .topLeading)
+                .frame(
+                    width: 350,
+                    height: 150,
+                    alignment: .topLeading
+                )
         }
         .onChange(of: isExpanded) { newValue in
             if newValue {

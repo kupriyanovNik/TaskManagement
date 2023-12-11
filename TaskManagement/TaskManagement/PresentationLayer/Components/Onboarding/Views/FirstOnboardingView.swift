@@ -27,7 +27,7 @@ struct FirstOnboardingView: View {
                 startTyping: $startTyping,
                 showText: $showText,
                 color: .brown,
-                text: "Start",
+                text: "Начать",
                 showNextView: $showNextView
             )
 
