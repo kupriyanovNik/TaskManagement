@@ -32,7 +32,6 @@ struct OnboardingView: View {
                 .bold()
                 .multilineTextAlignment(.center)
                 .font(.largeTitle)
-                .offset(y: -100)
 
             FirstOnboardingView(showNextView: $showSView)
 
@@ -62,10 +61,8 @@ struct OnboardingView: View {
     private func hideOnboarding() {
         hideKeyboard()
 
-        delay(1) {
-            withAnimation(.linear) {
-                self.shouldShowOnboarding = false 
-            }
+        withAnimation(.linear) {
+            self.shouldShowOnboarding = false
         }
     }
 }

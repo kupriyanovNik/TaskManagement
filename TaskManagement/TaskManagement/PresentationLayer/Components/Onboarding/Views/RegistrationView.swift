@@ -46,7 +46,7 @@ struct RegistrationView: View {
                 canShowPreviousView: canShowPreviousView
             ) {
                 isFocusedUsername = false
-                isFocusedUserAge = false 
+                isFocusedUserAge = false
             }
 
             VStack(spacing: 16) {
@@ -77,13 +77,15 @@ struct RegistrationView: View {
                     dismissAction()
                 } label: {
                     Text(strings.login)
+                        .font(.headline)
+                        .scaleEffect(1.2)
                         .padding()
                         .foregroundColor(.white)
                         .hCenter()
                         .background(.black)
                         .cornerRadius(10)
                 }
-                .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
+                .buttonStyle(HeaderButtonStyle(pressedScale: 0.95, pressedOpacity: 1))
             }
             .padding(.horizontal)
             .padding(.vertical, 32)
