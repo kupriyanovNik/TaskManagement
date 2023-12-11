@@ -13,10 +13,6 @@ struct OnboardingView: View {
 
     @Binding var shouldShowOnboarding: Bool
 
-    @State private var showSView: Bool = false
-    @State private var showTView: Bool = false
-    @State private var showFView: Bool = false
-
     // MARK: - Private Properties
 
     private let strings = Localizable.Onboarding.self
@@ -33,14 +29,22 @@ struct OnboardingView: View {
                 .multilineTextAlignment(.center)
                 .font(.largeTitle)
 
-            FirstOnboardingView(showNextView: $showSView)
+            FirstOnboardingView(
+                showNextView: $onboardingViewModel.showSView
+            )
 
-            SecondOnboardingView(showNextView: $showTView)
-                .modifier(ShowOnboardingViewAnimated(shouldShow: showSView))
+            SecondOnboardingView(
+                showNextView: $onboardingViewModel.showTView
+            )
+            .modifier(
+                ShowOnboardingViewAnimated(
+                    shouldShow: onboardingViewModel.showSView
+                )
+            )
 
             RegistrationView(
                 settingsViewModel: settingsViewModel,
-                showNextView: $showFView
+                showNextView: $onboardingViewModel.showFView
             ) {
                 if settingsViewModel.userName.isEmpty ||
                     settingsViewModel.userAge.isEmpty ||
@@ -51,7 +55,11 @@ struct OnboardingView: View {
                     hideOnboarding()
                 }
             }
-            .modifier(ShowOnboardingViewAnimated(shouldShow: showTView))
+            .modifier(
+                ShowOnboardingViewAnimated(
+                    shouldShow: onboardingViewModel.showTView
+                )
+            )
         }
         .alert(strings.error, isPresented: $onboardingViewModel.showError) {}
     }
