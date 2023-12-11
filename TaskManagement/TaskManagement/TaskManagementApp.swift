@@ -60,27 +60,16 @@ struct TaskManagementApp: App {
                     .environmentObject(networkManager)
                     .environmentObject(themeManager)
                     .opacity(shouldShowOnboarding ? 0.5 : 1)
-                    .clipShape(
-                        RoundedShape(
-                            corners: [.bottomRight, .bottomLeft], 
-                            radius: shouldShowOnboarding ? 30 : 0
-                        )
-                    )
-                    .padding(.bottom, shouldShowOnboarding ? 25 : 0)
                     .ignoresSafeArea()
                     .overlay {
-                        if shouldShowOnboarding {
-                            OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
-                                .environmentObject(settingsViewModel)
-                                .clipShape(
-                                    RoundedShape(
-                                        corners: [.bottomRight, .bottomLeft],
-                                        radius: 30
-                                    )
-                                )
-                                .padding(.bottom, 15)
-                                .ignoresSafeArea(edges: .top)
+                        VStack {
+                            if shouldShowOnboarding {
+                                OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
+                                    .environmentObject(settingsViewModel)
+                                    .transition(.move(edge: .top).combined(with: .opacity))
+                            }
                         }
+                        .transition(.move(edge: .top).combined(with: .opacity))
                     }
                     .animation(.spring, value: shouldShowOnboarding)
             }

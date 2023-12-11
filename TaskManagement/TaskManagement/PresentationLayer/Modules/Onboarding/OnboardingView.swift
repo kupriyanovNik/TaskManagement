@@ -17,43 +17,35 @@ struct OnboardingView: View {
 
     private let strings = Localizable.Onboarding.self
 
-    private var greetingsView: some View {
-        VStack(spacing: 30) {
+    // MARK: Body
+
+    var body: some View {
+        ZStack {
+            Color.white
+                .ignoresSafeArea()
+
             Text("My\nHabits")
+                .bold()
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, weight: .semibold))
+                .font(.largeTitle)
 
-            Text(strings.application)
-                .multilineTextAlignment(.center)
-                .font(.system(size: 20, weight: .semibold))
-                .padding(.horizontal)
-        }
-    }
-
-    private var registrationView: some View {
-        VStack(spacing: 16) {
-            Spacer()
-
-            CustomTextField(
-                inputText: $settingsViewModel.userName,
-                placeHolder: strings.username,
-                strokeColor: .black,
-                shouldExpandVertically: false
+            FirstOnboardingView(
+                showNextView: $onboardingViewModel.showSView
             )
-            .onTapContinueEditing()
 
-            CustomTextField(
-                inputText: $settingsViewModel.userAge,
-                placeHolder: strings.userage,
-                strokeColor: .black,
-                shouldExpandVertically: false
+            SecondOnboardingView(
+                showNextView: $onboardingViewModel.showTView
             )
-            .keyboardType(.numberPad)
-            .onTapContinueEditing()
+            .modifier(
+                ShowOnboardingViewAnimated(
+                    shouldShow: onboardingViewModel.showSView
+                )
+            )
 
-            Spacer()
-
-            Button {
+            RegistrationView(
+                settingsViewModel: settingsViewModel,
+                showNextView: $onboardingViewModel.showFView
+            ) {
                 if settingsViewModel.userName.isEmpty ||
                     settingsViewModel.userAge.isEmpty ||
                     settingsViewModel.userName.count > 15 ||
@@ -62,38 +54,12 @@ struct OnboardingView: View {
                 } else {
                     hideOnboarding()
                 }
-            } label: {
-                Text(strings.login)
-                    .padding()
-                    .foregroundColor(.white)
-                    .hCenter()
-                    .background(.black)
-                    .cornerRadius(10)
             }
-            .buttonStyle(HeaderButtonStyle(pressedScale: 1.03))
-        }
-        .padding()
-    }
-
-    // MARK: Body
-
-    var body: some View {
-        ZStack {
-            Color.white
-                .ignoresSafeArea()
-                .onTapEndEditing()
-
-            Group {
-                if onboardingViewModel.showGreetings {
-                    greetingsView
-                } else {
-                    registrationView
-                }
-            }
-        }
-        .transition(.move(edge: .top).combined(with: .opacity).combined(with: .scale))
-        .onAppear {
-            showRegistrationView()
+            .modifier(
+                ShowOnboardingViewAnimated(
+                    shouldShow: onboardingViewModel.showTView
+                )
+            )
         }
         .alert(strings.error, isPresented: $onboardingViewModel.showError) {}
     }
@@ -103,18 +69,8 @@ struct OnboardingView: View {
     private func hideOnboarding() {
         hideKeyboard()
 
-        delay(1) {
-            withAnimation(.linear) {
-                self.shouldShowOnboarding.toggle()
-            }
-        }
-    }
-    
-    private func showRegistrationView() {
-        delay(4) {
-            withAnimation(.default) {
-                self.onboardingViewModel.showGreetings = false
-            }
+        withAnimation(.linear) {
+            self.shouldShowOnboarding = false
         }
     }
 }
