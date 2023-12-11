@@ -89,17 +89,10 @@ struct RegistrationView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 32)
-            .offset(x: isExpanded ? 0 : screenSize.width)
             .opacity(isExpanded ? 1 : 0)
+            .modifier(ShowOnboardingViewAnimated(shouldShow: isExpanded))
         }
         .animation(.smooth, value: showNextView)
         .ignoresSafeArea()
     }
-}
-
-#Preview {
-    RegistrationView(
-        settingsViewModel: .init(),
-        showNextView: .constant(false)
-    ) {}
 }

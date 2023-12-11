@@ -32,8 +32,8 @@ struct GeometryReaderView: View {
                 Circle()
                     .fill(color)
                     .frame(
-                        width: isExpanded ? max(geometry.size.width, geometry.size.height) * 1.5 : 200,
-                        height: isExpanded ? max(geometry.size.width, geometry.size.height) * 1.5 : 200
+                        width: getCircleSize(geometry: geometry),
+                        height: getCircleSize(geometry: geometry)
                     )
 
                 if !isExpanded {
@@ -72,5 +72,11 @@ struct GeometryReaderView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Private Functions
+
+    private func getCircleSize(geometry: GeometryProxy) -> CGFloat {
+        isExpanded ? max(geometry.size.width, geometry.size.height) * 1.5 : 200
     }
 }

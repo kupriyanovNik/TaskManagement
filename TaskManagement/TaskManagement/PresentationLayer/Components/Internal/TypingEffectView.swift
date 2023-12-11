@@ -1,5 +1,5 @@
 //
-//  TypingEffect.swift
+//  TypingEffectView.swift
 //
 
 import SwiftUI
@@ -37,7 +37,7 @@ struct TypingEffectView: View {
         }
     }
 
-    // MARK: - Private Properties
+    // MARK: - Private Functions
 
     private func startTypingEffect() {
         displayedText = ""
@@ -69,6 +69,10 @@ struct TypingEffectView: View {
 #Preview {
     TypingEffectView(
         isExpanded: .constant(false),
-        fullText: "meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow"
+        fullText: """
+        meow meow meow meow meow meow meow meow meow
+        meow meow meow meow meow meow meow
+        meow meow meow meow meow meow meow meow meow
+        """
     )
 }
