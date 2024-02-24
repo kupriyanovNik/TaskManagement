@@ -12,7 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @EnvironmentObject var themeManager: ThemeManager
 
     @Namespace var animation
@@ -29,21 +29,21 @@ struct HomeView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
-                ForEach($coreDataViewModel.tasksFilteredByDate, id: \.id) { $task in
+                ForEach($coreDataManager.tasksFilteredByDate, id: \.id) { $task in
                     TaskCardView(
                         homeViewModel: homeViewModel,
                         navigationViewModel: navigationViewModel,
-                        coreDataViewModel: coreDataViewModel,
+                        coreDataManager: coreDataManager,
                         settingsViewModel: settingsViewModel,
                         themeManager: themeManager,
                         isEditing: $homeViewModel.isEditing,
                         task: $task
                     ) { taskDate in
-                        coreDataViewModel.fetchTasksFilteredByDate(
+                        coreDataManager.fetchTasksFilteredByDate(
                             dateToFilter: homeViewModel.currentDay
                         )
                         
-                        if coreDataViewModel.tasksFilteredByDate.isEmpty {
+                        if coreDataManager.tasksFilteredByDate.isEmpty {
                             homeViewModel.currentDay = .now
                         }
                     }
@@ -60,16 +60,16 @@ struct HomeView: View {
                 }
             }
         }
-        .animation(.spring(), value: coreDataViewModel.tasksFilteredByDate)
+        .animation(.spring(), value: coreDataManager.tasksFilteredByDate)
         .onChange(of: homeViewModel.currentDay) { newCurrentDate in
-            coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: newCurrentDate)
+            coreDataManager.fetchTasksFilteredByDate(dateToFilter: newCurrentDate)
         }
-        .onChange(of: coreDataViewModel.tasksFilteredByDate) { newFilteredTasks in
+        .onChange(of: coreDataManager.tasksFilteredByDate) { newFilteredTasks in
             if newFilteredTasks.isEmpty {
                 homeViewModel.isEditing = false
             }
         }
-        .onChange(of: coreDataViewModel.allTasks.count) { newValue in
+        .onChange(of: coreDataManager.allTasks.count) { newValue in
             if newValue % 10 == 0 {
                 requestReview()
             }
@@ -78,7 +78,7 @@ struct HomeView: View {
             headerView()
         }
         .overlay {
-            if coreDataViewModel.tasksFilteredByDate.isEmpty {
+            if coreDataManager.tasksFilteredByDate.isEmpty {
                 NotFoundView(
                     title: strings.noTasks,
                     description: strings.noTasksDescription,
@@ -160,7 +160,7 @@ struct HomeView: View {
 
                     HStack {
                         if !homeViewModel.showCalendar || homeViewModel.showHeaderTap,
-                           !coreDataViewModel.allTasks.isEmpty {
+                           !coreDataManager.allTasks.isEmpty {
                             Image(systemName: "chevron.down")
                                 .font(.title3)
                                 .foregroundColor(themeManager.selectedTheme.pageTitleColor)
@@ -194,7 +194,7 @@ struct HomeView: View {
                     withAnimation {
                         ImpactManager.shared.generateFeedback()
 
-                        if coreDataViewModel.allTasks.isEmpty {
+                        if coreDataManager.allTasks.isEmpty {
                             navigationViewModel.showTaskAddingView.toggle()
                         } else {
                             homeViewModel.showCalendar.toggle()
@@ -206,7 +206,7 @@ struct HomeView: View {
                     }
                 }
 
-                if !coreDataViewModel.tasksFilteredByDate.isEmpty {
+                if !coreDataManager.tasksFilteredByDate.isEmpty {
                     Button(homeViewModel.editText) {
                         withAnimation {
                             homeViewModel.isEditing.toggle()
@@ -220,9 +220,9 @@ struct HomeView: View {
             .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
             .padding(.horizontal)
             .padding(.bottom, 5)
-            .animation(.linear, value: coreDataViewModel.tasksFilteredByDate.isEmpty)
+            .animation(.linear, value: coreDataManager.tasksFilteredByDate.isEmpty)
 
-            if !coreDataViewModel.allTasks.isEmpty && homeViewModel.showCalendar {
+            if !coreDataManager.allTasks.isEmpty && homeViewModel.showCalendar {
                 ScrollView(.horizontal, showsIndicators: false) {
                     calendarView()
                 }
@@ -250,7 +250,7 @@ struct HomeView: View {
         .environmentObject(HomeViewModel())
         .environmentObject(SettingsViewModel())
         .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataViewModel())
+        .environmentObject(CoreDataManager())
         .environmentObject(ThemeManager())
 }
 

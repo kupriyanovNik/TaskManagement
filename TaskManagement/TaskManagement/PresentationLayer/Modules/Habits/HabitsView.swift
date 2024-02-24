@@ -11,7 +11,7 @@ struct HabitsView: View {
     @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @EnvironmentObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
@@ -23,10 +23,10 @@ struct HabitsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
-                ForEach(coreDataViewModel.allHabits, id: \.habitID) { habit in
+                ForEach(coreDataManager.allHabits, id: \.habitID) { habit in
                     HabitCardView(
                         habitsViewModel: habitsViewModel,
-                        coreDataViewModel: coreDataViewModel,
+                        coreDataManager: coreDataManager,
                         habit: habit
                     ) { habit in
                         habitsViewModel.editHabit = habit
@@ -48,7 +48,7 @@ struct HabitsView: View {
             headerView()
         }
         .overlay {
-            if coreDataViewModel.allHabits.isEmpty {
+            if coreDataManager.allHabits.isEmpty {
                 NotFoundView(
                     title: strings.noHabits,
                     description: strings.noHabitsDescription,
@@ -81,7 +81,7 @@ struct HabitsView: View {
 
             Spacer()
 
-            if !coreDataViewModel.allHabits.isEmpty {
+            if !coreDataManager.allHabits.isEmpty {
                 Button(habitsViewModel.editText) {
                     withAnimation {
                         habitsViewModel.isEditing.toggle()
@@ -103,6 +103,6 @@ struct HabitsView: View {
         .environmentObject(HabitsViewModel())
         .environmentObject(SettingsViewModel())
         .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataViewModel())
+        .environmentObject(CoreDataManager())
         .environmentObject(ThemeManager())
 }

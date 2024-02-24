@@ -15,7 +15,7 @@ struct TaskManagementApp: App {
 
     @StateObject private var navigationViewModel = NavigationViewModel()
     @StateObject private var tabBarViewModel = TabBarViewModel()
-    @StateObject private var coreDataViewModel = CoreDataViewModel()
+    @StateObject private var coreDataManager = CoreDataManager()
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var allTasksViewModel = AllTasksViewModel()
     @StateObject private var habitsViewModel = HabitsViewModel()
@@ -46,7 +46,7 @@ struct TaskManagementApp: App {
                 MainNavigationView(
                     navigationViewModel: navigationViewModel,
                     tabBarViewModel: tabBarViewModel,
-                    coreDataViewModel: coreDataViewModel,
+                    coreDataManager: coreDataManager,
                     homeViewModel: homeViewModel,
                     allTasksViewModel: allTasksViewModel,
                     habitsViewModel: habitsViewModel,

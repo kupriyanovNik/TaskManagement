@@ -16,7 +16,7 @@ struct CustomTabBar: View {
     @EnvironmentObject var allTasksViewModel: AllTasksViewModel
     @EnvironmentObject var habitsViewModel: HabitsViewModel
     @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
     @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -31,7 +31,7 @@ struct CustomTabBar: View {
 
         return Button {
             if navigationViewModel.selectedTab == .home {
-                if !coreDataViewModel.allTasks.isEmpty {
+                if !coreDataManager.allTasks.isEmpty {
                     navigationViewModel.showAllTasksView.toggle()
                 }
             } else {
@@ -94,7 +94,7 @@ struct CustomTabBar: View {
         TaskAddingView()
             .environmentObject(homeViewModel)
             .environmentObject(navigationViewModel)
-            .environmentObject(coreDataViewModel)
+            .environmentObject(coreDataManager)
             .environmentObject(taskAddingViewModel)
             .environmentObject(themeManager)
     }
@@ -103,7 +103,7 @@ struct CustomTabBar: View {
         HabitAddingView()
             .environmentObject(habitAddingViewModel)
             .environmentObject(habitsViewModel)
-            .environmentObject(coreDataViewModel)
+            .environmentObject(coreDataManager)
             .environmentObject(themeManager)
     }
 
@@ -136,7 +136,7 @@ struct CustomTabBar: View {
                     .environmentObject(homeViewModel)
                     .environmentObject(settingsViewModel)
                     .environmentObject(navigationViewModel)
-                    .environmentObject(coreDataViewModel)
+                    .environmentObject(coreDataManager)
                     .environmentObject(themeManager)
             } label: {}
         }
@@ -146,7 +146,7 @@ struct CustomTabBar: View {
             ImpactManager.shared.generateFeedback(style: .rigid)
         }
         .padding(.horizontal, 30)
-        .animation(.linear, value: coreDataViewModel.allTasks.isEmpty)
+        .animation(.linear, value: coreDataManager.allTasks.isEmpty)
         .sheet(isPresented: $navigationViewModel.showTaskAddingView) {
             taskAddingViewDismissAction()
         } content: {
@@ -183,19 +183,20 @@ struct CustomTabBar: View {
         dismissEditInAllScreens()
 
         homeViewModel.editTask = nil
-        coreDataViewModel.fetchAllTasks()
-        coreDataViewModel.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
+        coreDataManager.fetchAllTasks()
+        coreDataManager.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
 
         if let filteringCategory = allTasksViewModel.filteringCategory {
-            coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
+            coreDataManager.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
         }
+
         taskAddingViewModel.reset()
     }
 
     private func habitAddingViewDismissAction() {
         dismissEditInAllScreens()
         habitAddingViewModel.reset()
-        coreDataViewModel.fetchAllTasks()
+        coreDataManager.fetchAllTasks()
     }
 
     private func dismissEditInAllScreens() {

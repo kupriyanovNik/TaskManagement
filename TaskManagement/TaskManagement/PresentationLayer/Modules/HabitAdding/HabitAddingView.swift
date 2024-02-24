@@ -10,7 +10,7 @@ struct HabitAddingView: View {
 
     @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
     @EnvironmentObject var habitsViewModel: HabitsViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @EnvironmentObject var themeManager: ThemeManager
 
     @Environment(\.dismiss) var dismiss
@@ -275,7 +275,7 @@ struct HabitAddingView: View {
                 }
             }
 
-            coreDataViewModel.updateHabit(
+            coreDataManager.updateHabit(
                 habit: habit,
                 title: habitAddingViewModel.habitTitle.removeLeadingSpacing(),
                 description: habitAddingViewModel.habitDescription,
@@ -285,7 +285,7 @@ struct HabitAddingView: View {
                 reminderText: habitAddingViewModel.reminderText
             )
         } else {
-            coreDataViewModel.addHabit(
+            coreDataManager.addHabit(
                 id: UUID().uuidString,
                 title: habitAddingViewModel.habitTitle.removeLeadingSpacing(),
                 description: habitAddingViewModel.habitDescription,
@@ -313,6 +313,6 @@ struct HabitAddingView: View {
     HabitAddingView()
         .environmentObject(HabitAddingViewModel())
         .environmentObject(HabitsViewModel())
-        .environmentObject(CoreDataViewModel())
+        .environmentObject(CoreDataManager())
         .environmentObject(ThemeManager())
 }

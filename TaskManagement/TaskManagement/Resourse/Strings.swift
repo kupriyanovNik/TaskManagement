@@ -33,6 +33,10 @@ enum Constants {
         static let taskModel = "TaskModel"
         static let habitModel = "HabitModel"
     }
+
+    enum Network {
+        static let urlString = "https://api.spaceflightnewsapi.net"
+    }
 }
 
 

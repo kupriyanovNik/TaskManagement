@@ -18,15 +18,21 @@ protocol Request {
 }
 
 extension Request {
+
+    // MARK: - Internal Properties
+
     var method: APIMethod { .get }
     var body: Codable? { nil }
     var headers: HTTPHeader? { nil }
     var queryParam: QueryParams? { nil }
-    
+
+    // MARK: - Internal Functions
+
     func asURLRequest(_ baseURL: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: baseURL) else { return nil }
         urlComponents.path = "\(urlComponents.path)\(path)"
         urlComponents.queryItems = addQueryParams(queryParams: queryParam)
+
         guard let finalURL = urlComponents.url else { return nil }
         
         var urlRequest = URLRequest(url: finalURL)
@@ -36,7 +42,9 @@ extension Request {
         
         return urlRequest
     }
-    
+
+    // MARK: - Private Properties
+
     private func requestFromBody() -> Data? {
         guard let body else { return nil }
         guard let httpBody = try? JSONEncoder().encode(body) else { return nil }

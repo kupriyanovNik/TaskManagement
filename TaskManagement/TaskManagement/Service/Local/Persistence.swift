@@ -26,9 +26,11 @@ struct PersistenceController {
 
     // MARK: - Internal Properties
 
-    let container: NSPersistentContainer
-
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }
+
+    // MARK: - Private Properties
+
+    private let container: NSPersistentContainer
 }

@@ -9,7 +9,7 @@ struct TaskCard: View {
 
     // MARK: - Property Wrappers
 
-    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
 
     @State private var showDetail: Bool = false
     @State private var showCardTap: Bool = false
@@ -66,7 +66,7 @@ struct TaskCard: View {
             
             withAnimation {
                 if isCompleted {
-                    coreDataViewModel.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
+                    coreDataManager.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
                 } else {
                     doneTask()
                 }
@@ -124,7 +124,7 @@ struct TaskCard: View {
         HStack(spacing: 12) {
             Button {
                 if isCompleted {
-                    coreDataViewModel.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
+                    coreDataManager.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
                 } else {
                     doneTask()
                 }
@@ -197,7 +197,7 @@ struct TaskCard: View {
 
     private func doneTask() {
         withAnimation(.spring) {
-            coreDataViewModel.doneTask(task: taskObject, date: taskObject.taskDate ?? .now)
+            coreDataManager.doneTask(task: taskObject, date: taskObject.taskDate ?? .now)
         }
 
         NotificationManager.shared.removeNotification(with: taskObject.taskID ?? "")
@@ -233,7 +233,7 @@ struct TaskCardView: View {
 
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var navigationViewModel: NavigationViewModel
-    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var themeManager: ThemeManager
 
@@ -257,7 +257,7 @@ struct TaskCardView: View {
             }
 
             TaskCard(
-                coreDataViewModel: coreDataViewModel,
+                coreDataManager: coreDataManager,
                 taskObject: task,
                 doneImageName: ImageNames.System.checkmark,
                 markAsCompletedName: Localizable.Home.markAsCompleted,
@@ -277,7 +277,7 @@ struct TaskCardView: View {
             if task.isCompleted {
                 Button {
                     withAnimation(.spring) {
-                        coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                        coreDataManager.undoneTask(task: task, date: task.taskDate ?? .now)
                     }
 
                     if task.shouldNotificate {
@@ -303,10 +303,10 @@ struct TaskCardView: View {
 
             Button {
                 withAnimation {
-                    coreDataViewModel.removeTask(task: task) { taskDate in
+                    coreDataManager.removeTask(task: task) { taskDate in
                         self.onRemove?(taskDate)
 
-                        if coreDataViewModel.allTasks.isEmpty {
+                        if coreDataManager.allTasks.isEmpty {
                             navigationViewModel.showAllTasksView = false
                         }
                     }
@@ -340,7 +340,7 @@ struct TaskCardView: View {
                     withAnimation(.spring) {
                         if task.isCompleted {
                             withAnimation(.spring) {
-                                coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                                coreDataManager.undoneTask(task: task, date: task.taskDate ?? .now)
                             }
 
                             if task.shouldNotificate {

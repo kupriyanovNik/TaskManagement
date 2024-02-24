@@ -1,12 +1,12 @@
 //
-//  CoreDataViewModel.swift
+//  CoreDataManager.swift
 //
 
 import Foundation
 import CoreData
 import SwiftUI
 
-class CoreDataViewModel: ObservableObject {
+class CoreDataManager: ObservableObject {
 
     // MARK: - Property Wrappers
 

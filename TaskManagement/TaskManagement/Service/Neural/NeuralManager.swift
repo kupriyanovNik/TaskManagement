@@ -11,6 +11,10 @@ class NeuralManager {
 
     static let shared = NeuralManager()
 
+    // MARK: - Inits
+
+    private init() { }
+
     // MARK: - Internal Functions
 
     @discardableResult
@@ -48,4 +52,3 @@ class NeuralManager {
         }
     }
 }
-

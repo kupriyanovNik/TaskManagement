@@ -17,7 +17,7 @@ struct HabitCardView: View {
     // MARK: - Property Wrappers
 
     @ObservedObject var habitsViewModel: HabitsViewModel
-    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
 
     @State private var cardState: CardState = .basic
 
@@ -122,8 +122,8 @@ struct HabitCardView: View {
 
             Button {
                 withAnimation {
-                    coreDataViewModel.removeHabit(habit: habit) { _, ids in
-                        coreDataViewModel.fetchAllHabits()
+                    coreDataManager.removeHabit(habit: habit) { _, ids in
+                        coreDataManager.fetchAllHabits()
                         NotificationManager.shared.removeNotifications(with: ids)
                     }
                 }

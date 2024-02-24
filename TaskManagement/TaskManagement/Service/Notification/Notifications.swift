@@ -25,22 +25,28 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     // MARK: - Internal Functions
 
     func requestAuthorization() {
-        UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .badge, .sound, .criticalAlert]) { success, error in
+        UNUserNotificationCenter
+            .current()
+            .requestAuthorization(
+                options: [.alert, .badge, .sound, .criticalAlert]
+            ) { success, error in
                 if let error {
                     print("DEBUG: \(error.localizedDescription)")
                 }
             }
+
         UNUserNotificationCenter.current().delegate = self
     }
 
     func removeNotification(with id: String) {
-        UNUserNotificationCenter.current()
+        UNUserNotificationCenter
+            .current()
             .removePendingNotificationRequests(withIdentifiers: [id])
     }
 
     func removeNotifications(with ids: [String]) {
-        UNUserNotificationCenter.current()
+        UNUserNotificationCenter
+            .current()
             .removePendingNotificationRequests(withIdentifiers: ids)
     }
 
@@ -54,24 +60,20 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         body: String,
         isCritical: Bool = false
     ) {
-        requestAuthorization()
+        if isNotificationEnabled == false {
+            requestAuthorization()
+        }
 
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.subtitle = subtitle
-        content.body = body
-        content.sound = isCritical ? .defaultCritical : .default
+        let content = makeContent(title: title, subtitle: subtitle, body: body, isCritical: isCritical)
 
-        var dateComp = DateComponents()
-        dateComp.hour = hour
-        dateComp.minute = minute
-        dateComp.day = day
+        var dateComp = makeDateComponents(day: day, hour: hour, minute: minute)
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
 
-        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        let request = makeRequest(id: id, trigger: trigger, content: content)
 
-        UNUserNotificationCenter.current()
+        UNUserNotificationCenter
+            .current()
             .add(request) { error in
                 if let error {
                     print("DEBUG: \(error.localizedDescription)")
@@ -86,34 +88,31 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         weekDays: [Int],
         reminderDate: Date
     ) -> [String] {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.subtitle = subtitle
-        content.sound = .default
+        let calendar = Calendar.current
+
+        let content = makeContent(title: title, subtitle: subtitle, body: "", isCritical: false)
 
         var notificationsIDs: [String] = []
-        let weekdaySymbols: [String] = Calendar.current.weekdaySymbols
+        let weekdaySymbols: [String] = calendar.weekdaySymbols
 
         for weekDayIndex in weekDays {
             let id = UUID().uuidString
 
-            let min = Calendar.current.component(.minute, from: reminderDate)
-            let hour = Calendar.current.component(.hour, from: reminderDate)
+            let min = calendar.component(.minute, from: reminderDate)
+            let hour = calendar.component(.hour, from: reminderDate)
             let day = weekdaySymbols.firstIndex { currentDay in
                 currentDay == weekdaySymbols[weekDayIndex]
             } ?? -1
 
             if day != -1 {
-                var components = DateComponents()
-                components.minute = min
-                components.hour = hour
-                components.weekday = day + 1
+                let components = makeDateComponents(day: day + 1, hour: hour, minute: min)
 
                 let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
 
-                let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+                let request = makeRequest(id: id, trigger: trigger, content: content)
 
-                UNUserNotificationCenter.current()
+                UNUserNotificationCenter
+                    .current()
                     .add(request)
 
                 notificationsIDs.append(id)
@@ -121,6 +120,21 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         }
 
         return notificationsIDs
+    }
+
+    func checkNotificationStatus() {
+        UNUserNotificationCenter
+            .current()
+            .getNotificationSettings { status in
+                switch status.authorizationStatus {
+                case .denied, .ephemeral:
+                    self.isNotificationEnabled = false
+                case .authorized, .notDetermined, .provisional:
+                    self.isNotificationEnabled = true
+                @unknown default:
+                    print("DEBUG: unowned notification status")
+                }
+            }
     }
 
     // MARK: - Crutches
@@ -133,23 +147,49 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             completionHandler([.sound, .banner])
     }
 
-    // MARK: - Debug
+    // MARK: - Debug Functions
 
     func removeAllNotifications() {
-        UNUserNotificationCenter.current()
+        UNUserNotificationCenter
+            .current()
             .removeAllPendingNotificationRequests()
     }
 
-    func checkNotificationStatus() {
-        UNUserNotificationCenter.current().getNotificationSettings { status in
-            switch status.authorizationStatus {
-            case .denied, .ephemeral:
-                self.isNotificationEnabled = false
-            case .authorized, .notDetermined, .provisional:
-                self.isNotificationEnabled = true
-            @unknown default:
-                print("DEBUG: unowned notification status")
-            }
-        }
+    // MARK: - Private Functions
+
+    private func makeRequest(
+        id: String,
+        trigger: UNCalendarNotificationTrigger,
+        content: UNMutableNotificationContent
+    ) -> UNNotificationRequest {
+        .init(identifier: id, content: content, trigger: trigger)
+    }
+
+    private func makeContent(
+        title: String,
+        subtitle: String,
+        body: String,
+        isCritical: Bool
+    ) -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = subtitle
+        content.body = body
+        content.sound = isCritical ? .defaultCritical : .default
+
+        return content
+    }
+
+    private func makeDateComponents(
+        day: Int,
+        hour: Int,
+        minute: Int
+    ) -> DateComponents {
+        var dateComp = DateComponents()
+        dateComp.hour = hour
+        dateComp.minute = minute
+        dateComp.day = day
+
+        return dateComp
     }
 }

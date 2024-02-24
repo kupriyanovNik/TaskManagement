@@ -14,7 +14,7 @@ struct ProfileView: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @EnvironmentObject var informationViewModel: InformationViewModel
     @EnvironmentObject var newsViewModel: NewsViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @EnvironmentObject var networkManager: NetworkManager
     @EnvironmentObject var themeManager: ThemeManager
 
@@ -24,11 +24,11 @@ struct ProfileView: View {
     private var systemImages = ImageNames.System.self
 
     private var allTodayTasksCount: Int {
-        coreDataViewModel.allTodayTasks.count
+        coreDataManager.allTodayTasks.count
     }
 
     private var allTodayDoneTasksCount: Int {
-        coreDataViewModel.allTodayTasks.filter { $0.isCompleted }.count
+        coreDataManager.allTodayTasks.filter { $0.isCompleted }.count
     }
 
     private var doneTodayTasksPercentage: Double {
@@ -76,7 +76,7 @@ struct ProfileView: View {
                 .padding(.horizontal)
                 .padding(.top, 5)
 
-                if !coreDataViewModel.allTodayTasks.isEmpty {
+                if !coreDataManager.allTodayTasks.isEmpty {
                     StatisticsGauge(
                         title: strings.todayDoneTasks,
                         fromValue: allTodayDoneTasksCount,
@@ -90,7 +90,7 @@ struct ProfileView: View {
             headerView()
         }
         .onAppear {
-            coreDataViewModel.fetchTodayTasks()
+            coreDataManager.fetchTodayTasks()
             showConfetti()
         }
         .confetti(
@@ -238,7 +238,7 @@ struct ProfileView: View {
         .environmentObject(SettingsViewModel())
         .environmentObject(InformationViewModel())
         .environmentObject(NewsViewModel())
-        .environmentObject(CoreDataViewModel())
+        .environmentObject(CoreDataManager())
         .environmentObject(NetworkManager())
         .environmentObject(ThemeManager())
 }

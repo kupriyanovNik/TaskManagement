@@ -10,7 +10,7 @@ struct TaskAddingView: View {
 
     @EnvironmentObject var homeViewModel: HomeViewModel
     @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
     @EnvironmentObject var themeManager: ThemeManager
 
@@ -169,7 +169,7 @@ struct TaskAddingView: View {
 
     private func saveAction() {
         if let task = homeViewModel.editTask {
-            coreDataViewModel.updateTask(
+            coreDataManager.updateTask(
                 task: task,
                 title: taskAddingViewModel.taskTitle,
                 description: taskAddingViewModel.taskDescription,
@@ -186,7 +186,7 @@ struct TaskAddingView: View {
                 )
             }
         } else {
-            coreDataViewModel.addTask(
+            coreDataManager.addTask(
                 id: UUID().uuidString,
                 title: taskAddingViewModel.taskTitle,
                 description: taskAddingViewModel.taskDescription,
@@ -234,7 +234,7 @@ struct TaskAddingView: View {
     TaskAddingView()
         .environmentObject(HomeViewModel())
         .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataViewModel())
+        .environmentObject(CoreDataManager())
         .environmentObject(TaskAddingViewModel())
         .environmentObject(ThemeManager())
 }

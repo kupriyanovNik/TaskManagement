@@ -13,7 +13,7 @@
 		B7181BE72AD45DC8002F3D82 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */; };
 		B7181BEA2AD4638D002F3D82 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BE92AD4638D002F3D82 /* OnboardingView.swift */; };
 		B7181BEC2AD463A3002F3D82 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7181BEB2AD463A3002F3D82 /* OnboardingViewModel.swift */; };
-		B71FD0FF2AD437910039270D /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71FD0FE2AD437910039270D /* CoreDataViewModel.swift */; };
+		B71FD0FF2AD437910039270D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71FD0FE2AD437910039270D /* CoreDataManager.swift */; };
 		B71FD1022AD43E810039270D /* TaskManagement.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */; };
 		B72972942AD850D400B9F8BF /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72972932AD850D400B9F8BF /* TabBarViewModel.swift */; };
 		B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72972962AD8547500B9F8BF /* AllTasksView.swift */; };
@@ -117,7 +117,7 @@
 		B7181BE62AD45DC8002F3D82 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		B7181BE92AD4638D002F3D82 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B7181BEB2AD463A3002F3D82 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
-		B71FD0FE2AD437910039270D /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
+		B71FD0FE2AD437910039270D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B71FD1012AD43E810039270D /* TaskManagement.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskManagement.xcdatamodel; sourceTree = "<group>"; };
 		B72972932AD850D400B9F8BF /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		B72972962AD8547500B9F8BF /* AllTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksView.swift; sourceTree = "<group>"; };
@@ -382,7 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				B73213C72ACC8EEB00E42B1D /* Persistence.swift */,
-				B71FD0FE2AD437910039270D /* CoreDataViewModel.swift */,
+				B71FD0FE2AD437910039270D /* CoreDataManager.swift */,
 				B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */,
 			);
 			path = Local;
@@ -865,7 +865,7 @@
 				B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */,
 				B7739F142AE179FE000F19EE /* CategorySelectorButtonStyle.swift in Sources */,
 				B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */,
-				B71FD0FF2AD437910039270D /* CoreDataViewModel.swift in Sources */,
+				B71FD0FF2AD437910039270D /* CoreDataManager.swift in Sources */,
 				B7DC65882AD56858009DA010 /* Theme.swift in Sources */,
 				B7181BE72AD45DC8002F3D82 /* CustomNavigationBar.swift in Sources */,
 				B72972942AD850D400B9F8BF /* TabBarViewModel.swift in Sources */,

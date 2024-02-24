@@ -10,7 +10,7 @@ struct MainNavigationView: View {
 
     @ObservedObject var navigationViewModel: NavigationViewModel
     @ObservedObject var tabBarViewModel: TabBarViewModel
-    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var allTasksViewModel: AllTasksViewModel
     @ObservedObject var habitsViewModel: HabitsViewModel
@@ -38,7 +38,7 @@ struct MainNavigationView: View {
                             .environmentObject(navigationViewModel)
                             .environmentObject(homeViewModel)
                             .environmentObject(settingsViewModel)
-                            .environmentObject(coreDataViewModel)
+                            .environmentObject(coreDataManager)
                             .environmentObject(themeManager)
                         
                     case .habits:
@@ -46,7 +46,7 @@ struct MainNavigationView: View {
                             .environmentObject(habitsViewModel)
                             .environmentObject(settingsViewModel)
                             .environmentObject(navigationViewModel)
-                            .environmentObject(coreDataViewModel)
+                            .environmentObject(coreDataManager)
                             .environmentObject(themeManager)
 
                     case .profile:
@@ -56,7 +56,7 @@ struct MainNavigationView: View {
                             .environmentObject(settingsViewModel)
                             .environmentObject(informationViewModel)
                             .environmentObject(newsViewModel)
-                            .environmentObject(coreDataViewModel)
+                            .environmentObject(coreDataManager)
                             .environmentObject(networkManager)
                             .environmentObject(themeManager)
                     }
@@ -70,7 +70,7 @@ struct MainNavigationView: View {
                     .environmentObject(allTasksViewModel)
                     .environmentObject(settingsViewModel)
                     .environmentObject(habitsViewModel)
-                    .environmentObject(coreDataViewModel)
+                    .environmentObject(coreDataManager)
                     .environmentObject(taskAddingViewModel)
                     .environmentObject(habitAddingViewModel)
                     .environmentObject(themeManager)
