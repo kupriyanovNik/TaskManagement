@@ -8,7 +8,7 @@ struct ThemePickerCell: View {
 
     // MARK: - Internal Properties
 
-    var theme: Theme
+    var theme: ThemeProtocol
     var isSelected: Bool
     var onSelect: () -> ()
 

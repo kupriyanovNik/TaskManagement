@@ -5,6 +5,9 @@
 import Foundation
 
 extension Bundle {
+
+    // MARK: - Internal Properties
+
     var appName: String {
         getInfo("CFBundleName")
     }
@@ -33,6 +36,8 @@ extension Bundle {
     var appVersionLong: String {
         getInfo("CFBundleShortVersionString")
     }
+
+    // MARK: - Private Functions 
 
     private func getInfo(_ str: String) -> String { 
         infoDictionary?[str] as? String ?? "⚠️"

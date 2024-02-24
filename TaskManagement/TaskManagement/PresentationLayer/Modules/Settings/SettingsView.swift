@@ -38,8 +38,8 @@ struct SettingsView: View {
             if isExpanded {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: -10) {
-                        ForEach(0..<DataSource.themesCount) { themeIndex in
-                            let theme = DataSource.getTheme(themeIndex: themeIndex)
+                        ForEach(0..<ThemeDataSource.themesCount) { themeIndex in
+                            let theme = ThemeDataSource.getTheme(themeIndex: themeIndex)
                             let isSelected = theme.accentColor == themeManager.selectedTheme.accentColor
 
                             ThemePickerCell(

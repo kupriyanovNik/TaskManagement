@@ -1,14 +1,14 @@
 //
-//  DataSource.swift
+// ThemeDataSource.swift
 //
 
 import SwiftUI
 
-enum DataSource {
+enum ThemeDataSource {
 
     // MARK: - Static Properties
 
-    static let themes: [Theme] = [
+    static let themes: [ThemeProtocol] = [
         Theme1(),
         Theme2(),
         Theme3(),
@@ -21,7 +21,7 @@ enum DataSource {
 
     // MARK: - Static Functions
 
-    static func getTheme(themeIndex: Int) -> Theme {
+    static func getTheme(themeIndex: Int) -> ThemeProtocol {
         Self.themes[themeIndex]
     }
 }
