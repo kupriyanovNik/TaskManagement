@@ -8,27 +8,21 @@ struct MainNavigationView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var tabBarViewModel: TabBarViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var allTasksViewModel: AllTasksViewModel
-    @EnvironmentObject var habitsViewModel: HabitsViewModel
-    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
-    @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
-    @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
-    @EnvironmentObject var profileViewModel: ProfileViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var informationViewModel: InformationViewModel
-    @EnvironmentObject var newsViewModel: NewsViewModel
-    @EnvironmentObject var networkManager: NetworkManager
-    @EnvironmentObject var themeManager: ThemeManager
-
-    // MARK: - Inits
-
-    init() {
-        UITabBar.appearance().isHidden = true
-    }
+    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var tabBarViewModel: TabBarViewModel
+    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var allTasksViewModel: AllTasksViewModel
+    @ObservedObject var habitsViewModel: HabitsViewModel
+    @ObservedObject var taskAddingViewModel: TaskAddingViewModel
+    @ObservedObject var habitAddingViewModel: HabitAddingViewModel
+    @ObservedObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
+    @ObservedObject var profileViewModel: ProfileViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var informationViewModel: InformationViewModel
+    @ObservedObject var newsViewModel: NewsViewModel
+    @ObservedObject var networkManager: NetworkManager
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Body
 
@@ -87,6 +81,9 @@ struct MainNavigationView: View {
                 .linear(duration: settingsViewModel.shouldShowTabBarAnimation ? 0.3 : 0.0),
                 value: navigationViewModel.selectedTab
             )
+            .onAppear {
+                UITabBar.appearance().isHidden = true
+            }
         }
     }
 }
