@@ -76,7 +76,6 @@
 		B7BA603E2B0FC32D00D1DE5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA603D2B0FC32D00D1DE5A /* NetworkManager.swift */; };
 		B7BA60412B0FC65700D1DE5A /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60402B0FC65700D1DE5A /* NewsView.swift */; };
 		B7BA60432B0FC66100D1DE5A /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA60422B0FC66100D1DE5A /* NewsViewModel.swift */; };
-		B7BA60462B0FCB4400D1DE5A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B7BA60452B0FCB4400D1DE5A /* Kingfisher */; };
 		B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */; };
 		B7C605962B0F8C060029090E /* HabitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */; };
 		B7D949AC2AE04C6C00FE5CAE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* NotificationManager.swift */; };
@@ -91,6 +90,7 @@
 		B7E306A82B93828C0086F28D /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E306A72B93828C0086F28D /* NetworkConstants.swift */; };
 		B7E306AA2B9384B70086F28D /* CoreDataConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E306A92B9384B70086F28D /* CoreDataConstants.swift */; };
 		B7E306AC2B9385190086F28D /* DateFormatConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E306AB2B9385190086F28D /* DateFormatConstants.swift */; };
+		B7E306B02B938CFE0086F28D /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E306AF2B938CFE0086F28D /* CachedAsyncImage.swift */; };
 		B7F016312AD4752200B9F670 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F016302AD4752200B9F670 /* Date.swift */; };
 		B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F016352AD487C900B9F670 /* UINavigationController.swift */; };
 		B7F0163A2AD48DB600B9F670 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F016392AD48DB600B9F670 /* SettingsView.swift */; };
@@ -198,6 +198,7 @@
 		B7E306A72B93828C0086F28D /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		B7E306A92B9384B70086F28D /* CoreDataConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConstants.swift; sourceTree = "<group>"; };
 		B7E306AB2B9385190086F28D /* DateFormatConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatConstants.swift; sourceTree = "<group>"; };
+		B7E306AF2B938CFE0086F28D /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 		B7F016302AD4752200B9F670 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		B7F016352AD487C900B9F670 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		B7F016392AD48DB600B9F670 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -223,7 +224,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7BA60462B0FCB4400D1DE5A /* Kingfisher in Frameworks */,
 				B736A2A32AE4456B00977067 /* SPConfetti in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +457,7 @@
 				B7739F152AE17F8C000F19EE /* TaskCardView.swift */,
 				B76D5F2A2AF6C6CA0092D11D /* HabitCardView.swift */,
 				B73165AD2AEC244700BF2CA7 /* NotFoundView.swift */,
+				B7E306AF2B938CFE0086F28D /* CachedAsyncImage.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -743,7 +744,6 @@
 			name = TaskManagement;
 			packageProductDependencies = (
 				B736A2A22AE4456B00977067 /* SPConfetti */,
-				B7BA60452B0FCB4400D1DE5A /* Kingfisher */,
 			);
 			productName = TaskManagement;
 			productReference = B7F515C32ACB27060001A282 /* TaskManagement.app */;
@@ -780,7 +780,6 @@
 			mainGroup = B7F515BA2ACB27060001A282;
 			packageReferences = (
 				B736A2A12AE4456B00977067 /* XCRemoteSwiftPackageReference "SPConfetti" */,
-				B7BA60442B0FCB4400D1DE5A /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = B7F515C42ACB27060001A282 /* Products */;
 			projectDirPath = "";
@@ -912,6 +911,7 @@
 				B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */,
 				B7BA60382B0FC16000D1DE5A /* ApiMethods.swift in Sources */,
 				B7DC658C2AD56967009DA010 /* ThemeManager.swift in Sources */,
+				B7E306B02B938CFE0086F28D /* CachedAsyncImage.swift in Sources */,
 				B7E306AA2B9384B70086F28D /* CoreDataConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1205,14 +1205,6 @@
 				minimumVersion = 1.4.1;
 			};
 		};
-		B7BA60442B0FCB4400D1DE5A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.10.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1220,11 +1212,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B736A2A12AE4456B00977067 /* XCRemoteSwiftPackageReference "SPConfetti" */;
 			productName = SPConfetti;
-		};
-		B7BA60452B0FCB4400D1DE5A /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B7BA60442B0FCB4400D1DE5A /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 

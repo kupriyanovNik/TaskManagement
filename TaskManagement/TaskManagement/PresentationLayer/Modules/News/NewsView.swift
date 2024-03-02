@@ -3,7 +3,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct NewsView: View {
 
@@ -75,12 +74,30 @@ struct NewsView: View {
                 .font(.title2)
                 .foregroundColor(themeManager.selectedTheme.accentColor)
 
-            KFImage
-                .url(URL(string: new.imageUrl))
-                .fade(duration: 0.2)
-                .resizable()
-                .scaledToFit()
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+//            KFImage
+//                .url(URL(string: new.imageUrl))
+//                .fade(duration: 0.2)
+//                .resizable()
+//                .scaledToFit()
+//                .clipShape(RoundedRectangle(cornerRadius: 20))
+            
+            CachedAsyncImage(imageUrlString: new.imageUrl) { image in
+                Image(uiImage: image)
+                    .resizable()
+
+            } placeholder: {
+                Rectangle()
+                    .foregroundStyle(
+                        .linearGradient(
+                            colors: [.white.opacity(0.5), .gray],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+            }
+            .scaledToFit()
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+
 
             Text(new.title)
                 .font(.headline)
