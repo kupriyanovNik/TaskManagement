@@ -1,5 +1,5 @@
 //
-//  Images.swift
+//  ImageConstants.swift
 //
 
 import Foundation

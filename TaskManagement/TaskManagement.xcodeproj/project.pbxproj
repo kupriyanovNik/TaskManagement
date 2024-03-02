@@ -315,7 +315,7 @@
 				B70C875F2B08E08B00EBD924 /* MLModels */,
 				B7F515CA2ACB27070001A282 /* Assets.xcassets */,
 				B7DC65852AD56756009DA010 /* Localizable */,
-				B7E306A42B9381550086F28D /* Strings */,
+				B7E306A42B9381550086F28D /* Constants */,
 			);
 			path = Resourse;
 			sourceTree = "<group>";
@@ -640,7 +640,7 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		B7E306A42B9381550086F28D /* Strings */ = {
+		B7E306A42B9381550086F28D /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				B73213CA2ACC934100E42B1D /* ImageConstants.swift */,
@@ -649,7 +649,7 @@
 				B7E306A52B9381630086F28D /* UserDefaultsConstants.swift */,
 				B7E306A72B93828C0086F28D /* NetworkConstants.swift */,
 			);
-			path = Strings;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		B7F016382AD48D8600B9F670 /* Settings */ = {
