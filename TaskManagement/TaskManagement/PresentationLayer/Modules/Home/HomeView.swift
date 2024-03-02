@@ -20,7 +20,7 @@ struct HomeView: View {
     // MARK: - Private Properties
 
     private var strings = Localizable.Home.self
-    private var systemImages = ImageNames.System.self
+    private var systemImages = ImageConstants.System.self
     private var dateFormats = Constants.DateFormats.self
     private var animationNames = Constants.MatchedGeometryNames.self
 
@@ -94,8 +94,9 @@ struct HomeView: View {
         HStack(spacing: 10) {
             ForEach(homeViewModel.currentWeek, id: \.timeIntervalSince1970) { day in
                 let isToday = homeViewModel.isSameAsSelectedDay(date: day)
-                let dateNumber = homeViewModel.extractDate(date: day, format: dateFormats.forDateNumber)
-                let dateLiteral = homeViewModel.extractDate(date: day, format: dateFormats.forDateLiteral)
+                
+                let dateNumber = day.extract(with: dateFormats.forDateNumber)
+                let dateLiteral = day.extract(with: dateFormats.forDateLiteral)
 
                 VStack(spacing: 10) {
                     Text(dateNumber)

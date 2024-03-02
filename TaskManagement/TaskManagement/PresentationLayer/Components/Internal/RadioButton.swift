@@ -26,7 +26,7 @@ struct RadioButton: View {
                     .fill(accentColor)
                     .padding(2)
                     .overlay {
-                        Image(systemName: ImageNames.System.checkmark)
+                        Image(systemName: ImageConstants.System.checkmark)
                             .foregroundColor(.white)
                     }
                     .transition(.opacity.combined(with: .scale))

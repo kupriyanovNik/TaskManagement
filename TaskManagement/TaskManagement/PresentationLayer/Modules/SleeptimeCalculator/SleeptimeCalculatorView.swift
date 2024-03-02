@@ -17,7 +17,7 @@ struct SleeptimeCalculatorView: View {
     // MARK: - Private Properties
 
     private var strings = Localizable.SleeptimeCalculator.self
-    private var systemImages = ImageNames.System.self
+    private var systemImages = ImageConstants.System.self
 
     private var userAge: Int {
         Int(settingsViewModel.userAge) ?? 10

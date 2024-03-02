@@ -19,7 +19,7 @@ struct TaskAddingView: View {
     // MARK: - Private Properties
 
     private var strings = Localizable.TaskAdding.self
-    private var systemImages = ImageNames.System.self
+    private var systemImages = ImageConstants.System.self
 
     // MARK: - Body
 

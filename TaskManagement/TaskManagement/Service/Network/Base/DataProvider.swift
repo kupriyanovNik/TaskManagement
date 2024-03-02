@@ -11,7 +11,7 @@ final class DataProvider {
     static var sessionDispatcher: SessionDispatcher = .init()
     
     static func fetchData<R: Request>(_ request: R) async throws -> R.ReturnType {
-        let urlString = Constants.Network.urlString
+        let urlString = NetworkConstants.urlString.rawValue
         guard let urlRequest = request.asURLRequest(urlString) else {
             throw APIError.badRequest
         }

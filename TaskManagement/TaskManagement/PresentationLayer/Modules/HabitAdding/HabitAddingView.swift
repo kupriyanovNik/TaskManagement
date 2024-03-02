@@ -17,7 +17,7 @@ struct HabitAddingView: View {
 
     // MARK: - Private Properties
 
-    private var systemImages = ImageNames.System.self
+    private var systemImages = ImageConstants.System.self
     private var strings = Localizable.HabitAdding.self
 
     // MARK: - Body

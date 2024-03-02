@@ -12,15 +12,15 @@ class NewsViewModel: ObservableObject {
     @Published var showHeaderTap: Bool = false
 
     @AppStorage(
-        UserDefaultsKeys.leastNewsTime.rawValue
+        UserDefaultsConstants.leastNewsTime.rawValue
     ) var leastTime: Int = 30 * 60 // 30 min in seconds
 
     @AppStorage(
-        UserDefaultsKeys.lastTimeSeenNews.rawValue
+        UserDefaultsConstants.lastTimeSeenNews.rawValue
     ) var lastSeenNews: Double = 0
 
     @AppStorage(
-        UserDefaultsKeys.lastTimeOpenNews.rawValue
+        UserDefaultsConstants.lastTimeOpenNews.rawValue
     ) var lastOpenNews: Double = 0
 
     // MARK: - Private Properties

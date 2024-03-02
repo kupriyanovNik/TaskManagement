@@ -259,7 +259,7 @@ struct TaskCardView: View {
             TaskCard(
                 coreDataManager: coreDataManager,
                 taskObject: task,
-                doneImageName: ImageNames.System.checkmark,
+                doneImageName: ImageConstants.System.checkmark,
                 markAsCompletedName: Localizable.Home.markAsCompleted,
                 markedAsCompletedName: Localizable.Home.markedAsCompleted
             )
@@ -284,7 +284,7 @@ struct TaskCardView: View {
                         sendNotification(task: task)
                     }
                 } label: {
-                    Image(systemName: ImageNames.System.xmarkCircleFill)
+                    Image(systemName: ImageConstants.System.xmarkCircleFill)
                         .font(.title2)
                         .foregroundColor(.primary)
                 }
@@ -295,7 +295,7 @@ struct TaskCardView: View {
                     homeViewModel.editTask = task
                     navigationViewModel.showTaskAddingView.toggle()
                 } label: {
-                    Image(systemName: ImageNames.System.pencilCircleFill)
+                    Image(systemName: ImageConstants.System.pencilCircleFill)
                         .font(.title2)
                         .foregroundColor(.primary)
                 }
@@ -312,7 +312,7 @@ struct TaskCardView: View {
                     }
                 }
             } label: {
-                Image(systemName: ImageNames.System.minusCircleFill)
+                Image(systemName: ImageConstants.System.minusCircleFill)
                     .font(.title2)
                     .foregroundColor(.red)
             }

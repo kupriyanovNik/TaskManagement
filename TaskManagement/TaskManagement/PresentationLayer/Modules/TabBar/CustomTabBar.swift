@@ -23,8 +23,8 @@ struct CustomTabBar: View {
 
     // MARK: Private Properties
 
-    private var systemImages = ImageNames.System.self
-    private var tabBarImages = ImageNames.TabBarImages.self
+    private var systemImages = ImageConstants.System.self
+    private var tabBarImages = ImageConstants.TabBarImages.self
 
     private var homeButton: some View {
         let isSelected = navigationViewModel.selectedTab == .home

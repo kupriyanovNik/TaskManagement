@@ -22,7 +22,7 @@ struct GeometryReaderView: View {
 
     // MARK: - Private Properties
 
-    private let systemImages = ImageNames.System.self
+    private let systemImages = ImageConstants.System.self
 
     // MARK: - Body
 

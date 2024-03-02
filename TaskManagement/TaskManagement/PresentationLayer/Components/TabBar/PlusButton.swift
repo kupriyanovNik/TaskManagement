@@ -40,7 +40,7 @@ struct PlusButton: View {
                 .rotationEffect(.degrees(tabBarViewModel.gradientRotation))
                 .frame(width: 48)
 
-            Image(systemName: ImageNames.System.plus)
+            Image(systemName: ImageConstants.System.plus)
                 .font(.title2.bold())
                 .foregroundColor(.black)
 

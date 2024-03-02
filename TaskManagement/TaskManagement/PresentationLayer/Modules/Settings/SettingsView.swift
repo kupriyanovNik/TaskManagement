@@ -15,7 +15,7 @@ struct SettingsView: View {
     // MARK: - Private Properties
 
     private var strings = Localizable.Settings.self
-    private var systemImages = ImageNames.System.self
+    private var systemImages = ImageConstants.System.self
 
     private var themeSelectionRow: some View {
         let isExpanded = settingsViewModel.showExpandedThemePicker
@@ -99,7 +99,7 @@ struct SettingsView: View {
                 UserDefaults.standard
                     .setValue(
                         true,
-                        forKey: UserDefaultsKeys.shouldShowOnboarding.rawValue
+                        forKey: UserDefaultsConstants.shouldShowOnboarding.rawValue
                     )
             }
 

@@ -4,7 +4,7 @@
 
 import Foundation
 
-enum UserDefaultsKeys: String {
+enum UserDefaultsConstants: String {
     case shouldShowOnboarding
     case selectedThemeIndex
     case lastTimeShowConfetti

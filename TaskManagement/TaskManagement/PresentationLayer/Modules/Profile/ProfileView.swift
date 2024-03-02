@@ -21,7 +21,7 @@ struct ProfileView: View {
     // MARK: - Private Properties
 
     private var strings = Localizable.Profile.self
-    private var systemImages = ImageNames.System.self
+    private var systemImages = ImageConstants.System.self
 
     private var allTodayTasksCount: Int {
         coreDataManager.allTodayTasks.count

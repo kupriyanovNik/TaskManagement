@@ -29,7 +29,7 @@ struct HabitCardView: View {
 
     // MARK: - Private Properties
 
-    private let systemImages = ImageNames.System.self
+    private let systemImages = ImageConstants.System.self
     private let strings = Localizable.HabitCard.self
     private let calendar = Calendar.current
 

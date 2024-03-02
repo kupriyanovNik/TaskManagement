@@ -16,7 +16,7 @@ struct InformationView: View {
     // MARK: - Private Properties
 
     private let strings = Localizable.Information.self
-    private let systemImages = ImageNames.System.self
+    private let systemImages = ImageConstants.System.self
     private let bundle = Bundle.main
 
     private var timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
