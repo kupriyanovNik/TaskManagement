@@ -79,7 +79,7 @@
 		B7BA60462B0FCB4400D1DE5A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B7BA60452B0FCB4400D1DE5A /* Kingfisher */; };
 		B7BFABB82B090F5E0095555B /* SleeptimeCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */; };
 		B7C605962B0F8C060029090E /* HabitsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */; };
-		B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */; };
+		B7D949AC2AE04C6C00FE5CAE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AB2AE04C6C00FE5CAE /* NotificationManager.swift */; };
 		B7D949AF2AE04D9E00FE5CAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */; };
 		B7DC65882AD56858009DA010 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC65872AD56858009DA010 /* ThemeProtocol.swift */; };
 		B7DC658A2AD568C3009DA010 /* ThemeDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DC65892AD568C3009DA010 /* ThemeDefinition.swift */; };
@@ -186,7 +186,7 @@
 		B7BA60422B0FC66100D1DE5A /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		B7BFABB72B090F5E0095555B /* SleeptimeCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleeptimeCalculatorViewModel.swift; sourceTree = "<group>"; };
 		B7C605952B0F8C060029090E /* HabitsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewModelTests.swift; sourceTree = "<group>"; };
-		B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		B7D949AB2AE04C6C00FE5CAE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B7D949AE2AE04D9E00FE5CAE /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		B7DC65872AD56858009DA010 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		B7DC65892AD568C3009DA010 /* ThemeDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDefinition.swift; sourceTree = "<group>"; };
@@ -606,7 +606,7 @@
 		B7D949AA2AE04B7A00FE5CAE /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				B7D949AB2AE04C6C00FE5CAE /* Notifications.swift */,
+				B7D949AB2AE04C6C00FE5CAE /* NotificationManager.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -874,7 +874,7 @@
 				B70C87662B08E14300EBD924 /* NeuralManager.swift in Sources */,
 				B7BA60312B0FC16000D1DE5A /* SessionDispatch.swift in Sources */,
 				B74985662B0122E000AB6EDB /* HeaderButtonStyle.swift in Sources */,
-				B7D949AC2AE04C6C00FE5CAE /* Notifications.swift in Sources */,
+				B7D949AC2AE04C6C00FE5CAE /* NotificationManager.swift in Sources */,
 				B77F6E682B1CEDE2006AD86E /* InformationViewModel.swift in Sources */,
 				B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */,
 				B72D16C82B25E26E006CCD2D /* TypingEffectView.swift in Sources */,
