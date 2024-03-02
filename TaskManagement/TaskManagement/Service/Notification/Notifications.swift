@@ -6,7 +6,7 @@ import Foundation
 import UserNotificationsUI
 import UserNotifications
 
-class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
+final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     // MARK: - Static Properties
 

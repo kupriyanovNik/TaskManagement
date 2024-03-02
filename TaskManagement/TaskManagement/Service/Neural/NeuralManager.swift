@@ -5,7 +5,7 @@
 import Foundation
 import CoreML
 
-class NeuralManager {
+final class NeuralManager {
 
     // MARK: - Static Properties
 

@@ -5,7 +5,7 @@
 import Foundation
 
 @MainActor
-class NetworkManager: ObservableObject {
+final class NetworkManager: ObservableObject {
 
     // MARK: - Property Wrappers
 

@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ImpactManager {
+final class ImpactManager {
 
     // MARK: - Static Properties
 
@@ -19,5 +19,4 @@ class ImpactManager {
     func generateFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle = .soft) {
         UIImpactFeedbackGenerator(style: style).impactOccurred()
     }
-
 }

@@ -6,7 +6,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
-class CoreDataManager: ObservableObject {
+final class CoreDataManager: ObservableObject {
 
     // MARK: - Property Wrappers
 

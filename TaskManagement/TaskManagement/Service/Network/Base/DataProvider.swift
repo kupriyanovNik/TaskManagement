@@ -9,7 +9,9 @@ final class DataProvider {
     // MARK: - Static Properties
 
     static var sessionDispatcher: SessionDispatcher = .init()
-    
+
+    // MARK: - Static Functions
+
     static func fetchData<R: Request>(_ request: R) async throws -> R.ReturnType {
         let urlString = NetworkConstants.urlString.rawValue
         guard let urlRequest = request.asURLRequest(urlString) else {

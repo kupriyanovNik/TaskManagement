@@ -43,7 +43,7 @@ extension Request {
         return urlRequest
     }
 
-    // MARK: - Private Properties
+    // MARK: - Private Functions
 
     private func requestFromBody() -> Data? {
         guard let body else { return nil }
