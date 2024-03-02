@@ -10,7 +10,7 @@ struct TaskManagementApp: App {
     // MARK: - Property Wrappers
 
     @AppStorage(
-        Constants.UserDefaultsKeys.shouldShowOnboarding
+        UserDefaultsKeys.shouldShowOnboarding.rawValue
     ) var shouldShowOnboarding: Bool = true
 
     @StateObject private var navigationViewModel = NavigationViewModel()

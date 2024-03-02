@@ -97,7 +97,10 @@ struct SettingsView: View {
         return VStack(alignment: .center) {
             Button("show onboarding") {
                 UserDefaults.standard
-                    .setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
+                    .setValue(
+                        true,
+                        forKey: UserDefaultsKeys.shouldShowOnboarding.rawValue
+                    )
             }
 
             Button("remove all notifications") {

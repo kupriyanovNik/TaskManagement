@@ -12,10 +12,6 @@ class ProfileViewModel: ObservableObject {
     @Published var showConfetti: Bool = false 
 
     @AppStorage(
-        Constants.UserDefaultsKeys.lastTimeShowConfetti
-    ) var lastTimeShowConfetti: Double = 0 {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+        UserDefaultsKeys.lastTimeShowConfetti.rawValue
+    ) var lastTimeShowConfetti: Double = 0
 }

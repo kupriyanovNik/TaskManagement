@@ -11,7 +11,7 @@ class ThemeManager: ObservableObject {
     @Published var selectedTheme: ThemeProtocol = Theme1()
 
     @AppStorage(
-        Constants.UserDefaultsKeys.selectedTheme
+        UserDefaultsKeys.selectedThemeIndex.rawValue
     ) var selectedThemeIndex: Int = 0 {
         didSet {
             updateTheme()
