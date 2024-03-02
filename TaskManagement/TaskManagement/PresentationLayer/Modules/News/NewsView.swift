@@ -9,18 +9,18 @@ struct NewsView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var newsViewModel: NewsViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var networkManager: NetworkManager
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var newsViewModel: NewsViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var networkManager: NetworkManager
+    @ObservedObject var themeManager: ThemeManager
+
 
     // MARK: - Private Properties
 
-    private var systemImages = ImageConstants.System.self
-
-    private var strings = Localizable.News.self
+    private let systemImages = ImageConstants.System.self
+    private let strings = Localizable.News.self
 
     // MARK: - Body
 
@@ -170,9 +170,10 @@ struct NewsView: View {
 // MARK: - Preview
 
 #Preview {
-    NewsView()
-        .environmentObject(NewsViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(NetworkManager())
-        .environmentObject(ThemeManager())
+    NewsView(
+        newsViewModel: .init(),
+        settingsViewModel: .init(),
+        networkManager: .init(),
+        themeManager: .init()
+    )
 }

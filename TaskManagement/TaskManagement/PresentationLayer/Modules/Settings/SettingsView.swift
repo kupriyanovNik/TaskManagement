@@ -8,14 +8,15 @@ struct SettingsView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var themeManager: ThemeManager
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Settings.self
-    private var systemImages = ImageConstants.System.self
+    private let strings = Localizable.Settings.self
+    private let systemImages = ImageConstants.System.self
 
     private var themeSelectionRow: some View {
         let isExpanded = settingsViewModel.showExpandedThemePicker
@@ -219,8 +220,9 @@ struct SettingsView: View {
 // MARK: - Preview
 
 #Preview {
-    SettingsView()
-        .environmentObject(ThemeManager())
-        .environmentObject(SettingsViewModel())
+    SettingsView(
+        settingsViewModel: .init(),
+        themeManager: .init()
+    )
 }
 

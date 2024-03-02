@@ -8,19 +8,19 @@ struct AllTasksView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var allTasksViewModel: AllTasksViewModel
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataManager: CoreDataManager
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var allTasksViewModel: AllTasksViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var systemImages = ImageConstants.System.self
-    private var strings = Localizable.AllTasks.self
+    private let systemImages = ImageConstants.System.self
+    private let strings = Localizable.AllTasks.self
 
     // MARK: - Body
 
@@ -231,11 +231,12 @@ struct AllTasksView: View {
 // MARK: - Preview
 
 #Preview {
-    AllTasksView()
-        .environmentObject(CoreDataManager())
-        .environmentObject(HomeViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(NavigationViewModel())
-        .environmentObject(AllTasksViewModel())
-        .environmentObject(ThemeManager())
+    AllTasksView(
+        allTasksViewModel: .init(),
+        homeViewModel: .init(),
+        settingsViewModel: .init(),
+        navigationViewModel: .init(),
+        coreDataManager: .init(),
+        themeManager: .init()
+    )
 }

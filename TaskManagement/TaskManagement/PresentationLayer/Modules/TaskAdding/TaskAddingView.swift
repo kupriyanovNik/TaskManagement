@@ -8,18 +8,18 @@ struct TaskAddingView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataManager: CoreDataManager
-    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var taskAddingViewModel: TaskAddingViewModel
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.TaskAdding.self
-    private var systemImages = ImageConstants.System.self
+    private let strings = Localizable.TaskAdding.self
+    private let systemImages = ImageConstants.System.self
 
     // MARK: - Body
 
@@ -231,10 +231,11 @@ struct TaskAddingView: View {
 // MARK: - Preview
 
 #Preview {
-    TaskAddingView()
-        .environmentObject(HomeViewModel())
-        .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataManager())
-        .environmentObject(TaskAddingViewModel())
-        .environmentObject(ThemeManager())
+    TaskAddingView(
+        homeViewModel: .init(),
+        navigationViewModel: .init(),
+        coreDataManager: .init(),
+        taskAddingViewModel: .init(),
+        themeManager: .init()
+    )
 }

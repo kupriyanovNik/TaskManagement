@@ -8,17 +8,17 @@ struct HabitAddingView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
-    @EnvironmentObject var habitsViewModel: HabitsViewModel
-    @EnvironmentObject var coreDataManager: CoreDataManager
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var habitAddingViewModel: HabitAddingViewModel
+    @ObservedObject var habitsViewModel: HabitsViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var systemImages = ImageConstants.System.self
-    private var strings = Localizable.HabitAdding.self
+    private let systemImages = ImageConstants.System.self
+    private let strings = Localizable.HabitAdding.self
 
     // MARK: - Body
 
@@ -310,9 +310,10 @@ struct HabitAddingView: View {
 // MARK: - Preview
 
 #Preview {
-    HabitAddingView()
-        .environmentObject(HabitAddingViewModel())
-        .environmentObject(HabitsViewModel())
-        .environmentObject(CoreDataManager())
-        .environmentObject(ThemeManager())
+    HabitAddingView(
+        habitAddingViewModel: .init(),
+        habitsViewModel: .init(),
+        coreDataManager: .init(),
+        themeManager: .init()
+    )
 }

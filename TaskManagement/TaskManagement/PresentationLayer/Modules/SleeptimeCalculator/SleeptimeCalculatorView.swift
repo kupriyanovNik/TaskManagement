@@ -8,16 +8,16 @@ struct SleeptimeCalculatorView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.SleeptimeCalculator.self
-    private var systemImages = ImageConstants.System.self
+    private let strings = Localizable.SleeptimeCalculator.self
+    private let systemImages = ImageConstants.System.self
 
     private var userAge: Int {
         Int(settingsViewModel.userAge) ?? 10
@@ -224,8 +224,9 @@ struct SleeptimeCalculatorView: View {
 }
 
 #Preview {
-    SleeptimeCalculatorView()
-        .environmentObject(SleeptimeCalculatorViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(ThemeManager())
+    SleeptimeCalculatorView(
+        sleeptimeCalculatorViewModel: .init(),
+        settingsViewModel: .init(),
+        themeManager: .init()
+    )
 }

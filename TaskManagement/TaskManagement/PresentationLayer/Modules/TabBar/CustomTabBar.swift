@@ -10,21 +10,21 @@ struct CustomTabBar: View {
 
     @Environment(\.colorScheme) var colorScheme
 
-    @EnvironmentObject var tabBarViewModel: TabBarViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var allTasksViewModel: AllTasksViewModel
-    @EnvironmentObject var habitsViewModel: HabitsViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var coreDataManager: CoreDataManager
-    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
-    @EnvironmentObject var habitAddingViewModel: HabitAddingViewModel
-    @EnvironmentObject var themeManager: ThemeManager
+    @ObservedObject var tabBarViewModel: TabBarViewModel
+    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var allTasksViewModel: AllTasksViewModel
+    @ObservedObject var habitsViewModel: HabitsViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var taskAddingViewModel: TaskAddingViewModel
+    @ObservedObject var habitAddingViewModel: HabitAddingViewModel
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: Private Properties
 
-    private var systemImages = ImageConstants.System.self
-    private var tabBarImages = ImageConstants.TabBarImages.self
+    private let systemImages = ImageConstants.System.self
+    private let tabBarImages = ImageConstants.TabBarImages.self
 
     private var homeButton: some View {
         let isSelected = navigationViewModel.selectedTab == .home
@@ -91,20 +91,22 @@ struct CustomTabBar: View {
     }
 
     private var taskAddingView: some View {
-        TaskAddingView()
-            .environmentObject(homeViewModel)
-            .environmentObject(navigationViewModel)
-            .environmentObject(coreDataManager)
-            .environmentObject(taskAddingViewModel)
-            .environmentObject(themeManager)
+        TaskAddingView(
+            homeViewModel: homeViewModel,
+            navigationViewModel: navigationViewModel,
+            coreDataManager: coreDataManager,
+            taskAddingViewModel: taskAddingViewModel,
+            themeManager: themeManager
+        )
     }
 
     private var habitAddingView: some View {
-        HabitAddingView()
-            .environmentObject(habitAddingViewModel)
-            .environmentObject(habitsViewModel)
-            .environmentObject(coreDataManager)
-            .environmentObject(themeManager)
+        HabitAddingView(
+            habitAddingViewModel: habitAddingViewModel,
+            habitsViewModel: habitsViewModel,
+            coreDataManager: coreDataManager,
+            themeManager: themeManager
+        )
     }
 
     // MARK: Body
@@ -131,13 +133,14 @@ struct CustomTabBar: View {
         }
         .overlay {
             NavigationLink(isActive: $navigationViewModel.showAllTasksView) {
-                AllTasksView()
-                    .environmentObject(allTasksViewModel)
-                    .environmentObject(homeViewModel)
-                    .environmentObject(settingsViewModel)
-                    .environmentObject(navigationViewModel)
-                    .environmentObject(coreDataManager)
-                    .environmentObject(themeManager)
+                AllTasksView(
+                    allTasksViewModel: allTasksViewModel,
+                    homeViewModel: homeViewModel,
+                    settingsViewModel: settingsViewModel,
+                    navigationViewModel: navigationViewModel,
+                    coreDataManager: coreDataManager,
+                    themeManager: themeManager
+                )
             } label: {}
         }
         .onChange(of: navigationViewModel.selectedTab) { _ in

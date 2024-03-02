@@ -8,15 +8,15 @@ struct HabitsView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var habitsViewModel: HabitsViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataManager: CoreDataManager
-    @EnvironmentObject var themeManager: ThemeManager
+    @ObservedObject var habitsViewModel: HabitsViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Habits.self
+    private let strings = Localizable.Habits.self
 
     // MARK: - Body
 
@@ -99,10 +99,11 @@ struct HabitsView: View {
 // MARK: - Preview
 
 #Preview {
-    HabitsView()
-        .environmentObject(HabitsViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataManager())
-        .environmentObject(ThemeManager())
+    HabitsView(
+        habitsViewModel: .init(),
+        settingsViewModel: .init(),
+        navigationViewModel: .init(),
+        coreDataManager: .init(),
+        themeManager: .init()
+    )
 }

@@ -34,47 +34,51 @@ struct MainNavigationView: View {
                 VStack {
                     switch navigationViewModel.selectedTab {
                     case .home:
-                        HomeView()
-                            .environmentObject(navigationViewModel)
-                            .environmentObject(homeViewModel)
-                            .environmentObject(settingsViewModel)
-                            .environmentObject(coreDataManager)
-                            .environmentObject(themeManager)
-                        
+                        HomeView(
+                            homeViewModel: homeViewModel,
+                            settingsViewModel: settingsViewModel,
+                            navigationViewModel: navigationViewModel,
+                            coreDataManager: coreDataManager,
+                            themeManager: themeManager
+                        )
+
                     case .habits:
-                        HabitsView()
-                            .environmentObject(habitsViewModel)
-                            .environmentObject(settingsViewModel)
-                            .environmentObject(navigationViewModel)
-                            .environmentObject(coreDataManager)
-                            .environmentObject(themeManager)
+                        HabitsView(
+                            habitsViewModel: habitsViewModel,
+                            settingsViewModel: settingsViewModel,
+                            navigationViewModel: navigationViewModel,
+                            coreDataManager: coreDataManager,
+                            themeManager: themeManager
+                        )
 
                     case .profile:
-                        ProfileView()
-                            .environmentObject(profileViewModel)
-                            .environmentObject(sleeptimeCalculatorViewModel)
-                            .environmentObject(settingsViewModel)
-                            .environmentObject(informationViewModel)
-                            .environmentObject(newsViewModel)
-                            .environmentObject(coreDataManager)
-                            .environmentObject(networkManager)
-                            .environmentObject(themeManager)
+                        ProfileView(
+                            profileViewModel: profileViewModel,
+                            sleeptimeCalculatorViewModel: sleeptimeCalculatorViewModel,
+                            settingsViewModel: settingsViewModel,
+                            informationViewModel: informationViewModel,
+                            newsViewModel: newsViewModel,
+                            coreDataManager: coreDataManager,
+                            networkManager: networkManager,
+                            themeManager: themeManager
+                        )
                     }
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                CustomTabBar()
-                    .environmentObject(navigationViewModel)
-                    .environmentObject(tabBarViewModel)
-                    .environmentObject(homeViewModel)
-                    .environmentObject(allTasksViewModel)
-                    .environmentObject(settingsViewModel)
-                    .environmentObject(habitsViewModel)
-                    .environmentObject(coreDataManager)
-                    .environmentObject(taskAddingViewModel)
-                    .environmentObject(habitAddingViewModel)
-                    .environmentObject(themeManager)
-                    .padding(.bottom, 5)
+                CustomTabBar(
+                    tabBarViewModel: tabBarViewModel,
+                    navigationViewModel: navigationViewModel,
+                    homeViewModel: homeViewModel,
+                    allTasksViewModel: allTasksViewModel,
+                    habitsViewModel: habitsViewModel,
+                    settingsViewModel: settingsViewModel,
+                    coreDataManager: coreDataManager,
+                    taskAddingViewModel: taskAddingViewModel,
+                    habitAddingViewModel: habitAddingViewModel,
+                    themeManager: themeManager
+                )
+                .padding(.bottom, 5)
             }
             .ignoresSafeArea(.keyboard)
             .animation(

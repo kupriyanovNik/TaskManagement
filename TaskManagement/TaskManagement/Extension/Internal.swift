@@ -5,7 +5,7 @@
 import SwiftUI
 import Foundation
 
-// MARK: - For Delay
+// MARK: - For Async Delay
 func delay(
     _ time: Double,
     execute: @escaping () -> ()

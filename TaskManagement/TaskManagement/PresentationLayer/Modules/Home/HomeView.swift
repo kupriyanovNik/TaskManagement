@@ -9,19 +9,19 @@ struct HomeView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataManager: CoreDataManager
-    @EnvironmentObject var themeManager: ThemeManager
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var themeManager: ThemeManager
 
     @Namespace var animation
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Home.self
-    private var systemImages = ImageConstants.System.self
-    private var dateFormats = DateFormatConstants.self
+    private let strings = Localizable.Home.self
+    private let systemImages = ImageConstants.System.self
+    private let dateFormats = DateFormatConstants.self
 
     // MARK: - Body
 
@@ -246,11 +246,11 @@ struct HomeView: View {
 // MARK: - Preview
 
 #Preview {
-    HomeView()
-        .environmentObject(HomeViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataManager())
-        .environmentObject(ThemeManager())
+    HomeView(
+        homeViewModel: .init(),
+        settingsViewModel: .init(),
+        navigationViewModel: .init(),
+        coreDataManager: .init(),
+        themeManager: .init()
+    )
 }
-

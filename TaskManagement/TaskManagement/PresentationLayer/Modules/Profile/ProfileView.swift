@@ -9,19 +9,19 @@ struct ProfileView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var profileViewModel: ProfileViewModel
-    @EnvironmentObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var informationViewModel: InformationViewModel
-    @EnvironmentObject var newsViewModel: NewsViewModel
-    @EnvironmentObject var coreDataManager: CoreDataManager
-    @EnvironmentObject var networkManager: NetworkManager
-    @EnvironmentObject var themeManager: ThemeManager
+    @ObservedObject var profileViewModel: ProfileViewModel
+    @ObservedObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var informationViewModel: InformationViewModel
+    @ObservedObject var newsViewModel: NewsViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var networkManager: NetworkManager
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Profile.self
-    private var systemImages = ImageConstants.System.self
+    private let strings = Localizable.Profile.self
+    private let systemImages = ImageConstants.System.self
 
     private var allTodayTasksCount: Int {
         coreDataManager.allTodayTasks.count
@@ -105,10 +105,11 @@ struct ProfileView: View {
 
     @ViewBuilder func sleepTimeCard() -> some View {
             NavigationLink {
-                SleeptimeCalculatorView()
-                    .environmentObject(sleeptimeCalculatorViewModel)
-                    .environmentObject(settingsViewModel)
-                    .environmentObject(themeManager)
+                SleeptimeCalculatorView(
+                    sleeptimeCalculatorViewModel: sleeptimeCalculatorViewModel,
+                    settingsViewModel: settingsViewModel,
+                    themeManager: themeManager
+                )
             } label: {
                 HStack {
                     Text(strings.sleeptimeCalculator)
@@ -132,10 +133,12 @@ struct ProfileView: View {
 
     @ViewBuilder func newsFeedCard() -> some View {
             NavigationLink {
-                NewsView()
-                    .environmentObject(newsViewModel)
-                    .environmentObject(settingsViewModel)
-                    .environmentObject(themeManager)
+                NewsView(
+                    newsViewModel: newsViewModel,
+                    settingsViewModel: settingsViewModel,
+                    networkManager: networkManager,
+                    themeManager: themeManager
+                )
             } label: {
                 HStack {
                     Text(strings.newsFeed)
@@ -180,9 +183,10 @@ struct ProfileView: View {
             Spacer()
 
             NavigationLink {
-                InformationView()
-                    .environmentObject(informationViewModel)
-                    .environmentObject(themeManager)
+                InformationView(
+                    informationViewModel: informationViewModel,
+                    themeManager: themeManager
+                )
             } label: {
                 Image(systemName: systemImages.infoBubble)
                     .foregroundColor(.black)
@@ -192,9 +196,10 @@ struct ProfileView: View {
             .padding(.trailing)            
 
             NavigationLink {
-                SettingsView()
-                    .environmentObject(settingsViewModel)
-                    .environmentObject(themeManager)
+                SettingsView(
+                    settingsViewModel: settingsViewModel,
+                    themeManager: themeManager
+                )
             } label: {
                 Image(systemName: systemImages.gear)
                     .foregroundColor(.black)
@@ -232,13 +237,14 @@ struct ProfileView: View {
 // MARK: - Preview
 
 #Preview {
-    ProfileView()
-        .environmentObject(ProfileViewModel())
-        .environmentObject(SleeptimeCalculatorViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(InformationViewModel())
-        .environmentObject(NewsViewModel())
-        .environmentObject(CoreDataManager())
-        .environmentObject(NetworkManager())
-        .environmentObject(ThemeManager())
+    ProfileView(
+        profileViewModel: .init(),
+        sleeptimeCalculatorViewModel: .init(),
+        settingsViewModel: .init(),
+        informationViewModel: .init(),
+        newsViewModel: .init(),
+        coreDataManager: .init(),
+        networkManager: .init(),
+        themeManager: .init()
+    )
 }
