@@ -1,10 +1,10 @@
 //
-//  NavigationViewModel.swift
+//  NavigationManager.swift
 //
 
 import Foundation
 
-class NavigationViewModel: ObservableObject {
+class NavigationManager: ObservableObject {
 
     // MARK: - Property Wrappers
 

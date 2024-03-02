@@ -1,10 +1,10 @@
 //
-//  Images.swift
+//  ImageConstants.swift
 //
 
 import Foundation
 
-enum ImageNames {
+enum ImageConstants {
     enum System {
         static let plus = "plus"
         static let lock = "lock"

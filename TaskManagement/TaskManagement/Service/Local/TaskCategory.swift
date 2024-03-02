@@ -11,9 +11,9 @@ enum TaskCategory: Int, CaseIterable {
     var localizableRawValue: String {
         switch self {
         case .normal:
-            localized("TaskCategory.normal")
+            "TaskCategory.normal".localized
         case .critical:
-            localized("TaskCategory.critical")
+            "TaskCategory.critical".localized
         }
     }
 }

@@ -5,11 +5,16 @@
 import Foundation
 
 final class SessionDispatcher {
-    
-    let urlSession: URLSession = URLSession.shared
-    
+
+    // MARK: - Internal Properties
+
+    let urlSession: URLSession = .shared
+
+    // MARK: - Internal Functions
+
     func dispatch<ReturnType: Codable>(request: URLRequest) async throws -> ReturnType {
-        print("[\(request.httpMethod?.uppercased() ?? "")] \(request.url!)")
+        let method = request.httpMethod?.uppercased() ?? ""
+        print("[\(method)] \(request.url!)")
         
         let (data, responce) = try await urlSession.data(for: request)
         
@@ -23,15 +28,16 @@ final class SessionDispatcher {
         return fetchedData
     }
     
+    // MARK: - Private Functions
+
     private func httpError(_ statusCode: Int) -> APIError {
         switch statusCode {
-            case 404: return .notFound
-            case 401: return .unauthorized
-            case 403: return .forbidden
-            case 500: return .serverError
-            case 501...509: return .error5xx(statusCode)
-            default:
-                return .unknownError
+            case 404: .notFound
+            case 401: .unauthorized
+            case 403: .forbidden
+            case 500: .serverError
+            case 501...509: .error5xx(statusCode)
+            default: .unknownError
         }
     }
     
@@ -49,5 +55,4 @@ final class SessionDispatcher {
                 print("ERROR: \(error.localizedDescription)")
         }
     }
-    
 }

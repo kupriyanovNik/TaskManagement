@@ -26,7 +26,7 @@ struct FirstOnboardingView: View {
                 isExpanded: $isExpanded,
                 startTyping: $startTyping,
                 showText: $showText,
-                color: .brown,
+                color: .orange,
                 text: "Начать",
                 showNextView: $showNextView
             )

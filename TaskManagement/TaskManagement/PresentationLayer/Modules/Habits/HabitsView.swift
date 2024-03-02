@@ -8,29 +8,29 @@ struct HabitsView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var habitsViewModel: HabitsViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-    @EnvironmentObject var themeManager: ThemeManager
+    @ObservedObject var habitsViewModel: HabitsViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var navigationManager: NavigationManager
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Habits.self
+    private let strings = Localizable.Habits.self
 
     // MARK: - Body
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(spacing: 20) {
-                ForEach(coreDataViewModel.allHabits, id: \.habitID) { habit in
+                ForEach(coreDataManager.allHabits, id: \.habitID) { habit in
                     HabitCardView(
                         habitsViewModel: habitsViewModel,
-                        coreDataViewModel: coreDataViewModel,
+                        coreDataManager: coreDataManager,
                         habit: habit
                     ) { habit in
                         habitsViewModel.editHabit = habit
-                        navigationViewModel.showHabitAddingView.toggle()
+                        navigationManager.showHabitAddingView.toggle()
                     }
                     .modifier(ScrollTransitionModifier(condition: $settingsViewModel.shouldShowScrollAnimation))
                 }
@@ -48,7 +48,7 @@ struct HabitsView: View {
             headerView()
         }
         .overlay {
-            if coreDataViewModel.allHabits.isEmpty {
+            if coreDataManager.allHabits.isEmpty {
                 NotFoundView(
                     title: strings.noHabits,
                     description: strings.noHabitsDescription,
@@ -81,7 +81,7 @@ struct HabitsView: View {
 
             Spacer()
 
-            if !coreDataViewModel.allHabits.isEmpty {
+            if !coreDataManager.allHabits.isEmpty {
                 Button(habitsViewModel.editText) {
                     withAnimation {
                         habitsViewModel.isEditing.toggle()
@@ -99,10 +99,11 @@ struct HabitsView: View {
 // MARK: - Preview
 
 #Preview {
-    HabitsView()
-        .environmentObject(HabitsViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataViewModel())
-        .environmentObject(ThemeManager())
+    HabitsView(
+        habitsViewModel: .init(),
+        settingsViewModel: .init(),
+        navigationManager: .init(),
+        coreDataManager: .init(),
+        themeManager: .init()
+    )
 }

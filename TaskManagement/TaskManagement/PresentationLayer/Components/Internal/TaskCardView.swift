@@ -9,7 +9,7 @@ struct TaskCard: View {
 
     // MARK: - Property Wrappers
 
-    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
 
     @State private var showDetail: Bool = false
     @State private var showCardTap: Bool = false
@@ -66,7 +66,7 @@ struct TaskCard: View {
             
             withAnimation {
                 if isCompleted {
-                    coreDataViewModel.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
+                    coreDataManager.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
                 } else {
                     doneTask()
                 }
@@ -124,7 +124,7 @@ struct TaskCard: View {
         HStack(spacing: 12) {
             Button {
                 if isCompleted {
-                    coreDataViewModel.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
+                    coreDataManager.undoneTask(task: taskObject, date: taskObject.taskDate ?? .now)
                 } else {
                     doneTask()
                 }
@@ -197,7 +197,7 @@ struct TaskCard: View {
 
     private func doneTask() {
         withAnimation(.spring) {
-            coreDataViewModel.doneTask(task: taskObject, date: taskObject.taskDate ?? .now)
+            coreDataManager.doneTask(task: taskObject, date: taskObject.taskDate ?? .now)
         }
 
         NotificationManager.shared.removeNotification(with: taskObject.taskID ?? "")
@@ -232,8 +232,8 @@ struct TaskCardView: View {
     // MARK: - Property Wrappers
 
     @ObservedObject var homeViewModel: HomeViewModel
-    @ObservedObject var navigationViewModel: NavigationViewModel
-    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var navigationManager: NavigationManager
+    @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var themeManager: ThemeManager
 
@@ -257,9 +257,9 @@ struct TaskCardView: View {
             }
 
             TaskCard(
-                coreDataViewModel: coreDataViewModel,
+                coreDataManager: coreDataManager,
                 taskObject: task,
-                doneImageName: ImageNames.System.checkmark,
+                doneImageName: ImageConstants.System.checkmark,
                 markAsCompletedName: Localizable.Home.markAsCompleted,
                 markedAsCompletedName: Localizable.Home.markedAsCompleted
             )
@@ -277,14 +277,14 @@ struct TaskCardView: View {
             if task.isCompleted {
                 Button {
                     withAnimation(.spring) {
-                        coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                        coreDataManager.undoneTask(task: task, date: task.taskDate ?? .now)
                     }
 
                     if task.shouldNotificate {
                         sendNotification(task: task)
                     }
                 } label: {
-                    Image(systemName: ImageNames.System.xmarkCircleFill)
+                    Image(systemName: ImageConstants.System.xmarkCircleFill)
                         .font(.title2)
                         .foregroundColor(.primary)
                 }
@@ -293,9 +293,9 @@ struct TaskCardView: View {
             if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
                 Button {
                     homeViewModel.editTask = task
-                    navigationViewModel.showTaskAddingView.toggle()
+                    navigationManager.showTaskAddingView.toggle()
                 } label: {
-                    Image(systemName: ImageNames.System.pencilCircleFill)
+                    Image(systemName: ImageConstants.System.pencilCircleFill)
                         .font(.title2)
                         .foregroundColor(.primary)
                 }
@@ -303,16 +303,16 @@ struct TaskCardView: View {
 
             Button {
                 withAnimation {
-                    coreDataViewModel.removeTask(task: task) { taskDate in
+                    coreDataManager.removeTask(task: task) { taskDate in
                         self.onRemove?(taskDate)
 
-                        if coreDataViewModel.allTasks.isEmpty {
-                            navigationViewModel.showAllTasksView = false
+                        if coreDataManager.allTasks.isEmpty {
+                            navigationManager.showAllTasksView = false
                         }
                     }
                 }
             } label: {
-                Image(systemName: ImageNames.System.minusCircleFill)
+                Image(systemName: ImageConstants.System.minusCircleFill)
                     .font(.title2)
                     .foregroundColor(.red)
             }
@@ -340,7 +340,7 @@ struct TaskCardView: View {
                     withAnimation(.spring) {
                         if task.isCompleted {
                             withAnimation(.spring) {
-                                coreDataViewModel.undoneTask(task: task, date: task.taskDate ?? .now)
+                                coreDataManager.undoneTask(task: task, date: task.taskDate ?? .now)
                             }
 
                             if task.shouldNotificate {

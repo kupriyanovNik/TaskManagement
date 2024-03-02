@@ -13,7 +13,7 @@ struct PersistenceController {
     // MARK: - Inits
 
     init() {
-        container = NSPersistentContainer(name: Constants.CoreDataNames.taskManagement)
+        container = NSPersistentContainer(name: CoreDataConstants.taskManagement)
 
         container.loadPersistentStores { description, error in
             if let error  {
@@ -26,9 +26,11 @@ struct PersistenceController {
 
     // MARK: - Internal Properties
 
-    let container: NSPersistentContainer
-
     var viewContext: NSManagedObjectContext {
         container.viewContext
     }
+
+    // MARK: - Private Properties
+
+    private let container: NSPersistentContainer
 }

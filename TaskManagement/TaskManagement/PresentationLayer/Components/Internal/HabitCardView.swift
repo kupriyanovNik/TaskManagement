@@ -17,7 +17,7 @@ struct HabitCardView: View {
     // MARK: - Property Wrappers
 
     @ObservedObject var habitsViewModel: HabitsViewModel
-    @ObservedObject var coreDataViewModel: CoreDataViewModel
+    @ObservedObject var coreDataManager: CoreDataManager
 
     @State private var cardState: CardState = .basic
 
@@ -29,7 +29,7 @@ struct HabitCardView: View {
 
     // MARK: - Private Properties
 
-    private let systemImages = ImageNames.System.self
+    private let systemImages = ImageConstants.System.self
     private let strings = Localizable.HabitCard.self
     private let calendar = Calendar.current
 
@@ -122,8 +122,8 @@ struct HabitCardView: View {
 
             Button {
                 withAnimation {
-                    coreDataViewModel.removeHabit(habit: habit) { _, ids in
-                        coreDataViewModel.fetchAllHabits()
+                    coreDataManager.removeHabit(habit: habit) { _, ids in
+                        coreDataManager.fetchAllHabits()
                         NotificationManager.shared.removeNotifications(with: ids)
                     }
                 }
@@ -191,7 +191,7 @@ struct HabitCardView: View {
 
     private func getDate(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = Constants.DateFormats.forDateNumber
+        formatter.dateFormat = DateFormatConstants.forDateNumber
 
         return formatter.string(from: date)
     }

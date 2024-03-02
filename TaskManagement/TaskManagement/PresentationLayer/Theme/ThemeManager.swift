@@ -8,14 +8,11 @@ class ThemeManager: ObservableObject {
 
     // MARK: - Property Wrappers
 
-    @Published var selectedTheme: Theme = Theme1()
+    @Published var selectedTheme: ThemeProtocol = Theme1()
 
     @AppStorage(
-        Constants.UserDefaultsKeys.selectedTheme
+        UserDefaultsConstants.selectedThemeIndex.rawValue
     ) var selectedThemeIndex: Int = 0 {
-        willSet {
-            objectWillChange.send()
-        }
         didSet {
             updateTheme()
         }
@@ -30,6 +27,6 @@ class ThemeManager: ObservableObject {
     // MARK: - Private Functions 
 
     private func updateTheme() {
-        selectedTheme = DataSource.getTheme(themeIndex: selectedThemeIndex)
+        selectedTheme = ThemeDataSource.getTheme(themeIndex: selectedThemeIndex)
     }
 }

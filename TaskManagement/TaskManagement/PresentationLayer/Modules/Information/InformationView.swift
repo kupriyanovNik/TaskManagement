@@ -8,18 +8,18 @@ struct InformationView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var informationViewModel: InformationViewModel
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var informationViewModel: InformationViewModel
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
     private let strings = Localizable.Information.self
-    private let systemImages = ImageNames.System.self
+    private let systemImages = ImageConstants.System.self
     private let bundle = Bundle.main
 
-    private var timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
     private var appInformationRow: some View {
         VStack {
@@ -243,7 +243,8 @@ struct InformationView: View {
 // MARK: - Preview
 
 #Preview {
-    InformationView()
-        .environmentObject(InformationViewModel())
-        .environmentObject(ThemeManager())
+    InformationView(
+        informationViewModel: .init(),
+        themeManager: .init()
+    )
 }

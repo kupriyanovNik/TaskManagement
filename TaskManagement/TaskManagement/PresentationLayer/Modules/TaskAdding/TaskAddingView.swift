@@ -8,18 +8,18 @@ struct TaskAddingView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-    @EnvironmentObject var taskAddingViewModel: TaskAddingViewModel
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var navigationManager: NavigationManager
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var taskAddingViewModel: TaskAddingViewModel
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.TaskAdding.self
-    private var systemImages = ImageNames.System.self
+    private let strings = Localizable.TaskAdding.self
+    private let systemImages = ImageConstants.System.self
 
     // MARK: - Body
 
@@ -169,7 +169,7 @@ struct TaskAddingView: View {
 
     private func saveAction() {
         if let task = homeViewModel.editTask {
-            coreDataViewModel.updateTask(
+            coreDataManager.updateTask(
                 task: task,
                 title: taskAddingViewModel.taskTitle,
                 description: taskAddingViewModel.taskDescription,
@@ -186,7 +186,7 @@ struct TaskAddingView: View {
                 )
             }
         } else {
-            coreDataViewModel.addTask(
+            coreDataManager.addTask(
                 id: UUID().uuidString,
                 title: taskAddingViewModel.taskTitle,
                 description: taskAddingViewModel.taskDescription,
@@ -231,10 +231,11 @@ struct TaskAddingView: View {
 // MARK: - Preview
 
 #Preview {
-    TaskAddingView()
-        .environmentObject(HomeViewModel())
-        .environmentObject(NavigationViewModel())
-        .environmentObject(CoreDataViewModel())
-        .environmentObject(TaskAddingViewModel())
-        .environmentObject(ThemeManager())
+    TaskAddingView(
+        homeViewModel: .init(),
+        navigationManager: .init(),
+        coreDataManager: .init(),
+        taskAddingViewModel: .init(),
+        themeManager: .init()
+    )
 }

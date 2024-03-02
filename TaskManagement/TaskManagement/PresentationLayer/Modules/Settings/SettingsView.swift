@@ -8,14 +8,15 @@ struct SettingsView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var themeManager: ThemeManager
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var strings = Localizable.Settings.self
-    private var systemImages = ImageNames.System.self
+    private let strings = Localizable.Settings.self
+    private let systemImages = ImageConstants.System.self
 
     private var themeSelectionRow: some View {
         let isExpanded = settingsViewModel.showExpandedThemePicker
@@ -38,8 +39,8 @@ struct SettingsView: View {
             if isExpanded {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: -10) {
-                        ForEach(0..<DataSource.themesCount) { themeIndex in
-                            let theme = DataSource.getTheme(themeIndex: themeIndex)
+                        ForEach(0..<ThemeDataSource.themesCount) { themeIndex in
+                            let theme = ThemeDataSource.getTheme(themeIndex: themeIndex)
                             let isSelected = theme.accentColor == themeManager.selectedTheme.accentColor
 
                             ThemePickerCell(
@@ -97,7 +98,10 @@ struct SettingsView: View {
         return VStack(alignment: .center) {
             Button("show onboarding") {
                 UserDefaults.standard
-                    .setValue(true, forKey: Constants.UserDefaultsKeys.shouldShowOnboarding)
+                    .setValue(
+                        true,
+                        forKey: UserDefaultsConstants.shouldShowOnboarding.rawValue
+                    )
             }
 
             Button("remove all notifications") {
@@ -216,8 +220,9 @@ struct SettingsView: View {
 // MARK: - Preview
 
 #Preview {
-    SettingsView()
-        .environmentObject(ThemeManager())
-        .environmentObject(SettingsViewModel())
+    SettingsView(
+        settingsViewModel: .init(),
+        themeManager: .init()
+    )
 }
 

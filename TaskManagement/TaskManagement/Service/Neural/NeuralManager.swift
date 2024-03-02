@@ -5,11 +5,15 @@
 import Foundation
 import CoreML
 
-class NeuralManager {
+final class NeuralManager {
 
     // MARK: - Static Properties
 
     static let shared = NeuralManager()
+
+    // MARK: - Inits
+
+    private init() { }
 
     // MARK: - Internal Functions
 
@@ -48,4 +52,3 @@ class NeuralManager {
         }
     }
 }
-

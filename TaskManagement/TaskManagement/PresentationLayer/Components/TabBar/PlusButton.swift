@@ -40,7 +40,7 @@ struct PlusButton: View {
                 .rotationEffect(.degrees(tabBarViewModel.gradientRotation))
                 .frame(width: 48)
 
-            Image(systemName: ImageNames.System.plus)
+            Image(systemName: ImageConstants.System.plus)
                 .font(.title2.bold())
                 .foregroundColor(.black)
 
@@ -59,7 +59,7 @@ struct PlusButton: View {
             }
         } onPressingChanged: { isPressed in
             withAnimation(.linear) {
-                rotation = isPressed ? 45 : 0
+                rotation = isPressed ? 90 : 0
                 tabBarViewModel.gradientLineWidth = isPressed ? 6 : 5
                 scale = isPressed ? 1.1 : 1
             }

@@ -13,43 +13,23 @@ class SettingsViewModel: ObservableObject {
     @Published var showDebugOptions: Bool = false 
 
     @AppStorage(
-        Constants.UserDefaultsKeys.userName
-    ) var userName: String = "" {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+        UserDefaultsConstants.userName.rawValue
+    ) var userName: String = ""
 
     @AppStorage(
-        Constants.UserDefaultsKeys.userAge
-    ) var userAge: String = "" {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+        UserDefaultsConstants.userAge.rawValue
+    ) var userAge: String = ""
 
     @AppStorage(
-        Constants.UserDefaultsKeys.shouldShowScrollAnimation
-    ) var shouldShowScrollAnimation: Bool = true {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+        UserDefaultsConstants.shouldShowScrollAnimation.rawValue
+    ) var shouldShowScrollAnimation: Bool = true
 
     @AppStorage(
-        Constants.UserDefaultsKeys.shouldShowTabBarAnimation
-    ) var shouldShowTabBarAnimation: Bool = true {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+        UserDefaultsConstants.shouldShowTabBarAnimation.rawValue
+    ) var shouldShowTabBarAnimation: Bool = true
 
     // TODO: - Add ability to change app icon
     @AppStorage(
-        Constants.UserDefaultsKeys.selectedAppIcon
-    ) var selectedAppIcon: String = "App Icon 1" {
-        willSet {
-            objectWillChange.send()
-        }
-    }
+        UserDefaultsConstants.selectedAppIcon.rawValue
+    ) var selectedAppIcon: String = "App Icon 1"
 }

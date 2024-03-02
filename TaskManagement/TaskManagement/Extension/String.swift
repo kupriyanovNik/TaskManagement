@@ -38,3 +38,9 @@ extension String {
         return inside
     }
 }
+
+extension String {
+    var localized: String {
+        NSLocalizedString(self, comment: "")
+    }
+}

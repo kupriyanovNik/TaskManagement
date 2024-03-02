@@ -1,10 +1,10 @@
 //
-//  Theme.swift
+//  ThemeProtocol.swift
 //
 
 import SwiftUI
 
-protocol Theme {
+protocol ThemeProtocol {
     var accentColor: Color { get }
     var pageTitleColor: Color { get }
     var themeName: String { get }

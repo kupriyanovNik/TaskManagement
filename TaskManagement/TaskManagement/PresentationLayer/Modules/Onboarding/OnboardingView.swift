@@ -9,7 +9,7 @@ struct OnboardingView: View {
     // MARK: Property Wrappers
 
     @StateObject private var onboardingViewModel = OnboardingViewModel()
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
 
     @Binding var shouldShowOnboarding: Bool
 
@@ -78,6 +78,8 @@ struct OnboardingView: View {
 // MARK: - Preview
 
 #Preview {
-    OnboardingView(shouldShowOnboarding: .constant(false))
-        .environmentObject(SettingsViewModel())
+    OnboardingView(
+        settingsViewModel: .init(),
+        shouldShowOnboarding: .constant(false)
+    )
 }

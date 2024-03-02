@@ -10,12 +10,12 @@ struct TaskManagementApp: App {
     // MARK: - Property Wrappers
 
     @AppStorage(
-        Constants.UserDefaultsKeys.shouldShowOnboarding
+        UserDefaultsConstants.shouldShowOnboarding.rawValue
     ) var shouldShowOnboarding: Bool = true
 
-    @StateObject private var navigationViewModel = NavigationViewModel()
+    @StateObject private var navigationManager = NavigationManager()
     @StateObject private var tabBarViewModel = TabBarViewModel()
-    @StateObject private var coreDataViewModel = CoreDataViewModel()
+    @StateObject private var coreDataManager = CoreDataManager()
     @StateObject private var homeViewModel = HomeViewModel()
     @StateObject private var allTasksViewModel = AllTasksViewModel()
     @StateObject private var habitsViewModel = HabitsViewModel()
@@ -43,35 +43,35 @@ struct TaskManagementApp: App {
                 Color.black
                     .ignoresSafeArea()
                 
-                MainNavigationView()
-                    .environmentObject(navigationViewModel)
-                    .environmentObject(tabBarViewModel)
-                    .environmentObject(coreDataViewModel)
-                    .environmentObject(homeViewModel)
-                    .environmentObject(allTasksViewModel)
-                    .environmentObject(habitsViewModel)
-                    .environmentObject(taskAddingViewModel)
-                    .environmentObject(habitAddingViewModel)
-                    .environmentObject(profileViewModel)
-                    .environmentObject(sleeptimeCalculatorViewModel)
-                    .environmentObject(settingsViewModel)
-                    .environmentObject(informationViewModel)
-                    .environmentObject(newsViewModel)
-                    .environmentObject(networkManager)
-                    .environmentObject(themeManager)
-                    .opacity(shouldShowOnboarding ? 0.5 : 1)
-                    .ignoresSafeArea()
-                    .overlay {
-                        VStack {
-                            if shouldShowOnboarding {
-                                OnboardingView(shouldShowOnboarding: $shouldShowOnboarding)
-                                    .environmentObject(settingsViewModel)
-                                    .transition(.move(edge: .top).combined(with: .opacity))
-                            }
+                MainNavigationView(
+                    navigationManager: navigationManager,
+                    tabBarViewModel: tabBarViewModel,
+                    coreDataManager: coreDataManager,
+                    homeViewModel: homeViewModel,
+                    allTasksViewModel: allTasksViewModel,
+                    habitsViewModel: habitsViewModel,
+                    taskAddingViewModel: taskAddingViewModel,
+                    habitAddingViewModel: habitAddingViewModel,
+                    sleeptimeCalculatorViewModel: sleeptimeCalculatorViewModel,
+                    profileViewModel: profileViewModel,
+                    settingsViewModel: settingsViewModel,
+                    informationViewModel: informationViewModel,
+                    newsViewModel: newsViewModel,
+                    networkManager: networkManager,
+                    themeManager: themeManager
+                )
+                .ignoresSafeArea()
+                .overlay {
+                    VStack {
+                        if shouldShowOnboarding {
+                            OnboardingView(
+                                settingsViewModel: settingsViewModel,
+                                shouldShowOnboarding: $shouldShowOnboarding
+                            )
+                            .transition(.opacity.combined(with: .scale).animation(.spring))
                         }
-                        .transition(.move(edge: .top).combined(with: .opacity))
                     }
-                    .animation(.spring, value: shouldShowOnboarding)
+                }
             }
             .preferredColorScheme(.light)
         }

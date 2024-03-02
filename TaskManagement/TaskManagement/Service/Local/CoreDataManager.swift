@@ -1,12 +1,12 @@
 //
-//  CoreDataViewModel.swift
+//  CoreDataManager.swift
 //
 
 import Foundation
 import CoreData
 import SwiftUI
 
-class CoreDataViewModel: ObservableObject {
+final class CoreDataManager: ObservableObject {
 
     // MARK: - Property Wrappers
 
@@ -20,7 +20,7 @@ class CoreDataViewModel: ObservableObject {
     // MARK: - Private Properties
 
     private var viewContext: NSManagedObjectContext
-    private var coreDataNames = Constants.CoreDataNames.self
+    private var coreDataNames = CoreDataConstants.self
 
     // MARK: - Inits
 

@@ -8,19 +8,19 @@ struct AllTasksView: View {
 
     // MARK: - Property Wrappers
 
-    @EnvironmentObject var allTasksViewModel: AllTasksViewModel
-    @EnvironmentObject var homeViewModel: HomeViewModel
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
-    @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var coreDataViewModel: CoreDataViewModel
-    @EnvironmentObject var themeManager: ThemeManager
-
     @Environment(\.dismiss) var dismiss
+
+    @ObservedObject var allTasksViewModel: AllTasksViewModel
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
+    @ObservedObject var navigationManager: NavigationManager
+    @ObservedObject var coreDataManager: CoreDataManager
+    @ObservedObject var themeManager: ThemeManager
 
     // MARK: - Private Properties
 
-    private var systemImages = ImageNames.System.self
-    private var strings = Localizable.AllTasks.self
+    private let systemImages = ImageConstants.System.self
+    private let strings = Localizable.AllTasks.self
 
     // MARK: - Body
 
@@ -28,7 +28,7 @@ struct AllTasksView: View {
         ScrollView(showsIndicators: false) {
             // MARK: I encountered bugs with redrawing due to the Lazy
             VStack(spacing: 20) {
-                if coreDataViewModel.allTasks.isEmpty {
+                if coreDataManager.allTasks.isEmpty {
                     Text(strings.noTasks)
                         .font(.system(size: 16))
                         .fontWeight(.semibold)
@@ -46,8 +46,8 @@ struct AllTasksView: View {
             .padding(.top)
             .blur(radius: allTasksViewModel.showFilteringView ? 3 : 0)
         }
-        .animation(.default, value: coreDataViewModel.allTasks)
-        .animation(.default, value: coreDataViewModel.tasksFilteredByCategory)
+        .animation(.default, value: coreDataManager.allTasks)
+        .animation(.default, value: coreDataManager.tasksFilteredByCategory)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
         .makeCustomNavBar {
@@ -63,7 +63,7 @@ struct AllTasksView: View {
             }
         }
         .onDisappear {
-            coreDataViewModel.fetchTasksFilteredByDate(
+            coreDataManager.fetchTasksFilteredByDate(
                 dateToFilter: homeViewModel.currentDay
             )
         }
@@ -129,11 +129,11 @@ struct AllTasksView: View {
     }
 
     @ViewBuilder func allTasks() -> some View {
-        ForEach($coreDataViewModel.allTasks, id: \.id) { $task in
+        ForEach($coreDataManager.allTasks, id: \.id) { $task in
             TaskCardView(
                 homeViewModel: homeViewModel,
-                navigationViewModel: navigationViewModel,
-                coreDataViewModel: coreDataViewModel,
+                navigationManager: navigationManager,
+                coreDataManager: coreDataManager,
                 settingsViewModel: settingsViewModel,
                 themeManager: themeManager,
                 isEditing: $allTasksViewModel.isEditing,
@@ -143,17 +143,17 @@ struct AllTasksView: View {
     }
 
     @ViewBuilder func tasksFilteredByCategory() -> some View {
-        if coreDataViewModel.tasksFilteredByCategory.isEmpty {
+        if coreDataManager.tasksFilteredByCategory.isEmpty {
             Text(strings.noTasks)
                 .font(.system(size: 16))
                 .fontWeight(.semibold)
                 .offset(y: 100)
         } else {
-            ForEach($coreDataViewModel.tasksFilteredByCategory, id: \.id) { $task in
+            ForEach($coreDataManager.tasksFilteredByCategory, id: \.id) { $task in
                 TaskCardView(
                     homeViewModel: homeViewModel,
-                    navigationViewModel: navigationViewModel,
-                    coreDataViewModel: coreDataViewModel,
+                    navigationManager: navigationManager,
+                    coreDataManager: coreDataManager,
                     settingsViewModel: settingsViewModel,
                     themeManager: themeManager,
                     isEditing: $allTasksViewModel.isEditing,
@@ -204,7 +204,7 @@ struct AllTasksView: View {
             }
 
 
-            if !coreDataViewModel.allTasks.isEmpty {
+            if !coreDataManager.allTasks.isEmpty {
                 Button(allTasksViewModel.editText) {
                     withAnimation {
                         allTasksViewModel.isEditing.toggle()
@@ -222,7 +222,7 @@ struct AllTasksView: View {
 
     private func fetchTasksFilteredByCategory() {
         if let filteringCategory = allTasksViewModel.filteringCategory {
-            coreDataViewModel.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
+            coreDataManager.fetchTasksFilteredByCategory(taskCategory: filteringCategory)
         }
     }
 
@@ -231,11 +231,12 @@ struct AllTasksView: View {
 // MARK: - Preview
 
 #Preview {
-    AllTasksView()
-        .environmentObject(CoreDataViewModel())
-        .environmentObject(HomeViewModel())
-        .environmentObject(SettingsViewModel())
-        .environmentObject(NavigationViewModel())
-        .environmentObject(AllTasksViewModel())
-        .environmentObject(ThemeManager())
+    AllTasksView(
+        allTasksViewModel: .init(),
+        homeViewModel: .init(),
+        settingsViewModel: .init(),
+        navigationManager: .init(),
+        coreDataManager: .init(),
+        themeManager: .init()
+    )
 }
