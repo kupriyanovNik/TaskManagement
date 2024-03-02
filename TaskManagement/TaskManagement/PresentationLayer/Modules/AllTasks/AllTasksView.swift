@@ -13,7 +13,7 @@ struct AllTasksView: View {
     @ObservedObject var allTasksViewModel: AllTasksViewModel
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
-    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var themeManager: ThemeManager
 
@@ -132,7 +132,7 @@ struct AllTasksView: View {
         ForEach($coreDataManager.allTasks, id: \.id) { $task in
             TaskCardView(
                 homeViewModel: homeViewModel,
-                navigationViewModel: navigationViewModel,
+                navigationManager: navigationManager,
                 coreDataManager: coreDataManager,
                 settingsViewModel: settingsViewModel,
                 themeManager: themeManager,
@@ -152,7 +152,7 @@ struct AllTasksView: View {
             ForEach($coreDataManager.tasksFilteredByCategory, id: \.id) { $task in
                 TaskCardView(
                     homeViewModel: homeViewModel,
-                    navigationViewModel: navigationViewModel,
+                    navigationManager: navigationManager,
                     coreDataManager: coreDataManager,
                     settingsViewModel: settingsViewModel,
                     themeManager: themeManager,
@@ -235,7 +235,7 @@ struct AllTasksView: View {
         allTasksViewModel: .init(),
         homeViewModel: .init(),
         settingsViewModel: .init(),
-        navigationViewModel: .init(),
+        navigationManager: .init(),
         coreDataManager: .init(),
         themeManager: .init()
     )

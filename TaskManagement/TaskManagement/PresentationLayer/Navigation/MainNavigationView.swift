@@ -8,7 +8,7 @@ struct MainNavigationView: View {
 
     // MARK: - Property Wrappers
 
-    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var tabBarViewModel: TabBarViewModel
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var homeViewModel: HomeViewModel
@@ -32,12 +32,12 @@ struct MainNavigationView: View {
                 Color.white
 
                 VStack {
-                    switch navigationViewModel.selectedTab {
+                    switch navigationManager.selectedTab {
                     case .home:
                         HomeView(
                             homeViewModel: homeViewModel,
                             settingsViewModel: settingsViewModel,
-                            navigationViewModel: navigationViewModel,
+                            navigationManager: navigationManager,
                             coreDataManager: coreDataManager,
                             themeManager: themeManager
                         )
@@ -46,7 +46,7 @@ struct MainNavigationView: View {
                         HabitsView(
                             habitsViewModel: habitsViewModel,
                             settingsViewModel: settingsViewModel,
-                            navigationViewModel: navigationViewModel,
+                            navigationManager: navigationManager,
                             coreDataManager: coreDataManager,
                             themeManager: themeManager
                         )
@@ -68,7 +68,7 @@ struct MainNavigationView: View {
             .safeAreaInset(edge: .bottom) {
                 CustomTabBar(
                     tabBarViewModel: tabBarViewModel,
-                    navigationViewModel: navigationViewModel,
+                    navigationManager: navigationManager,
                     homeViewModel: homeViewModel,
                     allTasksViewModel: allTasksViewModel,
                     habitsViewModel: habitsViewModel,
@@ -83,7 +83,7 @@ struct MainNavigationView: View {
             .ignoresSafeArea(.keyboard)
             .animation(
                 .linear(duration: settingsViewModel.shouldShowTabBarAnimation ? 0.3 : 0.0),
-                value: navigationViewModel.selectedTab
+                value: navigationManager.selectedTab
             )
             .onAppear {
                 UITabBar.appearance().isHidden = true

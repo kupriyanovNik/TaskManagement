@@ -232,7 +232,7 @@ struct TaskCardView: View {
     // MARK: - Property Wrappers
 
     @ObservedObject var homeViewModel: HomeViewModel
-    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var themeManager: ThemeManager
@@ -293,7 +293,7 @@ struct TaskCardView: View {
             if task.taskDate?.compare(.now) == .orderedDescending || Calendar.current.isDateInToday(task.taskDate ?? .now) {
                 Button {
                     homeViewModel.editTask = task
-                    navigationViewModel.showTaskAddingView.toggle()
+                    navigationManager.showTaskAddingView.toggle()
                 } label: {
                     Image(systemName: ImageConstants.System.pencilCircleFill)
                         .font(.title2)
@@ -307,7 +307,7 @@ struct TaskCardView: View {
                         self.onRemove?(taskDate)
 
                         if coreDataManager.allTasks.isEmpty {
-                            navigationViewModel.showAllTasksView = false
+                            navigationManager.showAllTasksView = false
                         }
                     }
                 }

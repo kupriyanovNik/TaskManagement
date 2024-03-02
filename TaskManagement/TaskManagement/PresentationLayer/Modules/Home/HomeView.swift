@@ -11,7 +11,7 @@ struct HomeView: View {
 
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
-    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var themeManager: ThemeManager
 
@@ -31,7 +31,7 @@ struct HomeView: View {
                 ForEach($coreDataManager.tasksFilteredByDate, id: \.id) { $task in
                     TaskCardView(
                         homeViewModel: homeViewModel,
-                        navigationViewModel: navigationViewModel,
+                        navigationManager: navigationManager,
                         coreDataManager: coreDataManager,
                         settingsViewModel: settingsViewModel,
                         themeManager: themeManager,
@@ -195,7 +195,7 @@ struct HomeView: View {
                         ImpactManager.shared.generateFeedback()
 
                         if coreDataManager.allTasks.isEmpty {
-                            navigationViewModel.showTaskAddingView.toggle()
+                            navigationManager.showTaskAddingView.toggle()
                         } else {
                             homeViewModel.showCalendar.toggle()
                         }
@@ -249,7 +249,7 @@ struct HomeView: View {
     HomeView(
         homeViewModel: .init(),
         settingsViewModel: .init(),
-        navigationViewModel: .init(),
+        navigationManager: .init(),
         coreDataManager: .init(),
         themeManager: .init()
     )

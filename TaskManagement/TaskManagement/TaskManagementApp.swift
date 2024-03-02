@@ -13,7 +13,7 @@ struct TaskManagementApp: App {
         UserDefaultsConstants.shouldShowOnboarding.rawValue
     ) var shouldShowOnboarding: Bool = true
 
-    @StateObject private var navigationViewModel = NavigationViewModel()
+    @StateObject private var navigationManager = NavigationManager()
     @StateObject private var tabBarViewModel = TabBarViewModel()
     @StateObject private var coreDataManager = CoreDataManager()
     @StateObject private var homeViewModel = HomeViewModel()
@@ -44,7 +44,7 @@ struct TaskManagementApp: App {
                     .ignoresSafeArea()
                 
                 MainNavigationView(
-                    navigationViewModel: navigationViewModel,
+                    navigationManager: navigationManager,
                     tabBarViewModel: tabBarViewModel,
                     coreDataManager: coreDataManager,
                     homeViewModel: homeViewModel,

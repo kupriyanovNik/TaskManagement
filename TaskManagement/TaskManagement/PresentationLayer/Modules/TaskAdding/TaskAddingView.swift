@@ -11,7 +11,7 @@ struct TaskAddingView: View {
     @Environment(\.dismiss) var dismiss
 
     @ObservedObject var homeViewModel: HomeViewModel
-    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var taskAddingViewModel: TaskAddingViewModel
     @ObservedObject var themeManager: ThemeManager
@@ -233,7 +233,7 @@ struct TaskAddingView: View {
 #Preview {
     TaskAddingView(
         homeViewModel: .init(),
-        navigationViewModel: .init(),
+        navigationManager: .init(),
         coreDataManager: .init(),
         taskAddingViewModel: .init(),
         themeManager: .init()

@@ -10,7 +10,7 @@ struct HabitsView: View {
 
     @ObservedObject var habitsViewModel: HabitsViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
-    @ObservedObject var navigationViewModel: NavigationViewModel
+    @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var themeManager: ThemeManager
 
@@ -30,7 +30,7 @@ struct HabitsView: View {
                         habit: habit
                     ) { habit in
                         habitsViewModel.editHabit = habit
-                        navigationViewModel.showHabitAddingView.toggle()
+                        navigationManager.showHabitAddingView.toggle()
                     }
                     .modifier(ScrollTransitionModifier(condition: $settingsViewModel.shouldShowScrollAnimation))
                 }
@@ -102,7 +102,7 @@ struct HabitsView: View {
     HabitsView(
         habitsViewModel: .init(),
         settingsViewModel: .init(),
-        navigationViewModel: .init(),
+        navigationManager: .init(),
         coreDataManager: .init(),
         themeManager: .init()
     )
