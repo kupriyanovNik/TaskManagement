@@ -191,7 +191,7 @@ struct HabitCardView: View {
 
     private func getDate(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = Constants.DateFormats.forDateNumber
+        formatter.dateFormat = DateFormatConstants.forDateNumber
 
         return formatter.string(from: date)
     }

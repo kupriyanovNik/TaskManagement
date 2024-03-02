@@ -21,8 +21,7 @@ struct HomeView: View {
 
     private var strings = Localizable.Home.self
     private var systemImages = ImageConstants.System.self
-    private var dateFormats = Constants.DateFormats.self
-    private var animationNames = Constants.MatchedGeometryNames.self
+    private var dateFormats = DateFormatConstants.self
 
     // MARK: - Body
 
@@ -119,7 +118,7 @@ struct HomeView: View {
                         if isToday {
                             Capsule()
                                 .fill(themeManager.selectedTheme.accentColor)
-                                .matchedGeometryEffect(id: animationNames.forCalendar, in: animation)
+                                .matchedGeometryEffect(id: "CurrentDayEffect", in: animation)
                         }
                     }
                 }

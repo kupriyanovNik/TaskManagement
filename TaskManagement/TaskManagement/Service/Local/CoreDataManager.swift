@@ -20,7 +20,7 @@ class CoreDataManager: ObservableObject {
     // MARK: - Private Properties
 
     private var viewContext: NSManagedObjectContext
-    private var coreDataNames = Constants.CoreDataNames.self
+    private var coreDataNames = CoreDataConstants.self
 
     // MARK: - Inits
 
