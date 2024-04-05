@@ -50,7 +50,7 @@ struct PlusButton: View {
         .onLongPressGesture(minimumDuration: 0.2, maximumDistance: 50) {
             longAction()
 
-            ImpactManager.shared.generateFeedback(style: .soft)
+            ImpactManager.generateFeedback(style: .soft)
 
             delay(0.3) {
                 scale = 1

@@ -1,4 +1,5 @@
 {
+  "originHash" : "85539a60a4141a0288d7899335e678953eac0191838b555c286a1af07f4b36ea",
   "pins" : [
     {
       "identity" : "spconfetti",
@@ -10,5 +11,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
