@@ -107,4 +107,4 @@
 // MARK: - TaskCategory
 
 "TaskCategory.normal" = "Обычное";
-"TaskCategory.critical" = "Важное🔥";
+"TaskCategory.important" = "Важное🔥";

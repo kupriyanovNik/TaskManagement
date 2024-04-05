@@ -46,7 +46,7 @@ final class CoreDataManager: ObservableObject {
         task.taskTitle = title
         task.taskDescription = description
         task.taskDate = date
-        task.taskCategory = category.localizableRawValue
+        task.taskCategory = Int16(category.rawValue)
         task.shouldNotificate = shouldNotificate
         task.isCompleted = false
         saveContext()
@@ -151,8 +151,8 @@ final class CoreDataManager: ObservableObject {
     
     func fetchTasksFilteredByCategory(taskCategory: TaskCategory) {
         let filterKey = "taskCategory"
-        let predicate = NSPredicate(format: "\(filterKey) = %@", argumentArray: [taskCategory.localizableRawValue])
-        
+        let predicate = NSPredicate(format: "\(filterKey) = %@", argumentArray: [taskCategory.rawValue])
+
         let request = NSFetchRequest<TaskModel>(entityName: coreDataNames.taskModel)
         request.sortDescriptors = [.init(keyPath: \TaskModel.taskDate, ascending: true)]
         request.predicate = predicate

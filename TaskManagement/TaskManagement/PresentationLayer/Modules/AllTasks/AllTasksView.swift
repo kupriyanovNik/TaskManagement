@@ -177,7 +177,7 @@ struct AllTasksView: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 if let filteringCategory = allTasksViewModel.filteringCategory {
-                    Text(filteringCategory.localizableRawValue)
+                    Text(filteringCategory.localized)
                         .bold()
                         .font(.largeTitle)
                         .foregroundColor(themeManager.selectedTheme.pageTitleColor)

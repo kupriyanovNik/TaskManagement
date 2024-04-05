@@ -88,7 +88,7 @@ struct TaskCard: View {
 
                     VStack {
                         if showDetail && !isToday {
-                            Text(taskObject.taskCategory ?? "Normal")
+                            Text(TaskCategory.getUnwrappedLocalized(rawValue: taskObject.taskCategory))
                                 .transition(.opacity.combined(with: .scale))
                                 .font(.callout)
                                 .foregroundStyle(.secondary)
@@ -183,7 +183,7 @@ struct TaskCard: View {
 
             VStack {
                 if showDetail && isToday {
-                    Text(taskObject.taskCategory ?? "Normal")
+                    Text(TaskCategory.getUnwrappedLocalized(rawValue: taskObject.taskCategory))
                         .transition(.opacity.combined(with: .scale))
                 }
             }
@@ -220,7 +220,7 @@ struct TaskCard: View {
                 title: date.greeting(),
                 subtitle: Localizable.TaskAdding.unfinishedTask,
                 body: body,
-                isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
+                isCritical: task.taskCategory == 1
             )
         }
     }
@@ -374,7 +374,7 @@ struct TaskCardView: View {
             title: date.greeting(),
             subtitle: Localizable.TaskAdding.unfinishedTask,
             body: body,
-            isCritical: (task.taskCategory == "Normal" || task.taskCategory == "Обычное" ) ? false : true
+            isCritical: task.taskCategory == 1
         )
     }
 }
