@@ -242,8 +242,8 @@
 		B70C87642B08E10E00EBD924 /* Neural */ = {
 			isa = PBXGroup;
 			children = (
-				B70C875F2B08E08B00EBD924 /* Model */,
 				B70C87652B08E14300EBD924 /* NeuralManager.swift */,
+				B70C875F2B08E08B00EBD924 /* Model */,
 			);
 			path = Neural;
 			sourceTree = "<group>";

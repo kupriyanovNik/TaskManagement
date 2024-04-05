@@ -263,7 +263,7 @@ struct TaskCardView: View {
                 markAsCompletedName: Localizable.Home.markAsCompleted,
                 markedAsCompletedName: Localizable.Home.markedAsCompleted
             )
-            .modifier(ScrollTransitionModifier(condition: $settingsViewModel.shouldShowScrollAnimation))
+            .modifier(ScrollTransitionModifier(condition: settingsViewModel.shouldShowScrollAnimation))
 
         }
         .hLeading()

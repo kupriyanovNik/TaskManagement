@@ -34,7 +34,10 @@ extension View {
         content: @escaping () -> Content
     ) -> some View {
         self.safeAreaInset(edge: .top) {
-            CustomNavBar(showBackground: showBackground, backgroundColor: backgroundColor) {
+            CustomNavBar(
+                showBackground: showBackground, 
+                backgroundColor: backgroundColor
+            ) {
                 content()
             }
         }

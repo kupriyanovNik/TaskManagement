@@ -33,7 +33,7 @@ struct NewsView: View {
                 } else {
                     ForEach(networkManager.news, id: \.id) { new in
                         spaceNewCard(new: new)
-                            .modifier(ScrollTransitionModifier(condition: $settingsViewModel.shouldShowScrollAnimation))
+                            .modifier(ScrollTransitionModifier(condition: settingsViewModel.shouldShowScrollAnimation))
                     }
                 }
             }
