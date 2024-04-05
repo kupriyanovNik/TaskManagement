@@ -172,7 +172,7 @@ struct SleeptimeCalculatorView: View {
             let hour = components.hour ?? 0
             let minute = components.minute ?? 0
 
-            if let output = NeuralManager.shared.calculateBedtime(
+            if let output = NeuralManager.calculateBedtime(
                 hour: hour,
                 minute: minute,
                 sleepAmount: sleeptimeCalculatorViewModel.sleepAmount,

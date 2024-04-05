@@ -7,10 +7,6 @@ import CoreML
 
 final class NeuralManager {
 
-    // MARK: - Static Properties
-
-    static let shared = NeuralManager()
-
     // MARK: - Inits
 
     private init() { }
@@ -18,7 +14,7 @@ final class NeuralManager {
     // MARK: - Internal Functions
 
     @discardableResult
-    func calculateBedtime(
+    static func calculateBedtime(
         hour: Int,
         minute: Int,
         sleepAmount: Double,
