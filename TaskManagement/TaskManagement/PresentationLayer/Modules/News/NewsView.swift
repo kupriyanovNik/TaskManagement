@@ -28,9 +28,15 @@ struct NewsView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading) {
                 if networkManager.companyTasks.isEmpty {
-                    ProgressView()
-                        .tint(themeManager.selectedTheme.accentColor)
-                        .hCenter()
+                    if networkManager.selectedCompanyId == "" {
+                        Text("Чтобы увидеть новостную ленту, подключитесь к компании, введя ее ID в настройках")
+                            .multilineTextAlignment(.center)
+                            .font(.headline)
+                    } else {
+                        ProgressView()
+                            .tint(themeManager.selectedTheme.accentColor)
+                            .hCenter()
+                    }
                 } else {
                     ForEach(networkManager.companyTasks, id: \.id) { task in
                         companyTaskCard(task)
