@@ -30,9 +30,7 @@ struct CachedAsyncImage<Content: View, Placeholder: View>: View {
             content(image)
         } else {
             placeholder()
-                .onAppear {
-                    loadImage()
-                }
+                .onAppear(perform: loadImage)
         }
     }
 

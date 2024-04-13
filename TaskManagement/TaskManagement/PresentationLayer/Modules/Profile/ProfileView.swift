@@ -13,7 +13,6 @@ struct ProfileView: View {
     @ObservedObject var sleeptimeCalculatorViewModel: SleeptimeCalculatorViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var informationViewModel: InformationViewModel
-    @ObservedObject var newsViewModel: NewsViewModel
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var networkManager: NetworkManager
     @ObservedObject var themeManager: ThemeManager
@@ -39,10 +38,6 @@ struct ProfileView: View {
         doneTodayTasksPercentage == 1
     }
 
-    private var isTodayLastSeenFeed: Bool {
-        Calendar.current.isDateInToday(Date(timeIntervalSince1970: newsViewModel.lastSeenNews))
-    }
-
     // MARK: - Body
 
     var body: some View {
@@ -52,26 +47,6 @@ struct ProfileView: View {
                     sleepTimeCard()
 
                     newsFeedCard()
-                        .blur(radius: isTodayLastSeenFeed ? 3 : 0)
-                        .brightness(isTodayLastSeenFeed ? 0.7 : 0)
-                        .overlay {
-                            if isTodayLastSeenFeed {
-                                ZStack {
-                                    themeManager.selectedTheme.accentColor
-                                        .opacity(0.2)
-
-                                    HStack {
-                                        Text(strings.tomorrow)
-                                            .bold()
-
-                                        Image(systemName: systemImages.lock)
-                                    }
-                                    .font(.title2)
-                                    .foregroundStyle(.black)
-                                }
-                                .cornerRadius(10)
-                            }
-                        }
                 }
                 .padding(.horizontal)
                 .padding(.top, 5)
@@ -134,9 +109,9 @@ struct ProfileView: View {
     @ViewBuilder func newsFeedCard() -> some View {
             NavigationLink {
                 NewsView(
-                    newsViewModel: newsViewModel,
                     settingsViewModel: settingsViewModel,
                     networkManager: networkManager,
+                    coreDataManager: coreDataManager,
                     themeManager: themeManager
                 )
             } label: {
@@ -242,7 +217,6 @@ struct ProfileView: View {
         sleeptimeCalculatorViewModel: .init(),
         settingsViewModel: .init(),
         informationViewModel: .init(),
-        newsViewModel: .init(),
         coreDataManager: .init(),
         networkManager: .init(),
         themeManager: .init()

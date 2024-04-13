@@ -10,11 +10,12 @@ struct NewsView: View {
 
     @Environment(\.dismiss) var dismiss
 
-    @ObservedObject var newsViewModel: NewsViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var networkManager: NetworkManager
+    @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var themeManager: ThemeManager
 
+    @State private var showHeaderTap: Bool = false
 
     // MARK: - Private Properties
 
@@ -26,13 +27,13 @@ struct NewsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading) {
-                if networkManager.news.isEmpty {
+                if networkManager.companyTasks.isEmpty {
                     ProgressView()
                         .tint(themeManager.selectedTheme.accentColor)
                         .hCenter()
                 } else {
-                    ForEach(networkManager.news, id: \.id) { new in
-                        spaceNewCard(new: new)
+                    ForEach(networkManager.companyTasks, id: \.id) { task in
+                        companyTaskCard(task)
                             .modifier(ScrollTransitionModifier(condition: settingsViewModel.shouldShowScrollAnimation))
                     }
                 }
@@ -41,87 +42,72 @@ struct NewsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
+        .animation(.bouncy, value: networkManager.companyTasks)
         .makeCustomNavBar {
             headerView()
         }
         .onAppear {
-            if networkManager.news.isEmpty {
-                networkManager.getNews()
-            }
-
-            newsViewModel.appearAction()
-        }
-        .onDisappear {
-            newsViewModel.stopTimer()
-        }
-        .onReceive(newsViewModel.timer) { timer in
-            newsViewModel.timerTick()
-
-            if newsViewModel.leastTime < 0 {
-                newsViewModel.lastSeenNews = Date().timeIntervalSince1970
-
-                dismiss()
-            }
+            networkManager.getNews(isInitial: false)
         }
     }
 
     // MARK: - View Builders
 
-    @ViewBuilder func spaceNewCard(new: SpaceNewsModel) -> some View {
+    @ViewBuilder func companyTaskCard(_ task: NetworkDataModel) -> some View {
+        let deadlineText = task.deadline.formatted(date: .numeric, time: .shortened)
+
         VStack(alignment: .leading) {
-            Text(new.newsSite)
+            Text(task.title)
+                .font(.title3)
                 .bold()
-                .font(.title2)
-                .foregroundColor(themeManager.selectedTheme.accentColor)
+                .multilineTextAlignment(.leading)
 
-//            KFImage
-//                .url(URL(string: new.imageUrl))
-//                .fade(duration: 0.2)
-//                .resizable()
-//                .scaledToFit()
-//                .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            CachedAsyncImage(imageUrlString: new.imageUrl) { image in
-                Image(uiImage: image)
-                    .resizable()
-
-            } placeholder: {
-                Rectangle()
-                    .foregroundStyle(
-                        .linearGradient(
-                            colors: [.white.opacity(0.5), .gray],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
+            if let url = task.imageUrl {
+                CachedAsyncImage(imageUrlString: url) { image in
+                    Image(uiImage: image)
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
+                .hCenter()
+                .padding()
             }
-            .scaledToFit()
-            .clipShape(RoundedRectangle(cornerRadius: 20))
 
-
-            Text(new.title)
+            Text(task.description)
+                .multilineTextAlignment(.leading)
                 .font(.headline)
-                .padding(8)
 
-            Text(new.summary)
-                .lineLimit(nil)
-                .font(.body)
-                .padding(8)
-
+            if task.isSaveable {
+                Button {
+                    coreDataManager.addTask(
+                        id: task.id ?? UUID().uuidString,
+                        title: task.title,
+                        description: task.description,
+                        date: task.deadline,
+                        category: .important,
+                        shouldNotificate: true
+                    )
+                } label: {
+                    Text("Сохранить (\(deadlineText))")
+                        .multilineTextAlignment(.leading)
+                        .foregroundStyle(.primary)
+                        .padding(.top)
+                }
+            }
         }
+        .hLeading()
         .padding()
         .background {
             themeManager.selectedTheme.accentColor
                 .opacity(0.1)
                 .cornerRadius(10)
         }
+
     }
 
     @ViewBuilder func headerView() -> some View {
-        let time = newsViewModel.leastTime
-
         HStack {
-            if !newsViewModel.showHeaderTap {
+            if !showHeaderTap {
                 Button {
                     dismiss()
                 } label: {
@@ -155,29 +141,15 @@ struct NewsView: View {
                     withAnimation {
                         ImpactManager.generateFeedback()
 
-                        networkManager.getNews()
+                        networkManager.getNews(isInitial: false)
                     }
                 } onPressingChanged: { isPressed in
                     withAnimation {
-                        newsViewModel.showHeaderTap = isPressed
+                        showHeaderTap = isPressed
                     }
                 }
 
             Spacer()
-
-            HStack(spacing: 3) {
-                Image(systemName: systemImages.lock)
-                Text("\(time / 60):\(time % 60)\((time % 60 < 10 && time / 60 != 0)  ? "0" : "")")
-            }
-            .foregroundColor(.black)
-            .font(.caption)
-            .padding(5)
-            .background {
-                themeManager.selectedTheme.accentColor
-                    .opacity(0.2)
-                    .cornerRadius(10)
-            }
-            .frame(alignment: .trailing)
         }
         .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
         .padding(.horizontal)
@@ -188,9 +160,9 @@ struct NewsView: View {
 
 #Preview {
     NewsView(
-        newsViewModel: .init(),
         settingsViewModel: .init(),
         networkManager: .init(),
+        coreDataManager: .init(),
         themeManager: .init()
     )
 }

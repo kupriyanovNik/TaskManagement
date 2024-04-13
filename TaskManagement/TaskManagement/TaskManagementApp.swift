@@ -3,6 +3,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct TaskManagementApp: App {
@@ -25,7 +26,6 @@ struct TaskManagementApp: App {
     @StateObject private var sleeptimeCalculatorViewModel = SleeptimeCalculatorViewModel()
     @StateObject private var settingsViewModel = SettingsViewModel()
     @StateObject private var informationViewModel = InformationViewModel()
-    @StateObject private var newsViewModel = NewsViewModel()
     @StateObject private var networkManager = NetworkManager()
     @StateObject private var themeManager = ThemeManager()
 
@@ -33,6 +33,8 @@ struct TaskManagementApp: App {
 
     init() {
         NotificationManager.shared.checkNotificationStatus()
+
+        FirebaseApp.configure()
     }
 
     // MARK: - Body
@@ -56,7 +58,6 @@ struct TaskManagementApp: App {
                     profileViewModel: profileViewModel,
                     settingsViewModel: settingsViewModel,
                     informationViewModel: informationViewModel,
-                    newsViewModel: newsViewModel,
                     networkManager: networkManager,
                     themeManager: themeManager
                 )

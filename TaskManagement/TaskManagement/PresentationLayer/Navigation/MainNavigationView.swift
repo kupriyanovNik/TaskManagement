@@ -20,7 +20,6 @@ struct MainNavigationView: View {
     @ObservedObject var profileViewModel: ProfileViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var informationViewModel: InformationViewModel
-    @ObservedObject var newsViewModel: NewsViewModel
     @ObservedObject var networkManager: NetworkManager
     @ObservedObject var themeManager: ThemeManager
 
@@ -57,7 +56,6 @@ struct MainNavigationView: View {
                             sleeptimeCalculatorViewModel: sleeptimeCalculatorViewModel,
                             settingsViewModel: settingsViewModel,
                             informationViewModel: informationViewModel,
-                            newsViewModel: newsViewModel,
                             coreDataManager: coreDataManager,
                             networkManager: networkManager,
                             themeManager: themeManager
