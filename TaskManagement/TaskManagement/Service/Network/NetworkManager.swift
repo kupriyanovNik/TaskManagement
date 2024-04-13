@@ -22,7 +22,6 @@ final class NetworkManager: ObservableObject {
     // MARK: - Private Properties
 
     private let db = Firestore.firestore()
-    private let decoder = JSONDecoder()
 
     // MARK: - Internal Functions 
 
