@@ -223,7 +223,7 @@ struct TaskAddingView: View {
             title: date.greeting(),
             subtitle: strings.unfinishedTask,
             body: body,
-            isCritical: taskAddingViewModel.taskCategory == .critical ? true : false
+            isCritical: taskAddingViewModel.taskCategory == .important
         )
     }
 }

@@ -32,7 +32,7 @@ struct HabitsView: View {
                         habitsViewModel.editHabit = habit
                         navigationManager.showHabitAddingView.toggle()
                     }
-                    .modifier(ScrollTransitionModifier(condition: $settingsViewModel.shouldShowScrollAnimation))
+                    .modifier(ScrollTransitionModifier(condition: settingsViewModel.shouldShowScrollAnimation))
                 }
             }
             .padding(.horizontal)

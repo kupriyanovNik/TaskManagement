@@ -28,7 +28,7 @@ struct FilterSelectorView: View {
                 ForEach(TaskCategory.allCases, id: \.rawValue) { taskCategory in
                     let isSelected = selectedCategory == taskCategory
 
-                    Text(taskCategory.localizableRawValue)
+                    Text(taskCategory.localized)
                         .font(.title3)
                         .padding(.vertical, 5)
                         .padding(.horizontal)

@@ -33,7 +33,7 @@ struct RadioButton: View {
             }
         }
         .onTapGesture {
-            ImpactManager.shared.generateFeedback(style: .medium)
+            ImpactManager.generateFeedback(style: .medium)
             
             isSelected.toggle()
         }

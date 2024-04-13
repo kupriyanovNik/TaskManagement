@@ -231,18 +231,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B70C875F2B08E08B00EBD924 /* MLModels */ = {
+		B70C875F2B08E08B00EBD924 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				B70C87622B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel */,
 			);
-			path = MLModels;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B70C87642B08E10E00EBD924 /* Neural */ = {
 			isa = PBXGroup;
 			children = (
 				B70C87652B08E14300EBD924 /* NeuralManager.swift */,
+				B70C875F2B08E08B00EBD924 /* Model */,
 			);
 			path = Neural;
 			sourceTree = "<group>";
@@ -311,8 +312,6 @@
 			isa = PBXGroup;
 			children = (
 				B7F515CC2ACB27070001A282 /* Preview Content */,
-				B77F6E5E2B1CE291006AD86E /* CDModels */,
-				B70C875F2B08E08B00EBD924 /* MLModels */,
 				B7F515CA2ACB27070001A282 /* Assets.xcassets */,
 				B7DC65852AD56756009DA010 /* Localizable */,
 				B7E306A42B9381550086F28D /* Constants */,
@@ -389,6 +388,7 @@
 				B73213C72ACC8EEB00E42B1D /* Persistence.swift */,
 				B71FD0FE2AD437910039270D /* CoreDataManager.swift */,
 				B7739F0B2AE14D6B000F19EE /* TaskCategory.swift */,
+				B77F6E5E2B1CE291006AD86E /* Model */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -518,12 +518,12 @@
 			path = Impact;
 			sourceTree = "<group>";
 		};
-		B77F6E5E2B1CE291006AD86E /* CDModels */ = {
+		B77F6E5E2B1CE291006AD86E /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				B71FD1002AD43E810039270D /* TaskManagement.xcdatamodeld */,
 			);
-			path = CDModels;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B77F6E5F2B1CE427006AD86E /* Modifiers */ = {

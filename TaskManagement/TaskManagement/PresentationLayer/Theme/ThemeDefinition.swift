@@ -2,7 +2,6 @@
 //  ThemeDefinitions.swift
 //
 
-import Foundation
 import SwiftUI
 
 struct Theme1: ThemeProtocol {

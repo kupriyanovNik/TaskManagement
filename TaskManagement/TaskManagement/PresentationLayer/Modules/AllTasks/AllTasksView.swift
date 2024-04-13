@@ -177,7 +177,7 @@ struct AllTasksView: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 if let filteringCategory = allTasksViewModel.filteringCategory {
-                    Text(filteringCategory.localizableRawValue)
+                    Text(filteringCategory.localized)
                         .bold()
                         .font(.largeTitle)
                         .foregroundColor(themeManager.selectedTheme.pageTitleColor)
@@ -192,7 +192,7 @@ struct AllTasksView: View {
             }
             .hLeading()
             .onLongPressGesture(minimumDuration: 0.7, maximumDistance: 50) {
-                ImpactManager.shared.generateFeedback()
+                ImpactManager.generateFeedback()
                 
                 withAnimation {
                     allTasksViewModel.showFilteringView = true

@@ -25,7 +25,7 @@ struct TaskCategorySelector: View {
                     Button {
                         taskCategory = mode
                     } label: {
-                        Text(mode.localizableRawValue)
+                        Text(mode.localized)
                             .font(.caption)
                     }
                     .buttonStyle(CategorySelectorButtonStyle())

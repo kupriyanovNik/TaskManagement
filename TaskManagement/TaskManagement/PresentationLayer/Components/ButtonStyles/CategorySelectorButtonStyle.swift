@@ -20,7 +20,7 @@ struct CategorySelectorButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? pressedScale : 1)
             .onChange(of: configuration.isPressed) { newValue in
                 if newValue {
-                    ImpactManager.shared.generateFeedback()
+                    ImpactManager.generateFeedback()
                 }
             }
             .animation(.default, value: configuration.isPressed)

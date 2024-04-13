@@ -8,7 +8,7 @@ struct ScrollTransitionModifier: ViewModifier {
 
     // MARK: - Internal Properties
 
-    @Binding var condition: Bool
+    var condition: Bool
 
     // MARK: - Body
 
