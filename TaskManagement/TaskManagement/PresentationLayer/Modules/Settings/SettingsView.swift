@@ -90,7 +90,36 @@ struct SettingsView: View {
         }
         .padding(.horizontal)
     }
-    
+
+    private var companyIdSelectionRow: some View {
+        let isExpanded = settingsViewModel.showExpandedCompanyTextField
+
+        return Group {
+            HStack {
+                Text("ID Вашей компании")
+
+                Image(systemName: systemImages.backArrow)
+                    .rotationEffect(.degrees(isExpanded ? 90 : -90))
+            }
+            .font(.headline)
+            .padding(.leading)
+            .onTapGesture {
+                withAnimation {
+                    settingsViewModel.showExpandedCompanyTextField.toggle()
+                }
+            }
+
+            if isExpanded {
+                CustomTextField(
+                    inputText: $settingsViewModel.selectedCompanyId,
+                    placeHolder: "ID",
+                    shouldExpandVertically: false
+                )
+                .padding(.horizontal)
+            }
+        }
+    }
+
     /// debug option
     private var debugOptionsRow: some View {
         let accentColor = themeManager.selectedTheme.accentColor
@@ -150,11 +179,16 @@ struct SettingsView: View {
 
                 if NotificationManager.shared.isNotificationEnabled == false {
                     disabledNotificationsRow
+
+                    Divider()
                 }
+
+                companyIdSelectionRow
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden()
+        .onTapEndEditing()
         .makeCustomNavBar {
             headerView()
         }

@@ -2,6 +2,7 @@
 //  NetworkManager.swift
 //
 
+import SwiftUI
 import Firebase
 import Foundation
 import FirebaseFirestore
@@ -13,6 +14,10 @@ final class NetworkManager: ObservableObject {
     // MARK: - Property Wrappers
 
     @Published var companyTasks: [NetworkDataModel] = []
+
+    @AppStorage(
+        UserDefaultsConstants.selectedCompanyId.rawValue
+    ) var selectedCompanyId: String = ""
 
     // MARK: - Private Properties
 
@@ -27,7 +32,8 @@ final class NetworkManager: ObservableObject {
                 companyTasks = []
             }
 
-            let querySnapshot = try await db.collection("qwert32122").getDocuments()
+            let querySnapshot = try await db.collection(selectedCompanyId).getDocuments()
+
             for document in querySnapshot.documents {
                 do {
                     let task = try document.data(as: NetworkDataModel.self)

@@ -9,6 +9,7 @@ class SettingsViewModel: ObservableObject {
     // MARK: - Property Wrappers
 
     @Published var showExpandedThemePicker: Bool = false 
+    @Published var showExpandedCompanyTextField: Bool = false
 
     @Published var showDebugOptions: Bool = false 
 
@@ -27,6 +28,10 @@ class SettingsViewModel: ObservableObject {
     @AppStorage(
         UserDefaultsConstants.shouldShowTabBarAnimation.rawValue
     ) var shouldShowTabBarAnimation: Bool = true
+
+    @AppStorage(
+        UserDefaultsConstants.selectedCompanyId.rawValue
+    ) var selectedCompanyId: String = ""
 
     // TODO: - Add ability to change app icon
     @AppStorage(

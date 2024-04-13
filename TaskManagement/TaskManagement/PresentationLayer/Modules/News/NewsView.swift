@@ -47,9 +47,7 @@ struct NewsView: View {
             headerView()
         }
         .onAppear {
-            if networkManager.companyTasks.isEmpty {
-                networkManager.getNews()
-            }
+            networkManager.getNews(isInitial: false)
         }
     }
 

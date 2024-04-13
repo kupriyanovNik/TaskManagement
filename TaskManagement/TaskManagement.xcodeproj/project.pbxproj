@@ -549,7 +549,6 @@
 		B7BA60282B0FC14800D1DE5A /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B799B7152BCAF3EC00B81133 /* GoogleService-Info.plist */,
 				B7BA603D2B0FC32D00D1DE5A /* NetworkManager.swift */,
 				B7BA603A2B0FC23300D1DE5A /* Model */,
 			);
@@ -559,6 +558,7 @@
 		B7BA603A2B0FC23300D1DE5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B799B7152BCAF3EC00B81133 /* GoogleService-Info.plist */,
 				B7BA603B2B0FC23B00D1DE5A /* NetworkDataModel.swift */,
 			);
 			path = Model;
