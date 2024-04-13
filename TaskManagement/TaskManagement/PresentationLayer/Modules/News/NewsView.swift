@@ -71,6 +71,7 @@ struct NewsView: View {
             if let url = task.imageUrl {
                 CachedAsyncImage(imageUrlString: url) { image in
                     Image(uiImage: image)
+                        .resizable()
                         .scaledToFit()
                 } placeholder: {
                     ProgressView()
