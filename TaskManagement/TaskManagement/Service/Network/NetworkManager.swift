@@ -26,19 +26,21 @@ final class NetworkManager: ObservableObject {
     // MARK: - Internal Functions 
 
     func getNews(isInitial: Bool = true) {
-        Task {
-            if !isInitial {
-                companyTasks = []
-            }
+        if selectedCompanyId != "" {
+            Task {
+                if !isInitial {
+                    companyTasks = []
+                }
 
-            let querySnapshot = try await db.collection(selectedCompanyId).getDocuments()
+                let querySnapshot = try await db.collection(selectedCompanyId).getDocuments()
 
-            for document in querySnapshot.documents {
-                do {
-                    let task = try document.data(as: NetworkDataModel.self)
-                    companyTasks.append(task)
-                } catch {
-                    print("DEBUG: \(error.localizedDescription)")
+                for document in querySnapshot.documents {
+                    do {
+                        let task = try document.data(as: NetworkDataModel.self)
+                        companyTasks.append(task)
+                    } catch {
+                        print("DEBUG: \(error.localizedDescription)")
+                    }
                 }
             }
         }
