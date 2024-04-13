@@ -13,7 +13,5 @@ enum UserDefaultsConstants: String {
     case shouldShowScrollAnimation
     case shouldShowTabBarAnimation
     case selectedAppIcon
-    case leastNewsTime
-    case lastTimeSeenNews
-    case lastTimeOpenNews
+    case selectedCompanyId
 }

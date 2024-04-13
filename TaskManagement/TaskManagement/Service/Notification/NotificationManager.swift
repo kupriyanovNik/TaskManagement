@@ -66,7 +66,7 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
         let content = makeContent(title: title, subtitle: subtitle, body: body, isCritical: isCritical)
 
-        var dateComp = makeDateComponents(day: day, hour: hour, minute: minute)
+        let dateComp = makeDateComponents(day: day, hour: hour, minute: minute)
 
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
 

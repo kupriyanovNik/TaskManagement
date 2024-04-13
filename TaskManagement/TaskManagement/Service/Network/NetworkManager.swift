@@ -2,23 +2,39 @@
 //  NetworkManager.swift
 //
 
+import Firebase
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 @MainActor
 final class NetworkManager: ObservableObject {
 
     // MARK: - Property Wrappers
 
-    @Published var news: [SpaceNewsModel] = []
+    @Published var companyTasks: [NetworkDataModel] = []
+
+    // MARK: - Private Properties
+
+    private let db = Firestore.firestore()
+    private let decoder = JSONDecoder()
 
     // MARK: - Internal Functions 
 
-    func getNews() {
+    func getNews(isInitial: Bool = true) {
         Task {
-            do {
-                news = try await DataProvider.fetchData(Requests.GetNews())
-            } catch {
-                print("DEBUG: \(error.localizedDescription)")
+            if !isInitial {
+                companyTasks = []
+            }
+
+            let querySnapshot = try await db.collection("qwert32122").getDocuments()
+            for document in querySnapshot.documents {
+                do {
+                    let task = try document.data(as: NetworkDataModel.self)
+                    companyTasks.append(task)
+                } catch {
+                    print("DEBUG: \(error.localizedDescription)")
+                }
             }
         }
     }
