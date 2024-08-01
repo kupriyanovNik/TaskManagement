@@ -20,6 +20,7 @@ struct CustomTabBar: View {
     @ObservedObject var taskAddingViewModel: TaskAddingViewModel
     @ObservedObject var habitAddingViewModel: HabitAddingViewModel
     @ObservedObject var themeManager: ThemeManager
+    @ObservedObject var infiniteCalendarViewModel: InfiniteCalendarViewModel
 
     // MARK: Private Properties
 
@@ -96,7 +97,8 @@ struct CustomTabBar: View {
             navigationManager: navigationManager,
             coreDataManager: coreDataManager,
             taskAddingViewModel: taskAddingViewModel,
-            themeManager: themeManager
+            themeManager: themeManager,
+            infiniteCalendarVM: infiniteCalendarViewModel
         )
     }
 
@@ -139,7 +141,8 @@ struct CustomTabBar: View {
                     settingsViewModel: settingsViewModel,
                     navigationManager: navigationManager,
                     coreDataManager: coreDataManager,
-                    themeManager: themeManager
+                    themeManager: themeManager,
+                    infiniteCalendarVM: infiniteCalendarViewModel
                 )
             } label: {}
         }
@@ -187,7 +190,7 @@ struct CustomTabBar: View {
 
         homeViewModel.editTask = nil
         coreDataManager.fetchAllTasks()
-        coreDataManager.fetchTasksFilteredByDate(dateToFilter: homeViewModel.currentDay)
+        coreDataManager.fetchTasksFilteredByDate(dateToFilter: infiniteCalendarViewModel.selectedDate)
 
         if let filteringCategory = allTasksViewModel.filteringCategory {
             coreDataManager.fetchTasksFilteredByCategory(taskCategory: filteringCategory)

@@ -28,6 +28,7 @@ struct TaskManagementApp: App {
     @StateObject private var informationViewModel = InformationViewModel()
     @StateObject private var networkManager = NetworkManager()
     @StateObject private var themeManager = ThemeManager()
+    @StateObject private var infiniteCalendarVM = InfiniteCalendarViewModel()
 
     // MARK: - Inits
 
@@ -59,7 +60,8 @@ struct TaskManagementApp: App {
                     settingsViewModel: settingsViewModel,
                     informationViewModel: informationViewModel,
                     networkManager: networkManager,
-                    themeManager: themeManager
+                    themeManager: themeManager,
+                    infiniteCalendarVM: infiniteCalendarVM
                 )
                 .ignoresSafeArea()
                 .overlay {

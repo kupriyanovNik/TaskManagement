@@ -30,4 +30,12 @@ extension Date {
 
         return formatter.string(from: self)
     }
+
+    func toString(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = format
+
+        return formatter.string(from: self)
+    }
 }

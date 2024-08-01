@@ -68,6 +68,13 @@
 		B799B7122BCAF3C500B81133 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B799B7112BCAF3C500B81133 /* FirebaseFirestoreSwift */; };
 		B799B7142BCAF3C500B81133 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B799B7132BCAF3C500B81133 /* FirebaseStorage */; };
 		B799B7162BCAF3EC00B81133 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B799B7152BCAF3EC00B81133 /* GoogleService-Info.plist */; };
+		B7A64DA32C5C24A30004B10E /* InfiniteCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A64DA22C5C24A30004B10E /* InfiniteCalendarViewModel.swift */; };
+		B7A64DA52C5C24ED0004B10E /* WeekModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A64DA42C5C24ED0004B10E /* WeekModel.swift */; };
+		B7A64DA72C5C25050004B10E /* TimeDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A64DA62C5C25050004B10E /* TimeDirection.swift */; };
+		B7A64DA92C5C25330004B10E /* WeeksTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A64DA82C5C25330004B10E /* WeeksTabView.swift */; };
+		B7A64DAB2C5C254B0004B10E /* InfiniteCalendarTodayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A64DAA2C5C254B0004B10E /* InfiniteCalendarTodayButton.swift */; };
+		B7A64DAD2C5C26220004B10E /* InfiniteWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A64DAC2C5C26220004B10E /* InfiniteWeekView.swift */; };
+		B7A64DAF2C5C26800004B10E /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A64DAE2C5C26800004B10E /* WeekView.swift */; };
 		B7A7C14F2B0EB5F9000F54BD /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */; };
 		B7ACC1822AD9BAC000FEEE0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7ACC1842AD9BAC000FEEE0E /* Localizable.strings */; };
 		B7BA603C2B0FC23B00D1DE5A /* NetworkDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BA603B2B0FC23B00D1DE5A /* NetworkDataModel.swift */; };
@@ -168,6 +175,13 @@
 		B77F6E652B1CE9CA006AD86E /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		B77F6E672B1CEDE2006AD86E /* InformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewModel.swift; sourceTree = "<group>"; };
 		B799B7152BCAF3EC00B81133 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B7A64DA22C5C24A30004B10E /* InfiniteCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCalendarViewModel.swift; sourceTree = "<group>"; };
+		B7A64DA42C5C24ED0004B10E /* WeekModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekModel.swift; sourceTree = "<group>"; };
+		B7A64DA62C5C25050004B10E /* TimeDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDirection.swift; sourceTree = "<group>"; };
+		B7A64DA82C5C25330004B10E /* WeeksTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeksTabView.swift; sourceTree = "<group>"; };
+		B7A64DAA2C5C254B0004B10E /* InfiniteCalendarTodayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteCalendarTodayButton.swift; sourceTree = "<group>"; };
+		B7A64DAC2C5C26220004B10E /* InfiniteWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteWeekView.swift; sourceTree = "<group>"; };
+		B7A64DAE2C5C26800004B10E /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		B7A7C14C2B0EB5F9000F54BD /* TaskManagementTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskManagementTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A7C14E2B0EB5F9000F54BD /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		B7ACC1832AD9BAC000FEEE0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -352,6 +366,7 @@
 		B73213BB2ACC8CB800E42B1D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B7A64D9F2C5C248A0004B10E /* EmbeddedViews */,
 				B7F515DC2ACB27C30001A282 /* HomeView.swift */,
 				B73213BE2ACC8CCA00E42B1D /* HomeViewModel.swift */,
 			);
@@ -536,6 +551,36 @@
 				B77F6E672B1CEDE2006AD86E /* InformationViewModel.swift */,
 			);
 			path = Information;
+			sourceTree = "<group>";
+		};
+		B7A64D9F2C5C248A0004B10E /* EmbeddedViews */ = {
+			isa = PBXGroup;
+			children = (
+				B7A64DA82C5C25330004B10E /* WeeksTabView.swift */,
+				B7A64DA22C5C24A30004B10E /* InfiniteCalendarViewModel.swift */,
+				B7A64DB12C5C2CB10004B10E /* Components */,
+				B7A64DB02C5C2CA20004B10E /* Model */,
+			);
+			path = EmbeddedViews;
+			sourceTree = "<group>";
+		};
+		B7A64DB02C5C2CA20004B10E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B7A64DA42C5C24ED0004B10E /* WeekModel.swift */,
+				B7A64DA62C5C25050004B10E /* TimeDirection.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B7A64DB12C5C2CB10004B10E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B7A64DAA2C5C254B0004B10E /* InfiniteCalendarTodayButton.swift */,
+				B7A64DAC2C5C26220004B10E /* InfiniteWeekView.swift */,
+				B7A64DAE2C5C26800004B10E /* WeekView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		B7A7C14D2B0EB5F9000F54BD /* TaskManagementTests */ = {
@@ -819,6 +864,8 @@
 				B72D16CA2B25E7F0006CCD2D /* GeometryReaderView.swift in Sources */,
 				B73BD3932AF17AE800055510 /* PlusButton.swift in Sources */,
 				B7E306A62B9381630086F28D /* UserDefaultsConstants.swift in Sources */,
+				B7A64DA52C5C24ED0004B10E /* WeekModel.swift in Sources */,
+				B7A64DAF2C5C26800004B10E /* WeekView.swift in Sources */,
 				B7F016312AD4752200B9F670 /* Date.swift in Sources */,
 				B7F016362AD487C900B9F670 /* UINavigationController.swift in Sources */,
 				B7BA60412B0FC65700D1DE5A /* NewsView.swift in Sources */,
@@ -828,9 +875,12 @@
 				B70C87632B08E0C000EBD924 /* SleeptimeCalculatorModel.mlmodel in Sources */,
 				B73213CD2ACC965400E42B1D /* View.swift in Sources */,
 				B75084352AEEA570006A04E1 /* HabitsViewModel.swift in Sources */,
+				B7A64DA32C5C24A30004B10E /* InfiniteCalendarViewModel.swift in Sources */,
 				B73213C82ACC8EEB00E42B1D /* Persistence.swift in Sources */,
 				B73213CB2ACC934100E42B1D /* ImageConstants.swift in Sources */,
+				B7A64DA92C5C25330004B10E /* WeeksTabView.swift in Sources */,
 				B7F2984B2AE30D8D00F4A8E3 /* StatisticsGauge.swift in Sources */,
+				B7A64DAB2C5C254B0004B10E /* InfiniteCalendarTodayButton.swift in Sources */,
 				B77F6E642B1CE84E006AD86E /* InformationView.swift in Sources */,
 				B7181BE42AD45647002F3D82 /* TaskAddingViewModel.swift in Sources */,
 				B75084322AEEA55E006A04E1 /* HabitsView.swift in Sources */,
@@ -858,6 +908,7 @@
 				B7D949AC2AE04C6C00FE5CAE /* NotificationManager.swift in Sources */,
 				B77F6E682B1CEDE2006AD86E /* InformationViewModel.swift in Sources */,
 				B73BD38D2AF174DD00055510 /* HabitAddingViewModel.swift in Sources */,
+				B7A64DA72C5C25050004B10E /* TimeDirection.swift in Sources */,
 				B72D16C82B25E26E006CCD2D /* TypingEffectView.swift in Sources */,
 				B72972972AD8547500B9F8BF /* AllTasksView.swift in Sources */,
 				B73BD38B2AF174D500055510 /* HabitAddingView.swift in Sources */,
@@ -886,6 +937,7 @@
 				B7DC65902AD569BC009DA010 /* ThemeDataSource.swift in Sources */,
 				B7F515DD2ACB27C30001A282 /* HomeView.swift in Sources */,
 				B77F6E5D2B1CE1A4006AD86E /* ImpactManager.swift in Sources */,
+				B7A64DAD2C5C26220004B10E /* InfiniteWeekView.swift in Sources */,
 				B72D16D12B25EAB1006CCD2D /* ShowOnboardingViewAnimated.swift in Sources */,
 				B7F515E32ACB2C2E0001A282 /* TaskAddingView.swift in Sources */,
 				B7DC658C2AD56967009DA010 /* ThemeManager.swift in Sources */,
@@ -1086,17 +1138,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"TaskManagement/Resourse/Preview Content\"";
 				DEVELOPMENT_TEAM = 7HDF545ZQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = myHabits;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1117,17 +1169,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"TaskManagement/Resourse/Preview Content\"";
 				DEVELOPMENT_TEAM = 7HDF545ZQ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = myHabits;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -22,6 +22,7 @@ struct MainNavigationView: View {
     @ObservedObject var informationViewModel: InformationViewModel
     @ObservedObject var networkManager: NetworkManager
     @ObservedObject var themeManager: ThemeManager
+    @ObservedObject var infiniteCalendarVM: InfiniteCalendarViewModel
 
     // MARK: - Body
 
@@ -38,7 +39,8 @@ struct MainNavigationView: View {
                             settingsViewModel: settingsViewModel,
                             navigationManager: navigationManager,
                             coreDataManager: coreDataManager,
-                            themeManager: themeManager
+                            themeManager: themeManager,
+                            infiniteCalendarVM: infiniteCalendarVM
                         )
 
                     case .habits:
@@ -74,7 +76,8 @@ struct MainNavigationView: View {
                     coreDataManager: coreDataManager,
                     taskAddingViewModel: taskAddingViewModel,
                     habitAddingViewModel: habitAddingViewModel,
-                    themeManager: themeManager
+                    themeManager: themeManager,
+                    infiniteCalendarViewModel: infiniteCalendarVM
                 )
                 .padding(.bottom, 5)
             }

@@ -14,6 +14,7 @@ struct HomeView: View {
     @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var themeManager: ThemeManager
+    @ObservedObject var infiniteCalendarVM: InfiniteCalendarViewModel
 
     @Namespace var animation
 
@@ -39,11 +40,11 @@ struct HomeView: View {
                         task: $task
                     ) { taskDate in
                         coreDataManager.fetchTasksFilteredByDate(
-                            dateToFilter: homeViewModel.currentDay
+                            dateToFilter: infiniteCalendarVM.selectedDate
                         )
                         
                         if coreDataManager.tasksFilteredByDate.isEmpty {
-                            homeViewModel.currentDay = .now
+                            infiniteCalendarVM.selectedDate = .now
                         }
                     }
                 }
@@ -60,7 +61,7 @@ struct HomeView: View {
             }
         }
         .animation(.spring(), value: coreDataManager.tasksFilteredByDate)
-        .onChange(of: homeViewModel.currentDay) { newCurrentDate in
+        .onChange(of: infiniteCalendarVM.selectedDate) { newCurrentDate in
             coreDataManager.fetchTasksFilteredByDate(dateToFilter: newCurrentDate)
         }
         .onChange(of: coreDataManager.tasksFilteredByDate) { newFilteredTasks in
@@ -90,55 +91,15 @@ struct HomeView: View {
     // MARK: - ViewBuilders
 
     @ViewBuilder func calendarView() -> some View {
-        HStack(spacing: 10) {
-            ForEach(homeViewModel.currentWeek, id: \.timeIntervalSince1970) { day in
-                let isToday = homeViewModel.isSameAsSelectedDay(date: day)
-                
-                let dateNumber = day.extract(with: dateFormats.forDateNumber)
-                let dateLiteral = day.extract(with: dateFormats.forDateLiteral)
-
-                VStack(spacing: 10) {
-                    Text(dateNumber)
-                        .font(.system(size: 15))
-                        .fontWeight(.semibold)
-
-                    Text(dateLiteral)
-                        .font(.system(size: 14))
-                        .fontWeight(.semibold)
-
-                    Circle()
-                        .fill(.white)
-                        .frame(width: 8, height: 8)
-                        .opacity(isToday ? 1 : 0)
-                }
-                .foregroundColor(isToday ? .white : .gray)
-                .frame(width: 45, height: 90)
-                .background {
-                    ZStack {
-                        if isToday {
-                            Capsule()
-                                .fill(themeManager.selectedTheme.accentColor)
-                                .matchedGeometryEffect(id: "CurrentDayEffect", in: animation)
-                        }
-                    }
-                }
-                .contentShape(Capsule())
-                .onTapGesture {
-                    ImpactManager.generateFeedback()
-
-                    withAnimation {
-                        homeViewModel.currentDay = day
-                    }
-                }
-
-            }
-        }
-        .padding(.horizontal)
+        HabitInfiniteWeekView(
+            infiniteCalendarViewModel: infiniteCalendarVM
+        )
+        .frame(height: 92)
     }
 
     @ViewBuilder func headerView() -> some View {
-        let isToday = Calendar.current.isDateInToday(homeViewModel.currentDay)
-        let headerText = isToday ? strings.today : homeViewModel.currentDay.formatted(
+        let isToday = Calendar.current.isDateInToday(infiniteCalendarVM.selectedDate)
+        let headerText = isToday ? strings.today : infiniteCalendarVM.selectedDate.formatted(
             date: .abbreviated,
             time: .omitted
         )
@@ -217,16 +178,20 @@ struct HomeView: View {
                 }
 
             }
-            .foregroundStyle(.linearGradient(colors: [.gray, .black], startPoint: .top, endPoint: .bottom))
+            .foregroundStyle(
+                .linearGradient(
+                    colors: [.gray, .black],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
             .padding(.horizontal)
             .padding(.bottom, 5)
             .animation(.linear, value: coreDataManager.tasksFilteredByDate.isEmpty)
 
             if !coreDataManager.allTasks.isEmpty && homeViewModel.showCalendar {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    calendarView()
-                }
-                .transition(.move(edge: .top).combined(with: .opacity))
+                calendarView()
+                    .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
     }
@@ -251,6 +216,7 @@ struct HomeView: View {
         settingsViewModel: .init(),
         navigationManager: .init(),
         coreDataManager: .init(),
-        themeManager: .init()
+        themeManager: .init(),
+        infiniteCalendarVM: .init()
     )
 }

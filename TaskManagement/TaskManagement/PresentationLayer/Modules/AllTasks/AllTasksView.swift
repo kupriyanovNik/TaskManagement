@@ -16,6 +16,7 @@ struct AllTasksView: View {
     @ObservedObject var navigationManager: NavigationManager
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var themeManager: ThemeManager
+    @ObservedObject var infiniteCalendarVM: InfiniteCalendarViewModel
 
     // MARK: - Private Properties
 
@@ -64,7 +65,7 @@ struct AllTasksView: View {
         }
         .onDisappear {
             coreDataManager.fetchTasksFilteredByDate(
-                dateToFilter: homeViewModel.currentDay
+                dateToFilter: infiniteCalendarVM.selectedDate
             )
         }
     }
@@ -237,6 +238,7 @@ struct AllTasksView: View {
         settingsViewModel: .init(),
         navigationManager: .init(),
         coreDataManager: .init(),
-        themeManager: .init()
+        themeManager: .init(),
+        infiniteCalendarVM: .init()
     )
 }

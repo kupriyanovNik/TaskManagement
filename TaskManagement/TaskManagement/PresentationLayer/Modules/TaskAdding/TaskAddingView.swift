@@ -15,6 +15,7 @@ struct TaskAddingView: View {
     @ObservedObject var coreDataManager: CoreDataManager
     @ObservedObject var taskAddingViewModel: TaskAddingViewModel
     @ObservedObject var themeManager: ThemeManager
+    @ObservedObject var infiniteCalendarVM: InfiniteCalendarViewModel
 
     // MARK: - Private Properties
 
@@ -194,7 +195,7 @@ struct TaskAddingView: View {
                 category: taskAddingViewModel.taskCategory,
                 shouldNotificate: taskAddingViewModel.shouldSendNotification
             ) { date, task in
-                homeViewModel.currentDay = date
+                infiniteCalendarVM.selectedDate = date
 
                 if taskAddingViewModel.shouldSendNotification {
                     sendNotification(
@@ -236,6 +237,7 @@ struct TaskAddingView: View {
         navigationManager: .init(),
         coreDataManager: .init(),
         taskAddingViewModel: .init(),
-        themeManager: .init()
+        themeManager: .init(),
+        infiniteCalendarVM: .init()
     )
 }
